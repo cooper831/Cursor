@@ -1,0 +1,152 @@
+<mxfile host="app.diagrams.net" agent="7.0" pages="1">
+  <diagram id="webhook-flow" name="订阅Webhook事件处理">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T" value="&lt;b&gt;订阅 Webhook 事件处理流程&lt;/b&gt; — 公共入口 + 事件分派器 + 业务处理器" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RC" value="🔔 RevenueCat&#10;事件发生" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e8daef;strokeColor=#6a1b9a;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="60" y="90" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="POST" value="POST /api/v1/revenuecat/webhook&#10;Authorization: Bearer xxx" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6a1b9a;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="240" y="90" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Auth" value="① 校验 Authorization&#10;失败 → 401 + 告警" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="490" y="90" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Idem" value="② 幂等检查 event.id&#10;已处理 → 200 Skip" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="730" y="90" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Raw" value="③ INSERT rc_webhook_events&#10;（PRD-1 已建，全量原始事件）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fff2cc;strokeColor=#b8860b;fontSize=10;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="730" y="190" width="200" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="Parse" value="④ 解析 event.type / app_user_id / product_id / transaction_id" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="490" y="280" width="440" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="Disp" value="⑤ 事件类型分派器&#10;switch(eventType)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="590" y="360" width="240" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="H1" value="INITIAL_PURCHASE&#10;➤ purchase_log(purchase/trial_start)&#10;➤ user_entitlement upsert&#10;➤ user_subscription insert" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="60" y="490" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H2" value="RENEWAL&#10;➤ purchase_log(renewal)&#10;➤ user_entitlement.expires_at 延期&#10;➤ user_subscription 更新周期" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="285" y="490" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H3" value="CANCELLATION&#10;➤ user_entitlement.auto_renew=false&#10;➤ user_subscription.status=&#10;  cancelled_in_cycle" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="510" y="490" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H4" value="EXPIRATION&#10;➤ user_entitlement.is_active=false&#10;➤ user_subscription.status=expired" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f5f5f5;strokeColor=#6c6c6c;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="735" y="490" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H5" value="BILLING_ISSUE&#10;➤ user_subscription.status=grace_period&#10;➤ 触发告警 / 站内信" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fff2cc;strokeColor=#b8860b;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="60" y="575" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H6" value="PRODUCT_CHANGE (升降级)&#10;➤ user_entitlement.product_id 更新&#10;➤ user_subscription.plan 更新" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="285" y="575" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H7" value="REFUND&#10;➤ purchase_log(refund, amount&lt;0)&#10;➤ user_entitlement.is_active=false&#10;➤ user_subscription.status=refunded" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" parent="1" vertex="1">
+          <mxGeometry x="510" y="575" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="H8" value="TRANSFER&#10;仅记日志，MVP 不做业务处理" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fafafa;strokeColor=#b3b3b3;fontSize=9;dashed=1;dashPattern=4 3;" parent="1" vertex="1">
+          <mxGeometry x="735" y="575" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Done" value="⑥ 标记 event.id 已处理&#10;返回 200 OK" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="400" y="700" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="RC" target="POST" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="POST" target="Auth" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="Auth" target="Idem" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="Idem" target="Raw" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="Raw" target="Parse" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="265" />
+              <mxPoint x="710" y="265" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="Parse" target="Disp" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2e7d32;strokeWidth=1.2;endArrow=block;endFill=1;exitX=0;exitY=1;entryX=0.5;entryY=0;" parent="1" source="Disp" target="H1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2e7d32;strokeWidth=1.2;endArrow=block;endFill=1;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" parent="1" source="Disp" target="H2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d79b00;strokeWidth=1.2;endArrow=block;endFill=1;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" parent="1" source="Disp" target="H3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c6c6c;strokeWidth=1.2;endArrow=block;endFill=1;exitX=1;exitY=1;entryX=0.5;entryY=0;" parent="1" source="Disp" target="H4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b8860b;strokeWidth=1.2;endArrow=block;endFill=1;exitX=0;exitY=1;entryX=0.5;entryY=0;" parent="1" source="Disp" target="H5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="470" />
+              <mxPoint x="165" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9673a6;strokeWidth=1.2;endArrow=block;endFill=1;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" parent="1" source="Disp" target="H6" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="470" />
+              <mxPoint x="390" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=1.2;endArrow=block;endFill=1;exitX=0.75;exitY=1;entryX=0.5;entryY=0;" parent="1" source="Disp" target="H7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="470" />
+              <mxPoint x="615" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b3b3b3;strokeWidth=1.2;endArrow=block;endFill=1;dashed=1;dashPattern=4 3;exitX=1;exitY=1;entryX=0.5;entryY=0;" parent="1" source="Disp" target="H8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="470" />
+              <mxPoint x="840" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2e7d32;strokeWidth=1;endArrow=block;endFill=1;" parent="1" source="H1" target="Done" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2e7d32;strokeWidth=1;endArrow=block;endFill=1;" parent="1" source="H2" target="Done" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d79b00;strokeWidth=1;endArrow=block;endFill=1;" parent="1" source="H3" target="Done" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c6c6c;strokeWidth=1;endArrow=block;endFill=1;" parent="1" source="H4" target="Done" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b8860b;strokeWidth=1;endArrow=block;endFill=1;" parent="1" source="H5" target="Done" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9673a6;strokeWidth=1;endArrow=block;endFill=1;" parent="1" source="H6" target="Done" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=1;endArrow=block;endFill=1;" parent="1" source="H7" target="Done" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b3b3b3;strokeWidth=1;endArrow=block;endFill=1;dashed=1;" parent="1" source="H8" target="Done" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

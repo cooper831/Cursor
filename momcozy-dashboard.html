@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momcozy 云存储系统解析与全链路看板</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 280px;
+            }
+        }
+        .nav-btn.active {
+            background-color: #D4A373;
+            color: #FFFFFF;
+            border-color: #D4A373;
+        }
+        .nav-btn {
+            background-color: #FFFFFF;
+            color: #666666;
+            border-color: #EAE2D6;
+            transition: all 0.3s ease;
+        }
+        body {
+            background-color: #FDFBF7;
+            color: #333333;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .phase-card.active-phase {
+            border-color: #E5989B;
+            background-color: #FFF5F5;
+            box-shadow: 0 4px 6px -1px rgba(229, 152, 155, 0.2);
+        }
+        .arrow-down {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #D4A373;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+    <header class="bg-white border-b border-[#EAE2D6] py-8 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Momcozy 数字化全链路监控中台</h1>
+            <p class="text-gray-500">基于 RevenueCat 的多端（iOS / Android / Stripe）云存储配置与履约交互解析</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        
+        <nav class="flex flex-wrap gap-4 mb-8 border-b border-[#EAE2D6] pb-4">
+            <button id="tab-flow" class="nav-btn active px-6 py-2 rounded-full font-medium border shadow-sm focus:outline-none" onclick="switchTab('flow')">
+                核心链路推演 (Core Flow)
+            </button>
+            <button id="tab-matrix" class="nav-btn px-6 py-2 rounded-full font-medium border shadow-sm focus:outline-none" onclick="switchTab('matrix')">
+                异常流矩阵 (Edge Cases)
+            </button>
+            <button id="tab-dashboard" class="nav-btn px-6 py-2 rounded-full font-medium border shadow-sm focus:outline-none" onclick="switchTab('dashboard')">
+                履约监控大盘 (Dashboard)
+            </button>
+        </nav>
+
+        <section id="section-flow" class="block">
+            <div class="mb-6 bg-white p-6 rounded-xl border border-[#EAE2D6] shadow-sm">
+                <h2 class="text-xl font-bold mb-2">核心链路演练厅</h2>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    本模块将云存储从"商店配置"到"物理空间下发"的完整生命周期拆解为四个交互式阶段。点击左侧的阶段卡片，右侧将动态呈现详细的系统交互节点、技术方案设计及关键动作要求，帮助您快速理解 RevenueCat 与 Momcozy 后端如何无缝协同。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-1 flex flex-col gap-3" id="phase-list">
+                </div>
+
+                <div class="md:col-span-2">
+                    <div class="bg-white p-6 rounded-xl border border-[#EAE2D6] shadow-sm h-full" id="phase-detail-container">
+                        <h3 id="detail-title" class="text-xl font-bold mb-4 text-[#D4A373]">请选择左侧流程节点</h3>
+                        <div id="detail-steps" class="flex flex-col mb-6">
+                        </div>
+                        <div id="detail-deepdive" class="bg-gray-50 p-4 rounded-lg border border-gray-100 hidden">
+                            <h4 class="font-bold text-sm text-gray-800 mb-2">💡 深度解析 & 关键动作</h4>
+                            <p id="deepdive-text" class="text-sm text-gray-600 leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-matrix" class="hidden">
+            <div class="mb-6 bg-white p-6 rounded-xl border border-[#EAE2D6] shadow-sm">
+                <h2 class="text-xl font-bold mb-2">异常流与边缘场景矩阵</h2>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    在复杂的跨平台支付系统中，异常情况（如断网、掉单、跨端冲突等）不可避免。本模块整理了常见的逆向业务场景。点击对应的异常场景卡片，查看对应的系统容错行为以及前端提供给用户的感知体验方案。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="matrix-grid">
+            </div>
+        </section>
+
+        <section id="section-dashboard" class="hidden">
+            <div class="mb-6 bg-white p-6 rounded-xl border border-[#EAE2D6] shadow-sm">
+                <h2 class="text-xl font-bold mb-2">履约与配置全景监控 (模拟数据)</h2>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    此看板基于核心链路的设计，模拟展示了数字化云存储上线后的系统运行健康度与销售分布。左侧图表展示了多渠道支付来源的占比，验证 Web Linkout 策略的引流效果；右侧图表展示了 Momcozy 后端接收 Webhook 并开启物理权限的成功率，反映系统履约的稳定性。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl border border-[#EAE2D6] shadow-sm">
+                    <h3 class="text-lg font-bold text-center mb-1">各端支付渠道占比分布</h3>
+                    <p class="text-xs text-center text-gray-500 mb-4">通过 RevenueCat SDK 统一汇总的三端订单</p>
+                    <div class="chart-container">
+                        <canvas id="channelChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl border border-[#EAE2D6] shadow-sm">
+                    <h3 class="text-lg font-bold text-center mb-1">Webhook 履约处理成功率</h3>
+                    <p class="text-xs text-center text-gray-500 mb-4">Momcozy 后端处理 S3/OSS 物理权限转化效率</p>
+                    <div class="chart-container">
+                        <canvas id="webhookChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const phases = [
+            {
+                id: "phase1",
+                title: "Phase 1: 基础配置 (Configuration)",
+                shortDesc: "搭建三端物理 SKU 与 RC 逻辑权限的映射关系。",
+                steps: [
+                    "Store 后台: 分别创建 Apple / Google / Stripe 底层 SKU",
+                    "RC 后台: 创建统一的 Entitlement (如 ent_storage)",
+                    "RC 后台: 将各端 Product 关联至该 Entitlement",
+                    "Momcozy 后端: 定义 Entitlement 与实际物理 Quota 的映射表"
+                ],
+                deepDive: "关键映射逻辑：后端需维护一张静态映射表。例如，当识别到 Entitlement 为 `ent_storage_50gb` 时，对应的物理配额 (Quota) 应设置为 51200MB。这是确保逻辑权益与实际物理资产准确绑定的核心基础。"
+            },
+            {
+                id: "phase2",
+                title: "Phase 2: 售卖与支付 (Forward Path)",
+                shortDesc: "从展示 Paywall 到各渠道完成支付校验。",
+                steps: [
+                    "App/Web 前端获取 RC Offering，动态渲染 Paywall (包含试用、月、年选项)",
+                    "用户选择渠道: iOS (IAP) / Android (GPB) / Web Linkout (Stripe Checkout)",
+                    "执行原生支付或 Stripe 收银台扣款并返回校验结果",
+                    "校验成功，RevenueCat 激活当前用户的 Entitlement 状态"
+                ],
+                deepDive: "Web Linkout 异常兜底机制：如果用户在 Stripe 浏览器端付完款后直接关闭页面，未点击"返回 App"，因为链接中携带了 `app_user_id`，只要 RC 将 Webhook 推送给后端，后端会在后台静默提升空间配额。用户下次打开 App 时，RC SDK 将自动同步最新状态，权限立即生效。"
+            },
+            {
+                id: "phase3",
+                title: "Phase 3: 权限履约 (Fulfillment)",
+                shortDesc: "Webhook 触发后端物理权限下发与数据库更新。",
+                steps: [
+                    "RevenueCat 触发 Webhook: 推送 INITIAL_PURCHASE 或 RENEWAL 事件",
+                    "Momcozy 后端接收并校验 Webhook 签名，查询配额映射表",
+                    "后端实时调用物理云服务 (S3/OSS) API，修改用户的 Bucket 配额限制",
+                    "更新 Momcozy 本地数据库，并通过 Push/邮件向用户下发履约成功通知"
+                ],
+                deepDive: "物理动作与兜底机制：后端在收到 Webhook 后，必须实时调用云服务 API 开启容量。如果遇到网络波动导致配额修改失败，务必将该任务记录并推入"延时重试队列（Retry Queue）"，以确保用户付款后物理存储空间 100% 到账。"
+            },
+            {
+                id: "phase4",
+                title: "Phase 4: 逆向与异常 (Exceptions)",
+                shortDesc: "订阅取消、退款与跨端掉单的恢复处理。",
+                steps: [
+                    "用户主动取消订阅、过期未续费或在商店申请退款成功",
+                    "RevenueCat 触发对应的 Webhook: CANCELLATION, EXPIRATION, 或 REVOKE",
+                    "Momcozy 后端识别到权限失效，触发降级指令",
+                    "用户遇到状态丢失，可手动点击 '恢复购买 (Restore)' 重新刷新收据"
+                ],
+                deepDive: "软降级（Soft Limit）策略：当订阅过期或退款时，切忌立即物理删除用户文件。最佳体验是将物理权限改为『只读/Read-only』。允许用户查看和下载历史已存文件，但拦截新的上传请求。在 PRD 中需明确一个数据保留期（如 30 天），期满后再执行物理删除清理。"
+            }
+        ];
+
+        const edgeCases = [
+            {
+                scenario: "支付中途断网",
+                system: "Apple/Google 商店系统会自动进行重试，或在用户下次启动 App 时自动触发收据校验。",
+                user: "重新进入 App 后，页面状态自动由'未支付'变更为'购买成功'，无需重新付款。"
+            },
+            {
+                scenario: "信用卡扣款失败",
+                system: "触发设定好的 '宽限期 (Grace Period)' 策略，此时 RC 状态仍保持为 Active 不掉线。",
+                user: "云存储空间仍可正常使用上传/下载，但 App 顶部会弹出横幅提醒：'续费失败，请更新您的支付方式'。"
+            },
+            {
+                scenario: "跨端重复购买",
+                system: "RevenueCat 会以 app_user_id 为核心自动合并多条权益记录，按高级别或最长有效期为主导计算。",
+                user: "用户在个人中心会看到订阅权限的有效期进行了累加，或者存储空间自动取两者中的最大值。"
+            },
+            {
+                scenario: "Web 网页端退款同步",
+                system: "Stripe 处理退款 -> 通知 RC 生成 Revoke 事件 -> Momcozy 后端执行云存储空间软降级。",
+                user: "退款到账后，用户将在 App 内或通过邮件收到权限已收回的通知，云盘转为只读。"
+            }
+        ];
+
+        let currentTab = 'flow';
+        let chartInstances = [];
+
+        function initFlow() {
+            const listContainer = document.getElementById('phase-list');
+            listContainer.innerHTML = '';
+            
+            phases.forEach((phase, index) => {
+                const card = document.createElement('div');
+                card.className = `phase-card p-4 rounded-xl border border-[#EAE2D6] bg-white cursor-pointer hover:shadow-md transition-all ${index === 0 ? 'active-phase' : ''}`;
+                card.onclick = () => selectPhase(phase.id);
+                card.id = `card-${phase.id}`;
+                
+                card.innerHTML = `
+                    <h3 class="font-bold text-gray-800 mb-1">${phase.title}</h3>
+                    <p class="text-xs text-gray-500">${phase.shortDesc}</p>
+                `;
+                listContainer.appendChild(card);
+            });
+
+            selectPhase('phase1');
+        }
+
+        function selectPhase(phaseId) {
+            document.querySelectorAll('.phase-card').forEach(el => el.classList.remove('active-phase'));
+            document.getElementById(`card-${phaseId}`).classList.add('active-phase');
+
+            const phase = phases.find(p => p.id === phaseId);
+            document.getElementById('detail-title').innerText = phase.title;
+            
+            const stepsContainer = document.getElementById('detail-steps');
+            stepsContainer.innerHTML = '';
+            
+            phase.steps.forEach((step, idx) => {
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'bg-[#FDFBF7] p-4 rounded-lg border border-[#EAE2D6] flex items-center gap-4';
+                stepDiv.innerHTML = `
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-[#D4A373] text-white flex items-center justify-center font-bold text-sm">
+                        ${idx + 1}
+                    </div>
+                    <div class="text-sm font-medium text-gray-700">${step}</div>
+                `;
+                stepsContainer.appendChild(stepDiv);
+                
+                if (idx < phase.steps.length - 1) {
+                    const arrowDiv = document.createElement('div');
+                    arrowDiv.className = 'arrow-down';
+                    arrowDiv.innerText = '↓';
+                    stepsContainer.appendChild(arrowDiv);
+                }
+            });
+
+            const deepDiveContainer = document.getElementById('detail-deepdive');
+            const deepDiveText = document.getElementById('deepdive-text');
+            
+            if (phase.deepDive) {
+                deepDiveText.innerText = phase.deepDive;
+                deepDiveContainer.classList.remove('hidden');
+            } else {
+                deepDiveContainer.classList.add('hidden');
+            }
+        }
+
+        function initMatrix() {
+            const grid = document.getElementById('matrix-grid');
+            grid.innerHTML = '';
+            
+            edgeCases.forEach(ec => {
+                const card = document.createElement('div');
+                card.className = 'bg-white border border-[#EAE2D6] rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer group';
+                card.onclick = function() {
+                    const content = this.querySelector('.ec-content');
+                    content.classList.toggle('hidden');
+                    const icon = this.querySelector('.toggle-icon');
+                    icon.innerText = content.classList.contains('hidden') ? '＋' : '－';
+                };
+
+                card.innerHTML = `
+                    <div class="p-4 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+                        <h3 class="font-bold text-gray-800 text-sm">⚠️ ${ec.scenario}</h3>
+                        <span class="toggle-icon text-gray-400 font-bold group-hover:text-[#D4A373]">＋</span>
+                    </div>
+                    <div class="ec-content hidden p-4 flex flex-col gap-3">
+                        <div>
+                            <span class="inline-block px-2 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded mb-1">系统容错行为</span>
+                            <p class="text-xs text-gray-600 leading-relaxed">${ec.system}</p>
+                        </div>
+                        <div>
+                            <span class="inline-block px-2 py-1 bg-green-50 text-green-700 text-xs font-bold rounded mb-1">用户侧感知</span>
+                            <p class="text-xs text-gray-600 leading-relaxed">${ec.user}</p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function initCharts() {
+            chartInstances.forEach(chart => chart.destroy());
+            chartInstances = [];
+
+            const ctxChannel = document.getElementById('channelChart').getContext('2d');
+            const channelChart = new Chart(ctxChannel, {
+                type: 'doughnut',
+                data: {
+                    labels: ['iOS (Apple IAP)', 'Android (Google Play)', 'Web Linkout (Stripe)'],
+                    datasets: [{
+                        data: [45, 30, 25],
+                        backgroundColor: ['#E5989B', '#D4A373', '#9D8189'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: {size: 11} } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ' ' + context.label + ': ' + context.parsed + '%';
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+
+            const ctxWebhook = document.getElementById('webhookChart').getContext('2d');
+            const webhookChart = new Chart(ctxWebhook, {
+                type: 'bar',
+                data: {
+                    labels: ['INITIAL_PURCHASE', 'RENEWAL', 'EXPIRATION', 'REVOKE'],
+                    datasets: [
+                        {
+                            label: '成功转化 (DB + OSS 更新)',
+                            data: [99.2, 98.5, 99.9, 100],
+                            backgroundColor: '#D4A373',
+                            borderRadius: 4
+                        },
+                        {
+                            label: '重试队列 (延时恢复)',
+                            data: [0.7, 1.2, 0.1, 0],
+                            backgroundColor: '#EAE2D6',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { 
+                            stacked: true, 
+                            max: 100, 
+                            ticks: { callback: function(value) { return value + "%" } } 
+                        },
+                        x: { 
+                            stacked: true,
+                            ticks: {
+                                font: { size: 10 }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: {size: 11} } }
+                    }
+                }
+            });
+
+            chartInstances.push(channelChart, webhookChart);
+        }
+
+        function switchTab(tabId) {
+            currentTab = tabId;
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            
+            document.getElementById('section-flow').classList.add('hidden');
+            document.getElementById('section-matrix').classList.add('hidden');
+            document.getElementById('section-dashboard').classList.add('hidden');
+            
+            document.getElementById(`section-${tabId}`).classList.remove('hidden');
+
+            if (tabId === 'dashboard') {
+                setTimeout(initCharts, 50); 
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initFlow();
+            initMatrix();
+        });
+
+    </script>
+</body>
+</html>

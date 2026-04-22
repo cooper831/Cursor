@@ -1,0 +1,382 @@
+{
+  "sections": [
+    {
+      "id": "today_for_you",
+      "title": "Today for You",
+      "hint": "Useful today. Relief today.",
+      "items": [
+        {
+          "id": "feed_without_the_fuss",
+          "themeTag": "Today for You",
+          "title": "Feed Without the Fuss",
+          "hero": {
+            "caption": "Make nights feel lighter",
+            "tags": ["Night feeds", "Less fuss", "More flow"],
+            "sceneImage": "A softly lit kitchen at night: one arm holding baby, the other warming and prepping a bottle—calm, not chaotic.",
+            "imageUrl": "./images/warmer.jpg"
+          },
+          "copy": "Night feeds shouldn’t feel like a sprint. Warm, prep, and clean with a smoother flow—so everyone gets back to sleep faster.",
+          "sellingTags": ["Faster warm-up", "Less waiting", "Simple routine"],
+          "personalizationTags": ["For messy feeds", "For newborn days"],
+          "recommendations": ["Bottle Warmer", "Bottle Washer", "Breast Milk Storage / Cooler"],
+          "product": { "price": 299, "originalPrice": 399, "coupon": "Night‑owl coupon −50", "rating": 4.8, "sold": "16k+" },
+          "cta": { "label": "Warm It Up", "deeplink": "app://collection/feeding-no-fuss", "style": "solid" },
+          "secondary": { "label": "See the Routine", "deeplink": "app://guide/night-feeding" }
+        },
+        {
+          "id": "walk_out_breathe_easy",
+          "themeTag": "Today for You",
+          "title": "Walk Out, Breathe Easy",
+          "hero": {
+            "caption": "Hands free. Heart full.",
+            "tags": ["Outings", "Hands-free", "Easy days"],
+            "sceneImage": "A daytime stroll: baby settled in a carrier, caregiver relaxed with both hands free—an outing that feels like a break.",
+            "imageUrl": "./images/carrier.jpg"
+          },
+          "copy": "Baby wants closeness. You want ease. The right carry makes short walks feel like rest—not a workout.",
+          "sellingTags": ["Easier outings", "Less strain", "Comfort fit"],
+          "personalizationTags": ["For first outings"],
+          "recommendations": ["Newborn Carrier", "Hip Seat Carrier", "Stroller"],
+          "product": { "price": 899, "originalPrice": 1099, "coupon": "Outing discount", "rating": 4.7, "sold": "9.8k+" },
+          "cta": { "label": "Let’s Roll", "deeplink": "app://collection/first-outings", "style": "outline" },
+          "secondary": { "label": "Try a Carrier", "deeplink": "app://category/carriers" }
+        },
+        {
+          "id": "nap_please",
+          "themeTag": "Today for You",
+          "title": "Nap, Please",
+          "hero": {
+            "caption": "Set the room to sleep mode",
+            "tags": ["Naps", "Soothing", "Consistent"],
+            "sceneImage": "A dim, cozy room: baby winding down while a sound machine and monitor quietly do their job.",
+            "imageUrl": "./images/sound.jpg"
+          },
+          "copy": "Naps shouldn’t be a mystery box. Build a familiar, steady soothing setup that gives every nap a better chance to stick.",
+          "sellingTags": ["Easier settling", "Fewer wake-ups", "More peace"],
+          "personalizationTags": ["For better naps"],
+          "recommendations": ["Sound Machine", "Baby Monitor"],
+          "product": { "price": 169, "originalPrice": 239, "coupon": "Sleep bonus", "rating": 4.6, "sold": "32k+" },
+          "cta": { "label": "Catch the Zzz", "deeplink": "app://collection/better-naps", "style": "soft" },
+          "secondary": { "label": "Play a Sound", "deeplink": "app://category/sound-machines" }
+        },
+        {
+          "id": "hands_free_heart_full",
+          "themeTag": "Today for You",
+          "title": "Hands Free, Heart Full",
+          "hero": {
+            "caption": "Close, but not stuck",
+            "tags": ["At home", "Comfort", "Freedom"],
+            "sceneImage": "At home: you prep a quick meal while baby stays snuggled and calm—connected, but with your hands back.",
+            "imageUrl": "./images/carrier.jpg"
+          },
+          "copy": "If baby cries the moment you set them down, you’re not failing—you’re needed. Carry close, keep moving, and keep your day going.",
+          "sellingTags": ["Comfort carry", "Less strain", "More calm"],
+          "personalizationTags": ["For newborn days"],
+          "recommendations": ["Newborn Baby Carrier", "Soft Structured Carrier"],
+          "product": { "price": 399, "originalPrice": 499, "coupon": "Limited-time drop", "rating": 4.7, "sold": "19k+" },
+          "cta": { "label": "Hold Me Close", "deeplink": "app://collection/hands-free", "style": "spotlight" },
+          "secondary": { "label": "See the Fit", "deeplink": "app://guide/carrier-fit" }
+        }
+      ]
+    },
+    {
+      "id": "daily_wonders",
+      "title": "Daily Wonders",
+      "hint": "Tiny milestones. Big smiles.",
+      "items": [
+        {
+          "id": "ready_to_sit",
+          "themeTag": "Daily Wonders",
+          "title": "Ready to Sit",
+          "hero": {
+            "caption": "First sit, first wow",
+            "tags": ["Feeding time", "Stable", "Easy clean"],
+            "sceneImage": "Baby sits more steadily, curious about a bowl and spoon—your first real mealtime moments.",
+            "imageUrl": "./images/stroller.jpg"
+          },
+          "copy": "When sitting gets steadier, mealtime gets real. A comfy, supportive seat makes feeding smoother for everyone.",
+          "sellingTags": ["More stable", "Easier cleanup", "Less stress"],
+          "personalizationTags": ["For little sitters"],
+          "recommendations": ["High Chair"],
+          "product": { "price": 699, "originalPrice": 899, "coupon": "Feeding season −80", "rating": 4.8, "sold": "7.6k+" },
+          "cta": { "label": "See the Seat", "deeplink": "app://category/high-chairs", "style": "solid" },
+          "secondary": { "label": "Join the Table", "deeplink": "app://collection/table-moments" }
+        },
+        {
+          "id": "little_explorer_on_board",
+          "themeTag": "Daily Wonders",
+          "title": "Little Explorer On Board",
+          "hero": {
+            "caption": "Outings become adventures",
+            "tags": ["Lightweight", "Smooth", "Packable"],
+            "sceneImage": "Baby rides wide-eyed, watching trees and light flicker by—comfortable exploring with you.",
+            "imageUrl": "./images/stroller.jpg"
+          },
+          "copy": "As curiosity grows, comfort matters. A light, steady, easy-to-pack stroller makes you want to go out more—because it’s actually easy.",
+          "sellingTags": ["Light to carry", "Smooth to push", "Easy to store"],
+          "personalizationTags": ["For first outings"],
+          "recommendations": ["Lightweight Stroller", "Bassinet-to-seat stroller"],
+          "product": { "price": 1299, "originalPrice": 1699, "coupon": "Travel season −100", "rating": 4.7, "sold": "5.4k+" },
+          "cta": { "label": "See the Stroller", "deeplink": "app://category/strollers", "style": "outline" },
+          "secondary": { "label": "Let’s Roll", "deeplink": "app://collection/stroller-picks" }
+        },
+        {
+          "id": "up_down_up_again",
+          "themeTag": "Daily Wonders",
+          "title": "Up, Down, Up Again",
+          "hero": {
+            "caption": "Up. Down. Repeat.",
+            "tags": ["Quick on/off", "Less strain", "More ease"],
+            "sceneImage": "Crawling and cruising days: baby wants up, then down, then up again—your arms deserve a break.",
+            "imageUrl": "./images/carrier.jpg"
+          },
+          "copy": "This stage is basically: “Up—down—up again.” A more ergonomic carry makes the whole day feel lighter.",
+          "sellingTags": ["Less back strain", "Faster switching", "More comfort"],
+          "personalizationTags": ["For up-down babies"],
+          "recommendations": ["Hip Seat Carrier", "2-in-1 Carrier"],
+          "product": { "price": 329, "originalPrice": 429, "coupon": "Bundle discount", "rating": 4.8, "sold": "21k+" },
+          "cta": { "label": "Hop on Hip Seat", "deeplink": "app://category/hip-seats", "style": "soft" },
+          "secondary": { "label": "Save My Arms", "deeplink": "app://collection/arm-savers" }
+        },
+        {
+          "id": "tiny_table_moments",
+          "themeTag": "Daily Wonders",
+          "title": "Tiny Table Moments",
+          "hero": {
+            "caption": "A seat at the table",
+            "tags": ["Family time", "Routines", "Together"],
+            "sceneImage": "A warm family table scene: baby participates in their own little seat—shared rhythms, shared moments.",
+            "imageUrl": "./images/stroller.jpg"
+          },
+          "copy": "Feeding isn’t just food—it’s belonging. A small seat helps baby join the family rhythm, one meal at a time.",
+          "sellingTags": ["More participation", "Smoother meals", "Easy clean"],
+          "personalizationTags": ["For little sitters"],
+          "recommendations": ["High Chair", "Feeding accessories"],
+          "product": { "price": 59.9, "originalPrice": 99.9, "coupon": "Accessories coupon", "rating": 4.7, "sold": "46k+" },
+          "cta": { "label": "Join the Table", "deeplink": "app://collection/feeding-accessories", "style": "spotlight" },
+          "secondary": { "label": "See the Seat", "deeplink": "app://category/high-chairs" }
+        }
+      ]
+    },
+    {
+      "id": "baby_inner_voice",
+      "title": "Baby’s Inner Voice",
+      "hint": "Translating what baby can’t say (yet).",
+      "items": [
+        {
+          "id": "hold_me_but_lets_move",
+          "themeTag": "Baby’s Inner Voice",
+          "title": "“Hold me, but let’s move.”",
+          "hero": {
+            "caption": "Close, and on the go",
+            "tags": ["Secure", "Curious", "Connected"],
+            "sceneImage": "Baby rests on your chest, calm and secure, while you shop or stroll—comfort without stopping life.",
+            "imageUrl": "./images/carrier.jpg"
+          },
+          "copy": "“I want to be close—and see the world with you.” Secure snuggles, hands free, and your day stays yours.",
+          "sellingTags": ["Close comfort", "Hands free", "Less strain"],
+          "personalizationTags": ["For newborn days", "For first outings"],
+          "recommendations": ["Newborn Carrier", "PureHug Carrier"],
+          "product": { "price": 429, "originalPrice": 529, "coupon": "Hug coupon −30", "rating": 4.8, "sold": "14k+" },
+          "cta": { "label": "Carry My World", "deeplink": "app://collection/carry-my-world", "style": "solid" },
+          "secondary": { "label": "Hold Me Close", "deeplink": "app://category/carriers" }
+        },
+        {
+          "id": "this_nap_needs_magic",
+          "themeTag": "Baby’s Inner Voice",
+          "title": "“This nap needs some magic.”",
+          "hero": {
+            "caption": "Help me find sleep",
+            "tags": ["White noise", "Warm light", "Soothing"],
+            "sceneImage": "Baby rubs sleepy eyes while the room shifts into calm mode—soft light and steady sound.",
+            "imageUrl": "./images/sound.jpg"
+          },
+          "copy": "“I’m tired… I just don’t know how to fall asleep.” Set the environment to ‘easy sleep’—and watch the magic happen.",
+          "sellingTags": ["Easier sleep", "More calm", "More consistent"],
+          "personalizationTags": ["For better naps"],
+          "recommendations": ["Sound Machine", "Monitor"],
+          "product": { "price": 199, "originalPrice": 269, "coupon": "Sleep coupon −30", "rating": 4.6, "sold": "28k+" },
+          "cta": { "label": "Play the Calm", "deeplink": "app://collection/play-the-calm", "style": "soft" },
+          "secondary": { "label": "Catch the Zzz", "deeplink": "app://collection/better-naps" }
+        },
+        {
+          "id": "im_ready_for_a_real_seat",
+          "themeTag": "Baby’s Inner Voice",
+          "title": "“I’m ready for a real seat.”",
+          "hero": {
+            "caption": "Let me join you",
+            "tags": ["Mealtime", "Participation", "Grow"],
+            "sceneImage": "Baby sits upright, reaching for food with curiosity—ready to take part, not just watch.",
+            "imageUrl": "./images/stroller.jpg"
+          },
+          "copy": "“I don’t want to watch you eat—I want in.” Moving from being held to participating is a big, sweet milestone.",
+          "sellingTags": ["More stable", "Easier meals", "Easy clean"],
+          "personalizationTags": ["For little sitters"],
+          "recommendations": ["High Chair"],
+          "product": { "price": 699, "originalPrice": 899, "coupon": "Feeding season −80", "rating": 4.8, "sold": "7.6k+" },
+          "cta": { "label": "See My Chair", "deeplink": "app://category/high-chairs", "style": "outline" },
+          "secondary": { "label": "Join the Table", "deeplink": "app://collection/table-moments" }
+        },
+        {
+          "id": "dont_stop_the_adventure",
+          "themeTag": "Baby’s Inner Voice",
+          "title": "“Don’t stop the adventure.”",
+          "hero": {
+            "caption": "Keep me rolling",
+            "tags": ["Comfort", "Explore", "Go"],
+            "sceneImage": "Baby looks around, taking in trees and sunlight as the city glides by—comfortable enough to keep exploring.",
+            "imageUrl": "./images/stroller.jpg"
+          },
+          "copy": "“I want to keep looking—don’t end it early.” A comfy ride turns the stroller into a little mobile basecamp.",
+          "sellingTags": ["More comfort", "More stability", "Easy fold"],
+          "personalizationTags": ["For first outings"],
+          "recommendations": ["Stroller"],
+          "product": { "price": 1299, "originalPrice": 1699, "coupon": "Travel season −100", "rating": 4.7, "sold": "5.4k+" },
+          "cta": { "label": "Keep Me Rolling", "deeplink": "app://category/strollers", "style": "spotlight" },
+          "secondary": { "label": "See the Stroller", "deeplink": "app://collection/stroller-picks" }
+        }
+      ]
+    },
+    {
+      "id": "little_fixes_big_relief",
+      "title": "Little Fixes, Big Relief",
+      "hint": "Small fixes that change the day.",
+      "items": [
+        {
+          "id": "the_bottle_pile_up",
+          "themeTag": "Little Fixes, Big Relief",
+          "title": "The Bottle Pile‑Up",
+          "hero": {
+            "caption": "Less scrubbing, more living",
+            "tags": ["Wash", "Save time", "Tidy"],
+            "sceneImage": "A sink full of bottles… then a clean counter. Make the repetitive part simpler—and your day lighter.",
+            "imageUrl": "./images/warmer.jpg"
+          },
+          "copy": "It’s never just one bottle. Turn the pile-up into a quick routine so you can reclaim a little time (and sanity).",
+          "sellingTags": ["Less effort", "Better clean", "Tidy counter"],
+          "personalizationTags": ["For messy feeds"],
+          "recommendations": ["Bottle Washer"],
+          "product": { "price": 799, "originalPrice": 999, "coupon": "Save-time coupon −120", "rating": 4.7, "sold": "6.3k+" },
+          "cta": { "label": "Fix the Bottles", "deeplink": "app://category/bottle-washers", "style": "solid" },
+          "secondary": { "label": "See the Before/After", "deeplink": "app://collection/bottle-pile-up" }
+        },
+        {
+          "id": "the_2am_feed",
+          "themeTag": "Little Fixes, Big Relief",
+          "title": "The 2 AM Feed",
+          "hero": {
+            "caption": "Beat the clock",
+            "tags": ["Warm fast", "Night", "Easy"],
+            "sceneImage": "A calm 2 AM feed: warm, pour, soothe—fewer minutes awake for everyone.",
+            "imageUrl": "./images/warmer.jpg"
+          },
+          "copy": "At 2 AM, every minute counts. Faster, more consistent warming means less crying—and more sleep.",
+          "sellingTags": ["Faster feeds", "Less crying", "Easy controls"],
+          "personalizationTags": ["For newborn days"],
+          "recommendations": ["Bottle Warmer"],
+          "product": { "price": 299, "originalPrice": 399, "coupon": "Night‑owl coupon −50", "rating": 4.8, "sold": "16k+" },
+          "cta": { "label": "Beat the 2 AM", "deeplink": "app://category/bottle-warmers", "style": "outline" },
+          "secondary": { "label": "Warm It Up", "deeplink": "app://collection/feeding-no-fuss" }
+        },
+        {
+          "id": "the_short_walk_save",
+          "themeTag": "Little Fixes, Big Relief",
+          "title": "The Short Walk Save",
+          "hero": {
+            "caption": "Save your arms",
+            "tags": ["Quick outings", "Light", "Relief"],
+            "sceneImage": "You planned a 10‑minute walk… and ended up carrying the whole time. A lighter setup changes everything.",
+            "imageUrl": "./images/stroller.jpg"
+          },
+          "copy": "For “just a quick trip,” the right gear is the difference between relief and regret. Keep it light. Keep it easy.",
+          "sellingTags": ["Less strain", "Lightweight", "Easy fold"],
+          "personalizationTags": ["For first outings", "For up-down babies"],
+          "recommendations": ["Hip Seat", "Lightweight stroller"],
+          "product": { "price": 329, "originalPrice": 429, "coupon": "Bundle discount", "rating": 4.8, "sold": "21k+" },
+          "cta": { "label": "Save My Arms", "deeplink": "app://collection/arm-savers", "style": "soft" },
+          "secondary": { "label": "Let’s Roll", "deeplink": "app://collection/stroller-picks" }
+        }
+      ]
+    },
+    {
+      "id": "mom_scenes",
+      "title": "Real Mom Scenes",
+      "hint": "The right support for every stage of motherhood.",
+      "items": [
+        {
+          "id": "the_preparer",
+          "themeTag": "The Preparer",
+          "title": "The Proactive Supermom's Survival Checklist",
+          "hero": {
+            "caption": "Beat nursing pain before it starts",
+            "tags": ["Pre-birth", "Newborn", "Essentials"],
+            "sceneImage": "A soon-to-be mom calmly packing her hospital bag, confidence radiating—she's ready before baby even arrives.",
+            "imageUrl": "./images/nursing-bra.jpg"
+          },
+          "copy": "Don't let your first messy night steal your grace. Real supermoms are just prepared. Beat nursing pain and chaos with our breathable, seamless bra. Equip this essential gear early to reduce anxiety by 50% and boost your night-waking stamina!",
+          "sellingTags": ["Breathable", "Seamless", "Essential gear"],
+          "personalizationTags": ["Pre-birth to Newborn"],
+          "recommendations": ["Seamless Nursing Bra"],
+          "product": { "price": 29.99, "originalPrice": 39.99, "coupon": "New mom −5", "rating": 4.8, "sold": "52k+" },
+          "cta": { "label": "Claim Your Mom Armor", "deeplink": "app://collection/nursing-bras", "style": "solid" },
+          "secondary": { "label": "See All Bras", "deeplink": "app://category/nursing-bras" }
+        },
+        {
+          "id": "the_contact_napper",
+          "themeTag": "The Contact Napper",
+          "title": "The Koala Mom's Ultimate Snuggle Zone",
+          "hero": {
+            "caption": "Cloud-like comfort for every cuddle",
+            "tags": ["0–6 Months", "Comfort", "Zero wires"],
+            "sceneImage": "Baby dozing on mom's chest, both perfectly still—a soft bra making the moment effortless.",
+            "imageUrl": "./images/nursing-bra.jpg"
+          },
+          "copy": "Trapped under a sleeping baby? This sweet surrender shouldn't mean digging straps or aching shoulders. Meet the bra softer than your baby's skin. Zero wires, zero friction. Enjoy your contact naps in cloud-like comfort, making every cuddle feel utterly effortless.",
+          "sellingTags": ["Ultra soft", "Zero friction", "Nap-ready"],
+          "personalizationTags": ["0–6 Months"],
+          "recommendations": ["Seamless Nursing Bra"],
+          "product": { "price": 29.99, "originalPrice": 39.99, "coupon": "Snuggle deal", "rating": 4.8, "sold": "52k+" },
+          "cta": { "label": "Unlock Snuggle Mode", "deeplink": "app://collection/nursing-bras", "style": "outline" },
+          "secondary": { "label": "Feel the Fabric", "deeplink": "app://category/nursing-bras" }
+        },
+        {
+          "id": "the_multi_tasker",
+          "themeTag": "The Multi-tasker",
+          "title": "24/7 Mom Magic: The One-Second Switch",
+          "hero": {
+            "caption": "Home to street in one second flat",
+            "tags": ["0–9 Months", "Versatile", "Chic"],
+            "sceneImage": "Mom answers the door mid-feed, looking effortlessly put-together—one bra that does it all.",
+            "imageUrl": "./images/nursing-bra.jpg"
+          },
+          "copy": "Doorbell ringing? No time to change! Skip the pajama panic with our one-second magic bra. It's a one-handed drop-down nursing dream at home, and a stylish, supportive top under a cardigan. Stay effortlessly chic and ready for anything, 24/7.",
+          "sellingTags": ["One-hand access", "Stylish", "Day & night"],
+          "personalizationTags": ["0–9 Months"],
+          "recommendations": ["Seamless Nursing Bra"],
+          "product": { "price": 29.99, "originalPrice": 39.99, "coupon": "Magic −5", "rating": 4.8, "sold": "52k+" },
+          "cta": { "label": "Get Your Magic Top", "deeplink": "app://collection/nursing-bras", "style": "soft" },
+          "secondary": { "label": "See the Switch", "deeplink": "app://category/nursing-bras" }
+        },
+        {
+          "id": "the_heavy_lifter",
+          "themeTag": "The Heavy Lifter",
+          "title": "Anti-Gravity Relief for Heavyweight Cuddles",
+          "hero": {
+            "caption": "Wide straps that secretly save your shoulders",
+            "tags": ["6–9 Months", "Support", "Wire-free"],
+            "sceneImage": "Mom lifts a heavier baby with ease—wide straps distributing the load, zero discomfort.",
+            "imageUrl": "./images/nursing-bra.jpg"
+          },
+          "copy": "As your baby gets heavier, your shoulders bear the brunt. You need an anti-gravity rescue! Our wide straps secretly distribute weight, while 3D seamless support holds you up—without wires. Relieve aching shoulders and save your strength for playtime!",
+          "sellingTags": ["Wide straps", "3D support", "Wire-free"],
+          "personalizationTags": ["6–9 Months"],
+          "recommendations": ["Seamless Nursing Bra"],
+          "product": { "price": 29.99, "originalPrice": 39.99, "coupon": "Relief −5", "rating": 4.8, "sold": "52k+" },
+          "cta": { "label": "Equip Anti-Gravity Gear", "deeplink": "app://collection/nursing-bras", "style": "spotlight" },
+          "secondary": { "label": "Feel the Lift", "deeplink": "app://category/nursing-bras" }
+        }
+      ]
+    }
+  ]
+}
+

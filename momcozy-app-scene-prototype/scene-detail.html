@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scene detail — Momcozy (wireframe)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="wireframe.css" />
+  </head>
+  <body class="ed-detail">
+    <header class="wf-bar">
+      <a href="index.html" style="text-decoration: none; color: inherit"><span class="wf-logo">← MOMCOZY</span></a>
+      <span class="wf-tag">Editorial · Detail</span>
+    </header>
+
+    <nav class="wf-scene-switch" aria-label="Switch scene (designer preview)">
+      <a href="?scene=pregnancy">Pregnancy</a>
+      <a href="?scene=feeding">Feeding</a>
+      <a href="?scene=recovery">Recovery</a>
+      <a href="?scene=outing">Outing</a>
+      <a href="?scene=parenting">Parenting</a>
+    </nav>
+
+    <article class="wf-detail" id="detail-root"></article>
+
+    <script>
+      /* Each scene: multiple productGroups; each group has a title + exactly 4 items (name, line, price, collection placeholder). */
+      var SCENES = {
+        pregnancy: {
+          name: "Cozy Pregnancy",
+          accent: "#8b7cb5",
+          accentSoft: "#ede9f5",
+          keywords: ["Smooth transition", "Ease", "Relax"],
+          manifesto:
+            "The weeks before birth are a bridge: your body changes fast, and small comforts stack into real calm. Cozy Pregnancy is about soft support, better sleep, and gentle monitoring—so you can meet motherhood feeling steadier, not rushed.",
+          storePath: "cozy-pregnancy",
+          productGroups: [
+            {
+              title: "Sleep & support",
+              items: [
+                { name: "U-Shaped Maternity Pillow", line: "Side-sleeping support through the third trimester.", price: "$89.99", collection: "#p-pillow" },
+                { name: "Belly Support Band", line: "Light lift for daily walks.", price: "$42.00", collection: "#p-belly" },
+                { name: "Cooling Sheet Set", line: "Breathable layers for warmer nights.", price: "$119.00", collection: "#p-sheets" },
+                { name: "Lounge Nursing Bra", line: "Soft stretch for changing shape.", price: "$36.99", collection: "#p-bra" },
+              ],
+            },
+            {
+              title: "Gentle monitoring",
+              items: [
+                { name: "At-Home Fetal Monitor", line: "Quick listen-ins between visits.", price: "$79.00", collection: "#p-fetal" },
+                { name: "Blood Pressure Cuff", line: "Compact tracking for peace of mind.", price: "$54.99", collection: "#p-bp" },
+                { name: "Glucose Log Kit", line: "Simple strips + case for on-the-go.", price: "$48.00", collection: "#p-glucose" },
+                { name: "Hydration Tumbler", line: "Marked reminders to sip through the day.", price: "$32.00", collection: "#p-water" },
+              ],
+            },
+          ],
+        },
+        feeding: {
+          name: "Cozy Feeding",
+          accent: "#c45c4a",
+          accentSoft: "#fbeae7",
+          keywords: ["Efficiency", "Freedom", "Simplify"],
+          manifesto:
+            "Feeding is a full-time rhythm. Cozy Feeding is built around wearable pumping, simple cleaning, and fewer trade-offs—so you can nourish baby and still steal moments for yourself, work, or rest.",
+          storePath: "cozy-feeding",
+          productGroups: [
+            {
+              title: "Wearable pumping",
+              items: [
+                { name: "Hands-Free Wearable Pump", line: "Quiet sessions under a loose tee.", price: "$299.99", collection: "#f-pump" },
+                { name: "Extra Collection Cups (pair)", line: "Rotate while one set washes.", price: "$45.00", collection: "#f-cups" },
+                { name: "Pump Cleaning Tablets", line: "Drop-in soak for tubing & flanges.", price: "$18.99", collection: "#f-clean" },
+                { name: "Portable UV Sanitizer Bag", line: "Zip, sanitize, pack away.", price: "$69.00", collection: "#f-uv" },
+              ],
+            },
+            {
+              title: "Nursing layers",
+              items: [
+                { name: "Seamless Nursing Bra (2-pack)", line: "Clip-down without digging in.", price: "$49.99", collection: "#f-bra" },
+                { name: "Crossover Sleep Top", line: "Midnight feeds with less fuss.", price: "$39.00", collection: "#f-top" },
+                { name: "Nursing Hoodie", line: "Discreet front panel for errands.", price: "$64.00", collection: "#f-hoodie" },
+                { name: "Leakproof Nursing Pads", line: "Thin profile, all-day confidence.", price: "$16.99", collection: "#f-pads" },
+              ],
+            },
+            {
+              title: "Bottles & on-the-go",
+              items: [
+                { name: "Wide-Neck Glass Bottles (3)", line: "Thermal sleeve included.", price: "$44.99", collection: "#f-bottle" },
+                { name: "Breastmilk Cooler Sleeve", line: "Slim ice packs for commute days.", price: "$28.00", collection: "#f-cooler" },
+                { name: "Bottle Brush Travel Kit", line: "Ventilated case, dries fast.", price: "$22.00", collection: "#f-brush" },
+                { name: "Disposable Pump Wipes (30)", line: "Quick wipe between sessions.", price: "$12.99", collection: "#f-wipes" },
+              ],
+            },
+          ],
+        },
+        recovery: {
+          name: "Cozy Recovery",
+          accent: "#a67c7c",
+          accentSoft: "#f5eded",
+          keywords: ["Relief", "Soothe", "Heal"],
+          manifesto:
+            "Recovery is not a side quest—it’s part of the story. Cozy Recovery brings breast care, gentle relief, and body support that fits quiet moments at home, so healing doesn’t compete with caring for baby.",
+          storePath: "cozy-recovery",
+          productGroups: [
+            {
+              title: "Breast comfort",
+              items: [
+                { name: "Heated Lactation Massager", line: "Soothing vibration for clogged ducts.", price: "$59.99", collection: "#r-massage" },
+                { name: "Silver Nursing Cups", line: "Let sore nipples breathe between feeds.", price: "$34.00", collection: "#r-silver" },
+                { name: "Hydrogel Pads (10)", line: "Cooling relief after pumping.", price: "$24.99", collection: "#r-hydro" },
+                { name: "Lanolin-Free Balm", line: "Plant-based barrier, no residue.", price: "$19.00", collection: "#r-balm" },
+              ],
+            },
+            {
+              title: "Body & rest",
+              items: [
+                { name: "Peri Bottle + Carry Pouch", line: "Angled rinse, discreet bag.", price: "$26.00", collection: "#r-peri" },
+                { name: "Cooling Perineal Pads (14)", line: "Hospital-bag staple restock.", price: "$21.99", collection: "#r-cool" },
+                { name: "High-Waist Recovery Shorts", line: "Gentle compression, soft edge.", price: "$54.00", collection: "#r-short" },
+                { name: "Weighted Eye Mask", line: "Ten-minute nap reset.", price: "$29.00", collection: "#r-mask" },
+              ],
+            },
+          ],
+        },
+        outing: {
+          name: "Cozy Outing",
+          accent: "#4a7ca7",
+          accentSoft: "#e8f0f7",
+          keywords: ["Mobile", "Light & handy", "Convenient"],
+          manifesto:
+            "Leaving the house changes math: bags, weather, timing, and baby’s mood. Cozy Outing focuses on light packing, confident carrying, and travel-ready gear—so outings feel doable, not heroic.",
+          storePath: "cozy-outing",
+          productGroups: [
+            {
+              title: "Carry & stroll",
+              items: [
+                { name: "Lightweight Diaper Backpack", line: "Wide mouth, 12 pockets.", price: "$89.00", collection: "#o-bag" },
+                { name: "Hip Seat Carrier", line: "Quick ups for toddler moments.", price: "$74.99", collection: "#o-hip" },
+                { name: "Clip-On Stroller Fan", line: "Four speeds, rechargeable.", price: "$29.99", collection: "#o-fan" },
+                { name: "Universal Stroller Organizer", line: "Cup holders + phone slot.", price: "$42.99", collection: "#o-org" },
+              ],
+            },
+            {
+              title: "Feeding away from home",
+              items: [
+                { name: "Insulated Bottle Tote", line: "Keeps temp for up to 4 hours.", price: "$31.00", collection: "#o-tote" },
+                { name: "Portable Bottle Warmer", line: "Cordless heat in the car.", price: "$79.99", collection: "#o-warmer" },
+                { name: "Nursing Cover Poncho", line: "Full coverage, airflow mesh.", price: "$49.99", collection: "#o-cover" },
+                { name: "Disposable Changing Mats (20)", line: "Waterproof backing.", price: "$17.00", collection: "#o-mat" },
+              ],
+            },
+            {
+              title: "Weather & extras",
+              items: [
+                { name: "Compact Travel Umbrella", line: "Wind-tested frame.", price: "$34.00", collection: "#o-umbrella" },
+                { name: "Stroller Rain Cover", line: "Clear panel, vented sides.", price: "$38.99", collection: "#o-rain" },
+                { name: "Sun Shade for Infant Seat", line: "UPF 50+ stretch fit.", price: "$27.00", collection: "#o-sun" },
+                { name: "Mini First-Aid Pouch", line: "Gauze, bandages, tweezers.", price: "$19.99", collection: "#o-aid" },
+              ],
+            },
+          ],
+        },
+        parenting: {
+          name: "Cozy Parenting",
+          accent: "#9a7b4f",
+          accentSoft: "#f5f0e8",
+          keywords: ["Safe", "Soft", "Sustainable"],
+          manifesto:
+            "Daily life with a baby is thousands of small decisions. Cozy Parenting is about soft essentials, safer sleep and home moments, and dependable basics—so you spend less energy guessing, and more time being present.",
+          storePath: "cozy-parenting",
+          productGroups: [
+            {
+              title: "Everyday care",
+              items: [
+                { name: "Overnight Diapers (Box)", line: "12-hour dryness, size NB–6.", price: "$54.99", collection: "#p-diaper" },
+                { name: "99% Water Baby Wipes", line: "Thick texture, sensitive skin.", price: "$34.99", collection: "#p-wipes" },
+                { name: "Hooded Bath Towel Set", line: "Plush hood, quick dry.", price: "$41.00", collection: "#p-towel" },
+                { name: "Cradle Cap Brush Duo", line: "Soft silicone + fine bristles.", price: "$14.00", collection: "#p-brush" },
+              ],
+            },
+            {
+              title: "Sleep & calm",
+              items: [
+                { name: "Portable Sound Machine", line: "White noise + night light.", price: "$27.99", collection: "#p-sound" },
+                { name: "Breathable Swaddle (3-pack)", line: "Hip-safe stretch.", price: "$39.99", collection: "#p-swaddle" },
+                { name: "Smart Baby Monitor", line: "HD pan, room temp alert.", price: "$159.00", collection: "#p-monitor" },
+                { name: "Blackout Window Panels", line: "Suction cups, travel size.", price: "$29.00", collection: "#p-blackout" },
+              ],
+            },
+          ],
+        },
+      };
+
+      function param(name) {
+        return new URLSearchParams(window.location.search).get(name);
+      }
+
+      function escapeHtml(t) {
+        var d = document.createElement("div");
+        d.textContent = t;
+        return d.innerHTML;
+      }
+
+      function cardHtml(p) {
+        return (
+          '<div class="wf-ess" data-name="' +
+          escapeHtml(p.name) +
+          '" data-price="' +
+          escapeHtml(p.price) +
+          '">' +
+          '<div class="wf-ess-visual" aria-hidden="true">Image</div>' +
+          '<div class="wf-ess-body">' +
+          '<div class="wf-ess-name">' +
+          escapeHtml(p.name) +
+          "</div>" +
+          '<p class="wf-ess-line">' +
+          escapeHtml(p.line) +
+          "</p>" +
+          '<div class="wf-ess-price">' +
+          escapeHtml(p.price) +
+          "</div>" +
+          '<button type="button" class="wf-ess-buy"><span class="wf-ess-buy-label">Learn more</span><span class="wf-ess-buy-arr" aria-hidden="true"> →</span></button>' +
+          "</div></div>"
+        );
+      }
+
+      function groupHtml(g) {
+        var cards = g.items.map(cardHtml).join("");
+        return (
+          '<div class="wf-product-group">' +
+          '<h3 class="wf-group-title">' +
+          escapeHtml(g.title) +
+          "</h3>" +
+          '<div class="wf-grid2">' +
+          cards +
+          "</div></div>"
+        );
+      }
+
+      function bindBuyDelegation(mount) {
+        mount.addEventListener("click", function (e) {
+          var t = e.target && e.target.closest ? e.target.closest(".wf-ess-buy") : null;
+          if (t) {
+            var card = t.closest(".wf-ess");
+            var n = card ? card.getAttribute("data-name") : "";
+            var pr = card ? card.getAttribute("data-price") : "";
+            alert("Learn more → PDP (demo)\n" + (n || "Product") + "\n" + (pr || ""));
+          }
+        });
+      }
+
+      function setupLoadMore(sectionEl, s) {
+        var mount = sectionEl.querySelector("#groups-mount");
+        var btn = sectionEl.querySelector("#wf-load-more");
+        var end = sectionEl.querySelector("#wf-load-end");
+        var groups = s.productGroups || [];
+        var nextIndex = 0;
+
+        function finish() {
+          btn.hidden = true;
+          end.hidden = false;
+        }
+
+        if (!groups.length) {
+          finish();
+          return;
+        }
+
+        function appendNext() {
+          if (nextIndex >= groups.length) return;
+          mount.insertAdjacentHTML("beforeend", groupHtml(groups[nextIndex]));
+          nextIndex++;
+          if (nextIndex >= groups.length) finish();
+        }
+
+        bindBuyDelegation(mount);
+
+        appendNext();
+        if (groups.length <= 1) finish();
+        else {
+          btn.hidden = false;
+          end.hidden = true;
+        }
+
+        btn.addEventListener("click", function () {
+          appendNext();
+          if (nextIndex >= groups.length) finish();
+        });
+      }
+
+      function render() {
+        var id = param("scene") || "feeding";
+        var s = SCENES[id];
+        var root = document.getElementById("detail-root");
+        if (!s) {
+          root.innerHTML =
+            '<div class="wf-invalid"><p>Unknown scene. Use <code>?scene=pregnancy|feeding|recovery|outing|parenting</code></p></div>';
+          return;
+        }
+
+        document.documentElement.style.setProperty("--accent", s.accent);
+        document.documentElement.style.setProperty("--accent-soft", s.accentSoft);
+
+        var kw = s.keywords
+          .map(function (k) {
+            return "<li>" + escapeHtml(k) + "</li>";
+          })
+          .join("");
+
+        var heroPhotoMap = {
+          feeding: { src: "assets/hero-cozy-feeding-feed-scene.png", cls: "" },
+          pregnancy: { src: "assets/hero-cozy-pregnancy-scene.png", cls: " wf-hero-ph--scene-pregnancy" },
+          recovery: { src: "assets/hero-cozy-recovery-scene.png", cls: " wf-hero-ph--scene-recovery" },
+          outing: { src: "assets/hero-cozy-outing-scene.png", cls: " wf-hero-ph--scene-outing" },
+          parenting: { src: "assets/hero-cozy-parenting-scene.png", cls: " wf-hero-ph--scene-parenting" },
+        };
+        var hp = heroPhotoMap[id];
+        var heroBlock = hp
+          ? '<div class="wf-hero-ph wf-hero-ph--photo' +
+            hp.cls +
+            '"><img src="' +
+            hp.src +
+            '" alt="" decoding="async" /></div>'
+          : '<div class="wf-hero-ph">Hero · immersive scene image (placeholder)</div>';
+
+        root.innerHTML =
+          '<section class="wf-hero">' +
+          heroBlock +
+          '<div class="wf-hero-cap" style="--accent:' +
+          s.accent +
+          '">' +
+          "<h1>" +
+          escapeHtml(s.name) +
+          "</h1>" +
+          '<ul class="wf-keywords">' +
+          kw +
+          "</ul></div></section>" +
+          '<section class="wf-block">' +
+          "<h2>Brand manifesto</h2>" +
+          '<p class="wf-manifesto">' +
+          escapeHtml(s.manifesto) +
+          "</p></section>" +
+          '<section class="wf-block wf-block--essentials" id="ess-section" aria-label="Product edit">' +
+          '<div class="wf-glass-wrap">' +
+          '<div id="groups-mount"></div>' +
+          '<div class="wf-load-wrap">' +
+          '<button type="button" id="wf-load-more" class="wf-load-more">Load more</button>' +
+          '<p id="wf-load-end" class="wf-load-end" hidden>end</p>' +
+          "</div></div></section>" +
+          '<div class="wf-cta-global">' +
+          '<button type="button" id="global-cta" class="wf-global-cta-btn">' +
+          escapeHtml("Go to the store — " + s.name + " full range >>") +
+          "</button></div>";
+
+        setupLoadMore(document.getElementById("ess-section"), s);
+
+        document.getElementById("global-cta").addEventListener("click", function () {
+          alert(
+            "Placeholder: open DTC\nhttps://momcozy.com/collections/" +
+              s.storePath +
+              "\n\nDesigner: add handoff transition before external browser / in-app webview."
+          );
+        });
+      }
+
+      render();
+    </script>
+  </body>
+</html>

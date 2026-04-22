@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirect…</title>
+    <script>
+      (function () {
+        try {
+          var q = window.location.search || "";
+          var base = new URL(".", window.location.href);
+          var target = new URL("momcozy-app-scene-prototype/scene-detail.html" + q, base);
+          window.location.replace(target.href);
+        } catch (e) {
+          /* 见下方手动链接 */
+        }
+      })();
+    </script>
+  </head>
+  <body style="font-family: system-ui, sans-serif; max-width: 42rem; padding: 1.25rem; line-height: 1.55">
+    <p>
+      正在跳转到详情页… 若无反应请打开
+      <a href="momcozy-app-scene-prototype/scene-detail.html">momcozy-app-scene-prototype/scene-detail.html</a>
+      （查询参数 <code>?scene=…</code> 会尽量保留；若未保留请手动在地址栏加上）。
+    </p>
+  </body>
+</html>

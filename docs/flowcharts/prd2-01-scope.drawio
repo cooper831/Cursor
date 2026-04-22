@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net" agent="7.0" pages="1">
+  <diagram id="scope" name="PRD-2 范围">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T" value="&lt;b&gt;PRD-2 · 范围边界 vs PRD-1&lt;/b&gt; — 强依赖 + 增量能力" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="P1" value="📦 PRD-1（已交付基础设施）" style="swimlane;horizontal=1;startSize=32;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;swimlaneFillColor=#f6fbf5;" parent="1" vertex="1">
+          <mxGeometry x="40" y="70" width="520" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="p1a" value="RevenueCat SDK 双端集成" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="P1" vertex="1">
+          <mxGeometry x="20" y="50" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1b" value="用户身份打通 (App User ID)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="P1" vertex="1">
+          <mxGeometry x="270" y="50" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1c" value="Webhook 端点 /api/v1/revenuecat/webhook" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="P1" vertex="1">
+          <mxGeometry x="20" y="100" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1d" value="rc_webhook_events 表 + 幂等/鉴权" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="P1" vertex="1">
+          <mxGeometry x="20" y="150" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1e" value="课程 IAP/GPB 购买 + L3 兜底" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="P1" vertex="1">
+          <mxGeometry x="270" y="150" width="230" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1f" value="RC Dashboard · Project / API Keys / 初始 Offering" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="P1" vertex="1">
+          <mxGeometry x="20" y="200" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p1g" value="Restore Purchases（课程）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="P1" vertex="1">
+          <mxGeometry x="20" y="250" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="P2" value="🆕 PRD-2（本 PRD 增量能力）" style="swimlane;horizontal=1;startSize=32;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;swimlaneFillColor=#f5f9ff;" parent="1" vertex="1">
+          <mxGeometry x="600" y="70" width="520" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="p2a" value="💎 订阅产品 storage_pro（月/年 + 免费试用）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="P2" vertex="1">
+          <mxGeometry x="20" y="50" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2b" value="订阅权益由 RC 权威管理（CustomerInfo）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" parent="P2" vertex="1">
+          <mxGeometry x="20" y="100" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2c" value="完整生命周期：试用 / 活跃 / 取消 / 宽限 / 过期" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" parent="P2" vertex="1">
+          <mxGeometry x="20" y="150" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2d" value="Webhook 订阅事件扩展（6 种新事件处理）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="P2" vertex="1">
+          <mxGeometry x="20" y="200" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2e" value="三张业务表&#10;user_entitlement + user_subscription + purchase_log" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" parent="P2" vertex="1">
+          <mxGeometry x="20" y="250" width="480" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="p2f" value="🧾 我的购买页（课程 + 订阅统一入口）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="P2" vertex="1">
+          <mxGeometry x="20" y="305" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2g" value="升降级（月↔年 proration）+ 宽限期提醒" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" parent="P2" vertex="1">
+          <mxGeometry x="20" y="355" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="p2h" value="Phase 2 · Link-out Stripe（Web Billing）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fafafa;strokeColor=#b3b3b3;fontSize=11;fontStyle=2;dashed=1;dashPattern=4 3;" parent="P2" vertex="1">
+          <mxGeometry x="20" y="405" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Out" value="❌ 不在 PRD-2 范围" style="swimlane;horizontal=1;startSize=32;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;fontSize=12;swimlaneFillColor=#fdf2f2;" parent="1" vertex="1">
+          <mxGeometry x="40" y="600" width="1080" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="o1" value="优惠码 / 促销码 Promotional Offer" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;" parent="Out" vertex="1">
+          <mxGeometry x="20" y="50" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="o2" value="家庭共享" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;" parent="Out" vertex="1">
+          <mxGeometry x="280" y="50" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="o3" value="多币种运营定价" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;" parent="Out" vertex="1">
+          <mxGeometry x="540" y="50" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="o4" value="自建 BI 订阅看板（用 RC Dashboard）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;" parent="Out" vertex="1">
+          <mxGeometry x="800" y="50" width="260" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="o5" value="订阅退款用户自助页（用系统自带）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;" parent="Out" vertex="1">
+          <mxGeometry x="20" y="100" width="500" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="o6" value="TRANSFER 事件业务处理（仅日志）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#b85450;fontSize=10;" parent="Out" vertex="1">
+          <mxGeometry x="540" y="100" width="520" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="强依赖" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2e7d32;strokeWidth=2;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=11;fontStyle=1;" parent="1" source="P1" target="P2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

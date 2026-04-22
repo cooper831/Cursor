@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net" agent="7.0" pages="1">
+  <diagram id="entitlement-split" name="混合权益职责分工">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T" value="&lt;b&gt;混合权益管理职责分工&lt;/b&gt; — 课程走现有系统 / 订阅走 RevenueCat（与 PRD-1 一致）" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="L1" value="📚 课程类产品（一次性购买）" style="swimlane;horizontal=1;startSize=32;fillColor=#fff3e0;strokeColor=#e65100;fontStyle=1;fontSize=12;swimlaneFillColor=#fffcf5;" parent="1" vertex="1">
+          <mxGeometry x="40" y="70" width="520" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" value="权益管理：&lt;b&gt;现有后端系统 ✅&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#e65100;fontSize=11;fontStyle=1;strokeWidth=2;" parent="L1" vertex="1">
+          <mxGeometry x="20" y="45" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" value="权益判断：现有后端课程权益 API" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#e65100;fontSize=11;" parent="L1" vertex="1">
+          <mxGeometry x="20" y="95" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" value="RC 在课程场景的职责：" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=1;spacingLeft=5;" parent="L1" vertex="1">
+          <mxGeometry x="20" y="150" width="480" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" value="· 合规支付（IAP / GPB / [Phase 2] Stripe）&#10;· 产品展示（Offerings 远程配置）&#10;· 收入分析（Dashboard）&#10;· ❌ 不负责权益判断" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#e65100;fontSize=10;align=left;spacingLeft=10;" parent="L1" vertex="1">
+          <mxGeometry x="20" y="180" width="480" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" value="为什么：" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=1;spacingLeft=5;" parent="L1" vertex="1">
+          <mxGeometry x="20" y="285" width="480" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" value="课程在多渠道（App IAP、Amazon 赠送、独立站购买）有兑换，&#10;现有系统已支持全渠道权益管理，无需改造" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fffcf5;strokeColor=#e65100;fontSize=10;align=left;spacingLeft=10;dashed=1;dashPattern=4 3;" parent="L1" vertex="1">
+          <mxGeometry x="20" y="315" width="480" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c7" value="权益开通链路：&#10;IAP/GPB 支付成功 → SDK 回调 → 客户端同步 POST {现有课程权益接口} → 零等待解锁" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=10;align=left;spacingLeft=10;strokeWidth=2;" parent="L1" vertex="1">
+          <mxGeometry x="20" y="390" width="480" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" value="Webhook 仅用于：对账 + 收入分析 + L3 兜底补偿" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fff2cc;strokeColor=#b8860b;fontSize=10;align=left;spacingLeft=10;" parent="L1" vertex="1">
+          <mxGeometry x="20" y="460" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="L2" value="💎 订阅类产品（自动续订）" style="swimlane;horizontal=1;startSize=32;fillColor=#e8daef;strokeColor=#6a1b9a;fontStyle=1;fontSize=12;swimlaneFillColor=#faf5fb;" parent="1" vertex="1">
+          <mxGeometry x="600" y="70" width="520" height="520" as="geometry" />
+        </mxCell>
+        <mxCell id="s1" value="权益管理：&lt;b&gt;RevenueCat ✅&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6a1b9a;fontSize=11;fontStyle=1;strokeWidth=2;" parent="L2" vertex="1">
+          <mxGeometry x="20" y="45" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s2" value="权益判断：RC SDK CustomerInfo（客户端）&#10;                    user_entitlement 表（服务端）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6a1b9a;fontSize=11;align=left;spacingLeft=10;" parent="L2" vertex="1">
+          <mxGeometry x="20" y="95" width="480" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="s3" value="RC 在订阅场景的职责：" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=1;spacingLeft=5;" parent="L2" vertex="1">
+          <mxGeometry x="20" y="150" width="480" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s4" value="· 合规支付（IAP / GPB / [Phase 2] Stripe）&#10;· 产品展示（Offerings）&#10;· ✅ 权益管理（Entitlements 活跃状态）&#10;· ✅ 订阅生命周期（试用/续费/取消/宽限/过期）&#10;· 收入分析（Dashboard）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6a1b9a;fontSize=10;align=left;spacingLeft=10;" parent="L2" vertex="1">
+          <mxGeometry x="20" y="180" width="480" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s5" value="为什么：" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=1;spacingLeft=5;" parent="L2" vertex="1">
+          <mxGeometry x="20" y="295" width="480" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="s6" value="订阅生命周期复杂（试用、续费、宽限、升降级），&#10;RevenueCat 原生处理各平台差异，自研成本极高" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#faf5fb;strokeColor=#6a1b9a;fontSize=10;align=left;spacingLeft=10;dashed=1;dashPattern=4 3;" parent="L2" vertex="1">
+          <mxGeometry x="20" y="325" width="480" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s7" value="权益开通链路：&#10;IAP/GPB 成功 → CustomerInfo 即刻更新 → UI 自动刷新&#10;&lt;b&gt;客户端无需调后端&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=10;align=left;spacingLeft=10;strokeWidth=2;" parent="L2" vertex="1">
+          <mxGeometry x="20" y="400" width="480" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="s8" value="Webhook 是服务端唯一入口：维护 user_entitlement / user_subscription" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e8daef;strokeColor=#6a1b9a;fontSize=10;align=left;spacingLeft=10;fontStyle=1;" parent="L2" vertex="1">
+          <mxGeometry x="20" y="470" width="480" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Share" value="🔗 共享层（两类产品共用）" style="swimlane;horizontal=1;startSize=32;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;swimlaneFillColor=#f5f9ff;" parent="1" vertex="1">
+          <mxGeometry x="40" y="610" width="1080" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="sh1" value="RevenueCat SDK" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" parent="Share" vertex="1">
+          <mxGeometry x="20" y="40" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sh2" value="Offerings（产品展示）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" parent="Share" vertex="1">
+          <mxGeometry x="240" y="40" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sh3" value="Webhook 端点 + rc_webhook_events" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" parent="Share" vertex="1">
+          <mxGeometry x="460" y="40" width="300" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sh4" value="Dashboard 收入分析" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=10;" parent="Share" vertex="1">
+          <mxGeometry x="780" y="40" width="280" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

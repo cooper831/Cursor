@@ -1,0 +1,309 @@
+{
+  "source": "https://momcozy.com/collections/cozy-outing",
+  "scenes": [
+    {
+      "id": "stroller",
+      "title": "Stroll-ready setup",
+      "description": "Strollers, organizers, and clip-ons for smoother walks and errands.",
+      "hero": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/1-DTC-2.jpg?v=1750905111&width=900",
+      "products": [
+        {
+          "title": "Momcozy ChangeGo Baby Stroller",
+          "price": "$699.99",
+          "url": "https://momcozy.com/products/momcozy-changego-baby-stroller",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/1-DTC-2.jpg?v=1750905111&width=720"
+        },
+        {
+          "title": "Outing Bundle: ChangeGo Baby Stroller and Handheld Cooling Fan",
+          "price": "$729.99",
+          "url": "https://momcozy.com/products/outing-bundle-changego-baby-stroller-and-handheld-cooling-fan",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/bundlev2.jpg?v=1756886639&width=720"
+        },
+        {
+          "title": "Outing Bundle: Momcozy ChangeGo Baby Stroller & Stroller Organizer with Cup Holders",
+          "price": "$726.98",
+          "url": "https://momcozy.com/products/outing-bundle-momcozy-changego-baby-stroller-and-stroller-organizer-with-cup-holders",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/72e1db01e60eec9cbc485188dd87564e.jpg?v=1753838951&width=720"
+        },
+        {
+          "title": "Momcozy Clip-On 4-Speed Stroller Fan",
+          "price": "$29.99",
+          "url": "https://momcozy.com/products/momcozy-clip-on-4-speed-stroller-fan",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/2_a340c7f3-4383-4b06-ae99-b89073598467.png?v=1747711841&width=720"
+        },
+        {
+          "title": "Momcozy Extra Large Stroller Organizer",
+          "price": "$54.99",
+          "url": "https://momcozy.com/products/momcozy-extra-large-stroller-organizer",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/1_bddf7c2f-db97-40aa-a263-686673dba8cc.webp?v=1759041156&width=720"
+        },
+        {
+          "title": "Momcozy Stroller Organizer - All-in-One Cup Holder & Pet Strollers",
+          "price": "From $26.99",
+          "url": "https://momcozy.com/products/momcozy-stroller-organizer-with-cup-holders",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/dcccecc301c727e237efa2bbfc312966.jpg?v=1754893073&width=720"
+        },
+        {
+          "title": "Momcozy Universal Stroller Organizer",
+          "price": "$42.99",
+          "url": "https://momcozy.com/products/momcozy-universal-stroller-organizer",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/1_7c67d5c8-5767-4d88-9390-bbda745adbb0.webp?v=1759041971&width=720"
+        }
+      ]
+    },
+    {
+      "id": "wear",
+      "title": "Wear them close",
+      "description": "Carriers, wraps, and hip seats for park loops and transit.",
+      "hero": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/black-01_112d6a25-d6a5-4916-bd80-84726eddb759.jpg?v=1774497253&width=900",
+      "products": [
+        {
+          "title": "PureHug Baby Carrier - Ergonomic Cozy & Lightweight",
+          "price": "From $59.99",
+          "url": "https://momcozy.com/products/ergonomic-cozy-and-lightweight-baby-carrier",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/black-01_112d6a25-d6a5-4916-bd80-84726eddb759.jpg?v=1774497253&width=720"
+        },
+        {
+          "title": "Wander360 Hip Seat Carrier",
+          "price": "From $49.99",
+          "url": "https://momcozy.com/products/momcozy-baby-hip-seat-carrier",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/IMG_202407317918_992x1238_3ffa8804-671b-48ce-95ef-c5a15b231da5.png?v=1722420039&width=720"
+        },
+        {
+          "title": "Momcozy Blue Mesh Baby Wrap",
+          "price": "$42.99",
+          "url": "https://momcozy.com/products/momcozy-cooling-breathable-baby-wrap",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/IMG_202511113857_1200x1498_787e90bd-afe9-4917-826d-5569cf66cc88.png?v=1762850490&width=720"
+        },
+        {
+          "title": "SnapLite Cooling Mesh Wrap Carrier",
+          "price": "$42.99",
+          "url": "https://momcozy.com/products/momcozy-baby-wrap-carrier-cooling-air-mesh",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/IMG_202407059583_992x1238_0c4c94e5-0268-44a5-8cc0-9f7a3b2af993.jpg?v=1761131441&width=720"
+        },
+        {
+          "title": "PureHug Baby Carrier - Grey Color",
+          "price": "$59.99",
+          "url": "https://momcozy.com/products/ergonomic-cozy-and-lightweight-baby-carrier-grey-color",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/Grey-01_08979137-5d96-4ec8-84f4-271786937ff9.jpg?v=1737531121&width=720"
+        },
+        {
+          "title": "PureHug Baby Carrier - Starry Night",
+          "price": "$59.99",
+          "url": "https://momcozy.com/products/baby-carrier-starry-night-color",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/StarryNight-01_cce3ac68-e64c-4fcc-bcb3-6b9a22b77ab9.jpg?v=1737531148&width=720"
+        },
+        {
+          "title": "PureHug Baby Carrier -  Leopard",
+          "price": "$59.99",
+          "url": "https://momcozy.com/products/baby-carrier-leopard-color",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/Leopard-01_720236a3-a35d-48bf-8534-fe9372f27f3f.jpg?v=1737531092&width=720"
+        },
+        {
+          "title": "PureHug Baby Carrier  - Khaki Color",
+          "price": "$64.99",
+          "url": "https://momcozy.com/products/baby-carrier-khaki-color",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/carrier-k.jpg?v=1754375316&width=720"
+        },
+        {
+          "title": "Easy to Wear Hands Free - Baby Wrap Carrier",
+          "price": "From $32.99",
+          "url": "https://momcozy.com/products/easy-to-wear-hands-free-baby-wrap-carrier",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/5_1b6cb23c-4725-4da0-bf2e-67a49acadfe0.jpg?v=1762851534&width=720"
+        },
+        {
+          "title": "HeriHug 100% linen Baby Carrier",
+          "price": "$99.00",
+          "url": "https://momcozy.com/products/herihuge-baby-carrier-100-linen-fabric",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/01_5ef1e2fc-0fef-4d2f-8b54-57cc593d3996.jpg?v=1753688046&width=720"
+        },
+        {
+          "title": "Momcozy Baby Carrier with Sunshield",
+          "price": "$79.99",
+          "url": "https://momcozy.com/products/momcozy-newborn-baby-carrier-with-sunshield",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/0_ecf1ab5b-d0e2-407d-9e7c-4808f23b9ed5.jpg?v=1760324166&width=720"
+        },
+        {
+          "title": "Momcozy GentleTouch Baby Carrier",
+          "price": "$89.99",
+          "url": "https://momcozy.com/products/momcozy-gentletouch-baby-carrier",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/carrier-G.jpg?v=1753688046&width=720"
+        },
+        {
+          "title": "PureHug Baby Carrier - Cotton-Houndstooth",
+          "price": "$69.99",
+          "url": "https://momcozy.com/products/momcozy-purehug-baby-carrier-cotton-houndstooth",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/3_16047cb3-391a-4b65-aca5-7643b9e23f51.jpg?v=1761724726&width=720"
+        },
+        {
+          "title": "2-In-1 Hip Seat Baby Carrier",
+          "price": "$89.99",
+          "url": "https://momcozy.com/products/momcozy-move2fit-hip-seat-carrier",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/1_f5680360-5627-4fea-9a27-470f9a0818e2.jpg?v=1763544814&width=720"
+        },
+        {
+          "title": "PureHug Baby Carrier - Black",
+          "price": "$59.99",
+          "url": "https://momcozy.com/products/momcozy-purehug-baby-carrier-black",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/black-01_112d6a25-d6a5-4916-bd80-84726eddb759.jpg?v=1774497253&width=720"
+        },
+        {
+          "title": "Momcozy PureHug Baby Carrier| Exclusive Offer",
+          "price": "From $59.99",
+          "url": "https://momcozy.com/products/momcozy-purehug-baby-carrier-exclusive-offer",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/IMG_202505128689_1200x1498_db1823e1-ae88-4905-b712-b01e62ebae86.jpg?v=1747043256&width=720"
+        },
+        {
+          "title": "WeeSnug Newborn Carrier (0-12M)",
+          "price": "$59.99",
+          "url": "https://momcozy.com/products/momcozy-weesnug-newborn-carrier",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/IMG_202506102339_1200x1498_373728ff-81ed-478e-8c51-197f63eb9e82.png?v=1776159115&width=720"
+        },
+        {
+          "title": "Momcozy PureHug Air Mesh Baby Carrier",
+          "price": "$79.99",
+          "url": "https://momcozy.com/products/momcozy-purehug-air-mesh-baby-carrier",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/1_e061fa4e-2283-4073-bf43-e774c7bc19f1.jpg?v=1756362451&width=720"
+        },
+        {
+          "title": "Portable Baby Carrier -  Lightweight & Foldable",
+          "price": "$44.99",
+          "url": "https://momcozy.com/products/momcozy-portable-baby-carrier-lightweight-foldable",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/3_e4bcc991-642b-4aa7-8cf0-87d8c854e8b8.jpg?v=1758176057&width=720"
+        }
+      ]
+    },
+    {
+      "id": "soothe",
+      "title": "Calm on the move",
+      "description": "Portable sound for naps in the car or stroller.",
+      "hero": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/5_265f1c19-d8c7-4e80-8af9-43b5cb6fef2a.jpg?v=1746001253&width=900",
+      "products": [
+        {
+          "title": "Momcozy Portable Sound Machine",
+          "price": "$27.99",
+          "url": "https://momcozy.com/products/momcozy-portable-sound-machine",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/5_265f1c19-d8c7-4e80-8af9-43b5cb6fef2a.jpg?v=1746001253&width=720"
+        },
+        {
+          "title": "Momcozy Portable Baby Sound Machine - Long Battery Life",
+          "price": "$24.99",
+          "url": "https://momcozy.com/products/momcozy-portable-baby-sound-machine-long-battery-life",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/1.1_c7c4291d-2096-4c2b-9c3b-3fc4bd02f6eb.jpg?v=1718263614&width=720"
+        },
+        {
+          "title": "Momcozy Baby Sound Machine - Long Battery Life (Warm Light)",
+          "price": "$24.99",
+          "url": "https://momcozy.com/products/momcozy-portable-baby-sound-machine-long-battery-life-warm-light",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/1-DTC_409f37f8-8245-437b-a6a7-d66e1a5b3ec4.jpg?v=1745747150&width=720"
+        },
+        {
+          "title": "Outing Bundle: Momcozy ChangeGo Baby Stroller & Portable Sound Machine",
+          "price": "$725.99",
+          "url": "https://momcozy.com/products/outing-bundle-momcozy-changego-baby-stroller-portable-sound-machine",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/WN06.jpg?v=1750904957&width=720"
+        },
+        {
+          "title": "Smart & Portable Sound Machine Bundle",
+          "price": "$66.99",
+          "url": "https://momcozy.com/products/smart-portable-sound-machine-bundle",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/c39223f74f614f90c33513d320713864.jpg?v=1760425990&width=720"
+        }
+      ]
+    },
+    {
+      "id": "feed",
+      "title": "Nursing & bottles outside",
+      "description": "Covers, coolers, warmers, and bottle bags built for outings.",
+      "hero": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/5b5d7e6f0b6af79a38820f09d6390e49.jpg?v=1762308147&width=900",
+      "products": [
+        {
+          "title": "Momcozy Nursing Cover - Soft, Breathable, Multi-Use Privacy Poncho",
+          "price": "$49.99",
+          "url": "https://momcozy.com/products/momcozy-nursing-cover-soft-breathable-privacy-poncho",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/5b5d7e6f0b6af79a38820f09d6390e49.jpg?v=1762308147&width=720"
+        },
+        {
+          "title": "Breastmilk Cooler Bag | Insulated Bottle Bag for Pumping & Travel Moms",
+          "price": "$26.99",
+          "url": "https://momcozy.com/products/momcozy-breastmilk-cooler-bag",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/products/BreastmilkCoolerBag_1.jpg?v=1659428838&width=720"
+        },
+        {
+          "title": "Superfast Portable Baby Bottle Warmer for Travel",
+          "price": "$79.99",
+          "url": "https://momcozy.com/products/portable-breast-milk-water-warmer-for-travel",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/14_778b338f-e7f3-44f2-bc34-b993df78fc7b.jpg?v=1730975896&width=720"
+        },
+        {
+          "title": "Momcozy Insulated Baby Bottle Bag",
+          "price": "$29.99",
+          "url": "https://momcozy.com/products/momcozy-insulated-baby-bottle-bag",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/10_f69ae5f6-eb6c-4078-8ada-fbf50bb21ec9.jpg?v=1730975241&width=720"
+        },
+        {
+          "title": "All-in-One Hands Free Pumping & Nursing Tank Tops",
+          "price": "$39.99",
+          "url": "https://momcozy.com/products/all-in-one-hands-free-pumping-nursing-tank-tops",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/3_d74c79d8-1cf1-4cc5-8c53-039115f02782.jpg?v=1729667601&width=720"
+        },
+        {
+          "title": "M6 Water Warmer Bundle: M6 Hands-free Breast Pump and Portable Baby Bottle Warmer",
+          "price": "$308.99",
+          "url": "https://momcozy.com/products/m6-water-warmer-bundle-m6-hands-free-breast-pump-and-breast-milk-warmer",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/1_85bec1b9-c7ad-4988-b03a-11ed07efd0e3.jpg?v=1747382395&width=720"
+        },
+        {
+          "title": "Momcozy Soft Knitted Blend Nursing Cover",
+          "price": "$59.99",
+          "url": "https://momcozy.com/products/momcozy-wool-blend-nursing-cover",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/2_94c92b10-52b9-40f1-b1cd-955bbed33365.png?v=1765181368&width=720"
+        }
+      ]
+    },
+    {
+      "id": "care",
+      "title": "Freshness & quick fixes",
+      "description": "Wipes, kits, and travel-friendly helpers.",
+      "hero": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/82dfff8e3769971242459ed7d5e5e9cb.png?v=1740641020&width=900",
+      "products": [
+        {
+          "title": "USB Rechargeable Handheld Cooling Fan for Travel",
+          "price": "$29.99",
+          "url": "https://momcozy.com/products/usb-rechargeable-handheld-cooling-fan-for-travel",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/82dfff8e3769971242459ed7d5e5e9cb.png?v=1740641020&width=720"
+        },
+        {
+          "title": "99% Water Baby Wipes - Higher Level of Purity",
+          "price": "From $34.99",
+          "url": "https://momcozy.com/products/water-wipes-higher-level-of-purity",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/12b.jpg?v=1767155286&width=720"
+        },
+        {
+          "title": "Natural Breast Pump Wipes - Safe & Convenient",
+          "price": "From $6.99",
+          "url": "https://momcozy.com/products/natural-breast-pump-wipes-fast-convenient",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/7_ca318c93-e64c-4b6f-b2ec-3e4295214d5c.jpg?v=1729223693&width=720"
+        },
+        {
+          "title": "Momcozy All-in-1 Core Baby Kit",
+          "price": "$49.99",
+          "url": "https://momcozy.com/products/momcozy-all-in-1-core-baby-kit",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/core-DTC-1.jpg?v=1732950550&width=720"
+        },
+        {
+          "title": "Momcozy All-in-1 Elite Baby Kit",
+          "price": "$99.99",
+          "url": "https://momcozy.com/products/momcozy-all-in-1-elite-baby-kit",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/3_9cf16660-d6ca-4fd0-a0ef-b7032dfcb20a.jpg?v=1744771813&width=720"
+        },
+        {
+          "title": "Momcozy All-in-1 Glow Baby Kit",
+          "price": "$39.99",
+          "url": "https://momcozy.com/products/momcozy-all-in-1-glow-baby-kit",
+          "image": "https://cdn.shopify.com/s/files/1/0559/2321/2486/files/74b96dbb2d19db9758ba306fc55ad040_2d588572-6b43-40d2-b33b-c0eb87ec049e.jpg?v=1758165819&width=720"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+<mxfile host="app.diagrams.net" agent="7.0" pages="1">
+  <diagram id="tables" name="数据表关系">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T" value="&lt;b&gt;PRD-2 · 数据表关系&lt;/b&gt; — 从 Webhook 到业务表到查询 API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RC" value="🔔 RevenueCat Webhook" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e8daef;strokeColor=#6a1b9a;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="100" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="EP" value="POST /webhook&#10;认证 + 幂等" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6a1b9a;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="320" y="100" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="RW" value="&lt;b&gt;rc_webhook_events&lt;/b&gt;&#10;(PRD-1 建，全量原始事件)&#10;──────&#10;rc_event_id (UK)&#10;event_type, app_user_id&#10;received_at, raw_payload JSON" style="rounded=1;whiteSpace=wrap;html=1;arcSize=5;fillColor=#fff2cc;strokeColor=#b8860b;fontSize=10;align=left;spacingLeft=10;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="540" y="75" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Dsp" value="⚙️ 事件分派处理器&#10;switch(event_type)" style="rhombus;whiteSpace=wrap;html=1;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="600" y="235" width="240" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="UE" value="&lt;b&gt;user_entitlement&lt;/b&gt;&#10;(权益当前状态 · 实时)&#10;──────&#10;app_user_id, entitlement_id (UK)&#10;product_id, period_type&#10;is_active, auto_renew&#10;expires_at, granted_at" style="rounded=1;whiteSpace=wrap;html=1;arcSize=5;fillColor=#d5e8d4;strokeColor=#2e7d32;fontSize=10;align=left;spacingLeft=10;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="60" y="370" width="280" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="US" value="&lt;b&gt;user_subscription&lt;/b&gt;&#10;(订阅快照 · 按订阅聚合)&#10;──────&#10;app_user_id, product_id&#10;status (trialing/active/cancelled/&#10;  grace/expired/refunded)&#10;original_purchase_at&#10;current_period_start/end&#10;cancelled_at, last_event_at" style="rounded=1;whiteSpace=wrap;html=1;arcSize=5;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;align=left;spacingLeft=10;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="440" y="370" width="280" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="PL" value="&lt;b&gt;purchase_log&lt;/b&gt;&#10;(业务流水 · 课程+订阅)&#10;──────&#10;app_user_id, entitlement_id&#10;type (purchase/trial_start/&#10;  renewal/refund/upgrade)&#10;product_id, store&#10;transaction_id (UK,type)&#10;amount, currency, country&#10;event_at, rc_event_id" style="rounded=1;whiteSpace=wrap;html=1;arcSize=5;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;spacingLeft=10;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="820" y="370" width="280" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="API" value="🔌 GET /api/v1/user/{id}/purchases&#10;&quot;我的购买&quot;查询 API" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="380" y="620" width="400" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="App" value="📱 客户端 · 我的购买页" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e3f2fd;strokeColor=#1565c0;fontSize=11;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="380" y="710" width="400" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="Ex" value="🔗 现有课程权益系统&#10;（权威来源）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fff3e0;strokeColor=#e65100;fontSize=10;fontStyle=2;dashed=1;dashPattern=4 3;" parent="1" vertex="1">
+          <mxGeometry x="60" y="620" width="260" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="Legend" value="&lt;b&gt;图例&lt;/b&gt;&lt;br&gt;🟡 原始日志（入仓）&lt;br&gt;🟢 权益当前状态&lt;br&gt;🔵 订阅快照&lt;br&gt;🔴 流水（幂等键 transaction_id,type）&lt;br&gt;┄┄ 课程权益（走现有系统）" style="text;html=1;strokeColor=#b3b3b3;fillColor=#fafafa;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;spacingLeft=8;" parent="1" vertex="1">
+          <mxGeometry x="840" y="620" width="260" height="135" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="RC" target="EP" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="原始事件" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="EP" target="RW" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="RW" target="Dsp" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" value="UPSERT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=1;entryX=0.5;entryY=0;strokeColor=#2e7d32;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="Dsp" target="UE" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="INSERT/UPDATE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#6c8ebf;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="Dsp" target="US" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="INSERT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=1;entryX=0.5;entryY=0;strokeColor=#b85450;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="Dsp" target="PL" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q1" value="SELECT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.2;exitY=0;entryX=0.5;entryY=1;strokeColor=#9673a6;strokeWidth=1.2;endArrow=open;dashed=0;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="API" target="UE" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#9673a6;strokeWidth=1.2;endArrow=open;" parent="1" source="API" target="US" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="q3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.8;exitY=0;entryX=0.5;entryY=1;strokeColor=#9673a6;strokeWidth=1.2;endArrow=open;" parent="1" source="API" target="PL" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="API" target="App" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ex1" value="课程权益查询" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#e65100;strokeWidth=1.2;endArrow=open;dashed=1;dashPattern=4 3;exitX=0;exitY=0.5;entryX=1;entryY=0.5;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="App" target="Ex" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="735" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

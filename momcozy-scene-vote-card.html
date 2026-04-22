@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momcozy · 场景投票卡片 — 通用组件 & 人群案例</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --pink: #E8456B;
+    --pink-light: #FFF0F3;
+    --pink-soft: #FADADD;
+    --coral: #F27059;
+    --peach: #FFECD2;
+    --cream: #FFF9F0;
+    --brown: #5C3D2E;
+    --brown-light: #8B6E5A;
+    --gold: #D4A854;
+    --green: #34C759;
+    --green-light: #E8F5E9;
+    --blue: #5B9FE4;
+    --blue-light: #E8F0FE;
+    --purple: #7B61FF;
+    --purple-light: #F0E6FF;
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #EEEEEE;
+    --gray-300: #E0E0E0;
+    --gray-400: #BDBDBD;
+    --gray-500: #9E9E9E;
+    --gray-600: #757575;
+    --gray-700: #616161;
+    --gray-800: #424242;
+    --gray-900: #212121;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+    --shadow-xl: 0 12px 48px rgba(0,0,0,0.12);
+    --radius: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+    --radius-xs: 6px;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+    background: #0F0F1A;
+    min-height: 100vh;
+  }
+
+  /* ===== Top Spec Bar ===== */
+  .spec-bar {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: rgba(15,15,26,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .spec-bar .logo {
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .spec-bar .logo .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pink);
+  }
+
+  .spec-bar .divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .persona-tabs {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .persona-tabs::-webkit-scrollbar { display: none; }
+
+  .persona-tab {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .persona-tab:hover {
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.8);
+  }
+
+  .persona-tab.active {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .persona-tab .emoji { font-size: 15px; }
+
+  /* ===== Layout ===== */
+  .main-layout {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 40px;
+    gap: 36px;
+  }
+
+  /* ===== Left: Phone ===== */
+  .phone-col {
+    flex-shrink: 0;
+    position: sticky;
+    top: 80px;
+    align-self: flex-start;
+  }
+
+  .phone-frame {
+    width: 390px;
+    height: 844px;
+    background: #fff;
+    border-radius: 44px;
+    overflow: hidden;
+    box-shadow: 0 0 0 6px #1E1E30, 0 0 0 7px rgba(255,255,255,0.05), var(--shadow-xl);
+    position: relative;
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 34px;
+    background: #000;
+    border-radius: 0 0 18px 18px;
+    z-index: 100;
+  }
+
+  .phone-screen {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: var(--gray-50);
+  }
+
+  .phone-screen::-webkit-scrollbar { display: none; }
+
+  .status-bar {
+    height: 54px;
+    background: #fff;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 28px 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+  }
+
+  /* App Header */
+  .app-header {
+    background: #fff;
+    padding: 6px 20px 14px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .app-header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gray-900);
+    letter-spacing: -0.5px;
+  }
+
+  .app-header .sub {
+    font-size: 12px;
+    color: var(--gray-500);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  /* Section: Scene Pill Selector */
+  .scene-pills {
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .scene-pills::-webkit-scrollbar { display: none; }
+
+  .scene-pill {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #fff;
+    border: 1.5px solid var(--gray-200);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .scene-pill:hover { border-color: var(--pink-soft); }
+
+  .scene-pill.active {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: #fff;
+  }
+
+  /* ===== The Universal Card ===== */
+  .feed-card {
+    margin: 12px 16px;
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: transform 0.25s;
+  }
+
+  /* -- Zone A: Scene Visual -- */
+  .card-scene {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .card-scene-bg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .scene-gradient {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .scene-label {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(12px);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+
+  .scene-label .icon { font-size: 13px; }
+
+  .scene-voters-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .scene-voters-badge .fire { font-size: 11px; }
+
+  /* Hotspot Tags floating in scene */
+  .scene-hotspot {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    padding: 6px 10px 6px 6px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-800);
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .scene-hotspot:hover {
+    transform: scale(1.06);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  }
+
+  .scene-hotspot .pulse {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    animation: gentle-pulse 2.5s infinite;
+  }
+
+  @keyframes gentle-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(232,69,107,0.25); }
+    50% { box-shadow: 0 0 0 5px rgba(232,69,107,0); }
+  }
+
+  .scene-hotspot .pulse.pink { background: var(--pink-light); }
+  .scene-hotspot .pulse.blue { background: var(--blue-light); }
+  .scene-hotspot .pulse.peach { background: var(--peach); }
+
+  .scene-emoji-deco {
+    position: absolute;
+    z-index: 3;
+    font-size: 64px;
+    opacity: 0.18;
+    bottom: -10px;
+    right: 10px;
+  }
+
+  /* -- Zone B: Social Proof Bar -- */
+  .card-social-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+
+  .avatar-stack {
+    display: flex;
+    margin-right: 2px;
+  }
+
+  .avatar-stack .av {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-left: -6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+  }
+
+  .avatar-stack .av:first-child { margin-left: 0; }
+
+  .social-text {
+    font-size: 11px;
+    color: var(--gray-600);
+    flex: 1;
+    line-height: 1.4;
+  }
+
+  .social-text strong { color: var(--gray-800); font-weight: 700; }
+
+  .vote-mini-btn {
+    padding: 5px 10px;
+    border-radius: 14px;
+    border: 1.5px solid var(--pink);
+    background: transparent;
+    color: var(--pink);
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .vote-mini-btn:hover {
+    background: var(--pink);
+    color: #fff;
+  }
+
+  /* -- Zone C: Product Slots -- */
+  .card-products {
+    padding: 14px 16px 8px;
+  }
+
+  .card-products-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .card-products-title h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+
+  .card-products-title .see-all {
+    font-size: 11px;
+    color: var(--pink);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .product-row {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+  }
+
+  .product-row::-webkit-scrollbar { display: none; }
+
+  .product-chip {
+    flex-shrink: 0;
+    width: 100px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .product-chip:hover { transform: translateY(-2px); }
+
+  .product-chip-img {
+    width: 100px;
+    height: 100px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-chip-img .vote-pct {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 12px 6px 4px;
+    text-align: center;
+  }
+
+  .product-chip h5 {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-top: 6px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .product-chip .price-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 3px;
+  }
+
+  .product-chip .price {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--pink);
+  }
+
+  .product-chip .old-price {
+    font-size: 10px;
+    color: var(--gray-400);
+    text-decoration: line-through;
+  }
+
+  /* -- Zone D: Action Bar -- */
+  .card-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px 14px;
+  }
+
+  .action-btn-primary {
+    flex: 1;
+    padding: 11px 16px;
+    background: var(--pink);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .action-btn-primary:hover { opacity: 0.9; transform: scale(1.01); }
+
+  .action-btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--gray-200);
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .action-btn-icon:hover { border-color: var(--pink-soft); }
+
+  /* ===== Right Panel: Spec ===== */
+  .spec-col {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .spec-section {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+
+  .spec-section h2 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .spec-section .section-sub {
+    color: rgba(255,255,255,0.45);
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+
+  /* Card Blueprint */
+  .blueprint {
+    background: rgba(255,255,255,0.02);
+    border: 1px dashed rgba(255,255,255,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .bp-zone {
+    padding: 14px 18px;
+    border-bottom: 1px dashed rgba(255,255,255,0.06);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    transition: background 0.2s;
+  }
+
+  .bp-zone:last-child { border-bottom: none; }
+  .bp-zone:hover { background: rgba(255,255,255,0.02); }
+
+  .bp-zone-tag {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .bp-zone-tag.a { background: var(--coral); }
+  .bp-zone-tag.b { background: var(--blue); }
+  .bp-zone-tag.c { background: var(--purple); }
+  .bp-zone-tag.d { background: var(--green); }
+
+  .bp-zone-info h4 {
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .bp-zone-info p {
+    color: rgba(255,255,255,0.5);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  /* Persona Cards */
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .persona-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .persona-card:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.12);
+    transform: translateY(-2px);
+  }
+
+  .persona-card.active-persona {
+    border-color: var(--pink);
+    background: rgba(232,69,107,0.06);
+  }
+
+  .persona-card .p-emoji { font-size: 28px; margin-bottom: 10px; }
+
+  .persona-card h4 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .persona-card .p-desc {
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .persona-card .p-scenes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .persona-card .p-scene-tag {
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.6);
+  }
+
+  .persona-card.active-persona .p-scene-tag {
+    background: rgba(232,69,107,0.12);
+    color: var(--pink);
+  }
+
+  /* Highlight features */
+  .feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .feature-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .feature-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .feature-icon.fi-pink { background: rgba(232,69,107,0.12); }
+  .feature-icon.fi-blue { background: rgba(91,159,228,0.12); }
+  .feature-icon.fi-purple { background: rgba(123,97,255,0.12); }
+  .feature-icon.fi-green { background: rgba(52,199,89,0.12); }
+  .feature-icon.fi-gold { background: rgba(212,168,84,0.12); }
+
+  .feature-info h5 {
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .feature-info p {
+    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  /* Tab bar */
+  .tab-bar {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid var(--gray-100);
+    display: flex;
+    padding: 8px 0 28px;
+    z-index: 50;
+  }
+
+  .tab-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 10px;
+    color: var(--gray-400);
+    font-weight: 500;
+  }
+
+  .tab-item.active { color: var(--gray-900); }
+  .tab-item .tab-icon { font-size: 18px; }
+
+  /* Mini vote bar */
+  .mini-vote-bar {
+    display: flex;
+    gap: 6px;
+    padding: 10px 16px 4px;
+  }
+
+  .mini-vote-option {
+    flex: 1;
+    padding: 10px;
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .mini-vote-option:hover { border-color: var(--pink-soft); }
+
+  .mini-vote-option.voted {
+    border-color: var(--pink);
+    background: var(--pink-light);
+  }
+
+  .mini-vote-option .vote-emoji { font-size: 20px; }
+  .mini-vote-option .vote-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-top: 4px;
+  }
+
+  .mini-vote-option .vote-bar-fill {
+    height: 3px;
+    border-radius: 2px;
+    background: var(--gray-200);
+    margin-top: 6px;
+    overflow: hidden;
+  }
+
+  .mini-vote-option .vote-bar-inner {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--pink);
+    transition: width 0.5s;
+  }
+
+  .mini-vote-option .vote-pct-text {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--pink);
+    margin-top: 3px;
+  }
+
+  /* Scene transition between personas */
+  .feed-card {
+    animation: cardIn 0.4s ease;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<div class="spec-bar">
+  <div class="logo">
+    <span class="dot"></span>
+    Momcozy · 场景投票卡片
+  </div>
+  <div class="divider"></div>
+  <div class="persona-tabs">
+    <button class="persona-tab active" onclick="switchPersona(0)">
+      <span class="emoji">📐</span> 通用结构
+    </button>
+    <button class="persona-tab" onclick="switchPersona(1)">
+      <span class="emoji">🤰</span> 孕期妈妈
+    </button>
+    <button class="persona-tab" onclick="switchPersona(2)">
+      <span class="emoji">🤱</span> 新手妈妈
+    </button>
+    <button class="persona-tab" onclick="switchPersona(3)">
+      <span class="emoji">💼</span> 职场妈妈
+    </button>
+    <button class="persona-tab" onclick="switchPersona(4)">
+      <span class="emoji">🏖️</span> 外出遛娃
+    </button>
+  </div>
+</div>
+
+<div class="main-layout">
+  <!-- ===== Phone ===== -->
+  <div class="phone-col">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen" id="phoneScreen">
+        <div class="status-bar"><span>9:41</span><span>⚡ 📶</span></div>
+        <div class="app-header">
+          <h1>For You</h1>
+          <div class="sub" id="headerSub">基于你的阶段 · 个性化场景推荐</div>
+        </div>
+
+        <div class="scene-pills" id="scenePills">
+          <!-- Filled by JS -->
+        </div>
+
+        <div id="cardContainer">
+          <!-- Cards filled by JS -->
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="tab-icon">🏠</span>Home</div>
+          <div class="tab-item"><span class="tab-icon">📱</span>Device</div>
+          <div class="tab-item"><span class="tab-icon">👥</span>Community</div>
+          <div class="tab-item"><span class="tab-icon">👤</span>Me</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Right Spec Panel ===== -->
+  <div class="spec-col">
+    <!-- Section: Generic Card Spec (always visible for persona 0) -->
+    <div class="spec-section" id="specStructure">
+      <h2>📐 通用卡片结构</h2>
+      <div class="section-sub">Universal Card Component · 四区结构</div>
+      <div class="blueprint">
+        <div class="bp-zone">
+          <div class="bp-zone-tag a">A</div>
+          <div class="bp-zone-info">
+            <h4>场景视觉区 · Scene Visual</h4>
+            <p>沉浸式场景背景 + 浮动商品热点标签。<br>用户一眼就能"看到自己"在这个场景中，热点可点击弹出商品卡片。支持自定义场景配色和 emoji 装饰。</p>
+          </div>
+        </div>
+        <div class="bp-zone">
+          <div class="bp-zone-tag b">B</div>
+          <div class="bp-zone-info">
+            <h4>社交投票条 · Social Vote Bar</h4>
+            <p>头像堆叠 + 参与人数 + 快捷投票按钮。<br>展示"有多少同阶段妈妈选了这个场景"，制造从众效应；点击投票按钮进入轻量 PK。</p>
+          </div>
+        </div>
+        <div class="bp-zone">
+          <div class="bp-zone-tag c">C</div>
+          <div class="bp-zone-info">
+            <h4>商品横滑区 · Product Carousel</h4>
+            <p>场景关联商品横向滑动，每个商品上叠加投票百分比。<br>用户看到的不只是"推荐什么"，还有"多少人投了这个"。支持快速加购。</p>
+          </div>
+        </div>
+        <div class="bp-zone">
+          <div class="bp-zone-tag d">D</div>
+          <div class="bp-zone-info">
+            <h4>行动号召区 · Action CTA</h4>
+            <p>"一键加购场景套装" + 收藏/分享。<br>将整个场景打包为套装优惠，提升客单价；分享按钮支持生成场景海报。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-section" id="specFeatures" style="display:none">
+      <h2 id="featureTitle">✨ 方案亮点</h2>
+      <div class="section-sub" id="featureSub"></div>
+      <div class="feature-list" id="featureList">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <div class="spec-section" id="specPersonas" style="display:none">
+      <h2>👩‍👧 适配人群总览</h2>
+      <div class="section-sub">点击卡片切换左侧手机预览</div>
+      <div class="persona-grid">
+        <div class="persona-card active-persona" onclick="switchPersona(1)">
+          <div class="p-emoji">🤰</div>
+          <h4>孕期妈妈</h4>
+          <div class="p-desc">孕中晚期，准备迎接新生命，需要提前囤货。</div>
+          <div class="p-scenes">
+            <span class="p-scene-tag">待产准备</span>
+            <span class="p-scene-tag">孕期舒适</span>
+          </div>
+        </div>
+        <div class="persona-card" onclick="switchPersona(2)">
+          <div class="p-emoji">🤱</div>
+          <h4>新手妈妈</h4>
+          <div class="p-desc">产后 0-6 个月，高频哺乳期，一切从零开始。</div>
+          <div class="p-scenes">
+            <span class="p-scene-tag">夜奶时光</span>
+            <span class="p-scene-tag">新生护理</span>
+          </div>
+        </div>
+        <div class="persona-card" onclick="switchPersona(3)">
+          <div class="p-emoji">💼</div>
+          <h4>职场妈妈</h4>
+          <div class="p-desc">产假结束重返职场，兼顾工作与母乳喂养。</div>
+          <div class="p-scenes">
+            <span class="p-scene-tag">背奶通勤</span>
+            <span class="p-scene-tag">办公哺乳</span>
+          </div>
+        </div>
+        <div class="persona-card" onclick="switchPersona(4)">
+          <div class="p-emoji">🏖️</div>
+          <h4>外出遛娃</h4>
+          <div class="p-desc">带宝宝出门探索世界，轻松便携是关键。</div>
+          <div class="p-scenes">
+            <span class="p-scene-tag">短途遛娃</span>
+            <span class="p-scene-tag">长途出行</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PERSONAS = [
+  // 0: Generic / Structure
+  {
+    headerSub: '基于你的阶段 · 个性化场景推荐',
+    pills: ['全部', '🌅 晨间', '🌙 夜间', '🏖️ 外出', '💼 职场', '🧘 恢复'],
+    cards: [
+      {
+        sceneBg: 'linear-gradient(135deg, #FFE4EC 0%, #FFECD2 100%)',
+        sceneLabel: '🌅 晨间哺乳',
+        sceneDeco: '🌅',
+        voters: '2,847',
+        hotspots: [
+          { emoji: '🤱', label: 'M9 Pro 吸奶器', top: '45%', left: '12%', color: 'pink' },
+          { emoji: '👙', label: '哺乳内衣', top: '35%', left: '58%', color: 'blue' },
+          { emoji: '💡', label: '柔光夜灯', top: '68%', left: '42%', color: 'peach' },
+        ],
+        socialText: '<strong>2,847</strong> 位妈妈在这个场景中选好物',
+        avatarColors: ['#FFB5C5', '#B5D0FF', '#FFD9B5'],
+        voteOptions: [
+          { emoji: '🤱', name: 'M9 Pro', pct: 62 },
+          { emoji: '🍼', name: 'S12 Pro', pct: 38 },
+        ],
+        products: [
+          { emoji: '🤱', name: 'M9 Pro 吸奶器', price: '$149', old: '$179', pct: '62%', bg: '#FFF0F3' },
+          { emoji: '👙', name: '无缝哺乳内衣', price: '$29', old: '$39', pct: '54%', bg: '#E8F0FE' },
+          { emoji: '💡', name: 'WN08 助眠夜灯', price: '$39', old: '', pct: '48%', bg: '#FFF3E0' },
+        ],
+        ctaText: '一键加购晨间套装',
+        ctaSaving: '组合省 $32',
+      }
+    ]
+  },
+  // 1: Pregnant Mom
+  {
+    headerSub: '孕 32 周 · 距预产期还有 47 天',
+    pills: ['推荐', '🤰 待产准备', '🛏 孕期睡眠', '👗 孕期穿搭', '🧘 产前运动'],
+    cards: [
+      {
+        sceneBg: 'linear-gradient(135deg, #F8E1F4 0%, #FFECD2 100%)',
+        sceneLabel: '🤰 待产准备清单',
+        sceneDeco: '🎀',
+        voters: '4,126',
+        hotspots: [
+          { emoji: '🧳', label: '待产包', top: '40%', left: '10%', color: 'pink' },
+          { emoji: '🤱', label: '吸奶器', top: '30%', left: '56%', color: 'blue' },
+          { emoji: '🩱', label: '产后束腹带', top: '65%', left: '35%', color: 'peach' },
+        ],
+        socialText: '<strong>92%</strong> 孕 32 周妈妈已开始准备待产包',
+        avatarColors: ['#E8B4D8', '#B5D0FF', '#FFD9B5'],
+        voteOptions: [
+          { emoji: '🧳', name: '标准待产包', pct: 71 },
+          { emoji: '👜', name: '豪华待产包', pct: 29 },
+        ],
+        products: [
+          { emoji: '🧳', name: 'Cozy 待产包套装', price: '$89', old: '$119', pct: '71%', bg: '#F8E1F4' },
+          { emoji: '🤱', name: 'M9 Pro 吸奶器', price: '$149', old: '$179', pct: '68%', bg: '#FFF0F3' },
+          { emoji: '🩱', name: '产后恢复束腹带', price: '$35', old: '$45', pct: '55%', bg: '#FFECD2' },
+          { emoji: '🧴', name: '防妊娠纹乳霜', price: '$28', old: '', pct: '49%', bg: '#E8F5E9' },
+        ],
+        ctaText: '一键加购待产套装',
+        ctaSaving: '组合省 $56',
+      },
+      {
+        sceneBg: 'linear-gradient(135deg, #E8DFFF 0%, #F0E6FF 100%)',
+        sceneLabel: '🛏 孕期安睡',
+        sceneDeco: '🌙',
+        voters: '1,893',
+        hotspots: [
+          { emoji: '🛏', label: '孕妇枕', top: '42%', left: '14%', color: 'pink' },
+          { emoji: '💡', label: '白噪音夜灯', top: '32%', left: '60%', color: 'peach' },
+        ],
+        socialText: '<strong>1,893</strong> 位准妈妈推荐孕晚期安睡好物',
+        avatarColors: ['#C8B8FF', '#FFB5C5', '#FFD9B5'],
+        voteOptions: [
+          { emoji: '🛏', name: 'U 型枕', pct: 64 },
+          { emoji: '🌙', name: 'C 型枕', pct: 36 },
+        ],
+        products: [
+          { emoji: '🛏', name: 'Cozy U 型孕妇枕', price: '$59', old: '$75', pct: '64%', bg: '#E8DFFF' },
+          { emoji: '💡', name: 'WN08 白噪音夜灯', price: '$39', old: '', pct: '58%', bg: '#FFF3E0' },
+          { emoji: '🧦', name: '孕妇弹力袜', price: '$19', old: '$25', pct: '42%', bg: '#E8F0FE' },
+        ],
+        ctaText: '一键加购安睡套装',
+        ctaSaving: '组合省 $21',
+      }
+    ]
+  },
+  // 2: New Mom
+  {
+    headerSub: '产后 2 个月 · 宝宝快速成长中',
+    pills: ['推荐', '🌙 夜奶时光', '🧴 新生护理', '🤱 哺乳日常', '💆 产后恢复'],
+    cards: [
+      {
+        sceneBg: 'linear-gradient(135deg, #1A1A3E 0%, #2D2D5E 50%, #1A1A3E 100%)',
+        sceneLabel: '🌙 夜奶时光',
+        sceneDeco: '🌙',
+        voters: '5,231',
+        hotspots: [
+          { emoji: '🤱', label: '静音吸奶器', top: '38%', left: '10%', color: 'pink' },
+          { emoji: '💡', label: '护眼夜灯', top: '28%', left: '58%', color: 'peach' },
+          { emoji: '🧣', label: '哺乳巾', top: '65%', left: '30%', color: 'blue' },
+        ],
+        socialText: '<strong>5,231</strong> 位新手妈妈每晚都在用这套组合',
+        avatarColors: ['#FFB5C5', '#9ECFFF', '#FFD9B5'],
+        voteOptions: [
+          { emoji: '🤱', name: 'M9 静音版', pct: 73 },
+          { emoji: '🍼', name: 'S12 双边版', pct: 27 },
+        ],
+        products: [
+          { emoji: '🤱', name: 'M9 Pro 静音吸奶器', price: '$149', old: '$179', pct: '73%', bg: '#2D2D5E' },
+          { emoji: '💡', name: 'WN08 助眠灯', price: '$39', old: '', pct: '61%', bg: '#3D3D6E' },
+          { emoji: '🧣', name: '竹纤维哺乳巾', price: '$22', old: '$28', pct: '52%', bg: '#2A2A4E' },
+        ],
+        ctaText: '一键加购夜奶套装',
+        ctaSaving: '组合省 $38',
+      },
+      {
+        sceneBg: 'linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%)',
+        sceneLabel: '🧴 新生儿护理',
+        sceneDeco: '👶',
+        voters: '3,472',
+        hotspots: [
+          { emoji: '🧴', label: '婴儿护肤', top: '40%', left: '12%', color: 'pink' },
+          { emoji: '🛁', label: '洗浴套装', top: '55%', left: '55%', color: 'blue' },
+        ],
+        socialText: '<strong>3,472</strong> 位妈妈为宝宝选了这些护理好物',
+        avatarColors: ['#A5D6A7', '#FFB5C5', '#FFD9B5'],
+        voteOptions: [
+          { emoji: '🧴', name: '有机护肤', pct: 58 },
+          { emoji: '🌿', name: '天然植物', pct: 42 },
+        ],
+        products: [
+          { emoji: '🧴', name: '有机婴儿润肤乳', price: '$18', old: '$24', pct: '58%', bg: '#E8F5E9' },
+          { emoji: '🛁', name: '新生儿洗护三件套', price: '$35', old: '$45', pct: '53%', bg: '#FFF3E0' },
+          { emoji: '🧷', name: '婴儿指甲剪套装', price: '$12', old: '', pct: '47%', bg: '#E8F0FE' },
+        ],
+        ctaText: '一键加购护理套装',
+        ctaSaving: '组合省 $18',
+      }
+    ]
+  },
+  // 3: Working Mom
+  {
+    headerSub: '产假结束 · 工作与母乳两不误',
+    pills: ['推荐', '💼 背奶通勤', '🏢 办公室哺乳', '📦 储奶管理', '👔 职场穿搭'],
+    cards: [
+      {
+        sceneBg: 'linear-gradient(135deg, #E8EFFA 0%, #D4E4FE 100%)',
+        sceneLabel: '💼 背奶通勤包',
+        sceneDeco: '💼',
+        voters: '2,156',
+        hotspots: [
+          { emoji: '🎒', label: '背奶包', top: '38%', left: '10%', color: 'blue' },
+          { emoji: '🤱', label: '便携吸奶器', top: '30%', left: '58%', color: 'pink' },
+          { emoji: '🧊', label: '保冷袋', top: '65%', left: '36%', color: 'peach' },
+        ],
+        socialText: '<strong>2,156</strong> 位职场妈妈的通勤标配',
+        avatarColors: ['#B5D0FF', '#FFB5C5', '#FFD9B5'],
+        voteOptions: [
+          { emoji: '🎒', name: '双肩背奶包', pct: 67 },
+          { emoji: '👜', name: '手提背奶包', pct: 33 },
+        ],
+        products: [
+          { emoji: '🎒', name: 'Cozy 背奶双肩包', price: '$45', old: '$59', pct: '67%', bg: '#E8EFFA' },
+          { emoji: '🤱', name: 'M9 Pro 穿戴式', price: '$149', old: '$179', pct: '72%', bg: '#FFF0F3' },
+          { emoji: '🧊', name: '恒温保冷收纳袋', price: '$25', old: '$32', pct: '55%', bg: '#FFF3E0' },
+          { emoji: '🍼', name: '储奶袋 50 片装', price: '$15', old: '', pct: '63%', bg: '#E8F5E9' },
+        ],
+        ctaText: '一键加购背奶通勤套装',
+        ctaSaving: '组合省 $41',
+      },
+      {
+        sceneBg: 'linear-gradient(135deg, #F5F0FF 0%, #EDE7FE 100%)',
+        sceneLabel: '🏢 办公室哺乳',
+        sceneDeco: '🏢',
+        voters: '1,432',
+        hotspots: [
+          { emoji: '🤱', label: '静音吸奶器', top: '42%', left: '12%', color: 'pink' },
+          { emoji: '🧣', label: '哺乳遮巾', top: '35%', left: '60%', color: 'peach' },
+        ],
+        socialText: '<strong>1,432</strong> 位职场妈妈在公司也能从容哺乳',
+        avatarColors: ['#C8B8FF', '#FFB5C5', '#B5D0FF'],
+        voteOptions: [
+          { emoji: '🤫', name: 'M9 静音版', pct: 78 },
+          { emoji: '⚡', name: 'S12 快充版', pct: 22 },
+        ],
+        products: [
+          { emoji: '🤱', name: 'M9 Pro 静音 24dB', price: '$149', old: '$179', pct: '78%', bg: '#F5F0FF' },
+          { emoji: '🧣', name: '轻奢哺乳遮巾', price: '$19', old: '$25', pct: '60%', bg: '#FFECD2' },
+          { emoji: '🧴', name: '乳头修复霜', price: '$16', old: '', pct: '52%', bg: '#FFF0F3' },
+        ],
+        ctaText: '一键加购办公哺乳套装',
+        ctaSaving: '组合省 $28',
+      }
+    ]
+  },
+  // 4: Outing Mom
+  {
+    headerSub: '带宝宝看世界 · 轻装出发',
+    pills: ['推荐', '🌳 公园遛娃', '🛒 商场半日游', '✈️ 长途旅行', '🚗 自驾出行'],
+    cards: [
+      {
+        sceneBg: 'linear-gradient(135deg, #E8F5E9 0%, #FFF9E6 100%)',
+        sceneLabel: '🌳 公园遛娃半日游',
+        sceneDeco: '🌳',
+        voters: '3,847',
+        hotspots: [
+          { emoji: '🎒', label: '妈咪包', top: '38%', left: '10%', color: 'pink' },
+          { emoji: '🤱', label: '便携吸奶器', top: '30%', left: '58%', color: 'blue' },
+          { emoji: '☂️', label: '遮阳篷', top: '62%', left: '38%', color: 'peach' },
+        ],
+        socialText: '<strong>3,847</strong> 位妈妈出门必带这几样',
+        avatarColors: ['#A5D6A7', '#FFB5C5', '#FFD9B5'],
+        voteOptions: [
+          { emoji: '🎒', name: '大容量妈咪包', pct: 59 },
+          { emoji: '👜', name: '轻便手提包', pct: 41 },
+        ],
+        products: [
+          { emoji: '🎒', name: 'Cozy 多功能妈咪包', price: '$49', old: '$65', pct: '59%', bg: '#E8F5E9' },
+          { emoji: '🤱', name: 'M5 迷你吸奶器', price: '$89', old: '$109', pct: '63%', bg: '#FFF0F3' },
+          { emoji: '🧊', name: '外出保温奶瓶袋', price: '$22', old: '$28', pct: '51%', bg: '#FFF3E0' },
+          { emoji: '🧴', name: '便携消毒湿巾', price: '$12', old: '', pct: '72%', bg: '#E8F0FE' },
+        ],
+        ctaText: '一键加购遛娃套装',
+        ctaSaving: '组合省 $35',
+      },
+      {
+        sceneBg: 'linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%)',
+        sceneLabel: '✈️ 长途旅行装备',
+        sceneDeco: '✈️',
+        voters: '1,689',
+        hotspots: [
+          { emoji: '🧳', label: '旅行收纳套装', top: '40%', left: '10%', color: 'pink' },
+          { emoji: '🤱', label: '静音吸奶器', top: '32%', left: '60%', color: 'blue' },
+          { emoji: '🧸', label: '安抚玩偶', top: '64%', left: '40%', color: 'peach' },
+        ],
+        socialText: '<strong>1,689</strong> 位妈妈的旅行清单',
+        avatarColors: ['#FFD9B5', '#FFB5C5', '#B5D0FF'],
+        voteOptions: [
+          { emoji: '🧳', name: '一体式旅行套', pct: 55 },
+          { emoji: '🎒', name: '分装便携包', pct: 45 },
+        ],
+        products: [
+          { emoji: '🧳', name: '旅行哺乳收纳套装', price: '$55', old: '$72', pct: '55%', bg: '#FFF3E0' },
+          { emoji: '🤱', name: 'M5 迷你吸奶器', price: '$89', old: '$109', pct: '66%', bg: '#FFF0F3' },
+          { emoji: '🧸', name: '飞机安抚玩偶', price: '$25', old: '$32', pct: '48%', bg: '#E8F5E9' },
+        ],
+        ctaText: '一键加购旅行套装',
+        ctaSaving: '组合省 $44',
+      }
+    ]
+  }
+];
+
+const FEATURES = [
+  null,
+  // 1: Pregnant
+  {
+    title: '🤰 孕期妈妈 · 场景策略',
+    sub: '核心诉求：安心准备、消除焦虑、提前囤货',
+    items: [
+      { icon: '📅', cls: 'fi-pink', title: '预产期倒计时驱动', desc: '场景标题显示孕周和预产期，利用时间紧迫感激发"该囤货了"的购买意愿。' },
+      { icon: '📊', cls: 'fi-blue', title: '同阶段妈妈数据', desc: '"92% 孕32周妈妈已准备待产包"——通过同龄人数据消除犹豫，降低决策成本。' },
+      { icon: '🧳', cls: 'fi-purple', title: '待产清单化推荐', desc: '将商品组织为"待产清单"而非货架，让用户感觉在准备而非购物。' },
+      { icon: '😴', cls: 'fi-green', title: '孕晚期痛点场景', desc: '孕期睡眠、妊娠纹护理等场景直击痛点，配合投票验证产品效果。' },
+      { icon: '🔄', cls: 'fi-gold', title: '向下一阶段过渡', desc: '卡片底部提示"月子期好物预览"，提前种草产后用品。' },
+    ]
+  },
+  // 2: New Mom
+  {
+    title: '🤱 新手妈妈 · 场景策略',
+    sub: '核心诉求：快速上手、夜间求生、新生儿护理',
+    items: [
+      { icon: '🌙', cls: 'fi-purple', title: '夜间场景深色调', desc: '夜奶场景使用深色背景，还原真实夜间氛围，产品标签自带微光效果，沉浸感极强。' },
+      { icon: '🏆', cls: 'fi-pink', title: '高投票权重商品', desc: '"5,231位新手妈妈每晚都在用"——新手妈妈最信任同类群体的真实选择。' },
+      { icon: '🍼', cls: 'fi-blue', title: '喂养 PK 降低选择焦虑', desc: '吸奶器 A vs B 直接投票对比，帮助选择困难的新手妈妈快速决策。' },
+      { icon: '🧴', cls: 'fi-green', title: '新生儿护理知识绑定', desc: '产品推荐附带简短护理 Tips，购物即学习，增加信任。' },
+      { icon: '📈', cls: 'fi-gold', title: '月龄升级提醒', desc: '当宝宝进入新月龄，自动刷新场景和推荐商品。' },
+    ]
+  },
+  // 3: Working Mom
+  {
+    title: '💼 职场妈妈 · 场景策略',
+    sub: '核心诉求：效率至上、隐蔽便携、工作育儿两不误',
+    items: [
+      { icon: '⏱️', cls: 'fi-blue', title: '效率关键词突出', desc: '"24dB 静音"、"15 分钟快充"——职场妈妈最在意时间和便携性，强化效率标签。' },
+      { icon: '👜', cls: 'fi-pink', title: '通勤场景 = 套装逻辑', desc: '背奶包+吸奶器+保冷袋天然捆绑，"一键加购通勤套装"转化率极高。' },
+      { icon: '🤫', cls: 'fi-purple', title: '静音 PK 成核心话题', desc: '办公室用哪款最安静？这类投票话题精准命中职场妈妈最大痛点。' },
+      { icon: '📦', cls: 'fi-green', title: '储奶管理场景延伸', desc: '从"吸"到"存"到"用"完整链路，储奶袋、标签贴自然连带。' },
+      { icon: '💰', cls: 'fi-gold', title: '组合省钱打动理性用户', desc: '职场妈妈消费更理性，"组合省 $41"比单品折扣更有说服力。' },
+    ]
+  },
+  // 4: Outing
+  {
+    title: '🏖️ 外出遛娃 · 场景策略',
+    sub: '核心诉求：轻便收纳、全场景覆盖、随时喂养',
+    items: [
+      { icon: '🗺️', cls: 'fi-green', title: '按出行距离分场景', desc: '"公园半日游" vs "长途旅行"不同出行场景需要不同装备，精准匹配。' },
+      { icon: '⚖️', cls: 'fi-pink', title: '轻量化是最高投票维度', desc: '妈咪包PK中，重量和容量是投票焦点，帮用户理性对比。' },
+      { icon: '📸', cls: 'fi-blue', title: '场景感召力最强', desc: '阳光草地+宝宝笑脸的场景图最能激发"我也要带宝宝出去"的消费冲动。' },
+      { icon: '🧳', cls: 'fi-purple', title: '旅行清单天然成套', desc: '出行场景商品关联度最高，套装转化率预计比单品高 2.3 倍。' },
+      { icon: '🔥', cls: 'fi-gold', title: '季节性运营', desc: '春游/暑假/秋游不同季节更换场景素材和推荐组合，保持新鲜感。' },
+    ]
+  }
+];
+
+let currentPersona = 0;
+
+function switchPersona(idx) {
+  currentPersona = idx;
+  document.querySelectorAll('.persona-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+
+  const p = PERSONAS[idx];
+  document.getElementById('headerSub').textContent = p.headerSub;
+
+  const pillsEl = document.getElementById('scenePills');
+  pillsEl.innerHTML = p.pills.map((pl, i) =>
+    `<button class="scene-pill ${i === 0 ? 'active' : ''}" onclick="activatePill(this)">${pl}</button>`
+  ).join('');
+
+  renderCards(p.cards);
+
+  // Right panel
+  const specStructure = document.getElementById('specStructure');
+  const specFeatures = document.getElementById('specFeatures');
+  const specPersonas = document.getElementById('specPersonas');
+
+  if (idx === 0) {
+    specStructure.style.display = '';
+    specFeatures.style.display = 'none';
+    specPersonas.style.display = '';
+  } else {
+    specStructure.style.display = 'none';
+    specFeatures.style.display = '';
+    specPersonas.style.display = 'none';
+
+    const f = FEATURES[idx];
+    document.getElementById('featureTitle').textContent = f.title;
+    document.getElementById('featureSub').textContent = f.sub;
+    document.getElementById('featureList').innerHTML = f.items.map(it => `
+      <div class="feature-item">
+        <div class="feature-icon ${it.cls}">${it.icon}</div>
+        <div class="feature-info">
+          <h5>${it.title}</h5>
+          <p>${it.desc}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.querySelector('.phone-screen').scrollTop = 0;
+}
+
+function renderCards(cards) {
+  const container = document.getElementById('cardContainer');
+  container.innerHTML = cards.map(card => `
+    <div class="feed-card">
+      <!-- Zone A: Scene -->
+      <div class="card-scene">
+        <div class="card-scene-bg" style="background:${card.sceneBg}">
+          <div class="scene-gradient"></div>
+          <div class="scene-label"><span class="icon">${card.sceneLabel.split(' ')[0]}</span> ${card.sceneLabel.split(' ').slice(1).join(' ')}</div>
+          <div class="scene-voters-badge"><span class="fire">🔥</span> ${card.voters} 人参与</div>
+          ${card.hotspots.map(h => `
+            <div class="scene-hotspot" style="top:${h.top};left:${h.left}">
+              <span class="pulse ${h.color}">${h.emoji}</span>
+              ${h.label}
+            </div>
+          `).join('')}
+          <div class="scene-emoji-deco">${card.sceneDeco}</div>
+        </div>
+      </div>
+
+      <!-- Zone B: Social Vote -->
+      <div class="card-social-bar">
+        <div class="avatar-stack">
+          ${card.avatarColors.map(c => `<div class="av" style="background:${c}">👩</div>`).join('')}
+        </div>
+        <div class="social-text">${card.socialText}</div>
+        <button class="vote-mini-btn" onclick="this.textContent='✓ 已投';this.style.background='var(--pink)';this.style.color='#fff';this.style.borderColor='var(--pink)'">投一票</button>
+      </div>
+
+      <!-- Mini Vote PK -->
+      <div class="mini-vote-bar">
+        ${card.voteOptions.map((v, i) => `
+          <div class="mini-vote-option ${i === 0 ? 'voted' : ''}" onclick="toggleVote(this)">
+            <div class="vote-emoji">${v.emoji}</div>
+            <div class="vote-name">${v.name}</div>
+            <div class="vote-bar-fill"><div class="vote-bar-inner" style="width:${v.pct}%"></div></div>
+            <div class="vote-pct-text">${v.pct}%</div>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- Zone C: Products -->
+      <div class="card-products">
+        <div class="card-products-title">
+          <h4>场景好物</h4>
+          <span class="see-all">查看全部 ›</span>
+        </div>
+        <div class="product-row">
+          ${card.products.map(pr => `
+            <div class="product-chip">
+              <div class="product-chip-img" style="background:${pr.bg}">
+                ${pr.emoji}
+                <div class="vote-pct">${pr.pct} 妈妈选</div>
+              </div>
+              <h5>${pr.name}</h5>
+              <div class="price-row">
+                <span class="price">${pr.price}</span>
+                ${pr.old ? `<span class="old-price">${pr.old}</span>` : ''}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- Zone D: CTA -->
+      <div class="card-action">
+        <button class="action-btn-primary" onclick="this.innerHTML='✓ 已加入购物车';this.style.background='var(--green)'">
+          🛒 ${card.ctaText} · <span style="opacity:0.85;font-weight:500">${card.ctaSaving}</span>
+        </button>
+        <div class="action-btn-icon" onclick="this.textContent='❤️'">🤍</div>
+        <div class="action-btn-icon">↗</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function activatePill(el) {
+  el.parentElement.querySelectorAll('.scene-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function toggleVote(el) {
+  el.parentElement.querySelectorAll('.mini-vote-option').forEach(o => o.classList.remove('voted'));
+  el.classList.add('voted');
+}
+
+// Init
+switchPersona(0);
+</script>
+
+</body>
+</html>

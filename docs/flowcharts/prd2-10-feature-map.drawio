@@ -1,0 +1,108 @@
+<mxfile host="app.diagrams.net" agent="7.0" pages="1">
+  <diagram id="feature-map" name="PRD-2 功能拆分">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T" value="&lt;b&gt;PRD-2 · 功能拆分总览&lt;/b&gt; — 3 层架构（客户端 / 后端 / 运营后台 + Phase 2 Web）" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="C" value="🖥️ 客户端 App（iOS / Android / RN）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="40" y="70" width="340" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="B" value="⚙️ 后端 Java" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="400" y="70" width="340" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="R" value="📊 RevenueCat Dashboard" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="760" y="70" width="340" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="F1" value="F1-Sub · 订阅方案选择页" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="120" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F2" value="F2-Sub · 订阅购买流程（含免费试用）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="60" y="175" width="300" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="F3" value="F3-Sub · 订阅管理页（我的订阅）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="235" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F4" value="F4-Sub · 订阅权益门控（存储 Pro）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="290" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F6a" value="F6a · 我的购买页（课程 + 订阅统一）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="60" y="345" width="300" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="F6c" value="F6c · 宽限期 / 续费失败提醒" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="405" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F7" value="F7-Sub · Webhook 订阅事件处理&#10;(RENEWAL/CANCEL/EXPIRE/BILLING/REFUND/CHANGE)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e8daef;strokeColor=#6a1b9a;fontSize=10;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="420" y="120" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="F8" value="F8-Sub · 三张表&#10;user_entitlement + user_subscription + purchase_log" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="420" y="190" width="300" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="F9" value="F9 · GET /user/{id}/purchases&#10;(我的购买查询 API)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e8daef;strokeColor=#6a1b9a;fontSize=10;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="420" y="260" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="F10" value="F10-Sub · 订阅退款联动&#10;REFUND → 撤销 user_entitlement" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="420" y="325" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="F11" value="F11-Sub · purchase_log 历史回溯补录&#10;(从 rc_webhook_events.raw_payload)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="420" y="390" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="F12" value="F12 · Link-out Stripe（Phase 2）&#10;独立站 Checkout + Web Billing 同步" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fafafa;strokeColor=#b3b3b3;fontSize=10;fontStyle=2;dashed=1;dashPattern=4 3;" parent="1" vertex="1">
+          <mxGeometry x="420" y="455" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="R1" value="R1 · Entitlement: storage_pro" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="780" y="120" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="R2" value="R2 · Products（月/年 × iOS/Android [+ Stripe]）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="780" y="175" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="R3" value="R3 · Offering default 新增 2 个 Package" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="780" y="230" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="R4" value="R4 · 订阅事件 Webhook 订阅清单扩展" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fff2cc;strokeColor=#b8860b;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="780" y="285" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="R5" value="R5 · Subscription 看板 + MRR / Churn 监控" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="780" y="340" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="R6" value="R6 · 对账导出（Webhook 事件 vs 支付对账单）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="780" y="395" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#2e7d32;strokeWidth=1.8;endArrow=block;endFill=1;" parent="1" source="F2" target="R3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="250" />
+              <mxPoint x="760" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="主链路" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#6a1b9a;strokeWidth=1.8;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="R4" target="F7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="305" />
+              <mxPoint x="770" y="305" />
+              <mxPoint x="770" y="147" />
+              <mxPoint x="730" y="147" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#6a1b9a;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="F7" target="F8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="147" />
+              <mxPoint x="390" y="218" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="查询" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#6a1b9a;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="F6a" target="F9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#9673a6;strokeWidth=1.2;endArrow=open;dashed=0;" parent="1" source="F9" target="F8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

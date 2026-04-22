@@ -1,0 +1,193 @@
+<mxfile host="Electron" modified="2026-04-22T00:00:00.000Z" agent="drawio-manual" version="24.0.0" type="device">
+  <diagram id="checklist-gantt" name="1 周时间规划">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="RevenueCat 开发前配置 · 1 周时间规划（甘特）" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1520" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="subtitle" value="建议基准起始日 2026-04-06（周一）  |  关键路径：Apple / Google 商品审核 24-48h" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#6B7280;" vertex="1" parent="1">
+          <mxGeometry x="40" y="58" width="1520" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="col_header" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F9FAFB;strokeColor=#E5E7EB;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="1520" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="col_section" value="阶段 / 任务" style="text;html=1;align=center;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="360" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="col_d1" value="Day 1 (Mon)&#10;04-06" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="400" y="100" width="165" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="col_d2" value="Day 2 (Tue)&#10;04-07" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="565" y="100" width="165" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="col_d3" value="Day 3 (Wed)&#10;04-08" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="730" y="100" width="165" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="col_d4" value="Day 4 (Thu)&#10;04-09" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="895" y="100" width="165" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="col_d5" value="Day 5 (Fri)&#10;04-10" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="100" width="165" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="col_d6" value="Day 6 (Sat)&#10;04-11" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#9CA3AF;" vertex="1" parent="1">
+          <mxGeometry x="1225" y="100" width="165" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="col_d7" value="Day 7 (Sun)&#10;04-12" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#9CA3AF;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="100" width="170" height="36" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sep_ph0" value="Phase 0 · 前置准备（产品 / 法务 / 设计 / 财务 / 运营 / 技术）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=12;fontStyle=1;fontColor=#78350F;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="140" width="1520" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p0a_name" value="账号注册 &amp; 权限开通" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="172" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p0a_bar" value="p0a · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#D97706;strokeWidth=1;fontSize=10;fontColor=#78350F;" vertex="1" parent="1">
+          <mxGeometry x="405" y="176" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p0b_name" value="产品名称 / 定价 / 素材" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="202" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p0b_bar" value="p0b · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#D97706;strokeWidth=1;fontSize=10;fontColor=#78350F;" vertex="1" parent="1">
+          <mxGeometry x="405" y="206" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p0c_name" value="法务文档（ToS / Privacy）" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="232" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p0c_bar" value="p0c · 2d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#D97706;strokeWidth=1;fontSize=10;fontColor=#78350F;" vertex="1" parent="1">
+          <mxGeometry x="405" y="236" width="320" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sep_ph1" value="Phase 1 · App Store Connect（iOS）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=12;fontStyle=1;fontColor=#1E3A8A;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="270" width="1520" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p1a_name" value="创建 IAP &amp; 订阅商品" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="302" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p1a_bar" value="p1a · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#2563EB;strokeWidth=1;fontSize=10;fontColor=#1E3A8A;" vertex="1" parent="1">
+          <mxGeometry x="570" y="306" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p1b_name" value="Apple 商品审核（关键路径）" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#991B1B;spacingLeft=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="332" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p1b_bar" value="p1b · 2d · CRIT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FECACA;strokeColor=#DC2626;strokeWidth=2;fontSize=10;fontColor=#991B1B;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="735" y="336" width="320" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p1c_name" value="Shared Secret &amp; API Key (.p8)" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="362" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p1c_bar" value="p1c · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#2563EB;strokeWidth=1;fontSize=10;fontColor=#1E3A8A;" vertex="1" parent="1">
+          <mxGeometry x="735" y="366" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p1d_name" value="Sandbox Tester 账号" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="392" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p1d_bar" value="p1d · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BFDBFE;strokeColor=#2563EB;strokeWidth=1;fontSize=10;fontColor=#1E3A8A;" vertex="1" parent="1">
+          <mxGeometry x="735" y="396" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sep_ph2" value="Phase 2 · Google Play Console（Android）" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#15803D;fontSize=12;fontStyle=1;fontColor=#14532D;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="430" width="1520" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p2a_name" value="创建 In-app &amp; Subscription" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="462" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p2a_bar" value="p2a · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#15803D;strokeWidth=1;fontSize=10;fontColor=#14532D;" vertex="1" parent="1">
+          <mxGeometry x="570" y="466" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p2b_name" value="Google 商品审核（关键路径）" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#991B1B;spacingLeft=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="492" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p2b_bar" value="p2b · 2d · CRIT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FECACA;strokeColor=#DC2626;strokeWidth=2;fontSize=10;fontColor=#991B1B;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="735" y="496" width="320" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p2c_name" value="Service Account &amp; JSON Key" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="522" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p2c_bar" value="p2c · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#15803D;strokeWidth=1;fontSize=10;fontColor=#14532D;" vertex="1" parent="1">
+          <mxGeometry x="735" y="526" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p2d_name" value="License Test 账号" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="552" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p2d_bar" value="p2d · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBF7D0;strokeColor=#15803D;strokeWidth=1;fontSize=10;fontColor=#14532D;" vertex="1" parent="1">
+          <mxGeometry x="735" y="556" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sep_ph3" value="Phase 3 · RevenueCat Dashboard" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#6D28D9;fontSize=12;fontStyle=1;fontColor=#4C1D95;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="590" width="1520" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p3a_name" value="创建 Project / App 关联" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="622" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p3a_bar" value="p3a · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#6D28D9;strokeWidth=1;fontSize=10;fontColor=#4C1D95;" vertex="1" parent="1">
+          <mxGeometry x="900" y="626" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p3b_name" value="Entitlement &amp; Offering 配置" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="652" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p3b_bar" value="p3b · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#6D28D9;strokeWidth=1;fontSize=10;fontColor=#4C1D95;" vertex="1" parent="1">
+          <mxGeometry x="1065" y="656" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_p3c_name" value="Webhook 配置 &amp; Test Event" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="682" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_p3c_bar" value="p3c · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DDD6FE;strokeColor=#6D28D9;strokeWidth=1;fontSize=10;fontColor=#4C1D95;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="686" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sep_ph4" value="验证 &amp; 交付" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#C2410C;fontSize=12;fontStyle=1;fontColor=#7C2D12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="720" width="1520" height="28" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_v1_name" value="Sandbox 端到端测试" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#374151;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="40" y="752" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_v1_bar" value="v1 · 1d" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FED7AA;strokeColor=#C2410C;strokeWidth=1;fontSize=10;fontColor=#7C2D12;" vertex="1" parent="1">
+          <mxGeometry x="1395" y="756" width="155" height="22" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r_v2_name" value="🏁 交付开发团队配置产出清单（里程碑）" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontColor=#7C2D12;spacingLeft=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="782" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="r_v2_bar" value="" style="shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;html=1;fillColor=#C2410C;strokeColor=#7C2D12;strokeWidth=1;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="1545" y="790" width="24" height="12" as="geometry" />
+        </mxCell>
+
+        <mxCell id="today_line" style="endArrow=none;html=1;strokeColor=#DC2626;strokeWidth=1;dashed=1;dashPattern=4 4;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="168" as="sourcePoint" />
+            <mxPoint x="560" y="810" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="today_label" value="Day 1 起点" style="text;html=1;align=center;verticalAlign=middle;fontSize=9;fontColor=#991B1B;fillColor=#FEF2F2;strokeColor=#FECACA;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="812" width="100" height="18" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend" value="图例： ▇ Phase 0 前置   ▇ Phase 1 App Store   ▇ Phase 2 Google Play   ▇ Phase 3 RevenueCat   ▇ 验证/交付   ▇ CRIT 关键路径（审核 24-48h）" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#6B7280;fillColor=#F9FAFB;strokeColor=#E5E7EB;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="840" width="1520" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

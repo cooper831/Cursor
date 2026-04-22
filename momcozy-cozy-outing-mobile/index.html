@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Cozy Outing — Momcozy</title>
+    <style>
+      :root {
+        --bg: #ebe7e2;
+        --surface: #faf7f4;
+        --text: #1d1d1f;
+        --muted: #6e6e73;
+        --line: rgba(0, 0, 0, 0.08);
+        --cta: #b85c67;
+        --cta-text: #fff;
+        --radius: 16px;
+        --shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+        --maxw: 430px;
+        --safe-b: env(safe-area-inset-bottom, 12px);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.45;
+      }
+
+      .shell {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        background: var(--surface);
+        min-height: 100dvh;
+      }
+
+      .top {
+        padding: 20px 20px 8px;
+        text-align: center;
+      }
+
+      .top-kicker {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .top h1 {
+        margin: 6px 0 0;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .top p {
+        margin: 8px 0 0;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .top a {
+        display: inline-block;
+        margin-top: 14px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--cta);
+        text-decoration: none;
+      }
+
+      .top a:active {
+        opacity: 0.7;
+      }
+
+      .subscene {
+        padding-bottom: 8px;
+      }
+
+      .subscene-hero {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #ddd;
+        overflow: hidden;
+      }
+
+      .subscene-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .subscene-head {
+        padding: 18px 20px 14px;
+      }
+
+      .subscene-head h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .subscene-head p {
+        margin: 8px 0 0;
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .product-scroll {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding: 4px 20px calc(22px + var(--safe-b));
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        touch-action: pan-x;
+      }
+
+      .product-scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      .p-card {
+        flex: 0 0 46%;
+        max-width: 188px;
+        min-width: 150px;
+        scroll-snap-align: start;
+        background: #fff;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .p-card:active {
+        transform: scale(0.98);
+      }
+
+      .p-card img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        background: #f0eeeb;
+      }
+
+      .p-card .meta {
+        padding: 10px 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+      }
+
+      .p-title {
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+      }
+
+      .p-price {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
+        margin-top: auto;
+      }
+
+      .foot {
+        text-align: center;
+        font-size: 11px;
+        color: var(--muted);
+        padding: 8px 16px calc(20px + var(--safe-b));
+        border-top: 1px solid var(--line);
+      }
+
+      .foot a {
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="top">
+        <div class="top-kicker">Cozy series</div>
+        <h1>Cozy Outing</h1>
+        <p>Shop by moment—real products from the Cozy Outing collection.</p>
+        <a href="https://momcozy.com/collections/cozy-outing" target="_blank" rel="noopener">View full collection ↗</a>
+      </header>
+
+      <main id="scenes-root"></main>
+
+      <footer class="foot">
+        Prototype · Data from
+        <a href="https://momcozy.com/collections/cozy-outing" target="_blank" rel="noopener">momcozy.com/collections/cozy-outing</a>
+        · Regenerate with <code>build_scenes.py</code>
+      </footer>
+    </div>
+
+    <script src="scenes.embed.js"></script>
+    <script>
+      (function () {
+        var data = window.__SCENES_DATA;
+        if (!data || !data.scenes) {
+          document.getElementById("scenes-root").innerHTML =
+            "<p style='padding:24px;text-align:center;color:#6e6e73'>Missing scene data. Open this folder via a local server or ensure scenes.embed.js is present.</p>";
+          return;
+        }
+
+        var root = document.getElementById("scenes-root");
+        var esc = function (s) {
+          var d = document.createElement("div");
+          d.textContent = s;
+          return d.innerHTML;
+        };
+
+        data.scenes.forEach(function (scene) {
+          var sec = document.createElement("section");
+          sec.className = "subscene";
+          sec.setAttribute("data-scene", scene.id);
+
+          var hero = document.createElement("div");
+          hero.className = "subscene-hero";
+          var hi = document.createElement("img");
+          hi.src = scene.hero;
+          hi.alt = "";
+          hi.loading = "lazy";
+          hi.decoding = "async";
+          hero.appendChild(hi);
+
+          var head = document.createElement("div");
+          head.className = "subscene-head";
+          head.innerHTML = "<h2>" + esc(scene.title) + "</h2><p>" + esc(scene.description) + "</p>";
+
+          var sc = document.createElement("div");
+          sc.className = "product-scroll";
+          sc.setAttribute("aria-label", scene.title + " products");
+
+          scene.products.forEach(function (p) {
+            var a = document.createElement("a");
+            a.className = "p-card";
+            a.href = p.url;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            var im = document.createElement("img");
+            im.src = p.image;
+            im.alt = "";
+            im.loading = "lazy";
+            im.decoding = "async";
+            var meta = document.createElement("div");
+            meta.className = "meta";
+            meta.innerHTML =
+              "<span class=\"p-title\">" +
+              esc(p.title) +
+              "</span><span class=\"p-price\">" +
+              esc(p.price) +
+              "</span>";
+            a.appendChild(im);
+            a.appendChild(meta);
+            sc.appendChild(a);
+          });
+
+          sec.appendChild(hero);
+          sec.appendChild(head);
+          sec.appendChild(sc);
+          root.appendChild(sec);
+        });
+      })();
+    </script>
+  </body>
+</html>

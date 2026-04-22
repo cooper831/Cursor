@@ -1,0 +1,103 @@
+<mxfile host="Electron" modified="2026-04-22T00:00:00.000Z" agent="drawio-manual" version="24.0.0" type="device">
+  <diagram id="checklist-dep" name="配置依赖关系">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="RevenueCat 接入 · 三方配置依赖关系" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;fontColor=#1F2937;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="1320" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend_box" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#9CA3AF;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="80" width="400" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" value="图例" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=1;fontColor=#374151;" vertex="1" parent="1">
+          <mxGeometry x="970" y="85" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_p0" value="前置准备" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontSize=10;fontColor=#78350F;" vertex="1" parent="1">
+          <mxGeometry x="980" y="110" width="70" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_ios" value="App Store / iOS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontSize=10;fontColor=#1E3A8A;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="110" width="90" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_and" value="Google Play / Android" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#15803D;fontSize=10;fontColor=#14532D;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="110" width="120" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_rc" value="RevenueCat" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#6D28D9;fontSize=10;fontColor=#4C1D95;" vertex="1" parent="1">
+          <mxGeometry x="980" y="146" width="80" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_dev" value="交付 / 开发" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#C2410C;fontSize=10;fontColor=#7C2D12;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="146" width="80" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_dash" value="— — 关键产出 / 数据交接" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontColor=#6B7280;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="146" width="200" height="26" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p0" value="&lt;b&gt;Phase 0 · 前置准备&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#78350F;&quot;&gt;产品 / 法务 / 设计 / 财务 / 运营 / 技术&lt;/span&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#78350F;&quot;&gt;账号 · 定价 · 素材 · 政策 · 银税&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;strokeWidth=2;fontSize=12;fontColor=#78350F;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="130" width="340" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p1" value="&lt;b&gt;Phase 1 · App Store Connect&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#1E3A8A;&quot;&gt;IAP 课程 + 订阅商品&lt;/span&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#1E3A8A;&quot;&gt;Shared Secret · API Key (.p8) · Sandbox&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;strokeWidth=2;fontSize=12;fontColor=#1E3A8A;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="260" y="300" width="340" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2" value="&lt;b&gt;Phase 2 · Google Play Console&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#14532D;&quot;&gt;In-app + Subscription 商品&lt;/span&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#14532D;&quot;&gt;Service Account JSON · License Test&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#15803D;strokeWidth=2;fontSize=12;fontColor=#14532D;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="860" y="300" width="340" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p3" value="&lt;b&gt;Phase 3 · RevenueCat Dashboard&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#4C1D95;&quot;&gt;Project · Entitlement · Product 关联&lt;/span&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#4C1D95;&quot;&gt;Offering · Webhook 配置 · API Key 生成&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#6D28D9;strokeWidth=3;fontSize=12;fontColor=#4C1D95;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="500" width="340" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p4" value="&lt;b&gt;Phase 4 · 交付给开发团队&lt;/b&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#7C2D12;&quot;&gt;Public API Keys · Secret API Key&lt;/span&gt;&lt;br/&gt;&lt;span style=&quot;font-size:10px;color:#7C2D12;&quot;&gt;Webhook URL / Token · Product ID · Entitlement ID&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#C2410C;strokeWidth=2;fontSize=12;fontColor=#7C2D12;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="700" width="340" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_p0_p1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#2563EB;strokeWidth=2;endArrow=classic;" edge="1" parent="1" source="p0" target="p1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_p0_p2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#15803D;strokeWidth=2;endArrow=classic;" edge="1" parent="1" source="p0" target="p2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_p1_p3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;strokeColor=#2563EB;strokeWidth=2;dashed=1;endArrow=classic;labelBackgroundColor=#FFFFFF;fontSize=10;fontColor=#1E3A8A;" edge="1" parent="1" source="p1" target="p3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="450" />
+              <mxPoint x="645" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_p1_p3_label" value="iOS Product ID&#10;Shared Secret&#10;API Key (.p8)" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#1E3A8A;fillColor=#FFFFFF;strokeColor=#93C5FD;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="420" width="130" height="58" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_p2_p3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;strokeColor=#15803D;strokeWidth=2;dashed=1;endArrow=classic;labelBackgroundColor=#FFFFFF;fontSize=10;fontColor=#14532D;" edge="1" parent="1" source="p2" target="p3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1030" y="450" />
+              <mxPoint x="815" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_p2_p3_label" value="Android Product ID&#10;Service Account JSON" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;fontColor=#14532D;fillColor=#FFFFFF;strokeColor=#86EFAC;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="420" width="160" height="42" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_p3_p4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#C2410C;strokeWidth=2;endArrow=classic;" edge="1" parent="1" source="p3" target="p4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="parallel_note" value="⏱ Phase 1 与 Phase 2 可并行执行" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#6B7280;fillColor=#F3F4F6;strokeColor=none;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="250" width="240" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note_critical" value="⚠️ Apple / Google 商品审核 24-48h 是关键路径，建议配置提前 1 周启动" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;strokeWidth=1;fontSize=10;fontColor=#991B1B;align=center;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="820" width="1320" height="40" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

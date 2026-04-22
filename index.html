@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Momcozy prototype</title>
+    <script>
+      (function () {
+        try {
+          var base = new URL(".", window.location.href);
+          var target = new URL("momcozy-app-scene-prototype/index.html", base);
+          window.location.replace(target.href);
+        } catch (e) {
+          /* 无 JS 时仍可用下方链接 */
+        }
+      })();
+    </script>
+    <meta http-equiv="refresh" content="1; url=momcozy-app-scene-prototype/index.html" />
+  </head>
+  <body style="font-family: system-ui, sans-serif; max-width: 42rem; padding: 1.25rem; line-height: 1.55">
+    <h1 style="font-size: 1.1rem">Momcozy 线框原型</h1>
+    <p>
+      <a href="momcozy-app-scene-prototype/index.html">进入 momcozy-app-scene-prototype/index.html</a>
+    </p>
+    <hr style="border: none; border-top: 1px solid #ddd; margin: 1.25rem 0" />
+    <p>
+      若浏览器提示<strong>「该网页无法正常运作」</strong>、<strong>「无法访问此网站」</strong>或一直转圈，多半是<strong>没有正在运行的本地
+      HTTP 服务</strong>，或地址里的<strong>端口写错</strong>（例如之前开过 8765，现在却在开 8766）。
+    </p>
+    <p>请在终端执行（路径按你本机为准）：</p>
+    <pre style="background: #f4f4f5; padding: 0.75rem; overflow: auto; font-size: 0.85rem">cd "momcozy-app-scene-prototype"
+./serve.sh</pre>
+    <p>
+      终端若出现 <code>Address already in use</code>，表示<strong>该端口已被其它程序占用</strong>（常见是之前开过的
+      <code>http.server</code> 没关）。可直接运行上面的 <code>./serve.sh</code>，脚本会<strong>自动换一个空闲端口</strong>；或手动指定端口：<code>./serve.sh 8800</code>，再用浏览器打开终端里打印的地址。
+    </p>
+    <p>若不用脚本，也可：<code>python3 -m http.server 8765</code>，然后打开 <code>http://127.0.0.1:8765/index.html</code>（端口需与命令一致）。</p>
+    <p>
+      若用 VS Code / Cursor 的 Live Server，请把<strong>站点根目录</strong>设为文件夹
+      <code>momcozy-app-scene-prototype</code>，或从本页点进上面的链接，避免 CSS、图片路径 404。
+    </p>
+  </body>
+</html>

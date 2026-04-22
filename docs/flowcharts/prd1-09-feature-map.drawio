@@ -1,0 +1,99 @@
+<mxfile host="app.diagrams.net" agent="7.0" pages="1">
+  <diagram id="feature-map" name="功能拆分总览">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T" value="&lt;b&gt;PRD-1 · 功能拆分总览&lt;/b&gt; — 3 层架构（客户端 / 后端 / 运营后台）" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="C" value="🖥️ 客户端 App（iOS / Android / RN）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="40" y="70" width="340" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="B" value="⚙️ 后端 Java" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="400" y="70" width="340" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="R" value="📊 RevenueCat Dashboard（运营后台）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;verticalAlign=top;spacingTop=8;" parent="1" vertex="1">
+          <mxGeometry x="760" y="70" width="340" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="F1" value="F1 · SDK 初始化与用户身份" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="120" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F2" value="F2 · 数字产品商店页" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="175" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F3" value="F3 · 课程详情与预览" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="230" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F4" value="F4 · 一次性购买流程（含 F4a 异常兜底）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="60" y="285" width="300" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="F5" value="F5 · 权益验证与门控" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="345" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F6" value="F6 · 恢复购买（Restore Purchases）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="400" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F6b" value="F6b · 迁移用户首次登录引导" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="60" y="455" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F7" value="F7 · Webhook 接收与幂等处理" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e8daef;strokeColor=#6a1b9a;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="420" y="120" width="300" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="F8" value="F8 · 购买日志同步（rc_webhook_events + course_grant_log）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="420" y="180" width="300" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="F10" value="F10 · 退款联动（REFUND → 撤销权限）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="420" y="240" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F11" value="F11 · 历史购买记录数据同步脚本" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#9673a6;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="420" y="295" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F_Grant" value="【主链路接口】POST /course/entitlement/grant" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="420" y="350" width="300" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="F9" value="~~F9 · 购买记录查询 API~~（移至 PRD-2）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=10;fontColor=#999999;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="420" y="410" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F12" value="F12 · 产品配置（Offering / Package）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="780" y="120" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F13" value="F13 · 数据看板（收入 / 用户分析）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="780" y="175" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="F14" value="F14 · 用户管理（查权益 / Promotional Grant）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="780" y="230" width="300" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ExistingBE" value="🔗 现有课程权益系统（权威来源）&#xa;查询 / 开通 / 撤销 API" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#fff3e0;strokeColor=#e65100;fontSize=11;fontStyle=2;strokeWidth=1.5;dashed=1;dashPattern=4 3;" parent="1" vertex="1">
+          <mxGeometry x="420" y="620" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="L" value="&lt;b&gt;图例&lt;/b&gt;&lt;br&gt;━━ 功能调用 / 数据流&lt;br&gt;粗边框 + 填色 = 关键功能&lt;br&gt;虚线灰框 = 本 PRD 不包含&lt;br&gt;橙色虚框 = 外部依赖" style="text;html=1;strokeColor=#b3b3b3;fillColor=#fafafa;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;spacingLeft=8;" parent="1" vertex="1">
+          <mxGeometry x="60" y="620" width="300" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#2e7d32;strokeWidth=1.8;endArrow=block;endFill=1;" parent="1" source="F4" target="F_Grant" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="主链路" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#2e7d32;strokeWidth=1.8;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="F_Grant" target="ExistingBE" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="L3 兜底" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#9673a6;strokeWidth=1.5;endArrow=open;dashed=1;dashPattern=4 3;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="F7" target="ExistingBE" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="REFUND" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#b85450;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="F10" target="ExistingBE" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="Webhook" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#9673a6;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="F12" target="F7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="getOfferings" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="F2" target="F12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="750" y="195" />
+              <mxPoint x="750" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

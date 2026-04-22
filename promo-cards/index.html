@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Recommendations Demo</title>
+    <style>
+      :root {
+        --bg: #f3f4f6;
+        --panel: #ffffff;
+        --panel-2: #ffffff;
+        --border: rgba(17, 24, 39, 0.08);
+        --text: rgba(17, 24, 39, 0.92);
+        --muted: rgba(17, 24, 39, 0.64);
+        --muted-2: rgba(17, 24, 39, 0.46);
+        --shadow: 0 16px 44px rgba(17, 24, 39, 0.12);
+        --radius: 18px;
+        --radius-lg: 24px;
+        --cta: #111827;
+        --ctaText: #ffffff;
+        --cta2: rgba(17, 24, 39, 0.06);
+        --cta2Text: rgba(17, 24, 39, 0.86);
+        --focus: 0 0 0 4px rgba(59, 130, 246, 0.18);
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .app {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 26px 18px 56px;
+      }
+
+      header {
+        display: flex;
+        gap: 14px;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin: 12px 0 22px;
+      }
+
+      .titleWrap {
+        display: grid;
+        gap: 6px;
+      }
+
+      h1 {
+        font-size: 20px;
+        margin: 0;
+        font-weight: 760;
+        letter-spacing: 0.2px;
+      }
+
+      .sub {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .chipRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
+      }
+
+      .chip {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 999px;
+        padding: 7px 10px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .section {
+        margin: 40px 0 68px;
+      }
+
+      .sectionHeader {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .sectionTitle {
+        font-size: 16px;
+        font-weight: 720;
+        margin: 0;
+        letter-spacing: 0.2px;
+      }
+
+      .sectionHint {
+        color: var(--muted-2);
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .railWrap {
+        position: relative;
+      }
+
+      .rail {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(300px, 340px);
+        gap: 14px;
+        overflow: auto hidden;
+        scroll-snap-type: x mandatory;
+        padding: 2px 2px 14px;
+        scrollbar-width: none;
+      }
+
+      .rail::-webkit-scrollbar {
+        display: none;
+        height: 0;
+      }
+      .rail::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.18);
+        border-radius: 99px;
+      }
+
+      .card {
+        scroll-snap-align: start;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: 310px auto;
+        min-height: 420px;
+      }
+
+      .hero {
+        position: relative;
+        background: linear-gradient(180deg, #ffffff, #f8fafc);
+      }
+
+      .heroInner {
+        position: absolute;
+        inset: 0;
+        padding: 0;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        gap: 10px;
+      }
+
+      .heroArt {
+        border-radius: 0;
+        border: 0;
+        background: radial-gradient(700px 260px at 15% 30%, rgba(99, 102, 241, 0.20), transparent 55%),
+          radial-gradient(700px 260px at 85% 35%, rgba(16, 185, 129, 0.18), transparent 55%),
+          radial-gradient(700px 260px at 55% 95%, rgba(245, 158, 11, 0.18), transparent 55%),
+          #ffffff;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .heroImg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .heroImgOverlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 72%, rgba(255, 255, 255, 0.94) 100%);
+        pointer-events: none;
+      }
+
+      .heroEmoji {
+        font-size: 72px;
+        transform: translateY(2px);
+        filter: saturate(1.05);
+      }
+
+      .heroArtHint {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        right: 10px;
+        font-size: 11px;
+        color: rgba(17, 24, 39, 0.55);
+        line-height: 1.25;
+      }
+
+      .badgeRow {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 9px;
+        border-radius: 999px;
+        font-size: 11px;
+        border: 1px solid rgba(17, 24, 39, 0.08);
+        background: rgba(255, 255, 255, 0.75);
+        color: rgba(17, 24, 39, 0.78);
+      }
+
+      .badgeDot {
+        width: 8px;
+        height: 8px;
+        border-radius: 99px;
+        background: rgba(17, 24, 39, 0.65);
+      }
+
+      .heroTitle {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 760;
+        letter-spacing: 0.2px;
+        text-shadow: none;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .content {
+        padding: 12px 14px 14px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .priceRow {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .price {
+        font-weight: 860;
+        letter-spacing: 0.2px;
+        font-size: 18px;
+        color: rgba(17, 24, 39, 0.92);
+      }
+
+      .price small {
+        font-size: 12px;
+        opacity: 0.86;
+        margin-right: 1px;
+      }
+
+      .priceStrike {
+        color: rgba(17, 24, 39, 0.45);
+        text-decoration: line-through;
+        font-size: 12px;
+      }
+
+      .coupon {
+        border: 1px dashed rgba(17, 24, 39, 0.18);
+        background: rgba(17, 24, 39, 0.04);
+        padding: 6px 9px;
+        border-radius: 999px;
+        font-size: 12px;
+        color: rgba(17, 24, 39, 0.70);
+      }
+
+      .socialProof {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        color: rgba(17, 24, 39, 0.58);
+        font-size: 12px;
+      }
+
+      .star {
+        display: inline-flex;
+        gap: 4px;
+        align-items: center;
+      }
+
+      .copy {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .metaRow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .pill {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(17, 24, 39, 0.04);
+        color: rgba(17, 24, 39, 0.72);
+      }
+
+      .btn {
+        appearance: none;
+        border: 0;
+        border-radius: 14px;
+        padding: 10px 12px;
+        font-weight: 760;
+        letter-spacing: 0.2px;
+        cursor: pointer;
+        transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+      }
+
+      .btnPrimary {
+        background: var(--cta);
+        color: var(--ctaText);
+      }
+
+      .btnSecondary {
+        background: var(--cta2);
+        color: var(--cta2Text);
+        border: 1px solid var(--border);
+      }
+
+      .ctaRow {
+        display: flex;
+        justify-content: center;
+        margin-top: 8px;
+      }
+
+      .btnCta {
+        border-radius: 999px;
+        padding: 10px 16px;
+        min-width: 132px;
+        font-weight: 780;
+        letter-spacing: 0.2px;
+      }
+
+      .btnCtaSolid {
+        background: #111827;
+        color: #ffffff;
+      }
+
+      .btnCtaOutline {
+        background: #ffffff;
+        color: #111827;
+        border: 1px solid rgba(17, 24, 39, 0.18);
+      }
+
+      .btnCtaSoft {
+        background: linear-gradient(180deg, rgba(17, 24, 39, 0.06), rgba(17, 24, 39, 0.03));
+        color: rgba(17, 24, 39, 0.88);
+        border: 1px solid rgba(17, 24, 39, 0.10);
+      }
+
+      .btnCtaSpotlight {
+        background: radial-gradient(120px 60px at 30% 20%, rgba(59, 130, 246, 0.22), transparent 65%),
+          radial-gradient(140px 70px at 70% 20%, rgba(16, 185, 129, 0.20), transparent 65%),
+          #111827;
+        color: #ffffff;
+      }
+
+      .btnCta::after {
+        content: " →";
+        opacity: 0.92;
+      }
+
+      .btn:active {
+        transform: scale(0.98);
+      }
+
+      .btn:focus-visible {
+        outline: none;
+        box-shadow: var(--focus);
+      }
+
+      .navBtn {
+        position: absolute;
+        top: 68px;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        border: 1px solid rgba(17, 24, 39, 0.12);
+        background: rgba(255, 255, 255, 0.78);
+        color: rgba(17, 24, 39, 0.92);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        opacity: 0.0;
+        transition: opacity 160ms ease;
+      }
+
+      .railWrap:hover .navBtn {
+        opacity: 1;
+      }
+
+      .navLeft {
+        left: 8px;
+      }
+      .navRight {
+        right: 8px;
+      }
+
+      .footerNote {
+        margin-top: 22px;
+        font-size: 12px;
+        color: var(--muted-2);
+        border-top: 1px solid rgba(17, 24, 39, 0.08);
+        padding-top: 14px;
+      }
+
+      @media (max-width: 520px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .chipRow {
+          justify-content: flex-start;
+        }
+        .rail {
+          grid-auto-columns: minmax(290px, 86vw);
+        }
+        .navBtn {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <div class="titleWrap">
+          <h1>App Home Recommendations (Generator)</h1>
+          <div class="sub">Theme sections → multiple cards. Tap CTA to simulate a deep link.</div>
+        </div>
+        <div class="chipRow" id="chipRow"></div>
+      </header>
+
+      <main id="root"></main>
+
+      <div class="footerNote">
+        Data source: <code>recommendations/data.json</code>. Edit the JSON to generate new themes and cards.
+      </div>
+    </div>
+
+    <script>
+      const $ = (sel, root = document) => root.querySelector(sel);
+      const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+      function el(tag, attrs = {}, children = []) {
+        const n = document.createElement(tag);
+        for (const [k, v] of Object.entries(attrs)) {
+          if (k === "class") n.className = v;
+          else if (k === "text") n.textContent = v;
+          else if (k === "html") n.innerHTML = v;
+          else if (k.startsWith("on") && typeof v === "function")
+            n.addEventListener(k.slice(2), v);
+          else n.setAttribute(k, v);
+        }
+        for (const c of children) n.appendChild(c);
+        return n;
+      }
+
+      function clamp(n, min, max) {
+        return Math.max(min, Math.min(max, n));
+      }
+
+      function scrollByCard(rail, dir) {
+        const card = rail.querySelector(".card");
+        const cardWidth = card ? card.getBoundingClientRect().width : 300;
+        rail.scrollBy({ left: dir * (cardWidth + 14), behavior: "smooth" });
+      }
+
+      function toast(msg) {
+        let t = $("#toast");
+        if (!t) {
+          t = el("div", { id: "toast" });
+          Object.assign(t.style, {
+            position: "fixed",
+            left: "50%",
+            bottom: "18px",
+            transform: "translateX(-50%)",
+            padding: "10px 12px",
+            borderRadius: "14px",
+            border: "1px solid rgba(255,255,255,0.14)",
+            background: "rgba(0,0,0,0.30)",
+            backdropFilter: "blur(10px)",
+            color: "rgba(255,255,255,0.92)",
+            fontSize: "12px",
+            opacity: "0",
+            transition: "opacity 160ms ease",
+            zIndex: "9999",
+            maxWidth: "92vw",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          });
+          document.body.appendChild(t);
+        }
+        t.textContent = msg;
+        t.style.opacity = "1";
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => (t.style.opacity = "0"), 1800);
+      }
+
+      function formatMoney(v) {
+        const n = Number(v);
+        if (Number.isNaN(n)) return String(v ?? "");
+        const isInt = Math.abs(n - Math.round(n)) < 1e-9;
+        return isInt ? String(Math.round(n)) : n.toFixed(1);
+      }
+
+      function render(sections) {
+        const root = $("#root");
+        const chipRow = $("#chipRow");
+        root.innerHTML = "";
+        chipRow.innerHTML = "";
+
+        sections.forEach((section) => {
+          chipRow.appendChild(el("div", { class: "chip", text: section.title }));
+          const rail = el("div", { class: "rail", "data-section": section.id });
+
+          section.items.forEach((item) => {
+            const imgSrc = item.hero?.imageUrl ? String(item.hero.imageUrl) : "";
+            const hero = el("div", { class: "hero" }, [
+              el("div", { class: "heroInner" }, [
+                el("div", { class: "heroArt" }, [
+                  ...(imgSrc
+                    ? [
+                        el("img", {
+                          class: "heroImg",
+                          src: imgSrc,
+                          alt: item.title || "Hero image",
+                          loading: "lazy",
+                        }),
+                        el("div", { class: "heroImgOverlay" })
+                      ]
+                    : [el("div", { class: "heroEmoji", text: " " })]),
+                ]),
+              ])
+            ]);
+
+            const content = el("div", { class: "content" }, [
+              el("h3", { class: "heroTitle", text: item.title }),
+              el("p", { class: "copy", text: item.copy }),
+              el("div", { class: "ctaRow" }, [
+                el(
+                  "button",
+                  {
+                    class: `btn btnCta ${(() => {
+                      const s = (item.cta?.style || "solid").toLowerCase();
+                      if (s === "outline") return "btnCtaOutline";
+                      if (s === "soft") return "btnCtaSoft";
+                      if (s === "spotlight") return "btnCtaSpotlight";
+                      return "btnCtaSolid";
+                    })()}`,
+                    type: "button",
+                    onClick: () => toast(`Deep link: ${item.cta?.deeplink || ""}`),
+                    "data-deeplink": item.cta?.deeplink || "",
+                    "aria-label": item.cta?.label || "Open",
+                  },
+                  [el("span", { text: item.cta?.label || "Open" })]
+                )
+              ])
+            ]);
+
+            rail.appendChild(el("article", { class: "card" }, [hero, content]));
+          });
+
+          const wrap = el("section", { class: "section" }, [
+            el("div", { class: "sectionHeader" }, [
+              el("h2", { class: "sectionTitle", text: section.title }),
+              el("div", { class: "sectionHint", text: "" }),
+            ]),
+            el("div", { class: "railWrap" }, [
+              el(
+                "button",
+                {
+                  class: "navBtn navLeft",
+                  type: "button",
+                  onClick: () => scrollByCard(rail, -1),
+                  "aria-label": "Scroll left",
+                },
+                [el("span", { text: "‹" })]
+              ),
+              el(
+                "button",
+                {
+                  class: "navBtn navRight",
+                  type: "button",
+                  onClick: () => scrollByCard(rail, 1),
+                  "aria-label": "Scroll right",
+                },
+                [el("span", { text: "›" })]
+              ),
+              rail,
+            ]),
+          ]);
+
+          root.appendChild(wrap);
+        });
+      }
+
+      (async () => {
+        try {
+          const res = await fetch("./data.json", { cache: "no-store" });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const json = await res.json();
+          const sections = Array.isArray(json?.sections) ? json.sections : [];
+          render(sections);
+        } catch (e) {
+          $("#root").appendChild(
+            el("div", {
+              class: "section",
+              html:
+                `<div class="sectionHeader">` +
+                `<h2 class="sectionTitle">Failed to load data</h2>` +
+                `<div class="sectionHint">Check recommendations/data.json</div>` +
+                `</div>` +
+                `<div class="chip">Error: ${String(e?.message || e)}</div>`,
+            })
+          );
+        }
+      })();
+    </script>
+  </body>
+</html>

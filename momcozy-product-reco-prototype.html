@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momcozy 商品推荐原型</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --pink: #E8456B;
+    --pink-light: #FFF0F3;
+    --pink-soft: #FADADD;
+    --coral: #F27059;
+    --peach: #FFECD2;
+    --cream: #FFF9F0;
+    --brown: #5C3D2E;
+    --brown-light: #8B6E5A;
+    --gold: #D4A854;
+    --green: #4CAF50;
+    --green-light: #E8F5E9;
+    --gray-50: #FAFAFA;
+    --gray-100: #F5F5F5;
+    --gray-200: #EEEEEE;
+    --gray-300: #E0E0E0;
+    --gray-400: #BDBDBD;
+    --gray-600: #757575;
+    --gray-800: #424242;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-xs: 6px;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #1a1a2e;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .prototype-container {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+  }
+
+  .nav-panel {
+    position: sticky;
+    top: 20px;
+    width: 220px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .nav-panel h2 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    opacity: 0.7;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .nav-btn {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s;
+    font-family: inherit;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+  }
+
+  .nav-btn.active {
+    background: var(--pink);
+    border-color: var(--pink);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .nav-btn .nav-num {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.15);
+    font-size: 11px;
+    margin-right: 8px;
+    font-weight: 700;
+  }
+
+  .nav-btn.active .nav-num {
+    background: rgba(255,255,255,0.3);
+  }
+
+  .phone-frame {
+    width: 390px;
+    min-height: 844px;
+    background: #fff;
+    border-radius: 44px;
+    overflow: hidden;
+    box-shadow: 0 0 0 8px #2a2a3e, 0 20px 60px rgba(0,0,0,0.5);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 34px;
+    background: #000;
+    border-radius: 0 0 20px 20px;
+    z-index: 100;
+  }
+
+  .phone-screen {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .phone-screen::-webkit-scrollbar { display: none; }
+
+  .status-bar {
+    height: 54px;
+    background: #fff;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 24px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #000;
+  }
+
+  .page-header {
+    padding: 8px 20px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .page-header .back-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: none;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .page-header h1 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+
+  .page-header .subtitle {
+    font-size: 11px;
+    color: var(--gray-600);
+    font-weight: 400;
+  }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ====== SCREEN 1: Cozy Journey Timeline ====== */
+  .s1-hero {
+    background: linear-gradient(135deg, #FFF0F3 0%, #FFECD2 100%);
+    padding: 24px 20px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .s1-hero::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(232,69,107,0.15), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .s1-hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--pink);
+    margin-bottom: 12px;
+  }
+
+  .s1-hero h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--brown);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .s1-hero p {
+    font-size: 13px;
+    color: var(--brown-light);
+    margin-bottom: 20px;
+  }
+
+  .s1-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 10px;
+    margin-bottom: 8px;
+  }
+
+  .s1-timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    height: 3px;
+    background: var(--gray-300);
+    border-radius: 2px;
+    transform: translateY(-50%);
+  }
+
+  .s1-timeline::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    width: 42%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--pink), var(--coral));
+    border-radius: 2px;
+    transform: translateY(-50%);
+  }
+
+  .s1-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--gray-300);
+    position: relative;
+    z-index: 2;
+    border: 3px solid #fff;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .s1-dot.passed { background: var(--pink); }
+  .s1-dot.current {
+    background: var(--coral);
+    width: 18px;
+    height: 18px;
+    box-shadow: 0 0 0 4px rgba(242,112,89,0.25);
+  }
+
+  .s1-timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4px;
+    margin-bottom: 4px;
+  }
+
+  .s1-timeline-labels span {
+    font-size: 10px;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+
+  .s1-timeline-labels span.active-label {
+    color: var(--coral);
+    font-weight: 700;
+  }
+
+  .s1-you-badge {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .s1-you-badge span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--coral);
+    background: rgba(242,112,89,0.1);
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-left: -30px;
+  }
+
+  .s1-countdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    margin: 16px 20px;
+    background: linear-gradient(135deg, var(--pink), var(--coral));
+    border-radius: var(--radius-sm);
+    color: #fff;
+  }
+
+  .s1-countdown-num {
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  .s1-countdown-text {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+    opacity: 0.9;
+  }
+
+  .s1-section-title {
+    padding: 20px 20px 12px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+
+  .s1-checklist {
+    padding: 0 20px;
+  }
+
+  .s1-check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .s1-check-item:hover {
+    border-color: var(--pink-soft);
+    background: var(--pink-light);
+  }
+
+  .s1-check-item.purchased {
+    opacity: 0.6;
+  }
+
+  .s1-check-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .s1-check-icon.done {
+    background: var(--green);
+    color: #fff;
+  }
+
+  .s1-check-icon.todo {
+    background: var(--pink);
+    color: #fff;
+  }
+
+  .s1-check-info { flex: 1; }
+  .s1-check-info h4 { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+  .s1-check-info p { font-size: 11px; color: var(--gray-600); margin-top: 2px; }
+
+  .s1-check-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .s1-check-tag.done-tag { background: var(--green-light); color: var(--green); }
+  .s1-check-tag.hot-tag { background: #FFF0F3; color: var(--pink); }
+
+  .s1-next-stage {
+    margin: 20px;
+    padding: 16px;
+    background: var(--cream);
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+  }
+
+  .s1-next-stage .icon { font-size: 24px; }
+  .s1-next-stage h4 { font-size: 13px; font-weight: 600; color: var(--brown); }
+  .s1-next-stage p { font-size: 11px; color: var(--brown-light); margin-top: 2px; }
+  .s1-next-stage .arrow { margin-left: auto; color: var(--gold); font-weight: 700; }
+
+  /* ====== SCREEN 2: Scene Window ====== */
+  .s2-hero {
+    padding: 24px 20px 16px;
+    background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
+  }
+
+  .s2-hero h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--brown);
+    margin-bottom: 4px;
+  }
+
+  .s2-hero p {
+    font-size: 13px;
+    color: var(--brown-light);
+  }
+
+  .s2-scenes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  .s2-scene-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    aspect-ratio: 1;
+    transition: transform 0.3s;
+  }
+
+  .s2-scene-card:hover { transform: scale(1.02); }
+
+  .s2-scene-card:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 2/1;
+  }
+
+  .s2-scene-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+    position: relative;
+  }
+
+  .s2-scene-card:nth-child(1) .s2-scene-bg {
+    background: linear-gradient(135deg, #FFE4EC, #FFD4E0);
+  }
+  .s2-scene-card:nth-child(2) .s2-scene-bg {
+    background: linear-gradient(135deg, #E8F0FE, #D4E4FE);
+  }
+  .s2-scene-card:nth-child(3) .s2-scene-bg {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+  }
+  .s2-scene-card:nth-child(4) .s2-scene-bg {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+  }
+  .s2-scene-card:nth-child(5) .s2-scene-bg {
+    background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+  }
+
+  .s2-scene-emoji {
+    font-size: 40px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .s2-scene-card:first-child .s2-scene-emoji {
+    font-size: 56px;
+  }
+
+  .s2-scene-time {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(0,0,0,0.4);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .s2-scene-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 2px;
+  }
+
+  .s2-scene-count {
+    font-size: 11px;
+    color: var(--gray-600);
+  }
+
+  .s2-scene-hotspots {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .s2-hotspot-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(4px);
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: var(--shadow-sm);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(232,69,107,0.3); }
+    50% { box-shadow: 0 0 0 6px rgba(232,69,107,0); }
+  }
+
+  .s2-immersive-preview {
+    margin: 0 20px 20px;
+    background: var(--gray-50);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--gray-200);
+  }
+
+  .s2-immersive-header {
+    background: linear-gradient(135deg, #FFE4EC, #FFECD2);
+    padding: 20px;
+    position: relative;
+    min-height: 160px;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .s2-float-tag {
+    position: absolute;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(8px);
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-800);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .s2-float-tag:hover {
+    background: #fff;
+    transform: scale(1.05);
+  }
+
+  .s2-float-tag .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--pink);
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .s2-tag-1 { top: 20px; left: 20px; }
+  .s2-tag-2 { top: 50px; right: 20px; }
+  .s2-tag-3 { bottom: 20px; left: 50%; transform: translateX(-50%); }
+
+  .s2-immersive-footer {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .s2-immersive-footer h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-800);
+  }
+
+  .s2-immersive-footer p {
+    font-size: 11px;
+    color: var(--gray-600);
+    margin-top: 2px;
+  }
+
+  .s2-add-all-btn {
+    background: var(--pink);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .s2-add-all-btn:hover { transform: scale(1.05); }
+
+  /* ====== SCREEN 3: Mom's Vote ====== */
+  .s3-hero {
+    padding: 24px 20px 16px;
+    background: linear-gradient(180deg, #FFF8F0 0%, #fff 100%);
+  }
+
+  .s3-hero h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--gray-800);
+  }
+
+  .s3-hero p {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-top: 4px;
+  }
+
+  .s3-live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FF3B30;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .s3-live-badge .blink-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    animation: blink 1s infinite;
+  }
+
+  .s3-pk-card {
+    margin: 0 20px 16px;
+    background: #fff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+
+  .s3-pk-title {
+    padding: 14px 16px;
+    background: linear-gradient(135deg, var(--pink), var(--coral));
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  .s3-pk-body {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .s3-pk-item {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    padding: 12px 8px;
+    border-radius: var(--radius-sm);
+    border: 2px solid transparent;
+    transition: all 0.3s;
+  }
+
+  .s3-pk-item:hover { border-color: var(--pink-soft); }
+  .s3-pk-item.selected { border-color: var(--pink); background: var(--pink-light); }
+
+  .s3-pk-product-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+  }
+
+  .s3-pk-item:first-child .s3-pk-product-img { background: #FFF0F3; }
+  .s3-pk-item:last-child .s3-pk-product-img { background: #E8F0FE; }
+
+  .s3-pk-item h4 { font-size: 13px; font-weight: 700; color: var(--gray-800); }
+  .s3-pk-item p { font-size: 11px; color: var(--gray-600); margin-top: 2px; }
+
+  .s3-vs {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .s3-pk-bar {
+    padding: 0 20px 16px;
+  }
+
+  .s3-bar-track {
+    height: 28px;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    background: var(--gray-200);
+  }
+
+  .s3-bar-left {
+    width: 68%;
+    background: linear-gradient(90deg, var(--pink), var(--coral));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    transition: width 0.6s ease;
+  }
+
+  .s3-bar-right {
+    flex: 1;
+    background: #7EB8E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .s3-voters {
+    text-align: center;
+    padding: 0 20px 16px;
+    font-size: 12px;
+    color: var(--gray-600);
+  }
+
+  .s3-voters strong { color: var(--pink); font-weight: 700; }
+
+  .s3-vote-btn {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 0 auto 20px;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--pink), var(--coral));
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.2s;
+  }
+
+  .s3-vote-btn:hover { transform: scale(1.02); }
+
+  .s3-winner {
+    margin: 0 20px 20px;
+    background: linear-gradient(135deg, #FFF9F0, #FFECD2);
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 1px solid rgba(212,168,84,0.3);
+  }
+
+  .s3-winner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .s3-winner-content {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .s3-winner-img {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-sm);
+    background: #FFF0F3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .s3-winner-info h4 { font-size: 15px; font-weight: 700; color: var(--gray-800); }
+  .s3-winner-info .stars { color: var(--gold); font-size: 13px; margin-top: 4px; }
+  .s3-winner-info .review-count { font-size: 11px; color: var(--gray-600); margin-left: 4px; }
+
+  .s3-hot-review {
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(255,255,255,0.7);
+    border-radius: var(--radius-xs);
+    font-size: 12px;
+    color: var(--gray-600);
+    line-height: 1.5;
+  }
+
+  .s3-hot-review .label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--pink);
+    margin-bottom: 4px;
+  }
+
+  /* ====== SCREEN 4: AI Smart Box ====== */
+  .s4-hero {
+    padding: 24px 20px 16px;
+    background: linear-gradient(180deg, #F0E6FF 0%, #fff 100%);
+    text-align: center;
+  }
+
+  .s4-ai-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7B61FF, #B47AFF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin: 0 auto 12px;
+    box-shadow: 0 4px 16px rgba(123,97,255,0.3);
+  }
+
+  .s4-hero h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--gray-800);
+  }
+
+  .s4-hero p {
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-top: 4px;
+  }
+
+  .s4-data-chips {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 12px 20px;
+  }
+
+  .s4-chip {
+    padding: 6px 12px;
+    background: rgba(123,97,255,0.08);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #7B61FF;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .s4-box-container {
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    perspective: 800px;
+  }
+
+  .s4-box-card {
+    flex: 1;
+    aspect-ratio: 3/4;
+    border-radius: var(--radius);
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+
+  .s4-box-card.flipped { transform: rotateY(180deg); }
+
+  .s4-box-front, .s4-box-back {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .s4-box-front {
+    background: linear-gradient(135deg, #F0E6FF, #E8D5FF);
+    border: 2px dashed rgba(123,97,255,0.3);
+  }
+
+  .s4-box-front .q-mark {
+    font-size: 32px;
+    font-weight: 900;
+    color: #7B61FF;
+    opacity: 0.3;
+  }
+
+  .s4-box-front .tap-text {
+    font-size: 10px;
+    color: #7B61FF;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  .s4-box-back {
+    transform: rotateY(180deg);
+    background: #fff;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--gray-200);
+  }
+
+  .s4-box-back .product-emoji {
+    font-size: 36px;
+    margin-bottom: 8px;
+  }
+
+  .s4-box-back h4 {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray-800);
+    text-align: center;
+  }
+
+  .s4-box-back .price {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--pink);
+    margin-top: 4px;
+  }
+
+  .s4-box-back .match-score {
+    font-size: 10px;
+    color: #7B61FF;
+    font-weight: 600;
+    margin-top: 6px;
+    background: rgba(123,97,255,0.08);
+    padding: 3px 8px;
+    border-radius: 10px;
+  }
+
+  .s4-reason-card {
+    margin: 0 20px 16px;
+    padding: 16px;
+    background: linear-gradient(135deg, #F8F5FF, #F0E6FF);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid #7B61FF;
+  }
+
+  .s4-reason-card .label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #7B61FF;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .s4-reason-card p {
+    font-size: 13px;
+    color: var(--gray-800);
+    line-height: 1.6;
+  }
+
+  .s4-actions {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px 20px;
+  }
+
+  .s4-btn-primary {
+    flex: 1;
+    padding: 14px;
+    background: linear-gradient(135deg, #7B61FF, #B47AFF);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .s4-btn-secondary {
+    padding: 14px 20px;
+    background: transparent;
+    border: 2px solid var(--gray-300);
+    color: var(--gray-600);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .s4-discount-banner {
+    margin: 0 20px 20px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #7B61FF, #9B7AFF);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+  }
+
+  .s4-discount-banner .text { font-size: 13px; font-weight: 600; }
+  .s4-discount-banner .code {
+    font-size: 14px;
+    font-weight: 800;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+
+  /* ====== SCREEN 5: Milestone Rewards ====== */
+  .s5-hero {
+    padding: 24px 20px 16px;
+    background: linear-gradient(180deg, #FFF9E6 0%, #fff 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .s5-confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .s5-confetti span {
+    position: absolute;
+    font-size: 14px;
+    animation: fall 3s infinite linear;
+    opacity: 0.6;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; }
+    100% { transform: translateY(160px) rotate(360deg); opacity: 0; }
+  }
+
+  .s5-confetti span:nth-child(1) { left: 10%; animation-delay: 0s; }
+  .s5-confetti span:nth-child(2) { left: 30%; animation-delay: 0.5s; }
+  .s5-confetti span:nth-child(3) { left: 50%; animation-delay: 1s; }
+  .s5-confetti span:nth-child(4) { left: 70%; animation-delay: 1.5s; }
+  .s5-confetti span:nth-child(5) { left: 90%; animation-delay: 2s; }
+
+  .s5-milestone-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, var(--gold), #E8C06C);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(212,168,84,0.3);
+  }
+
+  .s5-hero h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--brown);
+    line-height: 1.3;
+    position: relative;
+  }
+
+  .s5-hero p {
+    font-size: 13px;
+    color: var(--brown-light);
+    margin-top: 4px;
+    position: relative;
+  }
+
+  .s5-progress-ring {
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+    position: relative;
+  }
+
+  .s5-progress-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .s5-progress-ring .bg {
+    fill: none;
+    stroke: var(--gray-200);
+    stroke-width: 6;
+  }
+
+  .s5-progress-ring .progress {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 6;
+    stroke-dasharray: 326;
+    stroke-dashoffset: 98;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+  }
+
+  .s5-progress-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .s5-progress-center .days {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--gold);
+  }
+
+  .s5-progress-center .label {
+    font-size: 10px;
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+
+  .s5-gift-card {
+    margin: 0 20px 16px;
+    background: linear-gradient(135deg, #FFF9E6, #FFECD2);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(212,168,84,0.2);
+  }
+
+  .s5-gift-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(212,168,84,0.15);
+  }
+
+  .s5-gift-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--brown);
+  }
+
+  .s5-gift-header .price-tag {
+    background: var(--pink);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .s5-gift-items {
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .s5-gift-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    background: rgba(255,255,255,0.6);
+    border-radius: var(--radius-sm);
+  }
+
+  .s5-gift-item-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .s5-gift-item:nth-child(1) .s5-gift-item-img { background: #FFE4EC; }
+  .s5-gift-item:nth-child(2) .s5-gift-item-img { background: #E8F0FE; }
+  .s5-gift-item:nth-child(3) .s5-gift-item-img { background: #FFF3E0; }
+
+  .s5-gift-item-info h4 { font-size: 13px; font-weight: 600; color: var(--gray-800); }
+  .s5-gift-item-info p { font-size: 11px; color: var(--gray-600); margin-top: 2px; }
+
+  .s5-unlock-btn {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 0 auto 16px;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--gold), #E8C06C);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 4px 16px rgba(212,168,84,0.3);
+  }
+
+  .s5-next-milestone {
+    margin: 0 20px 20px;
+    padding: 16px;
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .s5-next-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .s5-next-info { flex: 1; }
+  .s5-next-info h4 { font-size: 13px; font-weight: 600; color: var(--gray-800); }
+  .s5-next-info p { font-size: 11px; color: var(--gray-600); margin-top: 2px; }
+  .s5-next-info .arrow { color: var(--gray-400); font-size: 16px; }
+
+  .s5-milestones-timeline {
+    padding: 0 20px 20px;
+  }
+
+  .s5-mt-item {
+    display: flex;
+    gap: 14px;
+    padding-bottom: 16px;
+    position: relative;
+  }
+
+  .s5-mt-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 34px;
+    bottom: 0;
+    width: 2px;
+    background: var(--gray-200);
+  }
+
+  .s5-mt-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .s5-mt-dot.gold { background: linear-gradient(135deg, var(--gold), #E8C06C); color: #fff; }
+  .s5-mt-dot.done { background: var(--green-light); }
+  .s5-mt-dot.future { background: var(--gray-200); }
+
+  .s5-mt-info h4 { font-size: 13px; font-weight: 600; color: var(--gray-800); margin-top: 6px; }
+  .s5-mt-info p { font-size: 11px; color: var(--gray-600); margin-top: 2px; }
+
+  /* Tab bar */
+  .tab-bar {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid var(--gray-200);
+    display: flex;
+    padding: 8px 0 28px;
+    z-index: 50;
+  }
+
+  .tab-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 10px;
+    color: var(--gray-400);
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .tab-item.active { color: var(--gray-800); }
+  .tab-item .tab-icon { font-size: 20px; }
+
+  /* Description panel */
+  .desc-panel {
+    width: 320px;
+    position: sticky;
+    top: 20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.1);
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+  }
+
+  .desc-panel::-webkit-scrollbar { width: 4px; }
+  .desc-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+
+  .desc-panel h3 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .desc-panel .desc-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(232,69,107,0.2);
+    color: var(--pink);
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+
+  .desc-panel p {
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .desc-panel .highlight-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .desc-panel .highlight-list li {
+    color: rgba(255,255,255,0.8);
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    gap: 8px;
+  }
+
+  .desc-panel .highlight-list li .hl-icon {
+    color: var(--pink);
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="prototype-container">
+  <!-- Left Navigation -->
+  <nav class="nav-panel">
+    <h2>方案导航</h2>
+    <button class="nav-btn active" onclick="showScreen(1)">
+      <span class="nav-num">1</span>Cozy 旅程
+    </button>
+    <button class="nav-btn" onclick="showScreen(2)">
+      <span class="nav-num">2</span>场景橱窗
+    </button>
+    <button class="nav-btn" onclick="showScreen(3)">
+      <span class="nav-num">3</span>妈妈圈投票
+    </button>
+    <button class="nav-btn" onclick="showScreen(4)">
+      <span class="nav-num">4</span>AI 智选盒子
+    </button>
+    <button class="nav-btn" onclick="showScreen(5)">
+      <span class="nav-num">5</span>里程碑奖励
+    </button>
+  </nav>
+
+  <!-- Phone Frame -->
+  <div class="phone-frame">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+
+      <!-- ========== SCREEN 1: Cozy Journey ========== -->
+      <div class="screen active" id="screen1">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>⚡ 📶</span>
+        </div>
+        <div class="page-header">
+          <h1>
+            For You
+            <div class="subtitle">基于你的孕期阶段推荐</div>
+          </h1>
+        </div>
+
+        <div class="s1-hero">
+          <div class="s1-hero-label">✨ Your Cozy Journey</div>
+          <h2>孕晚期必备清单</h2>
+          <p>和 12,847 位准妈妈一起准备迎接宝宝</p>
+
+          <div style="margin-top:16px">
+            <div class="s1-timeline">
+              <div class="s1-dot passed"></div>
+              <div class="s1-dot passed"></div>
+              <div class="s1-dot current"></div>
+              <div class="s1-dot"></div>
+              <div class="s1-dot"></div>
+            </div>
+            <div class="s1-timeline-labels">
+              <span>孕早期</span>
+              <span>孕中期</span>
+              <span class="active-label">孕晚期</span>
+              <span>月子期</span>
+              <span>育儿期</span>
+            </div>
+            <div class="s1-you-badge">
+              <span>📍 你在这里 · 孕 32 周</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="s1-countdown">
+          <div class="s1-countdown-num">47</div>
+          <div class="s1-countdown-text">天后<br>预产期到来 🎀</div>
+        </div>
+
+        <div class="s1-section-title">为你推荐准备</div>
+        <div class="s1-checklist">
+          <div class="s1-check-item purchased">
+            <div class="s1-check-icon done">✓</div>
+            <div class="s1-check-info">
+              <h4>M9 Pro 吸奶器</h4>
+              <p>穿戴式 · 你已于 3/12 购买</p>
+            </div>
+            <span class="s1-check-tag done-tag">已购</span>
+          </div>
+          <div class="s1-check-item">
+            <div class="s1-check-icon todo">🔥</div>
+            <div class="s1-check-info">
+              <h4>待产包系列</h4>
+              <p>92% 孕 32 周妈妈已准备</p>
+            </div>
+            <span class="s1-check-tag hot-tag">热门</span>
+          </div>
+          <div class="s1-check-item">
+            <div class="s1-check-icon todo">💤</div>
+            <div class="s1-check-info">
+              <h4>哺乳枕 & 月子服</h4>
+              <p>舒适月子期从这里开始</p>
+            </div>
+            <span class="s1-check-tag hot-tag">推荐</span>
+          </div>
+          <div class="s1-check-item">
+            <div class="s1-check-icon todo">👶</div>
+            <div class="s1-check-info">
+              <h4>新生儿护理套装</h4>
+              <p>沐浴 · 护肤 · 衣物</p>
+            </div>
+            <span class="s1-check-tag hot-tag">必备</span>
+          </div>
+        </div>
+
+        <div class="s1-next-stage">
+          <div class="icon">🌙</div>
+          <div>
+            <h4>下一阶段：月子恢复期</h4>
+            <p>提前了解，从容应对 →</p>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="tab-icon">🏠</span>Home</div>
+          <div class="tab-item"><span class="tab-icon">📱</span>Device</div>
+          <div class="tab-item"><span class="tab-icon">👥</span>Community</div>
+          <div class="tab-item"><span class="tab-icon">👤</span>Me</div>
+        </div>
+      </div>
+
+      <!-- ========== SCREEN 2: Scene Window ========== -->
+      <div class="screen" id="screen2">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>⚡ 📶</span>
+        </div>
+        <div class="page-header">
+          <h1>
+            Shop by Moment
+            <div class="subtitle">点击场景，发现你需要的好物</div>
+          </h1>
+        </div>
+
+        <div class="s2-hero">
+          <h2>你的生活场景</h2>
+          <p>每个时刻，都值得被温柔以待</p>
+        </div>
+
+        <div class="s2-scenes-grid">
+          <div class="s2-scene-card" onclick="this.classList.toggle('expanded')">
+            <div class="s2-scene-bg">
+              <div class="s2-scene-emoji">🌅</div>
+              <div class="s2-scene-time">推荐给你</div>
+              <div class="s2-scene-title">清晨哺乳时光</div>
+              <div class="s2-scene-count">8 件好物 · 1.2k 妈妈已购</div>
+              <div class="s2-scene-hotspots">
+                <div class="s2-hotspot-dot">🍼</div>
+                <div class="s2-hotspot-dot">👙</div>
+                <div class="s2-hotspot-dot">💡</div>
+              </div>
+            </div>
+          </div>
+          <div class="s2-scene-card">
+            <div class="s2-scene-bg">
+              <div class="s2-scene-emoji">🌙</div>
+              <div class="s2-scene-time">夜间必备</div>
+              <div class="s2-scene-title">夜奶神器</div>
+              <div class="s2-scene-count">5 件好物</div>
+            </div>
+          </div>
+          <div class="s2-scene-card">
+            <div class="s2-scene-bg">
+              <div class="s2-scene-emoji">🏖️</div>
+              <div class="s2-scene-time">外出轻松</div>
+              <div class="s2-scene-title">带娃出游</div>
+              <div class="s2-scene-count">12 件好物</div>
+            </div>
+          </div>
+          <div class="s2-scene-card">
+            <div class="s2-scene-bg">
+              <div class="s2-scene-emoji">💼</div>
+              <div class="s2-scene-time">职场妈妈</div>
+              <div class="s2-scene-title">背奶通勤</div>
+              <div class="s2-scene-count">6 件好物</div>
+            </div>
+          </div>
+          <div class="s2-scene-card">
+            <div class="s2-scene-bg">
+              <div class="s2-scene-emoji">🧘‍♀️</div>
+              <div class="s2-scene-time">产后修复</div>
+              <div class="s2-scene-title">身心恢复</div>
+              <div class="s2-scene-count">9 件好物</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s2-immersive-preview">
+          <div class="s2-immersive-header">
+            <div class="s2-float-tag s2-tag-1"><span class="dot"></span> M9 Pro 吸奶器</div>
+            <div class="s2-float-tag s2-tag-2"><span class="dot"></span> 哺乳内衣</div>
+            <div class="s2-float-tag s2-tag-3"><span class="dot"></span> 防溢乳垫</div>
+          </div>
+          <div class="s2-immersive-footer">
+            <div>
+              <h4>清晨哺乳时光</h4>
+              <p>3 件好物 · 组合省 ¥89</p>
+            </div>
+            <button class="s2-add-all-btn">一键加购 🛒</button>
+          </div>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="tab-icon">🏠</span>Home</div>
+          <div class="tab-item"><span class="tab-icon">📱</span>Device</div>
+          <div class="tab-item"><span class="tab-icon">👥</span>Community</div>
+          <div class="tab-item"><span class="tab-icon">👤</span>Me</div>
+        </div>
+      </div>
+
+      <!-- ========== SCREEN 3: Mom's Vote ========== -->
+      <div class="screen" id="screen3">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>⚡ 📶</span>
+        </div>
+        <div class="page-header">
+          <h1>
+            Moms are Choosing
+            <div class="subtitle">和万千妈妈一起投票选好物</div>
+          </h1>
+        </div>
+
+        <div class="s3-hero">
+          <div class="s3-live-badge"><span class="blink-dot"></span> LIVE 投票中</div>
+          <h2>本周热选 PK</h2>
+          <p>投票赢 10% 优惠券</p>
+        </div>
+
+        <div class="s3-pk-card">
+          <div class="s3-pk-title">🏆 夜奶神器大 PK</div>
+          <div class="s3-pk-body">
+            <div class="s3-pk-item selected" onclick="vote(this, 'left')">
+              <div class="s3-pk-product-img">🤱</div>
+              <h4>M9 Pro</h4>
+              <p>穿戴式吸奶器</p>
+            </div>
+            <div class="s3-vs">VS</div>
+            <div class="s3-pk-item" onclick="vote(this, 'right')">
+              <div class="s3-pk-product-img">🍼</div>
+              <h4>S12 Pro</h4>
+              <p>静音双边吸奶器</p>
+            </div>
+          </div>
+          <div class="s3-pk-bar">
+            <div class="s3-bar-track">
+              <div class="s3-bar-left" id="barLeft">68%</div>
+              <div class="s3-bar-right" id="barRight">32%</div>
+            </div>
+          </div>
+          <div class="s3-voters">已有 <strong>2,847</strong> 位妈妈参与投票</div>
+        </div>
+
+        <button class="s3-vote-btn" onclick="this.textContent='✅ 已投票！查看详细对比 →'; this.style.background='var(--green)';">
+          我也来投一票 →
+        </button>
+
+        <div class="s3-winner">
+          <div class="s3-winner-badge">👑 本周人气王</div>
+          <div class="s3-winner-content">
+            <div class="s3-winner-img">🤱</div>
+            <div class="s3-winner-info">
+              <h4>M9 Pro 免手持吸奶器</h4>
+              <div class="stars">★★★★★ <span class="review-count">4.9 · 1.2k 推荐</span></div>
+            </div>
+          </div>
+          <div class="s3-hot-review">
+            <div class="label">🏷 热评精选</div>
+            "比上一代安静太多了！夜里喂奶不会吵醒宝宝，穿戴式解放双手真的是神器～"<br>
+            <span style="font-size:10px;color:var(--gray-400)">—— @小月亮妈妈 · 产后 3 个月</span>
+          </div>
+        </div>
+
+        <div style="padding:0 20px 8px">
+          <div style="font-size:14px;font-weight:700;color:var(--gray-800)">更多 PK 话题</div>
+        </div>
+        <div style="padding:0 20px 20px;display:flex;gap:10px;">
+          <div style="flex:1;padding:14px;background:var(--gray-50);border-radius:12px;text-align:center;cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">🧴 vs 🧈</div>
+            <div style="font-size:12px;font-weight:600;color:var(--gray-800);">护臀膏之争</div>
+            <div style="font-size:10px;color:var(--gray-400);margin-top:2px;">1.5k 人已投</div>
+          </div>
+          <div style="flex:1;padding:14px;background:var(--gray-50);border-radius:12px;text-align:center;cursor:pointer;">
+            <div style="font-size:20px;margin-bottom:4px;">🎒 vs 👜</div>
+            <div style="font-size:12px;font-weight:600;color:var(--gray-800);">妈咪包选哪款</div>
+            <div style="font-size:10px;color:var(--gray-400);margin-top:2px;">892 人已投</div>
+          </div>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="tab-icon">🏠</span>Home</div>
+          <div class="tab-item"><span class="tab-icon">📱</span>Device</div>
+          <div class="tab-item"><span class="tab-icon">👥</span>Community</div>
+          <div class="tab-item"><span class="tab-icon">👤</span>Me</div>
+        </div>
+      </div>
+
+      <!-- ========== SCREEN 4: AI Smart Box ========== -->
+      <div class="screen" id="screen4">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>⚡ 📶</span>
+        </div>
+        <div class="page-header">
+          <h1>
+            AI Picks for You
+            <div class="subtitle">基于你的数据智能推荐</div>
+          </h1>
+        </div>
+
+        <div class="s4-hero">
+          <div class="s4-ai-icon">🤖</div>
+          <h2>Your Cozy Box</h2>
+          <p>AI 分析了你的哺乳数据，精选 3 件好物</p>
+        </div>
+
+        <div class="s4-data-chips">
+          <div class="s4-chip">📊 日均哺乳 6 次</div>
+          <div class="s4-chip">🌙 夜奶 2 次</div>
+          <div class="s4-chip">👶 宝宝 2 月龄</div>
+        </div>
+
+        <div class="s4-box-container">
+          <div class="s4-box-card flipped" onclick="this.classList.toggle('flipped')">
+            <div class="s4-box-front">
+              <div class="q-mark">?</div>
+              <div class="tap-text">点击翻开</div>
+            </div>
+            <div class="s4-box-back">
+              <div class="product-emoji">🤱</div>
+              <h4>M9 Pro<br>静音吸奶器</h4>
+              <div class="price">$149</div>
+              <div class="match-score">匹配度 98%</div>
+            </div>
+          </div>
+          <div class="s4-box-card flipped" onclick="this.classList.toggle('flipped')">
+            <div class="s4-box-front">
+              <div class="q-mark">?</div>
+              <div class="tap-text">点击翻开</div>
+            </div>
+            <div class="s4-box-back">
+              <div class="product-emoji">🌙</div>
+              <h4>WN08<br>助眠夜灯</h4>
+              <div class="price">$39</div>
+              <div class="match-score">匹配度 92%</div>
+            </div>
+          </div>
+          <div class="s4-box-card" onclick="this.classList.toggle('flipped')">
+            <div class="s4-box-front">
+              <div class="q-mark">?</div>
+              <div class="tap-text">点击翻开</div>
+            </div>
+            <div class="s4-box-back">
+              <div class="product-emoji">👙</div>
+              <h4>Seamless<br>哺乳内衣</h4>
+              <div class="price">$29</div>
+              <div class="match-score">匹配度 87%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s4-reason-card">
+          <div class="label">💡 AI 推荐理由</div>
+          <p>你的宝宝刚满 2 个月，根据你的喂养记录，<strong>夜间哺乳频率较高（日均 2 次）</strong>，推荐静音版吸奶器搭配助眠夜灯，让夜间喂奶更从容。</p>
+        </div>
+
+        <div class="s4-discount-banner">
+          <div class="text">🎁 Cozy Box 专属优惠</div>
+          <div class="code">COZYBOX15</div>
+        </div>
+
+        <div class="s4-actions">
+          <button class="s4-btn-primary">查看完整推荐</button>
+          <button class="s4-btn-secondary" onclick="this.textContent='🔄 已刷新'">🔄 换一批</button>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="tab-icon">🏠</span>Home</div>
+          <div class="tab-item"><span class="tab-icon">📱</span>Device</div>
+          <div class="tab-item"><span class="tab-icon">👥</span>Community</div>
+          <div class="tab-item"><span class="tab-icon">👤</span>Me</div>
+        </div>
+      </div>
+
+      <!-- ========== SCREEN 5: Milestone Rewards ========== -->
+      <div class="screen" id="screen5">
+        <div class="status-bar">
+          <span>9:41</span>
+          <span>⚡ 📶</span>
+        </div>
+        <div class="page-header">
+          <h1>
+            Milestones
+            <div class="subtitle">宝宝每个成长节点，都值得庆祝</div>
+          </h1>
+        </div>
+
+        <div class="s5-hero">
+          <div class="s5-confetti">
+            <span style="animation-delay:0s">🎉</span>
+            <span style="animation-delay:0.7s">✨</span>
+            <span style="animation-delay:1.4s">🎀</span>
+            <span style="animation-delay:2.1s">⭐</span>
+            <span style="animation-delay:0.3s">🎊</span>
+          </div>
+          <div class="s5-milestone-badge">🎂 里程碑即将到来</div>
+          <h2>宝宝的百天快到了！</h2>
+          <p>特别为你准备了百天庆祝礼盒</p>
+
+          <div class="s5-progress-ring">
+            <svg viewBox="0 0 120 120">
+              <circle class="bg" cx="60" cy="60" r="52"/>
+              <circle class="progress" cx="60" cy="60" r="52"/>
+            </svg>
+            <div class="s5-progress-center">
+              <div class="days">12</div>
+              <div class="label">天后百天</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s5-gift-card">
+          <div class="s5-gift-header">
+            <h3>🎁 百天庆祝礼盒</h3>
+            <span class="price-tag">¥299</span>
+          </div>
+          <div class="s5-gift-items">
+            <div class="s5-gift-item">
+              <div class="s5-gift-item-img">📸</div>
+              <div class="s5-gift-item-info">
+                <h4>百天纪念衣 + 成长记录卡</h4>
+                <p>棉柔面料 · 含 12 张月龄卡</p>
+              </div>
+            </div>
+            <div class="s5-gift-item">
+              <div class="s5-gift-item-img">🧸</div>
+              <div class="s5-gift-item-info">
+                <h4>安抚玩偶</h4>
+                <p>有机棉 · 可水洗 · 0+ 适用</p>
+              </div>
+            </div>
+            <div class="s5-gift-item">
+              <div class="s5-gift-item-img">🍼</div>
+              <div class="s5-gift-item-info">
+                <h4>阶段升级：8oz 宽口奶瓶</h4>
+                <p>宝宝长大了，该换大容量啦</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="s5-unlock-btn" onclick="this.textContent='🎉 已加入购物车！'; this.style.background='var(--green)';">
+          解锁百天礼盒 · 限时 85 折
+        </button>
+
+        <div style="padding:0 20px 8px">
+          <div style="font-size:14px;font-weight:700;color:var(--gray-800)">成长里程碑</div>
+        </div>
+
+        <div class="s5-milestones-timeline">
+          <div class="s5-mt-item">
+            <div class="s5-mt-dot done">✓</div>
+            <div class="s5-mt-info">
+              <h4>🎀 满月 · 已解锁</h4>
+              <p>满月护理套装 · 已购</p>
+            </div>
+          </div>
+          <div class="s5-mt-item">
+            <div class="s5-mt-dot gold">🎂</div>
+            <div class="s5-mt-info">
+              <h4>百天 · 还有 12 天</h4>
+              <p>百天庆祝礼盒 →</p>
+            </div>
+          </div>
+          <div class="s5-mt-item">
+            <div class="s5-mt-dot future">🥣</div>
+            <div class="s5-mt-info">
+              <h4>6 个月 · 辅食期</h4>
+              <p>辅食工具套装 · 提前预览</p>
+            </div>
+          </div>
+          <div class="s5-mt-item">
+            <div class="s5-mt-dot future">🚼</div>
+            <div class="s5-mt-info">
+              <h4>1 周岁 · 生日快乐</h4>
+              <p>周岁纪念大礼包 · 敬请期待</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="s5-next-milestone">
+          <div class="s5-next-icon">🥣</div>
+          <div class="s5-next-info">
+            <h4>下一站：6 个月辅食期</h4>
+            <p>提前种草，从容过渡 →</p>
+          </div>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab-item active"><span class="tab-icon">🏠</span>Home</div>
+          <div class="tab-item"><span class="tab-icon">📱</span>Device</div>
+          <div class="tab-item"><span class="tab-icon">👥</span>Community</div>
+          <div class="tab-item"><span class="tab-icon">👤</span>Me</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Right Description Panel -->
+  <div class="desc-panel" id="descPanel">
+    <div id="desc1" class="desc-content">
+      <span class="desc-tag">方案一</span>
+      <h3>「我的 Cozy 旅程」时间轴推荐</h3>
+      <p>将商品推荐嵌入妈妈的生命旅程时间轴，让用户感受到"这个产品正是我现阶段需要的"。</p>
+      <ul class="highlight-list">
+        <li><span class="hl-icon">✦</span> 基于预产期/宝宝月龄自动定位时间轴位置</li>
+        <li><span class="hl-icon">✦</span> 结合"已购"状态避免重复推荐，增强信任</li>
+        <li><span class="hl-icon">✦</span> 倒计时营造紧迫感，提升转化</li>
+        <li><span class="hl-icon">✦</span> 展示"下一阶段"，引导持续购买</li>
+        <li><span class="hl-icon">✦</span> 社交证明："12,847 位准妈妈一起准备"</li>
+      </ul>
+    </div>
+    <div id="desc2" class="desc-content" style="display:none">
+      <span class="desc-tag">方案二</span>
+      <h3>「场景化橱窗」沉浸式推荐</h3>
+      <p>将商品放入真实生活场景中，用户点击场景中的热点元素发现商品，实现"所见即所购"。</p>
+      <ul class="highlight-list">
+        <li><span class="hl-icon">✦</span> 可交互的场景图，热点标记发现商品</li>
+        <li><span class="hl-icon">✦</span> 场景覆盖五大 Cozy 系列</li>
+        <li><span class="hl-icon">✦</span> "一键加购全套"提升客单价</li>
+        <li><span class="hl-icon">✦</span> 按用户标签优先展示相关场景</li>
+        <li><span class="hl-icon">✦</span> 组合优惠促进连带购买</li>
+      </ul>
+    </div>
+    <div id="desc3" class="desc-content" style="display:none">
+      <span class="desc-tag">方案三</span>
+      <h3>「妈妈圈投票」社交化推荐</h3>
+      <p>利用社交化和游戏化机制，让商品推荐变成社区互动内容，让妈妈们在参与中种草。</p>
+      <ul class="highlight-list">
+        <li><span class="hl-icon">✦</span> PK 投票机制：参与投票后才能看结果</li>
+        <li><span class="hl-icon">✦</span> 实时投票数据营造从众效应</li>
+        <li><span class="hl-icon">✦</span> UGC 热评直接拉取真实反馈</li>
+        <li><span class="hl-icon">✦</span> 投票后推送优惠券，互动→转化闭环</li>
+        <li><span class="hl-icon">✦</span> 与 Community Tab 联动提升 DAU</li>
+      </ul>
+    </div>
+    <div id="desc4" class="desc-content" style="display:none">
+      <span class="desc-tag">方案四</span>
+      <h3>「AI 智选盒子」个性化推荐</h3>
+      <p>结合 App 已有的 Lactation Insight 数据，做真正的智能个性化推荐，翻卡交互增加趣味性。</p>
+      <ul class="highlight-list">
+        <li><span class="hl-icon">✦</span> 数据驱动：利用哺乳数据、宝宝月龄精准推荐</li>
+        <li><span class="hl-icon">✦</span> 翻卡交互：盲盒翻开，增加趣味性</li>
+        <li><span class="hl-icon">✦</span> 透明推荐理由，建立用户信任</li>
+        <li><span class="hl-icon">✦</span> 匹配度评分，量化推荐精准度</li>
+        <li><span class="hl-icon">✦</span> 专属优惠码促转化</li>
+      </ul>
+    </div>
+    <div id="desc5" class="desc-content" style="display:none">
+      <span class="desc-tag">方案五</span>
+      <h3>「里程碑奖励」成长式推荐</h3>
+      <p>把商品推荐融入妈妈和宝宝的成长里程碑，让购物变成庆祝时刻，情感驱动消费。</p>
+      <ul class="highlight-list">
+        <li><span class="hl-icon">✦</span> 满月、百天、半岁等关键节点触发推荐</li>
+        <li><span class="hl-icon">✦</span> 里程碑主题打包套装提升客单价</li>
+        <li><span class="hl-icon">✦</span> 进度环倒计时，营造期待感</li>
+        <li><span class="hl-icon">✦</span> "下一个里程碑"预告，提前种草</li>
+        <li><span class="hl-icon">✦</span> 可生成分享海报，引发社交传播</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+function showScreen(num) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.desc-content').forEach(d => d.style.display = 'none');
+
+  document.getElementById('screen' + num).classList.add('active');
+  document.querySelectorAll('.nav-btn')[num - 1].classList.add('active');
+  document.getElementById('desc' + num).style.display = 'block';
+
+  document.querySelector('.phone-screen').scrollTop = 0;
+}
+
+function vote(el, side) {
+  document.querySelectorAll('.s3-pk-item').forEach(i => i.classList.remove('selected'));
+  el.classList.add('selected');
+  const left = document.getElementById('barLeft');
+  const right = document.getElementById('barRight');
+  if (side === 'left') {
+    left.style.width = '72%';
+    left.textContent = '72%';
+    right.textContent = '28%';
+  } else {
+    left.style.width = '55%';
+    left.textContent = '55%';
+    right.textContent = '45%';
+  }
+}
+</script>
+
+</body>
+</html>

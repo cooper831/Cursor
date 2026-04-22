@@ -1,0 +1,97 @@
+<mxfile host="app.diagrams.net" agent="7.0" pages="1">
+  <diagram id="sub-purchase" name="订阅购买主链路">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T" value="&lt;b&gt;订阅购买主链路（含免费试用）&lt;/b&gt; — 4 泳道 × 时间行 · storage_pro" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="L1" value="用户" style="swimlane;horizontal=0;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;swimlaneFillColor=#f8fbff;" parent="1" vertex="1">
+          <mxGeometry x="40" y="60" width="200" height="740" as="geometry" />
+        </mxCell>
+        <mxCell id="L2" value="App (RC SDK)" style="swimlane;horizontal=0;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;swimlaneFillColor=#f6fbf5;" parent="1" vertex="1">
+          <mxGeometry x="240" y="60" width="200" height="740" as="geometry" />
+        </mxCell>
+        <mxCell id="L3" value="应用商店 (Apple / Google)" style="swimlane;horizontal=0;startSize=28;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;swimlaneFillColor=#fffcf1;" parent="1" vertex="1">
+          <mxGeometry x="440" y="60" width="200" height="740" as="geometry" />
+        </mxCell>
+        <mxCell id="L4" value="RevenueCat + 品牌后端" style="swimlane;horizontal=0;startSize=28;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;fontSize=12;swimlaneFillColor=#faf5fb;" parent="1" vertex="1">
+          <mxGeometry x="640" y="60" width="200" height="740" as="geometry" />
+        </mxCell>
+        <mxCell id="S1" value="① 进入订阅方案页" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="55" y="110" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="S2" value="② 展示月/年方案 + 7天试用标签&#10;(getOfferings())" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="255" y="165" width="170" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="S3" value="③ 点击 Start Free Trial" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="55" y="225" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="S4" value="④ purchasePackage(yearly)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="255" y="280" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="S5" value="⑤ 展示订阅合规弹窗&#10;(试用披露+续费条款)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="455" y="335" width="170" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="S6" value="⑥ 确认订阅" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="55" y="395" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="S7" value="⑦ 记录订阅&#10;试用期内不扣费" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#d6b656;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="455" y="450" width="170" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="S8" value="⑧ RC 授予 storage_pro&#10;entitlement (试用期)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e8daef;strokeColor=#6a1b9a;fontSize=10;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="655" y="510" width="170" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="S9" value="⑨ SDK 回调 · CustomerInfo&#10;.active[storage_pro].periodType=trial" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#c8e6c9;strokeColor=#2e7d32;fontSize=10;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="255" y="570" width="170" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="W" value="⑧′ 并行 · Webhook&#10;INITIAL_PURCHASE → 入库" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#faf5fb;strokeColor=#9673a6;dashed=1;dashPattern=4 3;fontSize=10;fontStyle=2;" parent="1" vertex="1">
+          <mxGeometry x="655" y="570" width="170" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="S10" value="⑩ 刷新 UI，跳订阅成功页" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#ffffff;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="255" y="630" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="S11" value="⑪ 看到 试用已开始 + 首次扣费日 ✓" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=#e3f2fd;strokeColor=#1565c0;fontSize=10;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="55" y="690" width="170" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="Legend" value="&lt;b&gt;图例&lt;/b&gt;&lt;br&gt;━━ 主链路&lt;br&gt;┄┄ Webhook（异步）&lt;br&gt;粗边框 = 关键节点&lt;br&gt;⚠️ 订阅与课程不同：支付成功即权威，无需客户端开通" style="text;html=1;strokeColor=#b3b3b3;fillColor=#fafafa;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;spacingLeft=8;" parent="1" vertex="1">
+          <mxGeometry x="860" y="60" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="S1" target="S2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="S2" target="S3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="S3" target="S4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="S4" target="S5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="确认" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="S5" target="S6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="S6" target="S7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="S7" target="S8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" value="SDK 回调" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=10;" parent="1" source="S8" target="S9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="eW" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#9673a6;strokeWidth=1.5;endArrow=open;dashed=1;dashPattern=4 3;" parent="1" source="S8" target="W" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="S9" target="S10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="S10" target="S11" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

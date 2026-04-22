@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" agent="7.0" pages="1">
+  <diagram id="product-hierarchy" name="订阅产品层级">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="T" value="&lt;b&gt;订阅产品层级&lt;/b&gt; — Entitlement → Package → Product（SKU）" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1080" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="L1" value="Entitlement 层（权益）" style="swimlane;horizontal=1;startSize=28;fillColor=#e8daef;strokeColor=#6a1b9a;fontStyle=1;fontSize=12;swimlaneFillColor=#faf5fb;" parent="1" vertex="1">
+          <mxGeometry x="40" y="70" width="1080" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ENT" value="🔑 storage_pro&#10;（解锁存储服务 Pro 全部功能）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#c8a2c8;strokeColor=#6a1b9a;fontSize=12;fontStyle=1;strokeWidth=2;" parent="L1" vertex="1">
+          <mxGeometry x="400" y="40" width="300" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L2" value="Package 层（跨平台打包，运营可改不需发版）" style="swimlane;horizontal=1;startSize=28;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;swimlaneFillColor=#f5f9ff;" parent="1" vertex="1">
+          <mxGeometry x="40" y="210" width="1080" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="PKG_M" value="📆 storage_pro_monthly&#10;（月订阅 Package）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;strokeWidth=2;" parent="L2" vertex="1">
+          <mxGeometry x="130" y="40" width="330" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="PKG_Y" value="📅 storage_pro_yearly&#10;（年订阅 Package · 更划算）" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;strokeWidth=2;" parent="L2" vertex="1">
+          <mxGeometry x="620" y="40" width="330" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="L3" value="Product / SKU 层（每平台独立 ID）" style="swimlane;horizontal=1;startSize=28;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1;fontSize=12;swimlaneFillColor=#f6fbf5;" parent="1" vertex="1">
+          <mxGeometry x="40" y="360" width="1080" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="P_M_IAP" value="🍎 storage_pro_monthly_iap&#10;iOS IAP · Auto-renewable · TBD/月&#10;✅ Phase 1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" parent="L3" vertex="1">
+          <mxGeometry x="20" y="45" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="P_M_GPB" value="🤖 storage_pro_monthly_gpb&#10;Android GPB · Auto-renewable · TBD/月&#10;✅ Phase 1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" parent="L3" vertex="1">
+          <mxGeometry x="285" y="45" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="P_Y_IAP" value="🍎 storage_pro_yearly_iap&#10;iOS IAP · Auto-renewable · TBD/年&#10;✅ Phase 1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" parent="L3" vertex="1">
+          <mxGeometry x="550" y="45" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="P_Y_GPB" value="🤖 storage_pro_yearly_gpb&#10;Android GPB · Auto-renewable · TBD/年&#10;✅ Phase 1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#ffffff;strokeColor=#82b366;fontSize=10;" parent="L3" vertex="1">
+          <mxGeometry x="815" y="45" width="245" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="P_M_STR" value="💳 storage_pro_monthly_stripe&#10;Stripe Web · TBD/月&#10;🕐 Phase 2" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fafafa;strokeColor=#b3b3b3;fontSize=10;fontStyle=2;dashed=1;dashPattern=4 3;" parent="L3" vertex="1">
+          <mxGeometry x="150" y="140" width="290" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="P_Y_STR" value="💳 storage_pro_yearly_stripe&#10;Stripe Web · TBD/年&#10;🕐 Phase 2" style="rounded=1;whiteSpace=wrap;html=1;arcSize=8;fillColor=#fafafa;strokeColor=#b3b3b3;fontSize=10;fontStyle=2;dashed=1;dashPattern=4 3;" parent="L3" vertex="1">
+          <mxGeometry x="640" y="140" width="290" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.3;exitY=1;entryX=0.5;entryY=0;strokeColor=#6a1b9a;strokeWidth=1.8;endArrow=block;endFill=1;" parent="1" source="ENT" target="PKG_M" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.7;exitY=1;entryX=0.5;entryY=0;strokeColor=#6a1b9a;strokeWidth=1.8;endArrow=block;endFill=1;" parent="1" source="ENT" target="PKG_Y" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.3;exitY=1;entryX=0.5;entryY=0;strokeColor=#6c8ebf;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="PKG_M" target="P_M_IAP" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.7;exitY=1;entryX=0.5;entryY=0;strokeColor=#6c8ebf;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="PKG_M" target="P_M_GPB" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.3;exitY=1;entryX=0.5;entryY=0;strokeColor=#6c8ebf;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="PKG_Y" target="P_Y_IAP" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.7;exitY=1;entryX=0.5;entryY=0;strokeColor=#6c8ebf;strokeWidth=1.5;endArrow=block;endFill=1;" parent="1" source="PKG_Y" target="P_Y_GPB" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#b3b3b3;strokeWidth=1;endArrow=block;endFill=1;dashed=1;dashPattern=4 3;" parent="1" source="PKG_M" target="P_M_STR" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#b3b3b3;strokeWidth=1;endArrow=block;endFill=1;dashed=1;dashPattern=4 3;" parent="1" source="PKG_Y" target="P_Y_STR" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

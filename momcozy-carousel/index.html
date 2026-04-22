@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Recommended for you</title>
+    <style>
+      :root {
+        --bg: #f5f5f7;
+        --card: #ffffff;
+        --text: #1d1d1f;
+        --sub: #6e6e73;
+        --muted: #aeaeb2;
+        --link: #0071e3;
+        --pill-bg: rgba(0, 0, 0, 0.06);
+        --shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        --radius: 22px;
+        --gap: 14px;
+        --card-w: min(72vw, 320px);
+        --card-h: min(50vh, 380px);
+        --pad-x: calc((100vw - var(--card-w)) / 2);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue",
+          sans-serif;
+        background: #1a1a1c;
+        color: var(--text);
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px 32px;
+      }
+
+      /* —— iPhone 14 Pro Max style shell (simplified front) —— */
+      .iphone-14pm {
+        --phone-w: min(390px, 92vw);
+        width: var(--phone-w);
+        filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.45));
+      }
+
+      .iphone-frame {
+        position: relative;
+        width: 100%;
+        padding: 11px;
+        border-radius: 54px;
+        background: linear-gradient(155deg, #5a5a62 0%, #35353a 28%, #232326 62%, #1a1a1d 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+      }
+
+      .iphone-frame::before,
+      .iphone-frame::after {
+        content: "";
+        position: absolute;
+        width: 3px;
+        border-radius: 2px;
+        background: #2b2b30;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+        z-index: 1;
+      }
+
+      .iphone-frame::before {
+        left: 4px;
+        top: 120px;
+        height: 72px;
+      }
+
+      .iphone-frame::after {
+        right: 4px;
+        top: 168px;
+        height: 96px;
+      }
+
+      .iphone-bezel {
+        border-radius: 46px;
+        padding: 10px;
+        background: #0a0a0b;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      }
+
+      .iphone-screen {
+        position: relative;
+        border-radius: 38px;
+        overflow: hidden;
+        aspect-ratio: 430 / 932;
+        background: #000;
+      }
+
+      .iphone-island {
+        position: absolute;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 34px;
+        background: #000;
+        border-radius: 20px;
+        z-index: 4;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+
+      .iphone-homebar {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 36%;
+        max-width: 160px;
+        height: 5px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.22);
+        z-index: 4;
+        pointer-events: none;
+      }
+
+      .iphone-glass {
+        position: absolute;
+        inset: 0;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        container-type: size;
+        container-name: phone;
+      }
+
+      .iphone-glass-inner {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 52px 0 18px;
+      }
+
+      @container phone (min-width: 0px) {
+        .iphone-glass-inner {
+          --card-w: min(72cqw, 288px);
+          --pad-x: calc((100cqw - var(--card-w)) / 2);
+          /* Card height scales with width (~reference tall portrait card) */
+          --card-h: min(calc(var(--card-w) * 1.38), min(50cqh, 320px));
+        }
+      }
+
+      .section-head {
+        padding: 0 20px 12px;
+        flex-shrink: 0;
+      }
+
+      .section-head h1 {
+        margin: 0;
+        font-size: 21px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .carousel-bleed {
+        flex: 1;
+        min-height: 0;
+        width: 100%;
+      }
+
+      .carousel {
+        display: flex;
+        gap: var(--gap);
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scroll-padding-inline: var(--pad-x);
+        padding: 6px var(--pad-x) 20px;
+        scrollbar-width: none;
+        touch-action: pan-x;
+        cursor: grab;
+        user-select: none;
+      }
+
+      .carousel.is-dragging {
+        cursor: grabbing;
+        scroll-snap-type: none;
+      }
+
+      .carousel::-webkit-scrollbar {
+        display: none;
+      }
+
+      .card {
+        flex: 0 0 var(--card-w);
+        scroll-snap-align: center;
+        height: var(--card-h);
+        max-height: 100%;
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card-visual {
+        flex: 0 0 60%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #e8e8ed,
+            #e8e8ed 10px,
+            #ececef 10px,
+            #ececef 20px
+          ),
+          #e8e8ed;
+        display: grid;
+        place-items: center;
+        color: var(--muted);
+        font-size: 13px;
+        gap: 6px;
+      }
+
+      .card-visual svg {
+        opacity: 0.55;
+      }
+
+      .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 12px 16px 12px;
+        min-height: 0;
+      }
+
+      .pill {
+        display: inline-block;
+        align-self: flex-start;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: var(--pill-bg);
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--sub);
+        margin-bottom: 8px;
+        flex-shrink: 0;
+      }
+
+      .card-copy {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .card-title {
+        margin: 0;
+        flex-shrink: 0;
+        width: 100%;
+        min-width: 0;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+        color: var(--text);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      .card-sub {
+        margin: 0;
+        flex-shrink: 0;
+        width: 100%;
+        min-width: 0;
+        font-size: 14px;
+        line-height: 1.35;
+        color: var(--sub);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      .card-footer {
+        flex-shrink: 0;
+        width: 100%;
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-top: 8px;
+        min-height: 44px;
+      }
+
+      .cta {
+        border: none;
+        background: none;
+        padding: 8px 0;
+        margin: 0;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--link);
+        cursor: pointer;
+        white-space: nowrap;
+        user-select: none;
+        letter-spacing: -0.01em;
+        flex-shrink: 0;
+        min-height: 36px;
+        display: inline-flex;
+        align-items: center;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .cta::after {
+        content: " ›";
+        font-weight: 500;
+      }
+
+      .cta:active {
+        opacity: 0.65;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .carousel {
+          scroll-behavior: auto;
+        }
+      }
+
+      /* Fallback when container queries unavailable */
+      @supports not (container-type: size) {
+        .iphone-glass-inner {
+          --card-w: min(72vw, 288px);
+          --pad-x: calc((100vw - var(--card-w)) / 2);
+          --card-h: min(calc(var(--card-w) * 1.38), min(52vh, 320px));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="iphone-14pm" aria-label="iPhone 14 Pro Max preview frame">
+      <div class="iphone-frame">
+        <div class="iphone-bezel">
+          <div class="iphone-screen">
+            <div class="iphone-island" aria-hidden="true"></div>
+            <div class="iphone-glass">
+              <div class="iphone-glass-inner">
+                <header class="section-head">
+                  <h1>Recommended for you</h1>
+                </header>
+
+                <div class="carousel-bleed">
+                  <section
+                    class="carousel"
+                    aria-label="Scenario recommendation cards"
+                    role="region"
+                    tabindex="0"
+                  >
+                    <article class="card" data-index="0">
+                      <div class="card-visual" aria-hidden="true">
+                        <svg width="28" height="24" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M4 6.5L9 4v12l-5-2.5V6.5ZM15 4l5 2.5V13.5L15 16V4ZM10.5 3.5L13.5 2v16l-3-1.5V3.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.2"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <span>Scene placeholder</span>
+                      </div>
+                      <div class="card-body">
+                        <span class="pill">Picked for you</span>
+                        <div class="card-copy">
+                          <h2 class="card-title">Starts with what you need now.</h2>
+                          <p class="card-sub">A calmer next step, picked for you.</p>
+                        </div>
+                        <div class="card-footer">
+                          <button type="button" class="cta">Peek picks</button>
+                        </div>
+                      </div>
+                    </article>
+
+                    <article class="card" data-index="1">
+                      <div class="card-visual" aria-hidden="true">
+                        <svg width="28" height="24" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M4 6.5L9 4v12l-5-2.5V6.5ZM15 4l5 2.5V13.5L15 16V4ZM10.5 3.5L13.5 2v16l-3-1.5V3.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.2"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <span>Scene placeholder</span>
+                      </div>
+                      <div class="card-body">
+                        <span class="pill">Cozy Pregnancy</span>
+                        <div class="card-copy">
+                          <h2 class="card-title">Rest before the big day.</h2>
+                          <p class="card-sub">Comfort that eases the wait.</p>
+                        </div>
+                        <div class="card-footer">
+                          <button type="button" class="cta">Sink in</button>
+                        </div>
+                      </div>
+                    </article>
+
+                    <article class="card" data-index="2">
+                      <div class="card-visual" aria-hidden="true">
+                        <svg width="28" height="24" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M4 6.5L9 4v12l-5-2.5V6.5ZM15 4l5 2.5V13.5L15 16V4ZM10.5 3.5L13.5 2v16l-3-1.5V3.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.2"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <span>Scene placeholder</span>
+                      </div>
+                      <div class="card-body">
+                        <span class="pill">Cozy Feeding</span>
+                        <div class="card-copy">
+                          <h2 class="card-title">Nourish without stopping life.</h2>
+                          <p class="card-sub">Hands-free pumping, simpler rhythm.</p>
+                        </div>
+                        <div class="card-footer">
+                          <button type="button" class="cta">Milk run</button>
+                        </div>
+                      </div>
+                    </article>
+
+                    <article class="card" data-index="3">
+                      <div class="card-visual" aria-hidden="true">
+                        <svg width="28" height="24" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M4 6.5L9 4v12l-5-2.5V6.5ZM15 4l5 2.5V13.5L15 16V4ZM10.5 3.5L13.5 2v16l-3-1.5V3.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.2"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <span>Scene placeholder</span>
+                      </div>
+                      <div class="card-body">
+                        <span class="pill">Cozy Recovery</span>
+                        <div class="card-copy">
+                          <h2 class="card-title">Heal at your own pace.</h2>
+                          <p class="card-sub">Relief that fits quiet moments.</p>
+                        </div>
+                        <div class="card-footer">
+                          <button type="button" class="cta">Ease up</button>
+                        </div>
+                      </div>
+                    </article>
+
+                    <article class="card" data-index="4">
+                      <div class="card-visual" aria-hidden="true">
+                        <svg width="28" height="24" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M4 6.5L9 4v12l-5-2.5V6.5ZM15 4l5 2.5V13.5L15 16V4ZM10.5 3.5L13.5 2v16l-3-1.5V3.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.2"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <span>Scene placeholder</span>
+                      </div>
+                      <div class="card-body">
+                        <span class="pill">Cozy Outing</span>
+                        <div class="card-copy">
+                          <h2 class="card-title">Step out with confidence.</h2>
+                          <p class="card-sub">Light gear for real-world days.</p>
+                        </div>
+                        <div class="card-footer">
+                          <button type="button" class="cta">Roam time</button>
+                        </div>
+                      </div>
+                    </article>
+
+                    <article class="card" data-index="5">
+                      <div class="card-visual" aria-hidden="true">
+                        <svg width="28" height="24" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M4 6.5L9 4v12l-5-2.5V6.5ZM15 4l5 2.5V13.5L15 16V4ZM10.5 3.5L13.5 2v16l-3-1.5V3.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.2"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        <span>Scene placeholder</span>
+                      </div>
+                      <div class="card-body">
+                        <span class="pill">Cozy Parenting</span>
+                        <div class="card-copy">
+                          <h2 class="card-title">Soft routines, calmer nights.</h2>
+                          <p class="card-sub">Essentials for cozy days ahead.</p>
+                        </div>
+                        <div class="card-footer">
+                          <button type="button" class="cta">Snug hunt</button>
+                        </div>
+                      </div>
+                    </article>
+                  </section>
+                </div>
+              </div>
+            </div>
+            <div class="iphone-homebar" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var track = document.querySelector(".carousel");
+        if (!track) return;
+
+        var cards = track.querySelectorAll(".card");
+        function cardStep() {
+          var c = cards[0];
+          if (!c) return 0;
+          return c.getBoundingClientRect().width + 14;
+        }
+
+        document.querySelectorAll(".card .cta").forEach(function (btn) {
+          btn.addEventListener("click", function (e) {
+            if (track.dataset.suppressClick === "1") {
+              e.preventDefault();
+              e.stopPropagation();
+              return;
+            }
+            var card = btn.closest(".card");
+            var title = card ? card.querySelector(".card-title") : null;
+            var label = title ? title.textContent.trim() : "Card";
+            alert("Demo: wire this to your detail route — " + label);
+          });
+        });
+
+        track.addEventListener("keydown", function (e) {
+          if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+          track.scrollBy({
+            left: e.key === "ArrowRight" ? cardStep() : -cardStep(),
+            behavior: "smooth",
+          });
+          e.preventDefault();
+        });
+
+        track.addEventListener(
+          "wheel",
+          function (e) {
+            var dx = e.deltaX;
+            var dy = e.deltaY;
+            if (Math.abs(dx) < Math.abs(dy)) {
+              track.scrollLeft += dy;
+              e.preventDefault();
+            }
+          },
+          { passive: false }
+        );
+
+        var drag = false;
+        var startX = 0;
+        var startScroll = 0;
+
+        track.addEventListener("pointerdown", function (e) {
+          if (e.pointerType === "touch") return;
+          if (e.button !== 0) return;
+          drag = true;
+          track.classList.add("is-dragging");
+          startX = e.clientX;
+          startScroll = track.scrollLeft;
+          try {
+            track.setPointerCapture(e.pointerId);
+          } catch (err) {}
+        });
+
+        track.addEventListener("pointermove", function (e) {
+          if (!drag) return;
+          track.scrollLeft = startScroll - (e.clientX - startX);
+        });
+
+        function endDrag(e) {
+          if (!drag) return;
+          drag = false;
+          track.classList.remove("is-dragging");
+          try {
+            track.releasePointerCapture(e.pointerId);
+          } catch (err) {}
+          if (Math.abs(e.clientX - startX) > 8) {
+            track.dataset.suppressClick = "1";
+            setTimeout(function () {
+              track.dataset.suppressClick = "0";
+            }, 50);
+          }
+        }
+
+        track.addEventListener("pointerup", endDrag);
+        track.addEventListener("pointercancel", endDrag);
+      })();
+    </script>
+  </body>
+</html>
