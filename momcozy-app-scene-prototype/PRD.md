@@ -247,7 +247,7 @@ PRD 要求：**所有面向用户的字符串与 URL 规则均可配置**，代�
 ### 6.5 样式与裁切类名
 
 - 全局：`wireframe.css`。
-- 场景 Hero / 卡片缩略图裁切：`.wf-hero-ph--scene-`*、`.wf-ph--scene-*` 内 `object-position` 可按场景调参。
+- 场景 Hero / 卡片缩略图裁切：`.wf-hero-ph--scene-`*、`.wf-ph--scene-`* 内 `object-position` 可按场景调参。
 
 ---
 
