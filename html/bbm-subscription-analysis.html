@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBM 订阅率破局 · Momcozy 产品分析</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #f7f2ea;
+    --ink-soft: #ede7db;
+    --paper: #1a1a17;
+    --paper-dim: #3a3530;
+    --accent: #ff5b22;
+    --accent-soft: #ffb392;
+    --gold: #b8922a;
+    --line: rgba(26, 26, 23, 0.10);
+    --line-strong: rgba(26, 26, 23, 0.20);
+    --muted: rgba(26, 26, 23, 0.50);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Noto Sans SC', -apple-system, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255, 91, 34, 0.06), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(200, 163, 90, 0.04), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
+
+  /* ========== MASTHEAD ========== */
+  .masthead { padding: 56px 0 32px; border-bottom: 1px solid var(--line-strong); position: relative; }
+  .masthead-top {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 48px;
+  }
+  .masthead-top .dot {
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    margin-right: 8px; animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% {opacity:1} 50% {opacity:0.3} }
+
+  .hero { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 48px; }
+  .hero-quarter {
+    font-family: 'Fraunces', serif; font-weight: 800;
+    font-size: clamp(80px, 14vw, 180px); line-height: 0.85;
+    letter-spacing: -0.04em; color: var(--paper);
+  }
+  .hero-quarter em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .hero-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(28px, 3.4vw, 48px); line-height: 1.15;
+    margin-top: 24px; letter-spacing: -0.01em;
+  }
+  .hero-title .underline {
+    background-image: linear-gradient(transparent 65%, var(--accent) 65%, var(--accent) 88%, transparent 88%);
+  }
+  .hero-meta {
+    text-align: right; font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.1em; color: var(--muted); line-height: 1.9;
+  }
+  .hero-meta strong { color: var(--paper); font-weight: 500; }
+
+  .hero-tagline {
+    margin-top: 56px; padding-top: 32px;
+    border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  }
+  .tag-cell { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .tag-cell-num {
+    font-family: 'Fraunces', serif; font-weight: 300; font-size: 32px;
+    color: var(--accent); line-height: 1; margin-bottom: 8px; font-style: italic;
+  }
+  .tag-cell-label { color: var(--muted); }
+
+  /* ========== INTRO ========== */
+  .intro { padding: 96px 0 48px; display: grid; grid-template-columns: 200px 1fr; gap: 64px; align-items: start; }
+  .intro-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding-top: 8px; border-top: 2px solid var(--accent); display: inline-block;
+  }
+  .intro-body {
+    font-family: 'Noto Serif SC', serif; font-weight: 400;
+    font-size: 22px; line-height: 1.7; color: var(--paper);
+  }
+  .intro-body .high { color: var(--accent); font-weight: 600; }
+
+  /* ========== OBJECTIVES ========== */
+  .objectives { padding: 48px 0 96px; }
+  .obj {
+    position: relative; padding: 64px 0; border-top: 1px solid var(--line-strong);
+    display: grid; grid-template-columns: 120px 1fr; gap: 48px;
+  }
+  .obj:last-of-type { border-bottom: 1px solid var(--line-strong); }
+  .obj-number {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 96px; line-height: 0.9; color: var(--paper);
+    position: sticky; top: 32px; align-self: start;
+  }
+  .obj-number::after { content: ''; display: block; width: 40px; height: 2px; background: var(--accent); margin-top: 16px; }
+  .obj-body { display: grid; grid-template-columns: 1fr; gap: 40px; }
+  .obj-head { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start; }
+  .obj-codename {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding: 6px 12px; border: 1px solid var(--accent); border-radius: 2px;
+    white-space: nowrap; margin-top: 12px;
+  }
+  .obj-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(28px, 3vw, 40px); line-height: 1.2; letter-spacing: -0.01em;
+  }
+  .obj-title .accent { color: var(--accent); }
+  .obj-narrative {
+    font-family: 'Noto Sans SC', sans-serif; font-weight: 300;
+    font-size: 16px; line-height: 1.8; color: rgba(26, 26, 23, 0.65);
+    max-width: 720px; padding-left: 16px; border-left: 2px solid var(--gold);
+    font-style: italic;
+  }
+
+  /* ========== KR GRID ========== */
+  .kr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--line-strong); border: 1px solid var(--line-strong); }
+  .kr { background: var(--ink); padding: 32px; position: relative; transition: background 0.4s ease; }
+  .kr:hover { background: var(--ink-soft); }
+  .kr.full { grid-column: 1 / -1; }
+  .kr-tag { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .kr-tag-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.15em; color: var(--accent); font-weight: 700;
+  }
+  .kr-tag-line { flex: 1; height: 1px; background: var(--line); }
+  .kr-headline {
+    font-family: 'Noto Serif SC', serif; font-weight: 600;
+    font-size: 19px; line-height: 1.4; margin-bottom: 16px; color: var(--paper);
+  }
+  .kr-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .kr-bullets li {
+    font-size: 13.5px; line-height: 1.6; color: rgba(26, 26, 23, 0.60);
+    padding-left: 18px; position: relative;
+  }
+  .kr-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 8px; height: 1px; background: var(--accent);
+  }
+  .kr-bullets li strong { color: var(--paper); font-weight: 500; }
+  .kr-metric {
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px dashed var(--line-strong);
+    display: flex; flex-wrap: wrap; gap: 16px 24px;
+  }
+  .kr-metric-item { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.05em; }
+  .kr-metric-num { color: var(--accent); font-size: 16px; font-weight: 700; display: block; margin-bottom: 2px; }
+  .kr-metric-lbl { color: var(--muted); }
+
+  /* ========== SPACER QUOTE ========== */
+  .spacer-quote {
+    padding: 80px 0;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+    margin: 32px 0;
+  }
+  .spacer-quote-text {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(32px, 4.5vw, 56px); line-height: 1.25;
+    text-align: center; letter-spacing: -0.01em;
+  }
+  .spacer-quote-text .accent {
+    color: var(--accent); font-style: italic;
+    font-family: 'Fraunces', serif; font-weight: 300;
+  }
+  .spacer-quote-sub {
+    text-align: center; margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.25em; color: var(--muted); text-transform: uppercase;
+  }
+
+  /* ========== TIMELINE / ROADMAP ========== */
+  .timeline-section { padding: 80px 0 60px; border-top: 1px solid var(--line-strong); }
+  .section-head { display: grid; grid-template-columns: 200px 1fr; gap: 64px; margin-bottom: 48px; align-items: end; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding-top: 8px; border-top: 2px solid var(--accent); display: inline-block;
+  }
+  .section-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.01em; line-height: 1.1;
+  }
+  .section-narrative {
+    font-family: 'Noto Sans SC', sans-serif; font-weight: 300;
+    font-size: 15px; line-height: 1.8; color: rgba(26, 26, 23, 0.65);
+    padding-left: 16px; border-left: 2px solid var(--gold);
+    font-style: italic; margin-top: 16px;
+  }
+  .timeline { position: relative; padding: 32px 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--line-strong); border: 1px solid var(--line-strong); }
+  .tl-phase { background: var(--ink); padding: 32px; border-top: 2px solid var(--accent); }
+  .tl-phase-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .tl-phase-title {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 56px; line-height: 1; color: var(--paper); margin-bottom: 24px;
+  }
+  .tl-events { display: flex; flex-direction: column; gap: 10px; }
+  .tl-event {
+    padding: 12px 14px; background: var(--ink-soft);
+    border-left: 2px solid var(--gold); font-size: 13px; line-height: 1.5;
+  }
+  .tl-event strong { display: block; color: var(--paper); font-weight: 500; margin-bottom: 3px; font-size: 13.5px; }
+  .tl-event span { color: var(--muted); font-size: 12px; }
+  .tl-event.big { border-left-color: var(--accent); background: rgba(255, 91, 34, 0.06); }
+
+  /* ========== FOOTER ========== */
+  footer {
+    padding: 80px 0 48px; border-top: 1px solid var(--line-strong);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end;
+  }
+  .footer-mark {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 80px; line-height: 0.9; color: var(--accent);
+  }
+  .footer-body {
+    font-family: 'Noto Sans SC', sans-serif; font-weight: 300;
+    font-size: 15px; line-height: 1.8; color: rgba(26, 26, 23, 0.60);
+    margin-top: 16px; max-width: 560px;
+  }
+  .footer-body strong { color: var(--paper); font-weight: 500; }
+  .footer-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.15em; color: var(--muted); text-align: right; line-height: 2;
+  }
+  .footer-meta strong { color: var(--paper); font-weight: 500; }
+
+  /* ========== ANIMATIONS ========== */
+  .reveal { opacity: 0; transform: translateY(20px);
+    animation: reveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+  .obj { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .obj.in { opacity: 1; transform: translateY(0); }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .wrap { padding: 0 24px; }
+    .hero { grid-template-columns: 1fr; gap: 24px; }
+    .hero-meta { text-align: left; }
+    .hero-tagline { grid-template-columns: repeat(2, 1fr); }
+    .intro { grid-template-columns: 1fr; gap: 16px; padding: 64px 0 32px; }
+    .obj { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; }
+    .obj-number { position: static; font-size: 64px; }
+    .obj-head { grid-template-columns: 1fr; gap: 12px; }
+    .obj-codename { margin-top: 0; justify-self: start; }
+    .kr-grid { grid-template-columns: 1fr; }
+    .section-head { grid-template-columns: 1fr; gap: 16px; }
+    .timeline { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; text-align: left; }
+    .footer-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== MASTHEAD ========== -->
+<header class="masthead">
+  <div class="wrap">
+    <div class="masthead-top">
+      <span><span class="dot"></span>Momcozy · APP 生态中心 · 商业化产品部 · 订阅增长分析</span>
+      <span>产品策略报告 &nbsp;/&nbsp; 2026</span>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="hero-quarter">BBM <em>订阅</em></div>
+        <div class="hero-title">
+          不是回放功能，是宝宝的<span class="underline">安全保障</span>与<span class="underline">成长记录</span>，<br>
+          是妈妈的<span class="underline">安心感</span>，是<span class="underline">用户关系</span>，<br>
+          是<span class="underline">长期经营</span>的起点
+        </div>
+      </div>
+      <div class="hero-meta">
+        <strong>存储订阅率低</strong><br>
+        根因诊断<br>
+        ——<br>
+        价值重构<br>
+        ——<br>
+        增长路线图
+      </div>
+    </div>
+    <div class="hero-tagline">
+      <div class="tag-cell">
+        <div class="tag-cell-num">4</div>
+        <div class="tag-cell-label">根因维度</div>
+      </div>
+      <div class="tag-cell">
+        <div class="tag-cell-num">6</div>
+        <div class="tag-cell-label">可即时激活<br>付费功能</div>
+      </div>
+      <div class="tag-cell">
+        <div class="tag-cell-num">4</div>
+        <div class="tag-cell-label">长期路线图<br>高价值场景</div>
+      </div>
+      <div class="tag-cell">
+        <div class="tag-cell-num">20<span style="font-size:16px;font-family:'JetBrains Mono',monospace;letter-spacing:0">%</span></div>
+        <div class="tag-cell-label">Nanit 第二年<br>续费率标杆</div>
+      </div>
+      <div class="tag-cell">
+        <div class="tag-cell-num">4</div>
+        <div class="tag-cell-label">全链路运营<br>SOP 阶段</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== INTRO ========== -->
+<section class="intro">
+  <div class="wrap" style="display:contents">
+    <div style="padding-left:48px; padding-right:0">
+      <div class="intro-eyebrow">问题背景</div>
+    </div>
+    <div style="padding-right:48px">
+      <div class="intro-body">
+        BBM 硬件已进入市场，但<span class="high">当前 BBM 硬件的订阅业务仅为功能需要</span>——无专责运营、无体系策略、无关键触达，订阅功能仅停留在存储回放，对用户而言可有可无。与此同时，竞品 Nanit 凭借"<span class="high">免费一年试用 → 到期续费</span>"的模型，在订阅侧建立了成熟的用户关系经营范式，第二年续费率约 20%。BBM 的订阅破局，不是修一个功能，而是重构从"卖硬件"到"卖安全保障 &amp; 陪伴"的产品价值主张。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== OBJECTIVES ========== -->
+<div class="objectives">
+  <div class="wrap">
+
+    <!-- OBJ 01 · 诊断 -->
+    <article class="obj">
+      <div class="obj-number">01</div>
+      <div class="obj-body">
+        <div class="obj-head">
+          <div class="obj-codename">◆ 根因诊断</div>
+          <div class="obj-title">订阅率低的<span class="accent">四重失位</span></div>
+        </div>
+        <div class="obj-narrative">
+          订阅不起来，不是用户不愿意付钱——是我们没有给用户更多的订阅的场景价值，也没有建立让他们自然走向付费的路径。
+        </div>
+        <div class="kr-grid">
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">失位 01</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">无推广资源</div>
+            <ul class="kr-bullets">
+              <li>GTM、产线、APP 侧<strong>无专责运营人力</strong></li>
+              <li>缺乏成体系的增长策略与目标拆解</li>
+              <li>订阅增长处于<strong>自然生长、无人看管</strong>状态</li>
+            </ul>
+          </div>
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">失位 02</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">功能价值单一</div>
+            <ul class="kr-bullets">
+              <li>付费功能<strong>仅有存储回放</strong>，使用频次低</li>
+              <li>Nanit 已覆盖睡眠分析、成长追踪、多人看护等<strong>多维高频场景</strong></li>
+              <li>没有挖掘更多用户付费的价值痛点</li>
+              <li>用户感知不到订阅带来的<strong>差异化体验</strong></li>
+            </ul>
+          </div>
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">失位 03</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">未深度集成，缺关键触达</div>
+            <ul class="kr-bullets">
+              <li>无 <strong>Push 通知</strong>：关键事件（口鼻遮挡、异常体动）无法即时推送</li>
+              <li>无 <strong>EDM 体系</strong>：试用到期、续费提醒、高光时刻分享均缺失</li>
+              <li>没有形成<strong>订阅全周期的运营增长触点</strong></li>
+            </ul>
+            </ul>
+          </div>
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">失位 04</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">缺差异化表达，未见于宣传</div>
+            <ul class="kr-bullets">
+              <li>硬件包装、详情页、宣传物料中<strong>无订阅价值点</strong></li>
+              <li>用户购买硬件时不知道"还有订阅"这件事</li>
+              <li>订阅既未作为<strong>卖点差异化</strong>，也未作为购后引导</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- OBJ 02 · 卖什么 -->
+    <article class="obj">
+      <div class="obj-number">02</div>
+      <div class="obj-body">
+        <div class="obj-head">
+          <div class="obj-codename">◇ 价值重构</div>
+          <div class="obj-title">卖什么：从<span class="accent">存储</span>到<span class="accent">安全陪伴</span></div>
+        </div>
+        <div class="obj-narrative">
+          订阅的是宝宝安全保障与成长记录。用户为宝宝安全买单，为成长记忆买单，为"我没在旁边但我知道他一切"的安心感买单——而不是为了回放一段视频。
+        </div>
+        <div class="kr-grid">
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">现有 · 可即时激活</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">已有付费案例，等待被发掘</div>
+            <ul class="kr-bullets">
+              <li><strong>睡眠数据追踪</strong>：入睡时间、醒来次数、翻身频率统计</li>
+              <li><strong>睡眠计划</strong>：科学作息建议，辅助养育决策</li>
+              <li><strong>婴儿高光时刻</strong>：自动剪辑宝宝精彩片段，情感留存</li>
+              <li><strong>多人看护解锁</strong>：支持家庭成员共享权限</li>
+              <li><strong>口鼻遮挡警报</strong>：安全守护，有价值支撑</li>
+              <li><strong>成长分析报告</strong>：周期性数据可视化，记录宝宝变化</li>
+            </ul>
+            <div class="kr-metric">
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">6</span>
+                <span class="kr-metric-lbl">可立即上线<br>的付费功能点</span>
+              </div>
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">高频</span>
+                <span class="kr-metric-lbl">睡眠场景<br>每日使用</span>
+              </div>
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">情感</span>
+                <span class="kr-metric-lbl">高光时刻<br>留存驱动续费</span>
+              </div>
+            </div>
+          </div>
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">路线图 · 长期高价值</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">尚待解决的核心痛点</div>
+            <ul class="kr-bullets">
+              <li><strong>智能安抚判断</strong>：区分宝宝自主接觉与需要抱抱，减少无效打扰</li>
+              <li><strong>移动看护方案</strong>：自带夹子 + 电池 + 网络，解锁非固定场景</li>
+              <li><strong>无声吐奶检测</strong>：当前监测盲区，高危安全场景</li>
+              <li><strong>看护人隐私保护</strong>：多人看护时的隐私分层机制</li>
+            </ul>
+            <div class="kr-metric">
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">4</span>
+                <span class="kr-metric-lbl">长期路线图<br>高价值场景</span>
+              </div>
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">安全</span>
+                <span class="kr-metric-lbl">最高支付意愿<br>驱动因子</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- OBJ 03 · 怎么卖 -->
+    <article class="obj">
+      <div class="obj-number">03</div>
+      <div class="obj-body">
+        <div class="obj-head">
+          <div class="obj-codename">▲ 运营增长</div>
+          <div class="obj-title">怎么卖：<span class="accent">全链路</span>订阅运营 SOP</div>
+        </div>
+        <div class="obj-narrative">
+          订阅不是一次性的功能上线，而是一条从硬件开箱到宝宝成长、贯穿用户全生命周期的运营主线。每个触点都是转化机会，每个节点都需要标准动作。
+        </div>
+        <div class="kr-grid">
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">阶段 1 · 硬件售卖期</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">在购买硬件时植入订阅心智</div>
+            <ul class="kr-bullets">
+              <li>产品包装、详情页植入<strong>"解锁更多智能功能"</strong>的订阅入口</li>
+              <li>赠送免费试用期，降低第一步门槛</li>
+              <li><strong>参考 Nanit</strong>：免费1年试用，第二年续费率约 20%</li>
+              <li>宣传素材中突出订阅差异化功能（安全警报、成长报告）</li>
+            </ul>
+            <div class="kr-metric">
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">Nanit</span>
+                <span class="kr-metric-lbl">先体验<br>后付费模型</span>
+              </div>
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">20%</span>
+                <span class="kr-metric-lbl">第二年<br>续费率验证</span>
+              </div>
+            </div>
+          </div>
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">阶段 2 · APP 激活引导期</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">前 1–6 个月：让用户轻松订阅，体验习惯产品价值</div>
+            <ul class="kr-bullets">
+              <li>新用户开机即进入<strong>免费试用体验流程</strong></li>
+              <li>试用期内每周推送高光时刻、睡眠报告，建立使用习惯</li>
+              <li>到期前 7 天、3 天、1 天<strong>精准提醒</strong>，引导续费</li>
+              <li>设计<strong>自动续订机制</strong>，降低流失率</li>
+            </ul>
+          </div>
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">阶段 3 · 购买转化体验</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">让购买决策简单、透明、无负担</div>
+            <ul class="kr-bullets">
+              <li><strong>场景化价值阐述</strong>：用"宝宝故事"替代功能列表</li>
+              <li>定价清晰、<strong>无隐藏费用</strong>，建立信任基础</li>
+              <li>提供无障碍<strong>退出机制</strong>，用退出保障权消除订阅顾虑</li>
+              <li>年付选项配合折扣，提升 LTV</li>
+            </ul>
+          </div>
+          <div class="kr">
+            <div class="kr-tag">
+              <span class="kr-tag-num">阶段 4 · 长期用户运营</span>
+              <div class="kr-tag-line"></div>
+            </div>
+            <div class="kr-headline">完整用户生命周期 SOP</div>
+            <ul class="kr-bullets">
+              <li><strong>便捷升降级</strong>：按需选择档位，无摩擦切换</li>
+              <li>续费前 <strong>EDM 提醒序列</strong>：价值回顾 + 专属优惠</li>
+              <li>流失挽回流程：取消前主动询问、推送优惠挽留</li>
+              <li>宝宝<strong>成长节点营销</strong>：满月、百天、周岁触发特定内容</li>
+            </ul>
+            <div class="kr-metric">
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">SOP</span>
+                <span class="kr-metric-lbl">标准化<br>全生命周期</span>
+              </div>
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">EDM</span>
+                <span class="kr-metric-lbl">关键节点<br>触达自动化</span>
+              </div>
+              <div class="kr-metric-item">
+                <span class="kr-metric-num">挽回</span>
+                <span class="kr-metric-lbl">流失前<br>主动干预</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<!-- ========== TIMELINE · 四阶段路线图 ========== -->
+<section class="timeline-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">执行路线图</div>
+      </div>
+      <div>
+        <div class="section-title">执行路线图</div>
+        <div class="section-narrative">
+          当前在售 BBM 均基于涂鸦方案，改动难度大，投入成本高。与王博沟通，优先以即将上线的 <strong>BM04（觅睿方案）</strong>为起点，自建订阅能力 + 觅睿存储服务，跑通全订阅周期运营 SOP；待明年初自研存储服务完成后，全套切换至自研方案。
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-phase">
+        <div class="tl-phase-label">Phase 01 · BM04 起跑</div>
+        <div class="tl-events">
+          <div class="tl-event big">
+            <strong>自建订阅支付基础流程</strong>
+            <span>基于觅睿存储服务，完成订阅购买、续费、取消全链路</span>
+          </div>
+          <div class="tl-event big">
+            <strong>支持试用体验流程</strong>
+            <span>新用户免费试用期设计，到期前提醒序列上线</span>
+          </div>
+          <div class="tl-event">
+            <strong>确定订阅专属运营责任人</strong>
+            <span>通过指标体系牵引，订阅增长有人负责、有数可看</span>
+          </div>
+          <div class="tl-event">
+            <strong>EDM 基础体系搭建</strong>
+            <span>续费提醒、高光时刻分享、宝宝成长节点触达</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-phase-label">Phase 02 · 价值扩展</div>
+        <div class="tl-events">
+          <div class="tl-event big">
+            <strong>场景激活，加量不加价</strong>
+            <span>睡眠分析、高光时刻、多人看护等场景纳入订阅，提升感知价值</span>
+          </div>
+          <div class="tl-event">
+            <strong>宣传物料植入</strong>
+            <span>包装、详情页加入订阅价值点与试用入口</span>
+          </div>
+          <div class="tl-event">
+            <strong>Push 通知上线</strong>
+            <span>口鼻遮挡、异常体动等安全事件实时推送</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-phase-label">Phase 03 · 体验打磨</div>
+        <div class="tl-events">
+          <div class="tl-event big">
+            <strong>购买流程体验打磨</strong>
+            <span>场景化价值阐述，透明定价，退出无障碍</span>
+          </div>
+          <div class="tl-event">
+            <strong>Push 通知迭代优化</strong>
+            <span>基于数据反馈优化推送频次与内容策略</span>
+          </div>
+          <div class="tl-event">
+            <strong>数据驱动迭代</strong>
+            <span>漏斗分析、A/B 测试关键节点转化</span>
+          </div>
+          <div class="tl-event">
+            <strong>挽回流程上线</strong>
+            <span>取消前主动干预，降低非自愿流失</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-phase-label">Phase 04 · 自研切换 &amp; 扩展</div>
+        <div class="tl-events">
+          <div class="tl-event big">
+            <strong>自研存储方案上线</strong>
+            <span>明年初完成，全套切换至自研方案，降低成本</span>
+          </div>
+          <div class="tl-event">
+            <strong>高价值功能路线图</strong>
+            <span>智能安抚判断、无声吐奶检测、隐私保护</span>
+          </div>
+          <div class="tl-event">
+            <strong>规模化增长体系</strong>
+            <span>完整用户生命周期 SOP 标准化，向全线产品推广</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="wrap">
+  <div>
+    <div class="footer-mark">Go.</div>
+    <div class="footer-body">
+      订阅的本质是<strong>用户对产品长期价值的持续投票</strong>。Momcozy BBM 的订阅增长，需要的不是一次功能发布，而是从硬件开箱那一刻起，就开始经营的<strong>用户关系体系</strong>。从"卖硬件"到"卖安全保障 &amp; 陪伴"，这一步需要产品、运营、营销的协同重构。
+    </div>
+  </div>
+  <div class="footer-meta">
+    <strong>Momcozy · APP 生态中心 · 商业化产品部</strong><br>
+    订阅增长策略分析<br>
+    Cooper<br>
+    <strong>2026</strong>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.obj').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

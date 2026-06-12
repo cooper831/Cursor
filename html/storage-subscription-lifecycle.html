@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>存储空间订阅生命周期</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" integrity="sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" integrity="sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/" crossorigin="anonymous"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #020617;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 32px;
+  min-height: 100vh;
+}
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pulse-dot {
+  width: 10px; height: 10px;
+  background: #34d399;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.5; transform:scale(1.3); }
+}
+h1 { font-size: 22px; font-weight: 700; color: #f1f5f9; }
+.subtitle { font-size: 11px; color: #64748b; margin-top: 3px; }
+.toolbar { position: relative; }
+.toolbar-toggle {
+  background: rgba(30,41,59,0.8);
+  border: 1px solid #334155;
+  color: #94a3b8;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.toolbar-toggle:hover { background: rgba(51,65,85,0.8); color: #e2e8f0; }
+.toolbar-actions {
+  display: none;
+  position: absolute;
+  right: 0; top: 40px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 8px;
+  gap: 6px;
+  flex-direction: column;
+  z-index: 100;
+  min-width: 140px;
+}
+.toolbar-actions.open { display: flex; }
+.toolbar-actions button {
+  background: rgba(30,41,59,0.8);
+  border: 1px solid #334155;
+  color: #94a3b8;
+  padding: 7px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  text-align: left;
+  white-space: nowrap;
+}
+.toolbar-actions button:hover { background: #1e293b; color: #e2e8f0; }
+.diagram-card {
+  background: rgba(15,23,42,0.8);
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+svg { display: block; }
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.card {
+  background: rgba(15,23,42,0.8);
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  padding: 18px;
+}
+.card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.card-dot { width: 8px; height: 8px; border-radius: 50%; }
+.card-dot.green { background: #34d399; }
+.card-dot.yellow { background: #fbbf24; }
+.card-dot.red { background: #fb7185; }
+.card h3 { font-size: 12px; font-weight: 600; color: #e2e8f0; }
+.card ul { list-style: none; }
+.card ul li { font-size: 10px; color: #94a3b8; padding: 3px 0; line-height: 1.5; }
+.footer {
+  font-size: 10px;
+  color: #334155;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid #0f172a;
+}
+@media print { .toolbar { display: none !important; } }
+</style>
+</head>
+<body>
+<div class="container" id="report-container">
+  <div class="header">
+    <div class="header-left">
+      <div class="pulse-dot"></div>
+      <div>
+        <h1>存储空间订阅生命周期</h1>
+        <div class="subtitle">Storage Subscription Lifecycle · 全状态流程覆盖</div>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="toolbar-toggle" onclick="toggleToolbar()">⋯</button>
+      <div class="toolbar-actions" id="toolbar-actions">
+        <button onclick="copyAsImage()">📋 复制为图片</button>
+        <button onclick="downloadPNG()">🖼️ 下载 PNG</button>
+        <button onclick="downloadPDF()">📄 下载 PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="diagram-card">
+    <svg viewBox="0 0 1400 2000" width="1400" height="2000" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+        </pattern>
+        <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0,10 3.5,0 7" fill="#64748b"/>
+        </marker>
+        <marker id="arr-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0,10 3.5,0 7" fill="#34d399"/>
+        </marker>
+        <marker id="arr-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0,10 3.5,0 7" fill="#fb7185"/>
+        </marker>
+        <marker id="arr-yellow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0,10 3.5,0 7" fill="#fbbf24"/>
+        </marker>
+        <marker id="arr-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+          <polygon points="0 0,10 3.5,0 7" fill="#a78bfa"/>
+        </marker>
+      </defs>
+
+      <!-- Background -->
+      <rect width="1400" height="2000" fill="#020617"/>
+      <rect width="1400" height="2000" fill="url(#grid)"/>
+
+      <!-- ============================================================ -->
+      <!-- SECTION LABELS -->
+      <!-- ============================================================ -->
+      <text x="30" y="58" fill="#334155" font-size="9" font-family="JetBrains Mono">① 注册 &amp; 试用</text>
+      <text x="30" y="358" fill="#334155" font-size="9" font-family="JetBrains Mono">② 订阅激活 &amp; 续费</text>
+      <text x="30" y="658" fill="#334155" font-size="9" font-family="JetBrains Mono">③ 升级 / 降级</text>
+      <text x="30" y="908" fill="#334155" font-size="9" font-family="JetBrains Mono">④ 退订 &amp; 退款</text>
+      <text x="30" y="1158" fill="#334155" font-size="9" font-family="JetBrains Mono">⑤ 支付异常 &amp; 宽限期</text>
+      <text x="30" y="1458" fill="#334155" font-size="9" font-family="JetBrains Mono">⑥ 恢复订阅</text>
+      <text x="30" y="1658" fill="#334155" font-size="9" font-family="JetBrains Mono">⑦ 数据生命周期</text>
+
+      <!-- dividers -->
+      <line x1="30" y1="340" x2="1370" y2="340" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="30" y1="640" x2="1370" y2="640" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="30" y1="890" x2="1370" y2="890" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="30" y1="1140" x2="1370" y2="1140" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="30" y1="1440" x2="1370" y2="1440" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="30" y1="1640" x2="1370" y2="1640" stroke="#1e293b" stroke-width="1" stroke-dasharray="4,4"/>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 1: 注册 & 试用  y: 70–320 -->
+      <!-- ============================================================ -->
+
+      <!-- 用户入口 -->
+      <rect x="580" y="70" width="140" height="50" rx="25" fill="#0f172a"/>
+      <rect x="580" y="70" width="140" height="50" rx="25" fill="rgba(30,41,59,0.6)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="650" y="91" fill="white" font-size="11" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">用户入口</text>
+      <text x="650" y="107" fill="#94a3b8" font-size="8" text-anchor="middle" font-family="JetBrains Mono">未订阅状态</text>
+
+      <!-- arrow down -->
+      <line x1="650" y1="120" x2="650" y2="148" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- 选择套餐 diamond -->
+      <polygon points="650,150 710,175 650,200 590,175" fill="#0f172a"/>
+      <polygon points="650,150 710,175 650,200 590,175" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="650" y="179" fill="#e2e8f0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">选择套餐</text>
+
+      <!-- 开启试用? diamond -->
+      <line x1="650" y1="200" x2="650" y2="223" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+      <polygon points="650,225 720,252 650,279 580,252" fill="#0f172a"/>
+      <polygon points="650,225 720,252 650,279 580,252" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="650" y="256" fill="#e2e8f0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">开启试用期？</text>
+
+      <!-- YES → Trial -->
+      <line x1="580" y1="252" x2="400" y2="252" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr-violet)"/>
+      <text x="490" y="245" fill="#a78bfa" font-size="8" text-anchor="middle" font-family="JetBrains Mono">是</text>
+
+      <rect x="290" y="227" width="110" height="50" rx="6" fill="#0f172a"/>
+      <rect x="290" y="227" width="110" height="50" rx="6" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="345" y="248" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">试用期</text>
+      <text x="345" y="263" fill="#c4b5fd" font-size="8" text-anchor="middle" font-family="JetBrains Mono">7/30天免费</text>
+
+      <!-- Trial → 到期自动扣款? -->
+      <line x1="345" y1="277" x2="345" y2="303" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arr-violet)"/>
+      <polygon points="345,305 415,320 345,335 275,320" fill="#0f172a"/>
+      <polygon points="345,305 415,320 345,335 275,320" fill="rgba(76,29,149,0.3)" stroke="#a78bfa" stroke-width="1.2"/>
+      <text x="345" y="324" fill="#c4b5fd" font-size="8" text-anchor="middle" font-family="JetBrains Mono">到期自动转付费?</text>
+
+      <!-- Trial 期间直接升级付费 arrow -->
+      <line x1="400" y1="252" x2="500" y2="252" stroke="#34d399" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr-green)"/>
+      <text x="448" y="245" fill="#34d399" font-size="7" text-anchor="middle" font-family="JetBrains Mono">提前付费</text>
+
+      <!-- NO → 直接支付 -->
+      <line x1="650" y1="279" x2="650" y2="303" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="660" y="295" fill="#94a3b8" font-size="8" font-family="JetBrains Mono">否</text>
+
+      <!-- 输入支付信息 -->
+      <rect x="580" y="305" width="140" height="50" rx="6" fill="#0f172a"/>
+      <rect x="580" y="305" width="140" height="50" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="650" y="326" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">输入支付信息</text>
+      <text x="650" y="341" fill="#67e8f9" font-size="8" text-anchor="middle" font-family="JetBrains Mono">绑卡 / 钱包</text>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 2: 订阅激活 & 续费  y: 360–630 -->
+      <!-- ============================================================ -->
+
+      <!-- 支付成功 → 订阅激活 -->
+      <line x1="650" y1="355" x2="650" y2="378" stroke="#34d399" stroke-width="1.5" marker-end="url(#arr-green)"/>
+      <text x="660" y="370" fill="#34d399" font-size="8" font-family="JetBrains Mono">成功</text>
+
+      <rect x="560" y="380" width="180" height="55" rx="6" fill="#0f172a"/>
+      <rect x="560" y="380" width="180" height="55" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="2"/>
+      <text x="650" y="403" fill="white" font-size="12" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">订阅激活</text>
+      <text x="650" y="419" fill="#6ee7b7" font-size="9" text-anchor="middle" font-family="JetBrains Mono">正常付费中</text>
+      <text x="650" y="431" fill="#34d399" font-size="7" text-anchor="middle" font-family="JetBrains Mono">存储可读写</text>
+
+      <!-- 支付失败 右分支 -->
+      <line x1="720" y1="330" x2="860" y2="330" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <text x="790" y="323" fill="#fb7185" font-size="8" text-anchor="middle" font-family="JetBrains Mono">失败</text>
+      <rect x="860" y="305" width="120" height="50" rx="6" fill="#0f172a"/>
+      <rect x="860" y="305" width="120" height="50" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+      <text x="920" y="326" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">支付失败</text>
+      <text x="920" y="341" fill="#fda4af" font-size="8" text-anchor="middle" font-family="JetBrains Mono">提示重试</text>
+      <!-- 重试 loop back -->
+      <path d="M 980 330 Q 1030 330 1030 280 Q 1030 252 780 252 Q 660 252 660 305" stroke="#fb7185" stroke-width="1" stroke-dasharray="3,3" fill="none" marker-end="url(#arr-red)"/>
+      <text x="1040" y="295" fill="#fb7185" font-size="7" font-family="JetBrains Mono">重新输入</text>
+
+      <!-- 周期到期前3天提醒 -->
+      <line x1="650" y1="435" x2="650" y2="463" stroke="#34d399" stroke-width="1.5" marker-end="url(#arr-green)"/>
+
+      <rect x="270" y="465" width="760" height="28" rx="4" fill="rgba(120,53,15,0.2)" stroke="#fbbf24" stroke-width="1"/>
+      <text x="650" y="483" fill="#fbbf24" font-size="8" text-anchor="middle" font-family="JetBrains Mono">📅  到期前 3 天 → 系统发送续费提醒（邮件 / 推送）</text>
+
+      <line x1="650" y1="493" x2="650" y2="513" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- 自动续费扣款 diamond -->
+      <polygon points="650,515 740,542 650,569 560,542" fill="#0f172a"/>
+      <polygon points="650,515 740,542 650,569 560,542" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="650" y="540" fill="#6ee7b7" font-size="9" text-anchor="middle" font-family="JetBrains Mono">自动续费</text>
+      <text x="650" y="554" fill="#6ee7b7" font-size="8" text-anchor="middle" font-family="JetBrains Mono">扣款成功？</text>
+
+      <!-- 成功 → 循环 -->
+      <line x1="560" y1="542" x2="420" y2="542" stroke="#34d399" stroke-width="1.5" marker-end="url(#arr-green)"/>
+      <text x="488" y="535" fill="#34d399" font-size="8" text-anchor="middle" font-family="JetBrains Mono">成功</text>
+      <rect x="310" y="517" width="110" height="50" rx="6" fill="#0f172a"/>
+      <rect x="310" y="517" width="110" height="50" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="365" y="538" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">周期延续</text>
+      <text x="365" y="553" fill="#6ee7b7" font-size="8" text-anchor="middle" font-family="JetBrains Mono">订阅继续</text>
+      <!-- loop back to active -->
+      <path d="M 310 542 Q 200 542 200 407 Q 200 380 560 380" stroke="#34d399" stroke-width="1" stroke-dasharray="3,3" fill="none" marker-end="url(#arr-green)"/>
+
+      <!-- 失败 → 宽限期 -->
+      <line x1="740" y1="542" x2="900" y2="542" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <text x="820" y="535" fill="#fb7185" font-size="8" text-anchor="middle" font-family="JetBrains Mono">失败</text>
+      <rect x="900" y="517" width="130" height="50" rx="6" fill="#0f172a"/>
+      <rect x="900" y="517" width="130" height="50" rx="6" fill="rgba(120,53,15,0.4)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="965" y="538" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">宽限期</text>
+      <text x="965" y="553" fill="#fcd34d" font-size="8" text-anchor="middle" font-family="JetBrains Mono">7天 每2天重试</text>
+
+      <!-- arrow to section 5 label -->
+      <line x1="965" y1="567" x2="965" y2="590" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arr-yellow)"/>
+      <text x="975" y="585" fill="#fbbf24" font-size="7" font-family="JetBrains Mono">→ 详见⑤</text>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 3: 升级 / 降级  y: 660–880 -->
+      <!-- ============================================================ -->
+
+      <!-- from active state -->
+      <path d="M 650 435 Q 650 450 1050 450 Q 1200 450 1200 665" stroke="#64748b" stroke-width="1" stroke-dasharray="3,3" fill="none" marker-end="url(#arr)"/>
+      <text x="1060" y="445" fill="#64748b" font-size="7" font-family="JetBrains Mono">用户操作</text>
+
+      <!-- 变更套餐 diamond -->
+      <polygon points="1050,665 1150,690 1050,715 950,690" fill="#0f172a"/>
+      <polygon points="1050,665 1150,690 1050,715 950,690" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="1050" y="694" fill="#e2e8f0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">变更套餐</text>
+
+      <!-- 升级 -->
+      <line x1="950" y1="690" x2="810" y2="690" stroke="#34d399" stroke-width="1.5" marker-end="url(#arr-green)"/>
+      <text x="880" y="683" fill="#34d399" font-size="8" text-anchor="middle" font-family="JetBrains Mono">升级</text>
+      <rect x="680" y="665" width="130" height="60" rx="6" fill="#0f172a"/>
+      <rect x="680" y="665" width="130" height="60" rx="6" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="745" y="686" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">立即生效</text>
+      <text x="745" y="700" fill="#6ee7b7" font-size="8" text-anchor="middle" font-family="JetBrains Mono">补差价</text>
+      <text x="745" y="713" fill="#6ee7b7" font-size="7" text-anchor="middle" font-family="JetBrains Mono">按剩余天数比例</text>
+
+      <!-- 降级 -->
+      <line x1="1150" y1="690" x2="1290" y2="690" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+      <text x="1220" y="683" fill="#fbbf24" font-size="8" text-anchor="middle" font-family="JetBrains Mono">降级</text>
+      <rect x="1290" y="665" width="80" height="60" rx="6" fill="#0f172a"/>
+      <rect x="1290" y="665" width="80" height="60" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="1330" y="686" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">下周期</text>
+      <text x="1330" y="700" fill="#fcd34d" font-size="8" text-anchor="middle" font-family="JetBrains Mono">生效</text>
+      <text x="1330" y="713" fill="#fcd34d" font-size="7" text-anchor="middle" font-family="JetBrains Mono">不退款</text>
+
+      <!-- 超额存储 -->
+      <line x1="1330" y1="725" x2="1330" y2="763" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+      <rect x="1260" y="765" width="140" height="50" rx="6" fill="#0f172a"/>
+      <rect x="1260" y="765" width="140" height="50" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+      <text x="1330" y="785" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">超额存储</text>
+      <text x="1330" y="799" fill="#fda4af" font-size="8" text-anchor="middle" font-family="JetBrains Mono">只读模式</text>
+      <text x="1330" y="810" fill="#fda4af" font-size="7" text-anchor="middle" font-family="JetBrains Mono">无法上传新文件</text>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 4: 退订 & 退款  y: 910–1130 -->
+      <!-- ============================================================ -->
+
+      <!-- from active -->
+      <path d="M 560 407 Q 120 407 120 950" stroke="#fb7185" stroke-width="1" stroke-dasharray="3,3" fill="none" marker-end="url(#arr-red)"/>
+      <text x="108" y="600" fill="#fb7185" font-size="7" font-family="JetBrains Mono" writing-mode="tb">退订操作</text>
+
+      <!-- 发起取消 -->
+      <rect x="60" y="950" width="120" height="50" rx="6" fill="#0f172a"/>
+      <rect x="60" y="950" width="120" height="50" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+      <text x="120" y="971" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">发起取消</text>
+      <text x="120" y="986" fill="#fda4af" font-size="8" text-anchor="middle" font-family="JetBrains Mono">用户确认</text>
+
+      <!-- 确认取消 diamond -->
+      <line x1="180" y1="975" x2="210" y2="975" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <polygon points="280,955 360,975 280,995 200,975" fill="#0f172a"/>
+      <polygon points="280,955 360,975 280,995 200,975" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.2"/>
+      <text x="280" y="979" fill="#fda4af" font-size="9" text-anchor="middle" font-family="JetBrains Mono">确认取消?</text>
+
+      <!-- 立即退款 path -->
+      <line x1="280" y1="995" x2="280" y2="1025" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+      <text x="290" y="1016" fill="#fbbf24" font-size="8" font-family="JetBrains Mono">申请退款</text>
+      <rect x="200" y="1027" width="160" height="55" rx="6" fill="#0f172a"/>
+      <rect x="200" y="1027" width="160" height="55" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="280" y="1048" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">退款审核</text>
+      <text x="280" y="1063" fill="#fcd34d" font-size="8" text-anchor="middle" font-family="JetBrains Mono">按剩余天数比例</text>
+      <text x="280" y="1075" fill="#fcd34d" font-size="7" text-anchor="middle" font-family="JetBrains Mono">1-5个工作日到账</text>
+
+      <!-- 待到期取消 path -->
+      <line x1="360" y1="975" x2="500" y2="975" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <text x="430" y="968" fill="#fb7185" font-size="8" text-anchor="middle" font-family="JetBrains Mono">仅取消</text>
+      <rect x="500" y="950" width="150" height="50" rx="6" fill="#0f172a"/>
+      <rect x="500" y="950" width="150" height="50" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+      <text x="575" y="971" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">待到期取消</text>
+      <text x="575" y="986" fill="#fda4af" font-size="8" text-anchor="middle" font-family="JetBrains Mono">当前周期可继续用</text>
+
+      <!-- 到期后降级 -->
+      <line x1="575" y1="1000" x2="575" y2="1027" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="500" y="1027" width="150" height="50" rx="6" fill="#0f172a"/>
+      <rect x="500" y="1027" width="150" height="50" rx="6" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="575" y="1048" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">已到期</text>
+      <text x="575" y="1063" fill="#94a3b8" font-size="8" text-anchor="middle" font-family="JetBrains Mono">降级为免费版</text>
+
+      <!-- 不确认 -->
+      <line x1="280" y1="955" x2="280" y2="920" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr)"/>
+      <text x="292" y="940" fill="#94a3b8" font-size="7" font-family="JetBrains Mono">取消操作</text>
+      <text x="292" y="950" fill="#94a3b8" font-size="7" font-family="JetBrains Mono">→ 保持订阅</text>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 5: 支付异常 & 宽限期  y: 1160–1430 -->
+      <!-- ============================================================ -->
+
+      <!-- Grace period detail box -->
+      <rect x="60" y="1165" width="580" height="260" rx="8" fill="rgba(120,53,15,0.1)" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4,4"/>
+      <text x="80" y="1185" fill="#fbbf24" font-size="9" font-family="JetBrains Mono">宽限期详细流程</text>
+
+      <!-- 扣款失败 -->
+      <rect x="80" y="1195" width="130" height="50" rx="6" fill="#0f172a"/>
+      <rect x="80" y="1195" width="130" height="50" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+      <text x="145" y="1216" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">扣款失败</text>
+      <text x="145" y="1231" fill="#fda4af" font-size="8" text-anchor="middle" font-family="JetBrains Mono">余额不足/卡失效</text>
+
+      <!-- 发送通知 -->
+      <line x1="210" y1="1220" x2="250" y2="1220" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="250" y="1195" width="120" height="50" rx="6" fill="#0f172a"/>
+      <rect x="250" y="1195" width="120" height="50" rx="6" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="310" y="1216" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">发送通知</text>
+      <text x="310" y="1231" fill="#fcd34d" font-size="8" text-anchor="middle" font-family="JetBrains Mono">邮件/推送</text>
+
+      <!-- 宽限期7天 -->
+      <line x1="310" y1="1245" x2="310" y2="1270" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#arr-yellow)"/>
+      <rect x="230" y="1270" width="160" height="55" rx="6" fill="#0f172a"/>
+      <rect x="230" y="1270" width="160" height="55" rx="6" fill="rgba(120,53,15,0.4)" stroke="#fbbf24" stroke-width="2"/>
+      <text x="310" y="1291" fill="white" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">宽限期</text>
+      <text x="310" y="1305" fill="#fcd34d" font-size="8" text-anchor="middle" font-family="JetBrains Mono">7天 · 每2天自动重试</text>
+      <text x="310" y="1317" fill="#fcd34d" font-size="7" text-anchor="middle" font-family="JetBrains Mono">订阅功能保持可用</text>
+
+      <!-- 用户主动更新支付方式 -->
+      <line x1="390" y1="1297" x2="470" y2="1297" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="430" y="1290" fill="#22d3ee" font-size="7" text-anchor="middle" font-family="JetBrains Mono">主动更新</text>
+      <rect x="470" y="1272" width="130" height="50" rx="6" fill="#0f172a"/>
+      <rect x="470" y="1272" width="130" height="50" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="535" y="1293" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">更新支付方式</text>
+      <text x="535" y="1308" fill="#67e8f9" font-size="8" text-anchor="middle" font-family="JetBrains Mono">立即重试扣款</text>
+
+      <!-- 重试成功 -->
+      <line x1="535" y1="1322" x2="535" y2="1350" stroke="#34d399" stroke-width="1.5" marker-end="url(#arr-green)"/>
+      <text x="545" y="1340" fill="#34d399" font-size="7" font-family="JetBrains Mono">成功</text>
+      <rect x="470" y="1352" width="130" height="40" rx="6" fill="#0f172a"/>
+      <rect x="470" y="1352" width="130" height="40" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="535" y="1377" fill="#6ee7b7" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">订阅恢复正常</text>
+
+      <!-- 宽限期结束仍失败 -->
+      <line x1="310" y1="1325" x2="310" y2="1355" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <text x="322" y="1344" fill="#fb7185" font-size="7" font-family="JetBrains Mono">7天后仍失败</text>
+      <rect x="210" y="1357" width="200" height="55" rx="6" fill="#0f172a"/>
+      <rect x="210" y="1357" width="200" height="55" rx="6" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="2"/>
+      <text x="310" y="1378" fill="white" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">订阅暂停</text>
+      <text x="310" y="1393" fill="#fda4af" font-size="8" text-anchor="middle" font-family="JetBrains Mono">存储只读 · 无法上传</text>
+      <text x="310" y="1405" fill="#fda4af" font-size="7" text-anchor="middle" font-family="JetBrains Mono">30天后警告数据清理</text>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 6: 恢复订阅  y: 1460–1630 -->
+      <!-- ============================================================ -->
+
+      <!-- from expired or suspended -->
+      <path d="M 575 1077 Q 575 1130 750 1130 Q 900 1130 900 1460" stroke="#34d399" stroke-width="1" stroke-dasharray="3,3" fill="none" marker-end="url(#arr-green)"/>
+      <path d="M 310 1412 Q 310 1435 700 1435 Q 900 1435 900 1460" stroke="#34d399" stroke-width="1" stroke-dasharray="3,3" fill="none" marker-end="url(#arr-green)"/>
+
+      <rect x="810" y="1460" width="180" height="50" rx="6" fill="#0f172a"/>
+      <rect x="810" y="1460" width="180" height="50" rx="6" fill="rgba(6,78,59,0.3)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="900" y="1481" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">用户发起恢复</text>
+      <text x="900" y="1496" fill="#6ee7b7" font-size="8" text-anchor="middle" font-family="JetBrains Mono">点击「恢复订阅」</text>
+
+      <line x1="900" y1="1510" x2="900" y2="1535" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- 选择套餐 -->
+      <rect x="820" y="1537" width="160" height="50" rx="6" fill="#0f172a"/>
+      <rect x="820" y="1537" width="160" height="50" rx="6" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="900" y="1558" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">选择套餐</text>
+      <text x="900" y="1573" fill="#67e8f9" font-size="8" text-anchor="middle" font-family="JetBrains Mono">试用期不再提供</text>
+
+      <line x1="900" y1="1587" x2="900" y2="1612" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- 支付 diamond -->
+      <polygon points="900,1614 970,1632 900,1650 830,1632" fill="#0f172a"/>
+      <polygon points="900,1614 970,1632 900,1650 830,1632" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="900" y="1636" fill="#e2e8f0" font-size="9" text-anchor="middle" font-family="JetBrains Mono">支付成功？</text>
+
+      <!-- 成功 → 立即激活 -->
+      <line x1="830" y1="1632" x2="720" y2="1632" stroke="#34d399" stroke-width="1.5" marker-end="url(#arr-green)"/>
+      <text x="775" y="1625" fill="#34d399" font-size="8" text-anchor="middle" font-family="JetBrains Mono">成功</text>
+      <rect x="630" y="1607" width="90" height="50" rx="6" fill="#0f172a"/>
+      <rect x="630" y="1607" width="90" height="50" rx="6" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="2"/>
+      <text x="675" y="1628" fill="white" font-size="10" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">立即激活</text>
+      <text x="675" y="1643" fill="#6ee7b7" font-size="8" text-anchor="middle" font-family="JetBrains Mono">订阅恢复</text>
+
+      <!-- 失败 -->
+      <line x1="970" y1="1632" x2="1080" y2="1632" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arr-red)"/>
+      <text x="1025" y="1625" fill="#fb7185" font-size="8" text-anchor="middle" font-family="JetBrains Mono">失败</text>
+      <rect x="1080" y="1607" width="120" height="50" rx="6" fill="#0f172a"/>
+      <rect x="1080" y="1607" width="120" height="50" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+      <text x="1140" y="1628" fill="white" font-size="10" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">支付失败</text>
+      <text x="1140" y="1643" fill="#fda4af" font-size="8" text-anchor="middle" font-family="JetBrains Mono">提示重试</text>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 7: 数据生命周期  y: 1660–1950 -->
+      <!-- ============================================================ -->
+
+      <!-- from suspended -->
+      <line x1="310" y1="1412" x2="310" y2="1668" stroke="#fb7185" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arr-red)"/>
+
+      <rect x="200" y="1670" width="220" height="55" rx="6" fill="#0f172a"/>
+      <rect x="200" y="1670" width="220" height="55" rx="6" fill="rgba(136,19,55,0.3)" stroke="#fb7185" stroke-width="1.5"/>
+      <text x="310" y="1691" fill="white" font-size="11" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">存储只读</text>
+      <text x="310" y="1706" fill="#fda4af" font-size="8" text-anchor="middle" font-family="JetBrains Mono">可下载，无法上传/修改</text>
+      <text x="310" y="1717" fill="#fda4af" font-size="7" text-anchor="middle" font-family="JetBrains Mono">持续 30 天</text>
+
+      <line x1="310" y1="1725" x2="310" y2="1755" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arr-red)"/>
+
+      <rect x="200" y="1757" width="220" height="55" rx="6" fill="#0f172a"/>
+      <rect x="200" y="1757" width="220" height="55" rx="6" fill="rgba(120,53,15,0.4)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="310" y="1778" fill="white" font-size="11" font-weight="600" text-anchor="middle" font-family="JetBrains Mono">数据清理警告</text>
+      <text x="310" y="1793" fill="#fcd34d" font-size="8" text-anchor="middle" font-family="JetBrains Mono">发送最终警告邮件</text>
+      <text x="310" y="1804" fill="#fcd34d" font-size="7" text-anchor="middle" font-family="JetBrains Mono">7天后删除超额数据</text>
+
+      <line x1="310" y1="1812" x2="310" y2="1840" stroke="#fb7185" stroke-width="1.5" marker-end="url(#arr-red)"/>
+
+      <rect x="200" y="1842" width="220" height="55" rx="6" fill="#0f172a"/>
+      <rect x="200" y="1842" width="220" height="55" rx="6" fill="rgba(136,19,55,0.5)" stroke="#fb7185" stroke-width="2"/>
+      <text x="310" y="1863" fill="white" font-size="11" font-weight="700" text-anchor="middle" font-family="JetBrains Mono">超额数据删除</text>
+      <text x="310" y="1878" fill="#fda4af" font-size="8" text-anchor="middle" font-family="JetBrains Mono">保留免费版配额内数据</text>
+      <text x="310" y="1889" fill="#fda4af" font-size="7" text-anchor="middle" font-family="JetBrains Mono">不可恢复</text>
+
+      <!-- 恢复 bypass -->
+      <path d="M 420 1697 Q 540 1697 540 1632 Q 540 1607 630 1607" stroke="#34d399" stroke-width="1" stroke-dasharray="3,3" fill="none" marker-end="url(#arr-green)"/>
+      <text x="485" y="1680" fill="#34d399" font-size="7" font-family="JetBrains Mono">30天内恢复订阅→数据保留</text>
+
+      <!-- Trial → 退订 from section 1 -->
+      <line x1="415" y1="690" x2="415" y2="950" stroke="#a78bfa" stroke-width="1" stroke-dasharray="3,3" marker-end="url(#arr-red)"/>
+      <text x="425" y="820" fill="#a78bfa" font-size="7" font-family="JetBrains Mono" writing-mode="tb">试用期结束→免费版</text>
+
+      <!-- ============================================================ -->
+      <!-- LEGEND -->
+      <!-- ============================================================ -->
+      <rect x="60" y="1920" width="1300" height="60" rx="8" fill="rgba(15,23,42,0.6)" stroke="#1e293b" stroke-width="1"/>
+      <text x="80" y="1940" fill="#64748b" font-size="9" font-family="JetBrains Mono">图例</text>
+
+      <!-- green -->
+      <rect x="130" y="1928" width="14" height="14" rx="3" fill="rgba(6,78,59,0.4)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="150" y="1940" fill="#94a3b8" font-size="9" font-family="JetBrains Mono">正常 / 激活</text>
+
+      <!-- violet -->
+      <rect x="280" y="1928" width="14" height="14" rx="3" fill="rgba(76,29,149,0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="300" y="1940" fill="#94a3b8" font-size="9" font-family="JetBrains Mono">试用期</text>
+
+      <!-- yellow -->
+      <rect x="390" y="1928" width="14" height="14" rx="3" fill="rgba(120,53,15,0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="410" y="1940" fill="#94a3b8" font-size="9" font-family="JetBrains Mono">警告 / 宽限</text>
+
+      <!-- red -->
+      <rect x="530" y="1928" width="14" height="14" rx="3" fill="rgba(136,19,55,0.4)" stroke="#fb7185" stroke-width="1.5"/>
+      <text x="550" y="1940" fill="#94a3b8" font-size="9" font-family="JetBrains Mono">失败 / 取消 / 暂停</text>
+
+      <!-- grey -->
+      <rect x="720" y="1928" width="14" height="14" rx="3" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="740" y="1940" fill="#94a3b8" font-size="9" font-family="JetBrains Mono">已到期 / 中性</text>
+
+      <!-- cyan -->
+      <rect x="880" y="1928" width="14" height="14" rx="3" fill="rgba(8,51,68,0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+      <text x="900" y="1940" fill="#94a3b8" font-size="9" font-family="JetBrains Mono">用户操作 / 输入</text>
+
+      <!-- diamond -->
+      <polygon points="1050,1928 1066,1935 1050,1942 1034,1935" fill="rgba(30,41,59,0.5)" stroke="#94a3b8" stroke-width="1.2"/>
+      <text x="1073" y="1940" fill="#94a3b8" font-size="9" font-family="JetBrains Mono">判断节点</text>
+
+      <!-- dashed -->
+      <line x1="1170" y1="1935" x2="1210" y2="1935" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arr)"/>
+      <text x="1215" y="1940" fill="#94a3b8" font-size="9" font-family="JetBrains Mono">旁路 / 参考</text>
+
+      <!-- second row legend -->
+      <text x="130" y="1968" fill="#94a3b8" font-size="9" font-family="JetBrains Mono">◆ 菱形 = 判断分支点    → 箭头上文字 = 条件标注    ---- = 旁路或跨区引用</text>
+    </svg>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot green"></div>
+        <h3>正常流程关键节点</h3>
+      </div>
+      <ul>
+        <li>• 新用户 → 选套餐 → 试用/直接付费</li>
+        <li>• 订阅激活后进入自动续费循环</li>
+        <li>• 到期前3天发送续费提醒</li>
+        <li>• 升级立即生效，补按比例差价</li>
+        <li>• 降级下周期生效，当期不退款</li>
+        <li>• 恢复订阅立即激活，不重复给试用</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot yellow"></div>
+        <h3>异常 &amp; 宽限期规则</h3>
+      </div>
+      <ul>
+        <li>• 扣款失败 → 通知 → 7天宽限期</li>
+        <li>• 宽限期内每2天自动重试</li>
+        <li>• 用户可主动更新支付方式触发立即重试</li>
+        <li>• 宽限期内功能保持正常可用</li>
+        <li>• 宽限期结束仍失败 → 订阅暂停</li>
+        <li>• 暂停后存储只读，30天后清理超额</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-dot red"></div>
+        <h3>退订 &amp; 数据保护</h3>
+      </div>
+      <ul>
+        <li>• 退订后当前周期继续可用</li>
+        <li>• 立即退款：按剩余天数比例退</li>
+        <li>• 到期后降级免费版，超额存储只读</li>
+        <li>• 只读保护期30天，期间可恢复订阅</li>
+        <li>• 最终警告7天后删除超额数据</li>
+        <li>• 免费版配额内数据始终保留</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    存储空间订阅生命周期 · Storage Subscription Lifecycle v1.0 · RC 接入存储订阅方案
+  </div>
+</div>
+
+<script>
+function toggleToolbar() {
+  document.getElementById('toolbar-actions').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.toolbar')) {
+    document.getElementById('toolbar-actions').classList.remove('open');
+  }
+});
+async function copyAsImage() {
+  const el = document.getElementById('report-container');
+  const rect = el.getBoundingClientRect();
+  const canvas = await html2canvas(document.body, {
+    x: rect.left - 32, y: rect.top - 32,
+    width: rect.width + 64, height: rect.height + 64,
+    scale: 2, backgroundColor: '#020617',
+    ignoreElements: e => e.classList.contains('toolbar')
+  });
+  canvas.toBlob(blob => navigator.clipboard.write([new ClipboardItem({'image/png': blob})]));
+}
+async function downloadPNG() {
+  const el = document.getElementById('report-container');
+  const rect = el.getBoundingClientRect();
+  const canvas = await html2canvas(document.body, {
+    x: rect.left - 32, y: rect.top - 32,
+    width: rect.width + 64, height: rect.height + 64,
+    scale: 2, backgroundColor: '#020617',
+    ignoreElements: e => e.classList.contains('toolbar')
+  });
+  const a = document.createElement('a');
+  a.download = 'storage-subscription-lifecycle.png';
+  a.href = canvas.toDataURL();
+  a.click();
+}
+async function downloadPDF() {
+  const el = document.getElementById('report-container');
+  const rect = el.getBoundingClientRect();
+  const canvas = await html2canvas(document.body, {
+    x: rect.left - 32, y: rect.top - 32,
+    width: rect.width + 64, height: rect.height + 64,
+    scale: 2, backgroundColor: '#020617',
+    ignoreElements: e => e.classList.contains('toolbar')
+  });
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: [canvas.width, canvas.height] });
+  pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, canvas.width, canvas.height);
+  pdf.save('storage-subscription-lifecycle.pdf');
+}
+</script>
+</body>
+</html>

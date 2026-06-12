@@ -1,89 +1,327 @@
-<mxfile host="app.diagrams.net" agent="7.0" pages="1">
+<mxfile host="app.diagrams.net" agent="7.0">
   <diagram id="sub-lifecycle" name="订阅生命周期状态机">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="2454" dy="718" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="T" value="&lt;b&gt;订阅生命周期状态机&lt;/b&gt; — storage_pro · 由 RevenueCat 管理" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" parent="1" vertex="1">
-          <mxGeometry x="40" y="20" width="1080" height="30" as="geometry" />
+        <mxCell id="T" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=13;" value="&lt;b&gt;订阅生命周期状态机&lt;/b&gt; — storage_pro · 由 RevenueCat 管理" vertex="1">
+          <mxGeometry height="30" width="1080" x="40" y="20" as="geometry" />
         </mxCell>
-        <mxCell id="S0" value="未订阅&#10;(没有 storage_pro)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;" parent="1" vertex="1">
-          <mxGeometry x="60" y="320" width="160" height="60" as="geometry" />
+        <mxCell id="S0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;" value="未订阅&#xa;(没有 storage_pro)" vertex="1">
+          <mxGeometry height="60" width="160" x="20" y="320" as="geometry" />
         </mxCell>
-        <mxCell id="S1" value="免费试用中&#10;(权益✓ / 扣费✗)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
-          <mxGeometry x="310" y="150" width="160" height="60" as="geometry" />
+        <mxCell id="S1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;strokeWidth=2;" value="免费试用中&#xa;(权益✓ / 扣费✗)" vertex="1">
+          <mxGeometry height="60" width="160" x="320" y="90" as="geometry" />
         </mxCell>
-        <mxCell id="S2" value="活跃订阅（付费）&#10;(权益✓ / 扣费✓)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#d5e8d4;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" parent="1" vertex="1">
-          <mxGeometry x="560" y="320" width="160" height="60" as="geometry" />
+        <mxCell id="S2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#d5e8d4;strokeColor=#2e7d32;fontSize=11;fontStyle=1;strokeWidth=2;" value="活跃订阅（付费）&#xa;(权益✓ / 扣费✓)" vertex="1">
+          <mxGeometry height="60" width="160" x="320" y="320" as="geometry" />
         </mxCell>
-        <mxCell id="S3" value="已取消（周期内）&#10;(权益✓ / 扣费✗)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1;" parent="1" vertex="1">
-          <mxGeometry x="810" y="150" width="160" height="60" as="geometry" />
+        <mxCell id="S3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1;" value="已取消（周期内）&#xa;(权益✓ / 扣费✗)" vertex="1">
+          <mxGeometry height="60" width="160" x="810" y="150" as="geometry" />
         </mxCell>
-        <mxCell id="S4" value="宽限期（账单问题）&#10;(权益✓ / 扣费重试中)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#fff2cc;strokeColor=#b8860b;fontSize=11;fontStyle=1;" parent="1" vertex="1">
-          <mxGeometry x="560" y="490" width="160" height="60" as="geometry" />
+        <mxCell id="S4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#fff2cc;strokeColor=#b8860b;fontSize=11;fontStyle=1;" value="宽限期（账单问题）&#xa;(权益✓ / 扣费重试中)" vertex="1">
+          <mxGeometry height="60" width="160" x="320" y="500" as="geometry" />
         </mxCell>
-        <mxCell id="S5" value="已过期&#10;(权益✗ / 扣费✗)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#6c6c6c;fontSize=11;fontStyle=1;" parent="1" vertex="1">
-          <mxGeometry x="1000" y="320" width="150" height="60" as="geometry" />
+        <mxCell id="S5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#6c6c6c;fontSize=11;fontStyle=1;" value="已过期&#xa;(权益✗ / 扣费✗)" vertex="1">
+          <mxGeometry height="60" width="150" x="1000" y="320" as="geometry" />
         </mxCell>
-        <mxCell id="S6" value="已退款&#10;(权益✗ / 金额退回)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" parent="1" vertex="1">
-          <mxGeometry x="810" y="490" width="160" height="60" as="geometry" />
+        <mxCell id="S6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" value="已退款&#xa;(权益✗ / 金额退回)" vertex="1">
+          <mxGeometry height="60" width="160" x="800" y="410" as="geometry" />
         </mxCell>
-        <mxCell id="N1" value="INITIAL_PURCHASE&#10;is_trial_period=true" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=9;fontColor=#2e7d32;" parent="1" vertex="1">
-          <mxGeometry x="60" y="230" width="160" height="30" as="geometry" />
+        <mxCell id="N1" parent="1" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=9;fontColor=#2e7d32;" value="INITIAL_PURCHASE&#xa;is_trial_period=true" vertex="1">
+          <mxGeometry height="30" width="160" x="20" y="220" as="geometry" />
         </mxCell>
-        <mxCell id="N2" value="RENEWAL&#10;（续费成功）" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=9;fontColor=#2e7d32;" parent="1" vertex="1">
-          <mxGeometry x="390" y="420" width="120" height="30" as="geometry" />
+        <mxCell id="N2" parent="1" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=9;fontColor=#2e7d32;" value="RENEWAL&#xa;（续费成功）" vertex="1">
+          <mxGeometry height="30" width="120" x="370" y="399" as="geometry" />
         </mxCell>
-        <mxCell id="Legend" value="&lt;b&gt;图例&lt;/b&gt;&lt;br&gt;━━ 主流转（Webhook 触发）&lt;br&gt;┄┄ 自循环事件（续费 / 升降级 / 退款）&lt;br&gt;🟢 付费活跃  🔵 试用  🟠 已取消  🟡 宽限&lt;br&gt;⚪ 未订阅/过期  🔴 退款" style="text;html=1;strokeColor=#b3b3b3;fillColor=#fafafa;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;spacingLeft=8;" parent="1" vertex="1">
-          <mxGeometry x="60" y="620" width="300" height="90" as="geometry" />
+        <mxCell id="Legend" parent="1" style="text;html=1;strokeColor=#b3b3b3;fillColor=#fafafa;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=10;spacingLeft=8;" value="&lt;b&gt;图例&lt;/b&gt;&lt;br&gt;━━ 主流转（Webhook 触发）&lt;br&gt;┄┄ 自循环事件（续费 / 升降级 / 退款）&lt;br&gt;🟢 付费活跃  🔵 试用  🟠 已取消  🟡 宽限&lt;br&gt;⚪ 未订阅/过期  🔴 退款" vertex="1">
+          <mxGeometry height="90" width="300" x="60" y="620" as="geometry" />
         </mxCell>
-        <mxCell id="SelfRenew" value="🔁 RENEWAL" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=9;fontColor=#2e7d32;fontStyle=2;" parent="1" vertex="1">
-          <mxGeometry x="560" y="270" width="160" height="30" as="geometry" />
+        <mxCell id="SelfRenew" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=9;fontColor=#2e7d32;fontStyle=2;" value="🔁 RENEWAL" vertex="1">
+          <mxGeometry height="30" width="160" x="360" y="290" as="geometry" />
         </mxCell>
-        <mxCell id="SelfPC" value="🔁 PRODUCT_CHANGE&#10;（月↔年升降级）" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=9;fontColor=#9673a6;fontStyle=2;" parent="1" vertex="1">
-          <mxGeometry x="560" y="395" width="160" height="30" as="geometry" />
+        <mxCell id="SelfPC" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=9;fontColor=#9673a6;fontStyle=2;" value="🔁 PRODUCT_CHANGE&#xa;（月↔年升降级）" vertex="1">
+          <mxGeometry height="30" width="160" x="490" y="390" as="geometry" />
         </mxCell>
-        <mxCell id="e1" value="INITIAL_PURCHASE&#10;(is_trial=true)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=0;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S0" target="S1" edge="1">
+        <mxCell id="e1" edge="1" parent="1" source="S0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=0;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" target="S1" value="INITIAL_PURCHASE&#xa;(is_trial=true)">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e2" value="INITIAL_PURCHASE&#10;(is_trial=false)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S0" target="S2" edge="1">
+        <mxCell id="e2" edge="1" parent="1" source="S0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeColor=#1f2937;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" target="S2" value="INITIAL_PURCHASE&#xa;(is_trial=false)">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e3" value="试用期到&#10;RENEWAL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#2e7d32;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S1" target="S2" edge="1">
+        <mxCell id="e3" edge="1" parent="1" source="S1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#2e7d32;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" target="S2" value="试用期到&#xa;RENEWAL">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e4" value="试用期内取消&#10;试用到期 EXPIRATION" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;strokeColor=#b85450;strokeWidth=1.2;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S1" target="S5" edge="1">
+        <mxCell id="e4" edge="1" parent="1" source="S1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;strokeColor=#b85450;strokeWidth=1.2;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" target="S5" value="试用期内取消&#xa;试用到期 EXPIRATION">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1075" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="SelfRenew" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.75;exitY=1;entryX=0;entryY=0.5;strokeColor=#d79b00;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;entryDx=0;entryDy=0;exitDx=0;exitDy=0;" target="S3" value="CANCELLATION">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="480" y="180" />
+            </Array>
+            <mxPoint x="584" y="320" as="sourcePoint" />
+            <mxPoint x="754" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="S2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#b8860b;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" target="S4" value="BILLING_ISSUE">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="S2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.75;entryX=0.5;entryY=0;strokeColor=#b85450;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="S6" value="REFUND">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="880" y="365" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="S3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;strokeColor=#b85450;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" target="S5" value="周期结束&#xa;EXPIRATION">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="1075" y="180" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e5" value="CANCELLATION" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=0;entryX=0;entryY=0.5;strokeColor=#d79b00;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S2" target="S3" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e6" value="BILLING_ISSUE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeColor=#b8860b;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S2" target="S4" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e7" value="REFUND" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=1;entryX=0;entryY=0.5;strokeColor=#b85450;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S2" target="S6" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e8" value="周期结束&#10;EXPIRATION" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;strokeColor=#b85450;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S3" target="S5" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e9" value="补缴成功 RENEWAL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;strokeColor=#2e7d32;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S4" target="S2" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e10" value="补缴失败 EXPIRATION" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=1;strokeColor=#b85450;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S4" target="S5" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e11" value="重新订阅&#10;INITIAL_PURCHASE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;strokeColor=#6c8ebf;strokeWidth=1.5;endArrow=open;dashed=1;dashPattern=4 3;labelBackgroundColor=#ffffff;fontSize=9;" parent="1" source="S5" target="S2" edge="1">
+        <mxCell id="e9" edge="1" parent="1" source="S4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;strokeColor=#2e7d32;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" target="S2" value="补缴成功 RENEWAL">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1075" y="450" />
-              <mxPoint x="540" y="450" />
+              <mxPoint x="270" y="530" />
+              <mxPoint x="270" y="365" />
+            </Array>
+            <mxPoint x="270" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="S4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0.5;entryY=1;strokeColor=#b85450;strokeWidth=1.5;endArrow=block;endFill=1;labelBackgroundColor=#ffffff;fontSize=9;exitDx=0;exitDy=0;" target="S5" value="补缴失败 EXPIRATION">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1075" y="530" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="S5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.25;strokeColor=#6c8ebf;strokeWidth=1.5;endArrow=open;dashed=1;dashPattern=4 3;labelBackgroundColor=#ffffff;fontSize=9;entryDx=0;entryDy=0;" target="S2" value="重新订阅&#xa;INITIAL_PURCHASE">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1000" y="335" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-31" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="VIhzogDrk00uwFuUc1k_-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-36" connectable="0" parent="VIhzogDrk00uwFuUc1k_-31" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="直接支付订阅" vertex="1">
+          <mxGeometry relative="1" x="-0.4971" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;initial_purchase（Normal）&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="310" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-5" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="VIhzogDrk00uwFuUc1k_-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-35" connectable="0" parent="VIhzogDrk00uwFuUc1k_-5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="使用到期自动扣款订阅" vertex="1">
+          <mxGeometry relative="1" x="-0.4133" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;initial_purchase（Trial）&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="80" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-32" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-33" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="VIhzogDrk00uwFuUc1k_-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="50" y="950" />
+              <mxPoint x="50" y="1281" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-34" connectable="0" parent="VIhzogDrk00uwFuUc1k_-33" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="试用到期前取消订阅" vertex="1">
+          <mxGeometry relative="1" x="-0.5337" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;Renewal&lt;br&gt;（is_trial_conversion=ture)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="80" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-15" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="VIhzogDrk00uwFuUc1k_-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-28" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="VIhzogDrk00uwFuUc1k_-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="1210" />
+              <mxPoint x="160" y="1210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-38" connectable="0" parent="VIhzogDrk00uwFuUc1k_-28" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="取消订阅" vertex="1">
+          <mxGeometry relative="1" x="0.8525" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-29" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="1210" />
+              <mxPoint x="640" y="1210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-37" connectable="0" parent="VIhzogDrk00uwFuUc1k_-29" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="自动扣费失败" vertex="1">
+          <mxGeometry relative="1" x="-0.9003" as="geometry">
+            <mxPoint y="34" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-39" connectable="0" parent="VIhzogDrk00uwFuUc1k_-29" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="取消订阅并申请退款" vertex="1">
+          <mxGeometry relative="1" x="0.8268" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-30" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;Stora&lt;/span&gt;&lt;span style=&quot;font-weight: 400; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;ge Active&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="310" y="1120" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;Renewal&lt;br&gt;（周期自动扣费)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="580" y="1120" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-13" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-40" connectable="0" parent="VIhzogDrk00uwFuUc1k_-13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="取消订阅未到重新订阅" vertex="1">
+          <mxGeometry relative="1" x="-0.406" y="1" as="geometry">
+            <mxPoint x="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;Cancellation&lt;br&gt;（Unsubscribe）&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="80" y="1251" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-16" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-41" connectable="0" parent="VIhzogDrk00uwFuUc1k_-16" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="保持n 天权限" vertex="1">
+          <mxGeometry relative="1" x="-0.0944" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;Billin_issue&lt;br&gt;（扣费失败）&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="310" y="1251" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-44" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-43">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-45" connectable="0" parent="VIhzogDrk00uwFuUc1k_-44" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="退款撤销，恢复权限" vertex="1">
+          <mxGeometry relative="1" x="-0.2502" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;Cancellation&lt;br&gt;（custome_support）&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="560" y="1251" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-20" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;宽限n天&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="310" y="1350" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-14" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="1480" />
+              <mxPoint x="280" y="1150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;Uncancellation&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="80" y="1450" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-18" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="1480" />
+              <mxPoint x="280" y="1150" />
+            </Array>
+            <mxPoint x="310" y="1150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-21" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="VIhzogDrk00uwFuUc1k_-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-25" connectable="0" parent="VIhzogDrk00uwFuUc1k_-21" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="N" vertex="1">
+          <mxGeometry relative="1" x="-0.6151" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-17" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="是否扣费恢复" vertex="1">
+          <mxGeometry height="80" width="110" x="335" y="1440" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;Expiration&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="310" y="1560" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-23" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="VIhzogDrk00uwFuUc1k_-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-24" connectable="0" parent="VIhzogDrk00uwFuUc1k_-23" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Y" vertex="1">
+          <mxGeometry relative="1" x="-0.26" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-26" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="60" y="1380" />
+              <mxPoint x="60" y="1580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-27" connectable="0" parent="VIhzogDrk00uwFuUc1k_-26" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="N" vertex="1">
+          <mxGeometry relative="1" x="-0.6146" y="3" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-22" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="是否恢复订阅" vertex="1">
+          <mxGeometry height="60" width="110" x="105" y="1350" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-46" edge="1" parent="1" source="VIhzogDrk00uwFuUc1k_-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" target="VIhzogDrk00uwFuUc1k_-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="810" y="1380" />
+              <mxPoint x="810" y="1100" />
+              <mxPoint x="430" y="1100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-43" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;Refund_reversed&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="560" y="1350" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-47" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;升级降级&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Product_change&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="590" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-48" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;立即生效&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="790" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-49" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=15;fillColor=#f5f5f5;strokeColor=#b3b3b3;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontColor=default;" value="&lt;span style=&quot;font-weight: 400;&quot;&gt;下一 周期生效&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="160" x="790" y="910" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-50" parent="1" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" value="业务侧问题" vertex="1">
+          <mxGeometry height="120" width="250" x="-260" y="990" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-51" parent="VIhzogDrk00uwFuUc1k_-50" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="过期或取消策略：只读、降级、清理" vertex="1">
+          <mxGeometry height="30" width="250" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-52" parent="VIhzogDrk00uwFuUc1k_-50" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="产品类别：Pro（50G）、Plus（10G）" vertex="1">
+          <mxGeometry height="30" width="250" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VIhzogDrk00uwFuUc1k_-53" parent="VIhzogDrk00uwFuUc1k_-50" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" value="Item 3" vertex="1">
+          <mxGeometry height="30" width="250" y="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

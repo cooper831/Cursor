@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>孕早期抗吐饮食执行方案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0c;
+    --ink-soft: #1a1a17;
+    --paper: #f3ede3;
+    --paper-dim: #e6dfd2;
+    --accent: #ff5b22;
+    --accent-soft: #ffb392;
+    --gold: #c8a35a;
+    --line: rgba(243,237,227,0.12);
+    --line-strong: rgba(243,237,227,0.25);
+    --muted: rgba(243,237,227,0.55);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Noto Sans SC', -apple-system, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,91,34,0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(200,163,90,0.06), transparent 60%);
+    background-attachment: fixed;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
+
+  /* MASTHEAD */
+  .masthead { padding: 56px 0 32px; border-bottom: 1px solid var(--line-strong); }
+  .masthead-top {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 48px;
+  }
+  .masthead-top .dot {
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    margin-right: 8px; animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 48px; }
+  .hero-quarter {
+    font-family: 'Fraunces', serif; font-weight: 800;
+    font-size: clamp(72px, 12vw, 160px); line-height: 0.85;
+    letter-spacing: -0.04em; color: var(--paper);
+  }
+  .hero-quarter em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .hero-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(26px, 3vw, 44px); line-height: 1.15;
+    margin-top: 24px; letter-spacing: -0.01em;
+  }
+  .hero-title .underline {
+    background-image: linear-gradient(transparent 65%, var(--accent) 65%, var(--accent) 88%, transparent 88%);
+  }
+  .hero-meta {
+    text-align: right; font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.1em; color: var(--muted); line-height: 1.9;
+  }
+  .hero-meta strong { color: var(--paper); font-weight: 500; }
+  .hero-tagline {
+    margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  }
+  .tag-cell { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .tag-cell-num {
+    font-family: 'Fraunces', serif; font-weight: 300; font-size: 32px;
+    color: var(--accent); line-height: 1; margin-bottom: 8px; font-style: italic;
+  }
+  .tag-cell-label { color: var(--muted); }
+
+  /* INTRO / PRINCIPLES */
+  .intro { padding: 80px 0 48px; display: grid; grid-template-columns: 200px 1fr; gap: 64px; align-items: start; }
+  .intro-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding-top: 8px; border-top: 2px solid var(--accent); display: inline-block;
+  }
+  .intro-body {
+    font-family: 'Noto Serif SC', serif; font-weight: 400;
+    font-size: 20px; line-height: 1.75; color: var(--paper);
+  }
+  .intro-body .high { color: var(--accent); font-weight: 600; }
+
+  /* 4 IRON RULES */
+  .rules-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--line-strong); border: 1px solid var(--line-strong);
+    margin-top: 48px;
+  }
+  .rule-card {
+    background: var(--ink); padding: 32px; position: relative;
+    border-left: 3px solid var(--accent);
+  }
+  .rule-num {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 56px; line-height: 1; color: var(--accent); margin-bottom: 12px;
+  }
+  .rule-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: 20px; margin-bottom: 10px; color: var(--paper);
+  }
+  .rule-desc { font-size: 14px; line-height: 1.7; color: rgba(243,237,227,0.7); }
+  .rule-desc strong { color: var(--paper); font-weight: 500; }
+
+  /* SPACER QUOTE */
+  .spacer-quote {
+    padding: 72px 0; border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong); margin: 40px 0;
+  }
+  .spacer-quote-text {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(28px, 4vw, 52px); line-height: 1.3;
+    text-align: center; letter-spacing: -0.01em;
+  }
+  .spacer-quote-text .accent {
+    color: var(--accent); font-style: italic;
+    font-family: 'Fraunces', serif; font-weight: 300;
+  }
+  .spacer-quote-sub {
+    text-align: center; margin-top: 20px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.25em; color: var(--muted); text-transform: uppercase;
+  }
+
+  /* TIMELINE — 5 MEALS */
+  .section { padding: 72px 0; border-top: 1px solid var(--line-strong); }
+  .section-head { display: grid; grid-template-columns: 200px 1fr; gap: 64px; margin-bottom: 40px; align-items: end; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding-top: 8px; border-top: 2px solid var(--accent); display: inline-block;
+  }
+  .section-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(28px, 3.5vw, 44px); letter-spacing: -0.01em; line-height: 1.1;
+  }
+  .meal-timeline {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+    background: var(--line-strong); border: 1px solid var(--line-strong);
+  }
+  .meal-slot { background: var(--ink); padding: 28px 24px; }
+  .meal-time {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 44px; line-height: 1; color: var(--accent); margin-bottom: 4px;
+  }
+  .meal-ampm {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; margin-bottom: 14px;
+  }
+  .meal-name {
+    font-family: 'Noto Serif SC', serif; font-weight: 600;
+    font-size: 16px; color: var(--paper); margin-bottom: 8px;
+  }
+  .meal-rule { font-size: 12.5px; color: rgba(243,237,227,0.6); line-height: 1.6; }
+  .meal-rule span { color: var(--accent-soft); }
+
+  /* WEEKLY MENU */
+  .week-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px;
+    background: var(--line-strong); border: 1px solid var(--line-strong);
+  }
+  .day-col { background: var(--ink); }
+  .day-header {
+    padding: 18px 16px; border-bottom: 1px solid var(--line-strong);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .day-header .day-num {
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: 32px; font-weight: 300; line-height: 1; color: var(--paper);
+  }
+  .meal-entry { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .meal-entry:last-child { border-bottom: none; }
+  .meal-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .meal-content { font-size: 12px; line-height: 1.65; color: rgba(243,237,227,0.72); }
+  .meal-content strong { color: var(--paper); font-weight: 500; display: block; margin-bottom: 2px; }
+  .meal-content .note { color: var(--accent-soft); font-size: 11px; }
+
+  /* NUTRITION SECTION */
+  .nutrition-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--line-strong); border: 1px solid var(--line-strong);
+  }
+  .nutrition-card { background: var(--ink-soft); padding: 32px; }
+  .nutrition-card.full { grid-column: 1 / -1; background: rgba(255,91,34,0.06); border-left: 3px solid var(--accent); }
+  .nutrition-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .nutrition-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 600;
+    font-size: 18px; margin-bottom: 14px; color: var(--paper);
+  }
+  .nutrition-items { display: flex; flex-direction: column; gap: 9px; }
+  .nutrition-item { font-size: 13.5px; line-height: 1.6; color: rgba(243,237,227,0.7); padding-left: 16px; position: relative; }
+  .nutrition-item::before { content:''; position:absolute; left:0; top:10px; width:8px; height:1px; background:var(--accent); }
+  .nutrition-item strong { color: var(--paper); font-weight: 500; }
+
+  /* EMERGENCY KIT */
+  .kit-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+    background: var(--line-strong); border: 1px solid var(--line-strong);
+  }
+  .kit-item { background: var(--ink); padding: 28px 20px; }
+  .kit-icon {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 40px; color: var(--accent); line-height: 1; margin-bottom: 12px;
+  }
+  .kit-name {
+    font-family: 'Noto Serif SC', serif; font-weight: 600;
+    font-size: 15px; margin-bottom: 6px; color: var(--paper);
+  }
+  .kit-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* DAD SECTION */
+  .dad-section { padding: 72px 0; border-top: 1px solid var(--line-strong); }
+  .dad-narrative {
+    font-family: 'Noto Sans SC', sans-serif; font-weight: 300;
+    font-size: 16px; line-height: 1.85; color: rgba(243,237,227,0.72);
+    padding-left: 20px; border-left: 2px solid var(--gold);
+    font-style: italic; max-width: 760px; margin-bottom: 40px;
+  }
+  .dad-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+    background: var(--line-strong); border: 1px solid var(--line-strong);
+  }
+  .dad-card { background: rgba(200,163,90,0.05); padding: 28px 20px; border-top: 2px solid var(--gold); }
+  .dad-num {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 40px; color: var(--gold); line-height: 1; margin-bottom: 10px;
+  }
+  .dad-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 600;
+    font-size: 15px; margin-bottom: 8px; color: var(--paper);
+  }
+  .dad-desc { font-size: 12px; color: rgba(243,237,227,0.6); line-height: 1.65; }
+  .dad-desc strong { color: var(--paper-dim); font-weight: 500; }
+
+  /* FOOTER */
+  footer {
+    padding: 72px 0 48px; border-top: 1px solid var(--line-strong);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end;
+  }
+  .footer-mark {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 72px; line-height: 0.9; color: var(--accent);
+  }
+  .footer-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.15em; color: var(--muted); text-align: right; line-height: 2;
+  }
+  .footer-meta strong { color: var(--paper); font-weight: 500; }
+
+  /* ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(20px); animation: reveal 1s cubic-bezier(0.2,0.8,0.2,1) forwards; }
+  @keyframes reveal { to { opacity:1; transform:translateY(0); } }
+  .obj { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .obj.in { opacity: 1; transform: translateY(0); }
+
+  /* PRINT */
+  @media print {
+    body { background: #0e0e0c !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body::before { display: none; }
+    .wrap { padding: 0 24px; }
+    @page { margin: 12mm; size: A4; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1000px) {
+    .wrap { padding: 0 24px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-meta { text-align: left; }
+    .hero-tagline, .meal-timeline { grid-template-columns: repeat(2, 1fr); }
+    .intro, .section-head { grid-template-columns: 1fr; gap: 16px; }
+    .rules-grid, .nutrition-grid { grid-template-columns: 1fr; }
+    .week-grid { grid-template-columns: repeat(2, 1fr); }
+    .kit-grid, .dad-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { grid-template-columns: 1fr; }
+    .footer-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="wrap">
+  <header class="masthead reveal">
+    <div class="masthead-top">
+      <span><span class="dot"></span>孕早期营养执行方案</span>
+      <span>5–6 WEEKS · ANTI-NAUSEA PROTOCOL · 2026</span>
+    </div>
+    <div class="hero">
+      <div>
+        <div class="hero-quarter"><em>5</em>–6</div>
+        <div class="hero-title">孕期第 <span class="underline">五六周</span><br>抗吐饮食全攻略</div>
+      </div>
+      <div class="hero-meta">
+        <strong>少量多餐</strong><br>
+        每日 5 餐<br>
+        间隔 ≤ 3 小时<br><br>
+        <strong>干湿分离</strong><br>
+        固液错开 1 小时<br><br>
+        <strong>温凉上桌</strong><br>
+        晾至无热气再端
+      </div>
+    </div>
+    <div class="hero-tagline">
+      <div class="tag-cell">
+        <div class="tag-cell-num">5</div>
+        <div class="tag-cell-label">每日餐次</div>
+      </div>
+      <div class="tag-cell">
+        <div class="tag-cell-num">3h</div>
+        <div class="tag-cell-label">最大间隔</div>
+      </div>
+      <div class="tag-cell">
+        <div class="tag-cell-num">7</div>
+        <div class="tag-cell-label">天完整食谱</div>
+      </div>
+      <div class="tag-cell">
+        <div class="tag-cell-num">4</div>
+        <div class="tag-cell-label">铁律必守</div>
+      </div>
+      <div class="tag-cell">
+        <div class="tag-cell-num">B6</div>
+        <div class="tag-cell-label">止吐营养素</div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<!-- INTRO -->
+<div class="wrap">
+  <div class="intro">
+    <div class="intro-eyebrow">◆ 核心逻辑</div>
+    <div class="intro-body">
+      孕 5–6 周是 hCG 爬坡后的早孕反应高峰期。饮食的核心策略是<span class="high">维持血糖平稳</span>——空腹血糖低会直接加重恶心。通过拆分为 5 餐、严格干湿分离，让胃部始终处于<span class="high">微满不撑</span>的舒适状态，是这周能量摄入的唯一正确路径。
+    </div>
+  </div>
+
+  <!-- 4 IRON RULES -->
+  <div class="rules-grid obj">
+    <div class="rule-card">
+      <div class="rule-num">01</div>
+      <div class="rule-title">干湿分离</div>
+      <div class="rule-desc">固体食物与水、汤、粥严格错开，间隔 <strong>≥ 1 小时</strong>。水汤混饭瞬间撑大胃部，是引发剧烈呕吐的头号触发器。</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">02</div>
+      <div class="rule-title">高碳水起步</div>
+      <div class="rule-desc">睁眼<strong>不要先起床</strong>，在床头干啃 2 片苏打饼干，把胃酸压下去再下床。晨起胃酸最高，这一步是全天抗吐的地基。</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">03</div>
+      <div class="rule-title">温凉不烫</div>
+      <div class="rule-desc">刚出锅的饭菜气味最浓，是孕吐的直接触发器。做好后在厨房<strong>晾 10–15 分钟</strong>至无热气，再端出来。宁凉勿热。</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-num">04</div>
+      <div class="rule-title">空腹必吃</div>
+      <div class="rule-desc">两餐间隔绝对<strong>不超过 3 小时</strong>。血糖一低，恶心感立刻翻倍。哪怕吃 3 片饼干也算一餐，绝不允许空腹超时。</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPACER QUOTE -->
+<div class="wrap">
+  <div class="spacer-quote">
+    <div class="spacer-quote-text">
+      能吃下去的，<span class="accent">就是胜利</span>
+    </div>
+    <div class="spacer-quote-sub">孕早期不需要追求营养均衡 · 先让身体接受食物 · 其余都是次要的</div>
+  </div>
+</div>
+
+<!-- 5-MEAL TIMELINE -->
+<div class="wrap">
+  <div class="section obj">
+    <div class="section-head">
+      <div class="section-eyebrow">◇ 五餐时间轴</div>
+      <div class="section-title">一天的<span style="color:var(--accent)">节奏</span>设计</div>
+    </div>
+    <div class="meal-timeline">
+      <div class="meal-slot">
+        <div class="meal-time">7</div>
+        <div class="meal-ampm">:30 AM · 第一餐</div>
+        <div class="meal-name">晨起踩刹车</div>
+        <div class="meal-rule">干食 · 高碳水<br><span>先吃后起床</span><br>床头备饼干</div>
+      </div>
+      <div class="meal-slot">
+        <div class="meal-time">10</div>
+        <div class="meal-ampm">:00 AM · 第二餐</div>
+        <div class="meal-name">上午能量站</div>
+        <div class="meal-rule">水果 · 坚果<br><span>餐间补水</span><br>维B6 + 叶酸</div>
+      </div>
+      <div class="meal-slot">
+        <div class="meal-time">12</div>
+        <div class="meal-ampm">:30 PM · 第三餐</div>
+        <div class="meal-name">正午精细餐</div>
+        <div class="meal-rule">优质蛋白<br><span>清爽不油腻</span><br>去油去汤</div>
+      </div>
+      <div class="meal-slot">
+        <div class="meal-time">15</div>
+        <div class="meal-ampm">:30 PM · 第四餐</div>
+        <div class="meal-name">下午充电桩</div>
+        <div class="meal-rule">酸甜开胃<br><span>温和淀粉</span><br>柠檬姜水</div>
+      </div>
+      <div class="meal-slot">
+        <div class="meal-time">18</div>
+        <div class="meal-ampm">:30 PM · 第五餐</div>
+        <div class="meal-name">傍晚舒适餐</div>
+        <div class="meal-rule">流质半流质<br><span>防夜间反胃</span><br>极易消化</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY MENU -->
+<div class="wrap">
+  <div class="section obj">
+    <div class="section-head">
+      <div class="section-eyebrow">▲ 一周食谱</div>
+      <div class="section-title">七天<span style="color:var(--accent)">完整</span>菜单</div>
+    </div>
+    <div class="week-grid">
+
+      <!-- MON -->
+      <div class="day-col">
+        <div class="day-header"><span class="day-num">一</span>Monday</div>
+        <div class="meal-entry">
+          <div class="meal-label">07:30 早</div>
+          <div class="meal-content"><strong>白馒头片 + 蛋白</strong>原味白馒头 1 个，水煮蛋 1 个只吃蛋白</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">10:00 加</div>
+          <div class="meal-content"><strong>火龙果</strong>红心½个<br><span class="note">餐后 1h 柠檬姜水</span></div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">12:30 午</div>
+          <div class="meal-content"><strong>清汤牛肉面</strong>去油，加焯水菠菜补叶酸，干湿分离捞面吃</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">15:30 加</div>
+          <div class="meal-content"><strong>蒸贝贝南瓜</strong>2 块 + 苏打饼干 2 片</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">18:30 晚</div>
+          <div class="meal-content"><strong>小米藜麦粥</strong>+ 清炒虾仁（微盐无油）</div>
+        </div>
+      </div>
+
+      <!-- TUE -->
+      <div class="day-col">
+        <div class="day-header"><span class="day-num">二</span>Tuesday</div>
+        <div class="meal-entry">
+          <div class="meal-label">07:30 早</div>
+          <div class="meal-content"><strong>全麦吐司 + 鹌鹑蛋</strong>烤干 1 片，水煮鹌鹑蛋 3 个</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">10:00 加</div>
+          <div class="meal-content"><strong>苹果 + 核桃</strong>鲜切几片，原味核桃 1 小把<br><span class="note">维B6 助减吐</span></div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">12:30 午</div>
+          <div class="meal-content"><strong>番茄丝瓜肉片面</strong>干湿分离，只吃面和肉片</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">15:30 加</div>
+          <div class="meal-content"><strong>纯藕粉 1 碗</strong>微甜温热暖胃</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">18:30 晚</div>
+          <div class="meal-content"><strong>碎肉青菜烂面</strong>菜心，捞干吃</div>
+        </div>
+      </div>
+
+      <!-- WED -->
+      <div class="day-col">
+        <div class="day-header"><span class="day-num">三</span>Wednesday</div>
+        <div class="meal-entry">
+          <div class="meal-label">07:30 早</div>
+          <div class="meal-content"><strong>蒸山药 + 苏打饼</strong>去皮山药 1 节，苏打饼 3 片</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">10:00 加</div>
+          <div class="meal-content"><strong>熟香蕉 1 根</strong><span class="note">助肠蠕动防便秘</span></div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">12:30 午</div>
+          <div class="meal-content"><strong>清蒸鲈鱼</strong>细嫩鱼肉 + 白米饭 1 小碗 + 白灼芦笋<br><span class="note">芦笋=叶酸王者</span></div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">15:30 加</div>
+          <div class="meal-content"><strong>烤大麦茶</strong>+ 苏打饼干 2 片</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">18:30 晚</div>
+          <div class="meal-content"><strong>鸡绒大米粥</strong>+ 白灼生菜（沥干）</div>
+        </div>
+      </div>
+
+      <!-- THU -->
+      <div class="day-col">
+        <div class="day-header"><span class="day-num">四</span>Thursday</div>
+        <div class="meal-entry">
+          <div class="meal-label">07:30 早</div>
+          <div class="meal-content"><strong>苏打饼 + 土豆泥</strong>3 片饼干，土豆泥 1 小碗不加奶</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">10:00 加</div>
+          <div class="meal-content"><strong>火龙果½个</strong><span class="note">餐后饮柠檬姜水</span></div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">12:30 午</div>
+          <div class="meal-content"><strong>潮汕牛肉丸</strong>切开，白米饭 + 清炒冬瓜</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">15:30 加</div>
+          <div class="meal-content"><strong>蒸红薯 + 吐司</strong>红薯 1 小块，烤吐司 1 片</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">18:30 晚</div>
+          <div class="meal-content"><strong>小米疙瘩汤</strong>捞干吃 + 清蒸虾仁 5 只</div>
+        </div>
+      </div>
+
+      <!-- FRI -->
+      <div class="day-col">
+        <div class="day-header"><span class="day-num">五</span>Friday</div>
+        <div class="meal-entry">
+          <div class="meal-label">07:30 早</div>
+          <div class="meal-content"><strong>白馒头 + 煮蛋</strong>干切片 1 个，煮鸡蛋 1 个</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">10:00 加</div>
+          <div class="meal-content"><strong>猕猴桃 1 个</strong><span class="note">酸甜开胃 VC+叶酸</span></div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">12:30 午</div>
+          <div class="meal-content"><strong>鸡汤煨面</strong>撇净浮油，捞面条 + 鸡胸肉丝</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">15:30 加</div>
+          <div class="meal-content"><strong>藕粉 1 碗</strong>+ 苏打饼干 2 片</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">18:30 晚</div>
+          <div class="meal-content"><strong>瘦肉山药粥</strong>+ 清炒西葫芦（少油）</div>
+        </div>
+      </div>
+
+      <!-- SAT -->
+      <div class="day-col">
+        <div class="day-header"><span class="day-num">六</span>Saturday</div>
+        <div class="meal-entry">
+          <div class="meal-label">07:30 早</div>
+          <div class="meal-content"><strong>烤面包 + 鹌鹑蛋</strong>切片 1 片，水煮鹌鹑蛋 3 个</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">10:00 加</div>
+          <div class="meal-content"><strong>苹果½个</strong><span class="note">两餐间小口温开水</span></div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">12:30 午</div>
+          <div class="meal-content"><strong>清蒸排骨</strong>去油 + 白米饭 1 碗 + 白灼菜心</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">15:30 加</div>
+          <div class="meal-content"><strong>贝贝南瓜 1 块</strong>+ 烤大麦茶 1 杯</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">18:30 晚</div>
+          <div class="meal-content"><strong>小米粥 + 蛋羹</strong>清蒸蛋羹不加香油，微量酱油</div>
+        </div>
+      </div>
+
+      <!-- SUN -->
+      <div class="day-col">
+        <div class="day-header"><span class="day-num">日</span>Sunday</div>
+        <div class="meal-entry">
+          <div class="meal-label">07:30 早</div>
+          <div class="meal-content"><strong>苏打饼 + 蒸芋头</strong>4 片饼干，蒸熟芋头 1 小块</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">10:00 加</div>
+          <div class="meal-content"><strong>火龙果½个</strong><span class="note">餐后饮柠檬姜水</span></div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">12:30 午</div>
+          <div class="meal-content"><strong>番茄牛肉末拌饭</strong>酸甜开胃，牛肉剁碎 + 炒芦笋</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">15:30 加</div>
+          <div class="meal-content"><strong>纯燕麦片</strong>温水冲稠，不加糖奶</div>
+        </div>
+        <div class="meal-entry">
+          <div class="meal-label">18:30 晚</div>
+          <div class="meal-content"><strong>碎肉菜碎烂面</strong>干湿分离，捞面吃</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- NUTRITION UPGRADE -->
+<div class="wrap">
+  <div class="section obj">
+    <div class="section-head">
+      <div class="section-eyebrow">● 营养升级</div>
+      <div class="section-title">本周<span style="color:var(--accent)">关键</span>营养素</div>
+    </div>
+    <div class="nutrition-grid">
+      <div class="nutrition-card">
+        <div class="nutrition-tag">◆ 叶酸 · FOLATE</div>
+        <div class="nutrition-title">神经管发育必需</div>
+        <div class="nutrition-items">
+          <div class="nutrition-item"><strong>菠菜、芦笋</strong>每天确保 1 种深绿色蔬菜</div>
+          <div class="nutrition-item"><strong>猕猴桃、火龙果</strong>水果中叶酸含量最高</div>
+          <div class="nutrition-item">每天确保 <strong>≥ 2 种</strong>叶酸来源食物</div>
+        </div>
+      </div>
+      <div class="nutrition-card">
+        <div class="nutrition-tag">◆ 维生素 B6</div>
+        <div class="nutrition-title">被证实可缓解孕吐</div>
+        <div class="nutrition-items">
+          <div class="nutrition-item"><strong>核桃</strong>上午加餐首选，1 小把即可</div>
+          <div class="nutrition-item"><strong>香蕉</strong>熟透后 B6 含量更高</div>
+          <div class="nutrition-item"><strong>鸡胸肉</strong>午餐蛋白质的最佳选择</div>
+        </div>
+      </div>
+      <div class="nutrition-card">
+        <div class="nutrition-tag">◆ 铁 + VC 搭档</div>
+        <div class="nutrition-title">促进铁吸收的黄金组合</div>
+        <div class="nutrition-items">
+          <div class="nutrition-item">猕猴桃 / 番茄与<strong>牛肉同餐</strong>，VC 促铁吸收</div>
+          <div class="nutrition-item">避免铁与茶、咖啡同时摄入</div>
+        </div>
+      </div>
+      <div class="nutrition-card full">
+        <div class="nutrition-tag">⚠ 大忌食物 · AVOID</div>
+        <div class="nutrition-title">本周严格禁止的食物</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:12px;">
+          <div style="font-size:13px;color:rgba(243,237,227,0.6);padding-left:14px;border-left:2px solid var(--accent)">油炸食品<br><span style="color:var(--muted);font-size:11px">气味+油脂双重刺激</span></div>
+          <div style="font-size:13px;color:rgba(243,237,227,0.6);padding-left:14px;border-left:2px solid var(--accent)">重口辣椒<br><span style="color:var(--muted);font-size:11px">刺激胃黏膜</span></div>
+          <div style="font-size:13px;color:rgba(243,237,227,0.6);padding-left:14px;border-left:2px solid var(--accent)">浓汤油汤<br><span style="color:var(--muted);font-size:11px">高脂难消化</span></div>
+          <div style="font-size:13px;color:rgba(243,237,227,0.6);padding-left:14px;border-left:2px solid var(--accent)">生食冷食<br><span style="color:var(--muted);font-size:11px">感染风险</span></div>
+          <div style="font-size:13px;color:rgba(243,237,227,0.6);padding-left:14px;border-left:2px solid var(--accent)">含气饮料<br><span style="color:var(--muted);font-size:11px">胀气加重恶心</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMERGENCY KIT -->
+<div class="wrap">
+  <div class="section obj">
+    <div class="section-head">
+      <div class="section-eyebrow">◇ 急救包</div>
+      <div class="section-title">床头<span style="color:var(--accent)">常备</span>五件套</div>
+    </div>
+    <div class="kit-grid">
+      <div class="kit-item">
+        <div class="kit-icon">01</div>
+        <div class="kit-name">苏打饼干</div>
+        <div class="kit-desc">× 1 袋，晨起必备。睁眼即吃，压住胃酸再起身。</div>
+      </div>
+      <div class="kit-item">
+        <div class="kit-icon">02</div>
+        <div class="kit-name">柠檬片</div>
+        <div class="kit-desc">切片放冰箱保存，恶心时取出含服或嗅闻，即刻镇压。</div>
+      </div>
+      <div class="kit-item">
+        <div class="kit-icon">03</div>
+        <div class="kit-name">话梅 / 陈皮梅</div>
+        <div class="kit-desc">少量备存。酸味刺激唾液分泌，有效压制突发恶心感。</div>
+      </div>
+      <div class="kit-item">
+        <div class="kit-icon">04</div>
+        <div class="kit-name">保温杯温开水</div>
+        <div class="kit-desc">小口慢饮，不要冷水。两餐之间补水专用，绝不随餐喝。</div>
+      </div>
+      <div class="kit-item">
+        <div class="kit-icon">05</div>
+        <div class="kit-name">备用呕吐袋</div>
+        <div class="kit-desc">床头、包里各备一个。心理安全感本身就能降低恶心频率。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAD SECTION -->
+<div class="wrap">
+  <div class="dad-section obj">
+    <div class="section-head">
+      <div class="section-eyebrow">▲ 准爸爸后勤</div>
+      <div class="section-title" style="color:var(--gold)">五条<span style="background-image:linear-gradient(transparent 65%,var(--gold) 65%,var(--gold) 88%,transparent 88%)">执行</span>备忘</div>
+    </div>
+    <div class="dad-narrative">
+      孕早期嗅觉像放大镜。你的任务不是让她吃得营养均衡，而是让她在最低痛苦下把食物吃进去。这一周，她的每一口都是胜利。
+    </div>
+    <div class="dad-grid">
+      <div class="dad-card">
+        <div class="dad-num">01</div>
+        <div class="dad-title">口味顺从</div>
+        <div class="dad-desc">这周不需要追求营养均衡。<strong>她想吃什么就做什么</strong>，能吃下去的就是胜利，不喜欢的立刻端走。</div>
+      </div>
+      <div class="dad-card">
+        <div class="dad-num">02</div>
+        <div class="dad-title">断绝油烟</div>
+        <div class="dad-desc"><strong>厨房关门</strong>，抽油烟机全开。做好后关闭通风，再开门端出。绝不在她面前炒菜煎肉。</div>
+      </div>
+      <div class="dad-card">
+        <div class="dad-num">03</div>
+        <div class="dad-title">温凉上桌</div>
+        <div class="dad-desc">饭菜做好后在厨房<strong>晾 10–15 分钟</strong>，待无热气再端出。热气 = 气味最浓 = 呕吐触发器。</div>
+      </div>
+      <div class="dad-card">
+        <div class="dad-num">04</div>
+        <div class="dad-title">批量蒸制</div>
+        <div class="dad-desc">优先用<strong>电饭煲 + 蒸锅</strong>，减少炒制。一次蒸多份分装冰箱，降低每餐烹饪气味刺激。</div>
+      </div>
+      <div class="dad-card">
+        <div class="dad-num">05</div>
+        <div class="dad-title">备好应急</div>
+        <div class="dad-desc"><strong>床头放苏打饼 + 小垃圾袋</strong>，半夜反胃第一时间能用上。她不需要开口要，你已经备好了。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="wrap">
+  <footer>
+    <div class="footer-mark">好。</div>
+    <div class="footer-meta">
+      <strong>孕早期抗吐饮食方案</strong><br>
+      孕 5–6 周 · 五餐制 · 干湿分离<br>
+      叶酸 · 维B6 · 柠檬姜水<br><br>
+      每一口都是胜利<br>
+      <strong>加油，准妈妈。</strong>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.obj').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

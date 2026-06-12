@@ -1,0 +1,145 @@
+<mxfile host="65bd71144e">
+    <diagram id="dtc-5-layer" name="DTC 5层架构 + 横切支撑">
+        <mxGraphModel dx="1948" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1060" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="t1" value="全球 DTC 业务核心架构图  ·  Momcozy 重构参考" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=22;fontStyle=1;fontColor=#0F172A;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="14" width="1636" height="32" as="geometry"/>
+                </mxCell>
+                <mxCell id="t2" value="5 层主架构 + 5 项横切支撑层 · 对标 DJI / Bambu Lab · 2026-05" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=12;fontStyle=2;fontColor=#64748B;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="50" width="1636" height="18" as="geometry"/>
+                </mxCell>
+                <mxCell id="L0c3" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#0F172A;strokeColor=#0F172A;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="88" width="1180" height="92" as="geometry"/>
+                </mxCell>
+                <mxCell id="L0h4" value="&lt;span style='font-size:14px;font-weight:700;color:#FFFFFF'&gt;&lt;span style='background:rgba(255,255,255,0.18);padding:2px 8px;border-radius:4px;margin-right:10px'&gt;L0&lt;/span&gt;战略与组织  Strategy &amp;amp; Organization&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=14;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="88" width="1180" height="34" as="geometry"/>
+                </mxCell>
+                <mxCell id="L0i5" value="&lt;div style='font-size:13px;font-weight:600;color:#FFFFFF;margin-bottom:2px'&gt;品牌战略&lt;/div&gt;&lt;div style='font-size:11px;color:#94A3B8'&gt;母婴关怀心智 / 全周期陪伴&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#1E293B;strokeColor=#334155;strokeWidth=1;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;spacingTop=8;spacingBottom=8;" parent="1" vertex="1">
+                    <mxGeometry x="45" y="128" width="281" height="46" as="geometry"/>
+                </mxCell>
+                <mxCell id="L0i6" value="&lt;div style='font-size:13px;font-weight:600;color:#FFFFFF;margin-bottom:2px'&gt;DTC 占比目标&lt;/div&gt;&lt;div style='font-size:11px;color:#94A3B8'&gt;一级 OKR / 季度复盘&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#1E293B;strokeColor=#334155;strokeWidth=1;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;spacingTop=8;spacingBottom=8;" parent="1" vertex="1">
+                    <mxGeometry x="336" y="128" width="281" height="46" as="geometry"/>
+                </mxCell>
+                <mxCell id="L0i7" value="&lt;div style='font-size:13px;font-weight:600;color:#FFFFFF;margin-bottom:2px'&gt;全球化布局&lt;/div&gt;&lt;div style='font-size:11px;color:#94A3B8'&gt;北美 · 欧洲 · 日韩 · DACH&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#1E293B;strokeColor=#334155;strokeWidth=1;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;spacingTop=8;spacingBottom=8;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="128" width="281" height="46" as="geometry"/>
+                </mxCell>
+                <mxCell id="L0i8" value="&lt;div style='font-size:13px;font-weight:600;color:#FFFFFF;margin-bottom:2px'&gt;组织模型&lt;/div&gt;&lt;div style='font-size:11px;color:#94A3B8'&gt;DTC 独立 BU + 中台共享&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=6;fillColor=#1E293B;strokeColor=#334155;strokeWidth=1;align=left;verticalAlign=middle;spacingLeft=12;spacingRight=12;spacingTop=8;spacingBottom=8;" parent="1" vertex="1">
+                    <mxGeometry x="918" y="128" width="281" height="46" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lc9" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#EFF6FF;strokeColor=#2563EB;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="196" width="1180" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lh10" value="&lt;div style='display:flex;justify-content:space-between'&gt;&lt;span style='font-size:14px;font-weight:700;color:#FFFFFF'&gt;&lt;span style='background:rgba(255,255,255,0.18);padding:2px 8px;border-radius:4px;margin-right:10px'&gt;L1&lt;/span&gt;流量获取  GTM / Acquisition&lt;/span&gt;&lt;span style='font-size:11px;font-style:italic;color:#E0E7FF;align-self:center'&gt;把对的人，用最低 CAC 带到自有阵地&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#2563EB;strokeColor=#2563EB;fontColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="196" width="1180" height="38" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm11" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;付费投流&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· Meta / Google / TikTok / Pinterest&lt;br/&gt;· 信息流 · 搜索 · 购物广告&lt;br/&gt;· 再营销 Retargeting&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="45" y="240" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm12" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;SEO / 内容站&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 关键词矩阵&lt;br/&gt;· 母婴长尾内容&lt;br/&gt;· 对比 · 评测 · 教程&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="336" y="240" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm13" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;红人 / 联盟&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· KOL 头部背书&lt;br/&gt;· 妈妈 KOC 矩阵&lt;br/&gt;· Affiliate 分销&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="240" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm14" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;PR / 品牌&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 奖项 · 媒体公关&lt;br/&gt;· 跨界联名&lt;br/&gt;· 线下展会 · 母婴展&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="918" y="240" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lc15" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#F5F3FF;strokeColor=#7C3AED;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="360" width="1180" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lh16" value="&lt;div style='display:flex;justify-content:space-between'&gt;&lt;span style='font-size:14px;font-weight:700;color:#FFFFFF'&gt;&lt;span style='background:rgba(255,255,255,0.18);padding:2px 8px;border-radius:4px;margin-right:10px'&gt;L2&lt;/span&gt;体验与转化  Experience &amp; Conversion&lt;/span&gt;&lt;span style='font-size:11px;font-style:italic;color:#E0E7FF;align-self:center'&gt;在自有阵地把流量转为订单与 ARPU&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#7C3AED;strokeColor=#7C3AED;fontColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="360" width="1180" height="38" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm17" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;独立站 / App&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· Shopify+ · Headless&lt;br/&gt;· App 内购 + 订阅&lt;br/&gt;· 多端一致体验&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="45" y="404" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm18" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;内容 / 落地页&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 场景化 PDP&lt;br/&gt;· 视频 · 3D · AR 演示&lt;br/&gt;· 对比 · 选购助手&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="336" y="404" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm19" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;推荐 / 搜索&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 个性化推荐&lt;br/&gt;· 智能搜索 + 引导&lt;br/&gt;· 购物车挽回&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="404" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm20" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;支付 / 履约&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 多币种 · 本地支付&lt;br/&gt;· 海外仓 · 极速达&lt;br/&gt;· Klarna · Afterpay 分期&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="918" y="404" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lc21" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#ECFDF5;strokeColor=#059669;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="524" width="1180" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lh22" value="&lt;div style='display:flex;justify-content:space-between'&gt;&lt;span style='font-size:14px;font-weight:700;color:#FFFFFF'&gt;&lt;span style='background:rgba(255,255,255,0.18);padding:2px 8px;border-radius:4px;margin-right:10px'&gt;L3&lt;/span&gt;客户服务  Pre &amp; Post-Sales&lt;/span&gt;&lt;span style='font-size:11px;font-style:italic;color:#E0E7FF;align-self:center'&gt;用服务体验拉开与平台货的差距&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#059669;strokeColor=#059669;fontColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="524" width="1180" height="38" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm23" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;售前咨询&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· AI 客服 + Live Chat&lt;br/&gt;· 母婴专家 1v1&lt;br/&gt;· 选购顾问 · 工程师&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="45" y="568" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm24" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;售后服务&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· RMA 退换货&lt;br/&gt;· 保修 · 维修 · 配件&lt;br/&gt;· 本地化退仓&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="336" y="568" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm25" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;客户成功&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 开箱引导&lt;br/&gt;· 月龄使用方案&lt;br/&gt;· 新生儿陪伴&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="568" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm26" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;VOC 反馈&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· NPS / CSAT&lt;br/&gt;· 工单语义分析&lt;br/&gt;· 差评闭环&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="918" y="568" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lc27" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FEF2F2;strokeColor=#DC2626;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="688" width="1180" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lh28" value="&lt;div style='display:flex;justify-content:space-between'&gt;&lt;span style='font-size:14px;font-weight:700;color:#FFFFFF'&gt;&lt;span style='background:rgba(255,255,255,0.18);padding:2px 8px;border-radius:4px;margin-right:10px'&gt;L4&lt;/span&gt;营销与触达  Marketing / CRM&lt;/span&gt;&lt;span style='font-size:11px;font-style:italic;color:#E0E7FF;align-self:center'&gt;用生命周期提升复购、LTV、唤醒沉睡&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#DC2626;strokeColor=#DC2626;fontColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="688" width="1180" height="38" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm29" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;生命周期营销&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· Welcome · Onboarding&lt;br/&gt;· Win-back 唤回&lt;br/&gt;· Cross-sell · Upsell&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="45" y="732" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm30" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;内容营销&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 博客 · 视频 · 教程&lt;br/&gt;· 妈妈故事 · UGC&lt;br/&gt;· 节日 · 月龄主题&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="336" y="732" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm31" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;活动促销&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 新品发布 · 闪购&lt;br/&gt;· 黑五 · Prime 节奏&lt;br/&gt;· Bundle 套装&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="732" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm32" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;个性化沟通&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· EDM · SMS · Push&lt;br/&gt;· 标签分层触达&lt;br/&gt;· AI 文案生成&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="918" y="732" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lc33" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="852" width="1180" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lh34" value="&lt;div style='display:flex;justify-content:space-between'&gt;&lt;span style='font-size:14px;font-weight:700;color:#FFFFFF'&gt;&lt;span style='background:rgba(255,255,255,0.18);padding:2px 8px;border-radius:4px;margin-right:10px'&gt;L5&lt;/span&gt;社区与会员增长  Community &amp; Loyalty&lt;/span&gt;&lt;span style='font-size:11px;font-style:italic;color:#E0E7FF;align-self:center'&gt;把用户变成共创者与传播者，反哺 DTC&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#D97706;strokeColor=#D97706;fontColor=#FFFFFF;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;" parent="1" vertex="1">
+                    <mxGeometry x="32" y="852" width="1180" height="38" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm35" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;品牌社区&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 妈妈论坛 · 群组&lt;br/&gt;· Discord · FB Group&lt;br/&gt;· 线下妈妈聚会&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="45" y="896" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm36" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;UGC 生态&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 创作激励&lt;br/&gt;· 晒单 · 评测打卡&lt;br/&gt;· 孕产成长日记&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="336" y="896" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm37" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;会员体系&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 等级 · 积分 · 权益&lt;br/&gt;· 生日 · 月龄关怀&lt;br/&gt;· App 端独享&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="627" y="896" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="Lm38" value="&lt;div style='font-size:13px;font-weight:600;color:#0F172A;margin-bottom:6px'&gt;订阅 / 复购&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.55'&gt;· 耗材订阅 · 自动续订&lt;br/&gt;· 周期购 · 套装&lt;br/&gt;· Refer-a-friend&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;fillColor=#FFFFFF;strokeColor=#E2E8F0;strokeWidth=1;align=left;verticalAlign=top;spacingLeft=11;spacingRight=11;spacingTop=9;spacingBottom=9;" parent="1" vertex="1">
+                    <mxGeometry x="918" y="896" width="281" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="St39" value="&lt;div style='font-size:14px;font-weight:700;color:#FFFFFF;margin-bottom:6px'&gt;横切支撑层  Horizontal Enablers&lt;/div&gt;&lt;div style='font-size:11px;color:#94A3B8;line-height:1.55'&gt;贯穿所有 5 层主架构的中台能力&lt;br/&gt;缺一层则对应业务层成「孤岛」&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#0F172A;strokeColor=#0F172A;align=left;verticalAlign=middle;spacingLeft=16;spacingRight=14;spacingTop=14;spacingBottom=14;" parent="1" vertex="1">
+                    <mxGeometry x="1232" y="88" width="258" height="92" as="geometry"/>
+                </mxCell>
+                <mxCell id="Se40" value="&lt;div style='font-size:13px;font-weight:600;color:#0EA5E9;margin-bottom:2px'&gt;数据中台 / CDP&lt;/div&gt;&lt;div style='font-size:10px;font-style:italic;color:#94A3B8;margin-bottom:8px'&gt;为所有层提供统一用户与归因数据&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.6'&gt;· 统一用户 ID&lt;br/&gt;· 全渠道归因&lt;br/&gt;· 标签 · 客群 · 看板&lt;br/&gt;· AB 实验平台&lt;br/&gt;· 用户画像 · 旅程地图&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#0EA5E9;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;spacingBottom=12;" parent="1" vertex="1">
+                    <mxGeometry x="1232" y="196" width="258" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="Se41" value="&lt;div style='font-size:13px;font-weight:600;color:#8B5CF6;margin-bottom:2px'&gt;AI / 算法&lt;/div&gt;&lt;div style='font-size:10px;font-style:italic;color:#94A3B8;margin-bottom:8px'&gt;为获客、转化、服务、复购提供智能能力&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.6'&gt;· 推荐 · 搜索&lt;br/&gt;· AI 客服 · 文案&lt;br/&gt;· 选购助手 · 月龄推荐&lt;br/&gt;· 智能投放 · 智能定价&lt;br/&gt;· 向量搜索 · 多模态&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#8B5CF6;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;spacingBottom=12;" parent="1" vertex="1">
+                    <mxGeometry x="1232" y="360" width="258" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="Se42" value="&lt;div style='font-size:13px;font-weight:600;color:#10B981;margin-bottom:2px'&gt;合规 / 支付 / 跨境&lt;/div&gt;&lt;div style='font-size:10px;font-style:italic;color:#94A3B8;margin-bottom:8px'&gt;跨境业务的合规底座与多支付能力&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.6'&gt;· GDPR / CCPA&lt;br/&gt;· 本地化税务&lt;br/&gt;· 退税 · 反欺诈&lt;br/&gt;· 多支付通道&lt;br/&gt;· VAT/IOSS · SCA 合规&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#10B981;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;spacingBottom=12;" parent="1" vertex="1">
+                    <mxGeometry x="1232" y="524" width="258" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="Se43" value="&lt;div style='font-size:13px;font-weight:600;color:#F59E0B;margin-bottom:2px'&gt;供应链 / 履约&lt;/div&gt;&lt;div style='font-size:10px;font-style:italic;color:#94A3B8;margin-bottom:8px'&gt;海外仓、柔性供应、退货逆向的承接&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.6'&gt;· 海外仓布局&lt;br/&gt;· C2M · 柔性供应&lt;br/&gt;· 时效与库存&lt;br/&gt;· 退货逆向&lt;br/&gt;· 新品试销快反&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#F59E0B;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;spacingBottom=12;" parent="1" vertex="1">
+                    <mxGeometry x="1232" y="688" width="258" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="Se44" value="&lt;div style='font-size:13px;font-weight:600;color:#EF4444;margin-bottom:2px'&gt;组织与人才&lt;/div&gt;&lt;div style='font-size:10px;font-style:italic;color:#94A3B8;margin-bottom:8px'&gt;DTC 独立 BU + 全球本地团队 + 文化&lt;/div&gt;&lt;div style='font-size:11px;color:#475569;line-height:1.6'&gt;· DTC 独立 BU&lt;br/&gt;· 全球化本地团队&lt;br/&gt;· PM · 增长 · CRM 配比&lt;br/&gt;· 数据驱动文化&lt;br/&gt;· OKR · 增长黑客&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=4;fillColor=#FFFFFF;strokeColor=#EF4444;strokeWidth=2;align=left;verticalAlign=top;spacingLeft=14;spacingRight=12;spacingTop=12;spacingBottom=12;" parent="1" vertex="1">
+                    <mxGeometry x="1232" y="852" width="258" height="152" as="geometry"/>
+                </mxCell>
+                <mxCell id="ln45" value="&lt;span style='font-size:11px;color:#475569'&gt;&lt;b&gt;读图：&lt;/b&gt;纵向 5 层 = 用户旅程主链路（自上而下：战略 → 流量 → 转化 → 服务 → 营销 → 社区）；右侧 5 项 = 贯穿所有层的横切中台能力，缺一项则对应业务层会变成「孤岛」。&lt;/span&gt;&lt;br/&gt;&lt;span style='font-size:10px;font-style:italic;color:#94A3B8'&gt;v1.1 · 2026-05-11 · 配套：dtc-architecture-framework.canvas.tsx · momcozy-商业化2026规划-完整版.md&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;" parent="1" vertex="1">
+                    <mxGeometry x="20" y="1018" width="1636" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

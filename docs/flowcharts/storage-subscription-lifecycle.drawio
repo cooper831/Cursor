@@ -1,0 +1,399 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="fElLd1IxtsG-jtUQER6g" name="Page-1">
+    <mxGraphModel dx="1316" dy="632" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2336" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zone1" parent="1" style="text;html=1;strokeColor=none;fillColor=#1e3a5f22;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;fontColor=#4a90d9;fontStyle=1;swimlaneLine=0;" value="① 注册 &amp; 试用" vertex="1">
+          <mxGeometry height="320" width="1600" x="20" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="zone2" parent="1" style="text;html=1;strokeColor=none;fillColor=#0a3d2222;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;fontColor=#2ecc71;fontStyle=1;swimlaneLine=0;" value="② 订阅激活 &amp; 自动续费" vertex="1">
+          <mxGeometry height="280" width="1600" x="20" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="zone3" parent="1" style="text;html=1;strokeColor=none;fillColor=#3d2a0022;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;fontColor=#f39c12;fontStyle=1;swimlaneLine=0;" value="③ 升级 / 降级" vertex="1">
+          <mxGeometry height="240" width="1600" x="20" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="zone4" parent="1" style="text;html=1;strokeColor=none;fillColor=#3d0a0a22;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;fontColor=#e74c3c;fontStyle=1;swimlaneLine=0;" value="④ 退订 &amp; 退款" vertex="1">
+          <mxGeometry height="260" width="1600" x="20" y="920" as="geometry" />
+        </mxCell>
+        <mxCell id="zone5" parent="1" style="text;html=1;strokeColor=none;fillColor=#3d2a0022;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;fontColor=#f39c12;fontStyle=1;swimlaneLine=0;" value="⑤ 支付异常 &amp; 宽限期" vertex="1">
+          <mxGeometry height="280" width="1600" x="20" y="1200" as="geometry" />
+        </mxCell>
+        <mxCell id="zone6" parent="1" style="text;html=1;strokeColor=none;fillColor=#0a3d2222;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;fontColor=#2ecc71;fontStyle=1;swimlaneLine=0;" value="⑥ 恢复订阅" vertex="1">
+          <mxGeometry height="220" width="1600" x="20" y="1500" as="geometry" />
+        </mxCell>
+        <mxCell id="zone7" parent="1" style="text;html=1;strokeColor=none;fillColor=#3d0a0a22;align=left;verticalAlign=top;spacingLeft=8;fontSize=10;fontColor=#e74c3c;fontStyle=1;swimlaneLine=0;" value="⑦ 数据生命周期" vertex="1">
+          <mxGeometry height="260" width="1600" x="20" y="1740" as="geometry" />
+        </mxCell>
+        <mxCell id="n_entry" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=11;fontStyle=1;" value="用户入口&#xa;（未订阅状态）" vertex="1">
+          <mxGeometry height="60" width="160" x="720" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="n_plan" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="选择套餐&#xa;基础/专业/企业" vertex="1">
+          <mxGeometry height="80" width="200" x="700" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="e_entry_plan" edge="1" parent="1" source="n_entry" style="edgeStyle=orthogonalEdgeStyle;" target="n_plan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_trial_q" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="开启试用期？" vertex="1">
+          <mxGeometry height="80" width="200" x="700" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="e_plan_trialq" edge="1" parent="1" source="n_plan" style="edgeStyle=orthogonalEdgeStyle;" target="n_trial_q">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_trial" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="&lt;b&gt;试用期&lt;/b&gt;&#xa;7 / 30 天免费&#xa;无需付款" vertex="1">
+          <mxGeometry height="60" width="160" x="360" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_trial_init" parent="1" style="text;html=1;strokeColor=#9673a6;fillColor=#f3e8ff;fontSize=8;align=center;rounded=1;" value="🔔 RC: INITIAL_PURCHASE&#xa;period_type=TRIAL" vertex="1">
+          <mxGeometry height="40" width="200" x="340" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="e_trialq_trial" edge="1" parent="1" source="n_trial_q" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitFixed=1;" target="n_trial" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_payment_input" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="输入支付信息&#xa;绑卡 / 钱包" vertex="1">
+          <mxGeometry height="60" width="160" x="1150" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e_trialq_pay" edge="1" parent="1" source="n_trial_q" style="edgeStyle=orthogonalEdgeStyle;" target="n_payment_input" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_pay_q" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="支付成功？" vertex="1">
+          <mxGeometry height="80" width="180" x="920" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="e_payinput_payq" edge="1" parent="1" source="n_payment_input" style="edgeStyle=orthogonalEdgeStyle;" target="n_pay_q">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1230" y="230" />
+              <mxPoint x="1010" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n_pay_fail_1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="支付失败&#xa;提示重新输入" vertex="1">
+          <mxGeometry height="60" width="140" x="1160" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="e_payq_fail" edge="1" parent="1" source="n_pay_q" style="edgeStyle=orthogonalEdgeStyle;fontColor=#b85450;strokeColor=#b85450;" target="n_pay_fail_1" value="失败">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_payfail_back" edge="1" parent="1" source="n_pay_fail_1" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitFixed=1;entryX=1;entryY=0.5;entryFixed=1;curved=1;strokeColor=#b85450;" target="n_payment_input" value="重试">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1370" y="290" />
+              <mxPoint x="1370" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n_trial_end_q" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" value="试用到期&#xa;已绑定支付方式？" vertex="1">
+          <mxGeometry height="80" width="240" x="320" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e_trial_end" edge="1" parent="1" source="n_trial" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitFixed=1;" target="n_trial_end_q">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_trialendq_yes" edge="1" parent="1" source="n_trial_end_q" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitFixed=1;strokeColor=#2ecc71;fontColor=#2ecc71;" target="n_pay_q" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_trial_expired" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=10;" value="已到期&#xa;降级免费版" vertex="1">
+          <mxGeometry height="60" width="140" x="100" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_trial_exp" parent="1" style="text;html=1;strokeColor=#b85450;fillColor=#fce4ec;fontSize=8;align=center;rounded=1;" value="🔔 RC: CANCELLATION&#xa;🔔 RC: EXPIRATION" vertex="1">
+          <mxGeometry height="40" width="160" x="60" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e_trialendq_no" edge="1" parent="1" source="n_trial_end_q" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitFixed=1;strokeColor=#b85450;fontColor=#b85450;" target="n_trial_expired" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_active" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" value="&lt;b&gt;订阅激活&lt;/b&gt;&#xa;正常付费中&#xa;存储可读写" vertex="1">
+          <mxGeometry height="70" width="200" x="700" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_active_init" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#e8f5e9;fontSize=8;align=center;rounded=1;" value="🔔 RC: INITIAL_PURCHASE&#xa;period_type=NORMAL" vertex="1">
+          <mxGeometry height="40" width="200" x="920" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="e_payq_active" edge="1" parent="1" source="n_pay_q" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;fontColor=#2ecc71;exitX=0.5;exitY=1;exitFixed=1;exitDx=0;exitDy=0;" target="n_active" value="成功">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="920" y="330" />
+              <mxPoint x="920" y="340" />
+              <mxPoint x="810" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n_remind" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" value="📅 到期前 3 天&#xa;系统发送续费提醒&#xa;（邮件 / 推送）" vertex="1">
+          <mxGeometry height="60" width="200" x="700" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="e_active_remind" edge="1" parent="1" source="n_active" style="edgeStyle=orthogonalEdgeStyle;" target="n_remind">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_renew_q" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="自动续费&#xa;扣款成功？" vertex="1">
+          <mxGeometry height="80" width="240" x="680" y="575" as="geometry" />
+        </mxCell>
+        <mxCell id="e_remind_renew" edge="1" parent="1" source="n_remind" style="edgeStyle=orthogonalEdgeStyle;" target="n_renew_q">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_renewal_ok" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="周期延续&#xa;订阅继续" vertex="1">
+          <mxGeometry height="60" width="140" x="380" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_renewal" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#e8f5e9;fontSize=8;align=center;rounded=1;" value="🔔 RC: RENEWAL&#xa;is_trial_conversion=false" vertex="1">
+          <mxGeometry height="40" width="190" x="360" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="e_renew_ok" edge="1" parent="1" source="n_renew_q" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitFixed=1;strokeColor=#82b366;fontColor=#2ecc71;" target="n_renewal_ok" value="成功">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_renewok_active" edge="1" parent="1" source="n_renewal_ok" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitFixed=1;entryX=0;entryY=0.5;entryFixed=1;curved=1;strokeColor=#82b366;" target="n_active">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_grace" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;" value="&lt;b&gt;宽限期&lt;/b&gt;&#xa;7天 · 每2天重试&#xa;订阅功能保持" vertex="1">
+          <mxGeometry height="65" width="180" x="1020" y="585" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_billing" parent="1" style="text;html=1;strokeColor=#d79b00;fillColor=#fff3e0;fontSize=8;align=center;rounded=1;" value="🔔 RC: BILLING_ISSUE&#xa;🔔 RC: CANCELLATION&#xa;cancel_reason=BILLING_ERROR" vertex="1">
+          <mxGeometry height="50" width="220" x="1220" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="e_renew_fail" edge="1" parent="1" source="n_renew_q" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitFixed=1;strokeColor=#b85450;fontColor=#b85450;" target="n_grace" value="失败">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_change_q" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" value="用户变更套餐" vertex="1">
+          <mxGeometry height="80" width="240" x="680" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="e_active_change" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#666;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="819.2" y="460" as="sourcePoint" />
+            <mxPoint x="819.2" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n_upgrade" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="&lt;b&gt;升级&lt;/b&gt;&#xa;立即生效&#xa;补差价（按剩余天数）" vertex="1">
+          <mxGeometry height="65" width="200" x="360" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_upgrade" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#e8f5e9;fontSize=8;align=center;rounded=1;" value="🔔 RC: PRODUCT_CHANGE&#xa;🔔 RC: RENEWAL (immediate)" vertex="1">
+          <mxGeometry height="40" width="220" x="330" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="e_change_upgrade" edge="1" parent="1" source="n_change_q" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitFixed=1;strokeColor=#82b366;fontColor=#2ecc71;" target="n_upgrade" value="升级">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_downgrade" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="&lt;b&gt;降级&lt;/b&gt;&#xa;下周期生效&#xa;不退款" vertex="1">
+          <mxGeometry height="65" width="180" x="1040" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_downgrade" parent="1" style="text;html=1;strokeColor=#d79b00;fillColor=#fff3e0;fontSize=8;align=center;rounded=1;" value="🔔 RC: PRODUCT_CHANGE&#xa;(deferred, period-end)" vertex="1">
+          <mxGeometry height="40" width="200" x="1060" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="e_change_downgrade" edge="1" parent="1" source="n_change_q" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitFixed=1;strokeColor=#d79b00;fontColor=#d79b00;" target="n_downgrade" value="降级">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_readonly_quota" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="超额存储&#xa;只读模式&#xa;无法上传新文件" vertex="1">
+          <mxGeometry height="65" width="160" x="1300" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="e_downgrade_readonly" edge="1" parent="1" source="n_downgrade" style="edgeStyle=orthogonalEdgeStyle;" target="n_readonly_quota">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_cancel_init" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="用户发起&#xa;取消订阅" vertex="1">
+          <mxGeometry height="60" width="160" x="700" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="e_active_cancel" edge="1" parent="1" source="n_active" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;dashed=1;" target="n_cancel_init">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="710" y="705" />
+              <mxPoint x="780" y="705" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rc_cancel" parent="1" style="text;html=1;strokeColor=#b85450;fillColor=#fce4ec;fontSize=8;align=center;rounded=1;" value="🔔 RC: CANCELLATION&#xa;cancel_reason=UNSUBSCRIBE" vertex="1">
+          <mxGeometry height="40" width="220" x="880" y="945" as="geometry" />
+        </mxCell>
+        <mxCell id="n_cancel_type" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="退款方式？" vertex="1">
+          <mxGeometry height="80" width="200" x="680" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cancel_type" edge="1" parent="1" source="n_cancel_init" style="edgeStyle=orthogonalEdgeStyle;" target="n_cancel_type">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_pending_cancel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="&lt;b&gt;待到期取消&lt;/b&gt;&#xa;当前周期继续可用&#xa;到期后降免费版" vertex="1">
+          <mxGeometry height="65" width="200" x="360" y="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="e_canceltype_pending" edge="1" parent="1" source="n_cancel_type" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitFixed=1;strokeColor=#b85450;fontColor=#b85450;" target="n_pending_cancel" value="仅取消&#xa;不退款">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_expired" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=10;" value="&lt;b&gt;已到期&lt;/b&gt;&#xa;降级为免费版" vertex="1">
+          <mxGeometry height="60" width="200" x="360" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_expiry" parent="1" style="text;html=1;strokeColor=#666;fillColor=#f5f5f5;fontSize=8;align=center;rounded=1;" value="🔔 RC: EXPIRATION&#xa;expiration_reason=UNSUBSCRIBE" vertex="1">
+          <mxGeometry height="40" width="220" x="570" y="1155" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pending_expired" edge="1" parent="1" source="n_pending_cancel" style="edgeStyle=orthogonalEdgeStyle;" target="n_expired">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_refund" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="&lt;b&gt;立即退款申请&lt;/b&gt;&#xa;按剩余天数比例&#xa;退款审核 → 1-5工作日到账" vertex="1">
+          <mxGeometry height="65" width="220" x="1000" y="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="e_canceltype_refund" edge="1" parent="1" source="n_cancel_type" style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitFixed=1;strokeColor=#d79b00;fontColor=#d79b00;" target="n_refund" value="立即退款">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_refund" parent="1" style="text;html=1;strokeColor=#d79b00;fillColor=#fff3e0;fontSize=8;align=center;rounded=1;" value="🔔 RC: CANCELLATION&#xa;cancel_reason=CUSTOMER_SUPPORT" vertex="1">
+          <mxGeometry height="40" width="220" x="1240" y="1050" as="geometry" />
+        </mxCell>
+        <mxCell id="n_pay_fail_2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="扣款失败&#xa;余额不足 / 卡失效&#xa;/ 银行拒绝" vertex="1">
+          <mxGeometry height="65" width="180" x="180" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="e_grace_fail" edge="1" parent="1" source="n_grace" style="edgeStyle=orthogonalEdgeStyle;" target="n_pay_fail_2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1110" y="1260" />
+              <mxPoint x="360" y="1260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n_notify" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" value="发送通知&#xa;邮件 / 推送" vertex="1">
+          <mxGeometry height="65" width="160" x="420" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="e_fail_notify" edge="1" parent="1" source="n_pay_fail_2" style="edgeStyle=orthogonalEdgeStyle;" target="n_notify">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_grace_detail" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;" value="&lt;b&gt;宽限期 7 天&lt;/b&gt;&#xa;每 2 天自动重试扣款&#xa;订阅功能保持正常" vertex="1">
+          <mxGeometry height="65" width="220" x="650" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="e_notify_grace" edge="1" parent="1" source="n_notify" style="edgeStyle=orthogonalEdgeStyle;" target="n_grace_detail">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_update_pay" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="用户主动&#xa;更新支付方式&#xa;立即重试" vertex="1">
+          <mxGeometry height="65" width="180" x="950" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="e_grace_update" edge="1" parent="1" source="n_grace_detail" style="edgeStyle=orthogonalEdgeStyle;" target="n_update_pay">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_grace_ok" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="扣款成功&#xa;订阅恢复正常" vertex="1">
+          <mxGeometry height="65" width="160" x="1200" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_grace_ok" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#e8f5e9;fontSize=8;align=center;rounded=1;" value="🔔 RC: RENEWAL&#xa;(recovered from billing issue)" vertex="1">
+          <mxGeometry height="40" width="210" x="1380" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="e_update_ok" edge="1" parent="1" source="n_update_pay" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;fontColor=#2ecc71;" target="n_grace_ok" value="成功">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_graceok_active" edge="1" parent="1" source="n_grace_ok" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitFixed=1;entryX=1;entryY=0.5;entryFixed=1;curved=1;strokeColor=#82b366;dashed=1;" target="n_active" value="恢复">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_suspended" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;" value="&lt;b&gt;订阅暂停&lt;/b&gt;&#xa;存储只读&#xa;无法上传" vertex="1">
+          <mxGeometry height="70" width="200" x="620" y="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_suspended" parent="1" style="text;html=1;strokeColor=#b85450;fillColor=#fce4ec;fontSize=8;align=center;rounded=1;" value="🔔 RC: EXPIRATION&#xa;expiration_reason=BILLING_ERROR" vertex="1">
+          <mxGeometry height="40" width="230" x="840" y="1375" as="geometry" />
+        </mxCell>
+        <mxCell id="e_grace_suspend" edge="1" parent="1" source="n_grace_detail" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitFixed=1;strokeColor=#b85450;fontColor=#b85450;" target="n_suspended" value="7天后&#xa;仍失败">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_paused_note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" value="📱 Android Only&#xa;SUBSCRIPTION_PAUSED&#xa;用户主动暂停计费&#xa;到期前保留权益" vertex="1">
+          <mxGeometry height="70" width="180" x="100" y="1380" as="geometry" />
+        </mxCell>
+        <mxCell id="n_restore_init" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="用户发起&#xa;恢复订阅" vertex="1">
+          <mxGeometry height="60" width="160" x="700" y="1535" as="geometry" />
+        </mxCell>
+        <mxCell id="e_expired_restore" edge="1" parent="1" source="n_expired" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;dashed=1;" target="n_restore_init">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_suspended_restore" edge="1" parent="1" source="n_suspended" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;dashed=1;" target="n_restore_init">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_uncancel" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#e8f5e9;fontSize=8;align=center;rounded=1;" value="🔔 RC: UNCANCELLATION (取消前恢复)&#xa;🔔 RC: RENEWAL (过期后恢复)&#xa;🔔 RC: INITIAL_PURCHASE (长期未订阅)" vertex="1">
+          <mxGeometry height="50" width="310" x="900" y="1530" as="geometry" />
+        </mxCell>
+        <mxCell id="n_restore_plan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="选择套餐&#xa;（试用期不再提供）" vertex="1">
+          <mxGeometry height="60" width="160" x="700" y="1625" as="geometry" />
+        </mxCell>
+        <mxCell id="e_restore_plan" edge="1" parent="1" source="n_restore_init" style="edgeStyle=orthogonalEdgeStyle;" target="n_restore_plan">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_restore_pay_q" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" value="支付成功？" vertex="1">
+          <mxGeometry height="75" width="180" x="920" y="1620" as="geometry" />
+        </mxCell>
+        <mxCell id="e_plan_payq2" edge="1" parent="1" source="n_restore_plan" style="edgeStyle=orthogonalEdgeStyle;" target="n_restore_pay_q">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_restore_ok" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="立即激活&#xa;订阅恢复" vertex="1">
+          <mxGeometry height="60" width="140" x="1160" y="1630" as="geometry" />
+        </mxCell>
+        <mxCell id="e_restorepay_ok" edge="1" parent="1" source="n_restore_pay_q" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;fontColor=#2ecc71;" target="n_restore_ok" value="成功">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_restoreok_active" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitFixed=1;entryX=0.5;entryY=1;entryFixed=1;curved=1;strokeColor=#82b366;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1280" y="1625" as="sourcePoint" />
+            <mxPoint x="850" y="455" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n_restore_fail" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="支付失败&#xa;提示重试" vertex="1">
+          <mxGeometry height="55" width="160" x="920" y="1710" as="geometry" />
+        </mxCell>
+        <mxCell id="e_restorepay_fail" edge="1" parent="1" source="n_restore_pay_q" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;fontColor=#b85450;" target="n_restore_fail" value="失败">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_data_readonly" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" value="存储只读&#xa;可下载，无法上传/修改&#xa;持续 30 天" vertex="1">
+          <mxGeometry height="65" width="220" x="300" y="1780" as="geometry" />
+        </mxCell>
+        <mxCell id="e_suspended_data" edge="1" parent="1" source="n_suspended" style="edgeStyle=orthogonalEdgeStyle;" target="n_data_readonly">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_data_bypass" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" value="30天内恢复订阅&#xa;→ 数据全部保留" vertex="1">
+          <mxGeometry height="55" width="200" x="600" y="1780" as="geometry" />
+        </mxCell>
+        <mxCell id="e_data_bypass" edge="1" parent="1" source="n_data_readonly" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;dashed=1;" target="n_data_bypass">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_bypass_restore" edge="1" parent="1" source="n_data_bypass" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;dashed=1;" target="n_restore_init">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_data_warn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" value="数据清理警告&#xa;发送最终警告邮件&#xa;7天后删除超额数据" vertex="1">
+          <mxGeometry height="65" width="220" x="300" y="1880" as="geometry" />
+        </mxCell>
+        <mxCell id="e_readonly_warn" edge="1" parent="1" source="n_data_readonly" style="edgeStyle=orthogonalEdgeStyle;" target="n_data_warn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n_data_delete" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;fontStyle=1;" value="&lt;b&gt;超额数据删除&lt;/b&gt;&#xa;保留免费版配额内数据&#xa;不可恢复" vertex="1">
+          <mxGeometry height="65" width="220" x="300" y="1980" as="geometry" />
+        </mxCell>
+        <mxCell id="e_warn_delete" edge="1" parent="1" source="n_data_warn" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" target="n_data_delete">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_trial_convert" parent="1" style="text;html=1;strokeColor=#9673a6;fillColor=#f3e8ff;fontSize=8;align=center;rounded=1;" value="🔔 RC: RENEWAL&#xa;is_trial_conversion=true&#xa;（试用转付费）" vertex="1">
+          <mxGeometry height="50" width="210" x="1140" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_non_renew" parent="1" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;fontSize=8;align=center;rounded=1;" value="🔔 RC: NON_RENEWING_PURCHASE&#xa;（一次性购买，不自动续费）" vertex="1">
+          <mxGeometry height="40" width="240" x="1140" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_transfer" parent="1" style="text;html=1;strokeColor=#9673a6;fillColor=#f3e8ff;fontSize=8;align=center;rounded=1;" value="🔔 RC: TRANSFER&#xa;（设备换账号时转移权益）" vertex="1">
+          <mxGeometry height="40" width="230" x="1140" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="rc_extended" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#e8f5e9;fontSize=8;align=center;rounded=1;" value="🔔 RC: SUBSCRIPTION_EXTENDED&#xa;（订阅被延长，到期日推迟）" vertex="1">
+          <mxGeometry height="40" width="240" x="1140" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;align=left;" value="RC Webhook 事件图例" vertex="1">
+          <mxGeometry height="30" width="300" x="40" y="2070" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" parent="1" style="text;html=1;strokeColor=#9673a6;fillColor=#f3e8ff;fontSize=9;align=left;rounded=1;" value="🔔 INITIAL_PURCHASE — 首次订阅 / 试用开始" vertex="1">
+          <mxGeometry height="28" width="340" x="40" y="2110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#e8f5e9;fontSize=9;align=left;rounded=1;" value="🔔 RENEWAL — 续费成功 / 试用转付费 / 宽限期恢复" vertex="1">
+          <mxGeometry height="28" width="380" x="400" y="2110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" parent="1" style="text;html=1;strokeColor=#b85450;fillColor=#fce4ec;fontSize=9;align=left;rounded=1;" value="🔔 CANCELLATION — 退订 / 账单异常取消 / 退款取消" vertex="1">
+          <mxGeometry height="28" width="380" x="800" y="2110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" parent="1" style="text;html=1;strokeColor=#666;fillColor=#f5f5f5;fontSize=9;align=left;rounded=1;" value="🔔 EXPIRATION — 订阅到期权益撤销" vertex="1">
+          <mxGeometry height="28" width="300" x="1200" y="2110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5" parent="1" style="text;html=1;strokeColor=#d79b00;fillColor=#fff3e0;fontSize=9;align=left;rounded=1;" value="🔔 BILLING_ISSUE — 扣款失败（含宽限期信息）" vertex="1">
+          <mxGeometry height="28" width="340" x="40" y="2150" as="geometry" />
+        </mxCell>
+        <mxCell id="leg6" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#e8f5e9;fontSize=9;align=left;rounded=1;" value="🔔 UNCANCELLATION — 到期前取消后又恢复" vertex="1">
+          <mxGeometry height="28" width="340" x="400" y="2150" as="geometry" />
+        </mxCell>
+        <mxCell id="leg7" parent="1" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;fontSize=9;align=left;rounded=1;" value="🔔 PRODUCT_CHANGE — 套餐升降级" vertex="1">
+          <mxGeometry height="28" width="280" x="760" y="2150" as="geometry" />
+        </mxCell>
+        <mxCell id="leg8" parent="1" style="text;html=1;strokeColor=#9673a6;fillColor=#f3e8ff;fontSize=9;align=left;rounded=1;" value="🔔 TRANSFER — 账号间权益转移" vertex="1">
+          <mxGeometry height="28" width="260" x="1060" y="2150" as="geometry" />
+        </mxCell>
+        <mxCell id="leg9" parent="1" style="text;html=1;strokeColor=#9673a6;fillColor=#e1d5e7;fontSize=9;align=left;rounded=1;" value="🔔 SUBSCRIPTION_PAUSED — 暂停（Android Only）" vertex="1">
+          <mxGeometry height="28" width="300" x="1340" y="2150" as="geometry" />
+        </mxCell>
+        <mxCell id="leg10" parent="1" style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;fontSize=9;align=left;rounded=1;" value="🔔 NON_RENEWING_PURCHASE — 一次性购买" vertex="1">
+          <mxGeometry height="28" width="320" x="40" y="2190" as="geometry" />
+        </mxCell>
+        <mxCell id="leg11" parent="1" style="text;html=1;strokeColor=#82b366;fillColor=#e8f5e9;fontSize=9;align=left;rounded=1;" value="🔔 SUBSCRIPTION_EXTENDED — 订阅延期" vertex="1">
+          <mxGeometry height="28" width="280" x="380" y="2190" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

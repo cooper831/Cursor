@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>母婴 App 变现图谱 · Momcozy AI 育儿助手付费策略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #faf8f5;
+    --ink-soft: #f0ece4;
+    --paper: #1a1915;
+    --paper-dim: #2e2c27;
+    --accent: #e84d14;
+    --accent-soft: #f5a882;
+    --gold: #9a7a3a;
+    --line: rgba(26, 25, 21, 0.1);
+    --line-strong: rgba(26, 25, 21, 0.18);
+    --muted: rgba(26, 25, 21, 0.45);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Noto Sans SC', -apple-system, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232, 77, 20, 0.06), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(154, 122, 58, 0.04), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
+
+  /* ========== MASTHEAD ========== */
+  .masthead { padding: 56px 0 32px; border-bottom: 1px solid var(--line-strong); }
+  .masthead-top {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 48px;
+  }
+  .masthead-top .dot {
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    margin-right: 8px; animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% {opacity:1} 50% {opacity:0.3} }
+
+  .hero { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 48px; }
+  .hero-eyebrow {
+    font-family: 'Fraunces', serif; font-weight: 800; font-style: italic;
+    font-size: clamp(72px, 12vw, 160px); line-height: 0.85;
+    letter-spacing: -0.04em; color: var(--paper);
+  }
+  .hero-eyebrow em { color: var(--accent); font-weight: 300; }
+  .hero-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(26px, 3.2vw, 44px); line-height: 1.2;
+    margin-top: 28px; letter-spacing: -0.01em;
+  }
+  .hero-title .underline {
+    background-image: linear-gradient(transparent 65%, var(--accent) 65%, var(--accent) 88%, transparent 88%);
+  }
+  .hero-sub {
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase;
+  }
+  .hero-meta {
+    text-align: right; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em; color: var(--muted); line-height: 2;
+  }
+  .hero-meta strong { color: var(--paper); font-weight: 500; display: block; }
+
+  .hero-stats {
+    margin-top: 48px; padding-top: 32px;
+    border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  }
+  .stat-cell {}
+  .stat-num {
+    font-family: 'Fraunces', serif; font-weight: 300; font-style: italic;
+    font-size: 38px; color: var(--accent); line-height: 1; margin-bottom: 6px;
+  }
+  .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+  /* ========== INTRO ========== */
+  .intro { padding: 80px 0 56px; display: grid; grid-template-columns: 200px 1fr; gap: 64px; align-items: start; border-bottom: 1px solid var(--line-strong); }
+  .intro-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding-top: 8px; border-top: 2px solid var(--accent);
+  }
+  .intro-body {
+    font-family: 'Noto Serif SC', serif; font-weight: 400;
+    font-size: 20px; line-height: 1.8; color: var(--paper);
+  }
+  .intro-body .high { color: var(--accent); font-weight: 600; }
+  .intro-body p + p { margin-top: 16px; }
+
+  /* ========== DATA TABLE ========== */
+  .data-section { padding: 80px 0 56px; border-bottom: 1px solid var(--line-strong); }
+  .section-head { display: grid; grid-template-columns: 200px 1fr; gap: 64px; margin-bottom: 40px; align-items: end; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding-top: 8px; border-top: 2px solid var(--accent);
+  }
+  .section-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(28px, 3.5vw, 44px); letter-spacing: -0.01em; line-height: 1.15;
+  }
+  .section-title .underline {
+    background-image: linear-gradient(transparent 65%, var(--accent) 65%, var(--accent) 88%, transparent 88%);
+  }
+
+  .data-table { width: 100%; border-collapse: collapse; }
+  .data-table thead tr { border-bottom: 1px solid var(--line-strong); }
+  .data-table thead th {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    padding: 12px 16px 16px; text-align: left; font-weight: 400;
+  }
+  .data-table thead th:first-child { padding-left: 0; }
+  .data-table tbody tr {
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s ease;
+  }
+  .data-table tbody tr:hover { background: var(--ink-soft); }
+  .data-table tbody td {
+    padding: 18px 16px; font-size: 13.5px; vertical-align: middle;
+    color: rgba(26, 25, 21, 0.80);
+  }
+  .data-table tbody td:first-child { padding-left: 0; }
+  .rank-num {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 28px; color: var(--accent); line-height: 1;
+  }
+  .app-name { font-family: 'Noto Serif SC', serif; font-weight: 600; color: var(--paper); font-size: 14px; }
+  .app-cat { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--muted); margin-top: 3px; }
+  .mrr-val { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-weight: 700; font-size: 13px; }
+  .rating-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--paper); }
+  .ob-bar-wrap { display: flex; align-items: center; gap: 10px; }
+  .ob-bar-bg { width: 80px; height: 3px; background: var(--line-strong); border-radius: 0; flex-shrink: 0; }
+  .ob-bar-fill { height: 100%; background: var(--accent); }
+  .ob-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+  .paywall-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em;
+    padding: 4px 8px; border: 1px solid; border-radius: 2px;
+    white-space: nowrap;
+  }
+  .paywall-tag.free { border-color: var(--accent); color: var(--accent); }
+  .paywall-tag.nofree { border-color: var(--line-strong); color: var(--muted); }
+
+  /* ========== OBJECTIVES / FINDINGS ========== */
+  .findings { padding: 80px 0; }
+  .obj {
+    position: relative; padding: 64px 0; border-top: 1px solid var(--line-strong);
+    display: grid; grid-template-columns: 120px 1fr; gap: 48px;
+    opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .obj:last-of-type { border-bottom: 1px solid var(--line-strong); }
+  .obj.in { opacity: 1; transform: translateY(0); }
+  .obj-number {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 96px; line-height: 0.9; color: var(--paper);
+    position: sticky; top: 32px; align-self: start;
+  }
+  .obj-number::after { content: ''; display: block; width: 40px; height: 2px; background: var(--accent); margin-top: 16px; }
+  .obj-body { display: grid; gap: 40px; }
+  .obj-head { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start; }
+  .obj-codename {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding: 6px 12px; border: 1px solid var(--accent); border-radius: 2px;
+    white-space: nowrap; margin-top: 10px;
+  }
+  .obj-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(26px, 2.8vw, 38px); line-height: 1.2; letter-spacing: -0.01em;
+  }
+  .obj-title .accent { color: var(--accent); }
+  .obj-narrative {
+    font-size: 15px; line-height: 1.85; color: rgba(26, 25, 21, 0.72);
+    max-width: 720px; padding-left: 16px; border-left: 2px solid var(--gold);
+    font-style: italic;
+  }
+
+  /* KR grid */
+  .kr-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong);
+  }
+  .kr { background: var(--ink); padding: 28px 32px; transition: background 0.3s ease; }
+  .kr:hover { background: var(--ink-soft); }
+  .kr.full { grid-column: 1 / -1; }
+  .kr-tag { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .kr-tag-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; color: var(--accent); font-weight: 700; }
+  .kr-tag-line { flex: 1; height: 1px; background: var(--line); }
+  .kr-headline { font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 18px; line-height: 1.4; margin-bottom: 14px; color: var(--paper); }
+  .kr-bullets { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .kr-bullets li { font-size: 13px; line-height: 1.65; color: rgba(26, 25, 21, 0.68); padding-left: 18px; position: relative; }
+  .kr-bullets li::before { content: ''; position: absolute; left: 0; top: 10px; width: 8px; height: 1px; background: var(--accent); }
+  .kr-bullets li strong { color: var(--paper); font-weight: 500; }
+  .kr-metric { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line-strong); display: flex; flex-wrap: wrap; gap: 14px 24px; }
+  .kr-metric-item { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.05em; }
+  .kr-metric-num { color: var(--accent); font-size: 18px; font-weight: 700; display: block; margin-bottom: 2px; font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; }
+  .kr-metric-lbl { color: var(--muted); }
+
+  /* ========== PRICE MATRIX ========== */
+  .price-matrix { padding: 80px 0; border-bottom: 1px solid var(--line-strong); }
+  .price-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); margin-top: 40px; }
+  .price-card { background: var(--ink); padding: 24px 20px; transition: background 0.3s ease; }
+  .price-card:hover { background: var(--ink-soft); }
+  .price-app { font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 13px; color: var(--paper); margin-bottom: 12px; line-height: 1.3; }
+  .price-monthly { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 28px; color: var(--paper); line-height: 1; }
+  .price-monthly em { color: var(--accent); }
+  .price-monthly-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 10px; }
+  .price-annual { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 8px; }
+  .price-save { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); margin-top: 4px; letter-spacing: 0.05em; }
+  .price-special { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--gold); margin-top: 6px; line-height: 1.5; }
+
+  /* ========== SPACER QUOTE ========== */
+  .spacer-quote {
+    padding: 96px 0;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+    margin: 0;
+  }
+  .spacer-quote-text {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(30px, 4.5vw, 56px); line-height: 1.3;
+    text-align: center; letter-spacing: -0.01em;
+    max-width: 900px; margin: 0 auto;
+  }
+  .spacer-quote-text .accent {
+    color: var(--accent); font-style: italic;
+    font-family: 'Fraunces', serif; font-weight: 300;
+  }
+  .spacer-quote-sub {
+    text-align: center; margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.25em; color: var(--muted); text-transform: uppercase;
+  }
+
+  /* ========== ONBOARDING PATTERNS ========== */
+  .ob-section { padding: 80px 0; border-bottom: 1px solid var(--line-strong); }
+  .ob-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); margin-top: 40px; }
+  .ob-card { background: var(--ink); padding: 32px; }
+  .ob-card:hover { background: var(--ink-soft); }
+  .ob-type { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); padding: 5px 10px; border: 1px solid var(--accent); border-radius: 2px; display: inline-block; margin-bottom: 16px; }
+  .ob-card-title { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 22px; line-height: 1.25; margin-bottom: 14px; }
+  .ob-card-desc { font-size: 13.5px; line-height: 1.75; color: rgba(26, 25, 21, 0.70); }
+  .ob-card-desc strong { color: var(--paper); font-weight: 500; }
+  .ob-flow { margin-top: 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .ob-flow-step { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.05em; color: var(--muted); padding: 4px 8px; background: var(--ink-soft); border: 1px solid var(--line); }
+  .ob-flow-arrow { color: var(--accent); font-size: 12px; flex-shrink: 0; }
+  .ob-apps { margin-top: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--muted); }
+
+  /* ========== STRATEGY ========== */
+  .strategy { padding: 80px 0; }
+  .strategy-hero { margin-bottom: 64px; }
+  .strategy-lead {
+    font-family: 'Noto Serif SC', serif; font-weight: 400;
+    font-size: 20px; line-height: 1.8; color: rgba(26, 25, 21, 0.82);
+    max-width: 800px; padding-left: 16px; border-left: 2px solid var(--gold);
+    font-style: italic; margin-top: 24px;
+  }
+
+  .strategy-pricing { margin-top: 56px; }
+  .pricing-showcase { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); margin-top: 24px; }
+  .plan-card { background: var(--ink); padding: 36px 32px; position: relative; }
+  .plan-card.featured { background: rgba(232, 77, 20, 0.06); border: 1px solid var(--accent); }
+  .plan-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; background: var(--accent); color: #faf8f5; padding: 4px 12px; text-transform: uppercase; font-weight: 700; }
+  .plan-name { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .plan-price { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 56px; line-height: 1; color: var(--paper); }
+  .plan-price em { color: var(--accent); }
+  .plan-period { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--muted); margin-top: 6px; margin-bottom: 20px; }
+  .plan-save { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 24px; }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .plan-features li { font-size: 13px; line-height: 1.6; color: rgba(26, 25, 21, 0.70); padding-left: 18px; position: relative; }
+  .plan-features li::before { content: ''; position: absolute; left: 0; top: 9px; width: 8px; height: 1px; background: var(--accent); }
+  .plan-features li strong { color: var(--paper); font-weight: 500; }
+
+  .strategy-onboarding { margin-top: 72px; }
+  .ob-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); margin-top: 24px; }
+  .ob-step { background: var(--ink); padding: 24px 20px; position: relative; }
+  .ob-step-num { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 12px; }
+  .ob-step-title { font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 14px; color: var(--paper); margin-bottom: 8px; line-height: 1.3; }
+  .ob-step-desc { font-size: 12px; line-height: 1.65; color: rgba(26, 25, 21, 0.60); }
+  .ob-step.paywall-trigger { background: rgba(232, 77, 20, 0.07); border-top: 2px solid var(--accent); }
+
+  /* ========== TIMELINE ========== */
+  .timeline-section { padding: 80px 0; border-top: 1px solid var(--line-strong); }
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 40px; }
+  .tl-phase { border-top: 2px solid var(--accent); padding-top: 24px; }
+  .tl-phase-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .tl-phase-num { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 52px; line-height: 1; color: var(--paper); margin-bottom: 16px; }
+  .tl-events { display: flex; flex-direction: column; gap: 10px; }
+  .tl-event { padding: 12px 14px; background: var(--ink-soft); border-left: 2px solid var(--gold); font-size: 12.5px; line-height: 1.55; color: rgba(26, 25, 21, 0.70); }
+  .tl-event strong { display: block; color: var(--paper); font-weight: 500; margin-bottom: 3px; font-size: 13px; }
+  .tl-event.big { border-left-color: var(--accent); background: rgba(232, 77, 20, 0.07); }
+
+  /* ========== RISKS ========== */
+  .risks { padding: 80px 0; border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); }
+  .risk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); margin-top: 40px; }
+  .risk-card { background: var(--ink); padding: 32px; }
+  .risk-num { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 56px; color: rgba(26, 25, 21, 0.10); line-height: 1; margin-bottom: 12px; }
+  .risk-title { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 17px; color: var(--paper); margin-bottom: 12px; line-height: 1.3; }
+  .risk-desc { font-size: 13px; line-height: 1.75; color: rgba(26, 25, 21, 0.65); }
+  .risk-desc strong { color: var(--accent); font-weight: 500; }
+
+  /* ========== AB TESTS ========== */
+  .ab-section { padding: 80px 0; border-bottom: 1px solid var(--line-strong); }
+  .ab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); margin-top: 40px; }
+  .ab-card { background: var(--ink); padding: 28px 32px; }
+  .ab-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .ab-question { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 19px; color: var(--paper); margin-bottom: 14px; line-height: 1.3; }
+  .ab-variants { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .ab-variant { padding: 12px 14px; border: 1px solid var(--line-strong); font-size: 12.5px; color: rgba(26, 25, 21, 0.70); }
+  .ab-variant.a { border-top: 2px solid var(--accent); }
+  .ab-variant.b { border-top: 2px solid var(--gold); }
+  .ab-variant-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; font-weight: 700; margin-bottom: 6px; }
+  .ab-variant.a .ab-variant-tag { color: var(--accent); }
+  .ab-variant.b .ab-variant-tag { color: var(--gold); }
+  .ab-ref { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 10px; }
+
+  /* ========== FOOTER ========== */
+  footer { padding: 80px 0 56px; border-top: 1px solid var(--line-strong); display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
+  .footer-mark { font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 80px; line-height: 0.9; color: var(--accent); }
+  .footer-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; color: var(--muted); margin-top: 12px; text-transform: uppercase; }
+  .footer-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: var(--muted); text-align: right; line-height: 2.2; }
+  .footer-meta strong { color: var(--paper); font-weight: 500; display: block; }
+
+  /* ========== ANIMATIONS ========== */
+  .reveal { opacity: 0; transform: translateY(20px); animation: reveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+
+  /* ========== FEATURE TABLE ========== */
+  .feat-free { font-size: 12.5px; color: rgba(26,25,21,0.65); line-height: 1.65; }
+  .feat-paid { font-size: 12.5px; line-height: 1.65; }
+  .feat-hook { font-size: 11px; color: var(--accent); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; line-height: 1.6; }
+  .feat-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .wrap { padding: 0 20px; }
+    .hero { grid-template-columns: 1fr; gap: 20px; }
+    .hero-meta { text-align: left; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .intro { grid-template-columns: 1fr; gap: 16px; padding: 48px 0 32px; }
+    .section-head { grid-template-columns: 1fr; gap: 12px; }
+    .obj { grid-template-columns: 1fr; gap: 20px; padding: 48px 0; }
+    .obj-number { position: static; font-size: 64px; }
+    .obj-head { grid-template-columns: 1fr; gap: 10px; }
+    .obj-codename { margin-top: 0; }
+    .kr-grid, .ob-grid, .ab-grid { grid-template-columns: 1fr; }
+    .price-grid { grid-template-columns: repeat(2, 1fr); }
+    .pricing-showcase { grid-template-columns: 1fr; }
+    .ob-steps { grid-template-columns: repeat(2, 1fr); }
+    .timeline { grid-template-columns: repeat(2, 1fr); }
+    .risk-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; }
+    .footer-meta { text-align: left; }
+    .data-table { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== MASTHEAD ===== -->
+<div class="wrap">
+  <header class="masthead reveal">
+    <div class="masthead-top">
+      <div><span class="dot"></span>产品战略研究报告 · Momcozy AI Agent</div>
+      <div>数据来源 paywallpro/paywall-gallery · 2026</div>
+    </div>
+
+    <div class="hero">
+      <div>
+        <div class="hero-eyebrow">母婴<em>变</em>现</div>
+        <h1 class="hero-title">
+          <span class="underline">母婴 App 变现图谱</span>
+        </h1>
+        <div class="hero-sub">Momcozy AI 育儿助手 · 付费策略规划</div>
+      </div>
+      <div class="hero-meta">
+        <strong>500+</strong>iOS 订阅 App 数据库
+        <strong>26</strong>母婴方向候选
+        <strong>Top 10</strong>深度拆解
+        <strong>2026</strong>数据采集年份
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-cell">
+        <div class="stat-num">$432K</div>
+        <div class="stat-label">最高 MRR</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Soft Paywall 占比</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">8/10</div>
+        <div class="stat-label">提供年付选项</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">52%</div>
+        <div class="stat-label">年付平均折扣</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">60</div>
+        <div class="stat-label">最长 Onboarding</div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<!-- ===== INTRO ===== -->
+<div class="wrap">
+  <section class="intro">
+    <div class="intro-eyebrow">◆ 研究背景</div>
+    <div class="intro-body">
+      <p>从 500 款 iOS 头部订阅应用数据库中，筛选出 <span class="high">26 款</span>母婴方向 App，按估算月经常性收入（MRR）排序，取 Top 10 进行付费墙类型、定价结构与 Onboarding 机制的深度拆解。</p>
+      <p>研究结论将直接用于指导 <span class="high">Momcozy App</span> 中 AI 育儿康复助手功能的订阅策略设计——从付费墙类型选择、定价分档，到 Onboarding 流程规划与 A/B 测试优先级。</p>
+    </div>
+  </section>
+</div>
+
+<!-- ===== DATA TABLE ===== -->
+<div class="wrap">
+  <section class="data-section">
+    <div class="section-head">
+      <div class="section-eyebrow">◇ 数据全览</div>
+      <h2 class="section-title">Top 10 母婴 App<br><span class="underline">付费墙数据矩阵</span></h2>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>应用</th>
+          <th>估算 MRR</th>
+          <th>评分</th>
+          <th>Onboarding 深度</th>
+          <th>付费墙类型</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="rank-num">1</div></td>
+          <td><div class="app-name">Kiddopia</div><div class="app-cat">Education</div></td>
+          <td><div class="mrr-val">$432.37K</div></td>
+          <td><div class="rating-val">4.35</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:12%"></div></div><span class="ob-num">7</span></div></td>
+          <td><span class="paywall-tag nofree">No Trial · Soft</span></td>
+        </tr>
+        <tr>
+          <td><div class="rank-num">2</div></td>
+          <td><div class="app-name">Huckleberry</div><div class="app-cat">Medical</div></td>
+          <td><div class="mrr-val">$377.92K</div></td>
+          <td><div class="rating-val">4.92</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:50%"></div></div><span class="ob-num">30</span></div></td>
+          <td><span class="paywall-tag nofree">No Trial · Soft</span></td>
+        </tr>
+        <tr>
+          <td><div class="rank-num">3</div></td>
+          <td><div class="app-name">Solid Starts</div><div class="app-cat">Education</div></td>
+          <td><div class="mrr-val">$336.88K</div></td>
+          <td><div class="rating-val">4.90</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:85%"></div></div><span class="ob-num">51</span></div></td>
+          <td><span class="paywall-tag free">Free Trial · Soft</span></td>
+        </tr>
+        <tr>
+          <td><div class="rank-num">4</div></td>
+          <td><div class="app-name">Natural Cycles</div><div class="app-cat">Health & Fitness</div></td>
+          <td><div class="mrr-val">$243.99K</div></td>
+          <td><div class="rating-val">4.80</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:100%"></div></div><span class="ob-num">60</span></div></td>
+          <td><span class="paywall-tag nofree">No Trial · Soft</span></td>
+        </tr>
+        <tr>
+          <td><div class="rank-num">5</div></td>
+          <td><div class="app-name">Speech Blubs</div><div class="app-cat">Education</div></td>
+          <td><div class="mrr-val">$214.43K</div></td>
+          <td><div class="rating-val">4.62</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:87%"></div></div><span class="ob-num">52</span></div></td>
+          <td><span class="paywall-tag free">Free Trial · Soft</span></td>
+        </tr>
+        <tr>
+          <td><div class="rank-num">6</div></td>
+          <td><div class="app-name">Pok Pok</div><div class="app-cat">Education</div></td>
+          <td><div class="mrr-val">$165.71K</div></td>
+          <td><div class="rating-val">4.67</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:27%"></div></div><span class="ob-num">16</span></div></td>
+          <td><span class="paywall-tag free">Free Trial · Soft</span></td>
+        </tr>
+        <tr>
+          <td><div class="rank-num">7</div></td>
+          <td><div class="app-name">Lively</div><div class="app-cat">Health & Fitness</div></td>
+          <td><div class="mrr-val">$139.92K</div></td>
+          <td><div class="rating-val">4.80</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:10%"></div></div><span class="ob-num">6</span></div></td>
+          <td><span class="paywall-tag nofree">No Trial · Soft</span></td>
+        </tr>
+        <tr>
+          <td><div class="rank-num">8</div></td>
+          <td><div class="app-name">Premom</div><div class="app-cat">Health & Fitness</div></td>
+          <td><div class="mrr-val">$98.44K</div></td>
+          <td><div class="rating-val">4.79</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:53%"></div></div><span class="ob-num">32</span></div></td>
+          <td><span class="paywall-tag nofree">No Trial · Soft</span></td>
+        </tr>
+        <tr>
+          <td><div class="rank-num">9</div></td>
+          <td><div class="app-name">The Wonder Weeks</div><div class="app-cat">Health & Fitness</div></td>
+          <td><div class="mrr-val">$83.45K</div></td>
+          <td><div class="rating-val">4.85</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:23%"></div></div><span class="ob-num">14</span></div></td>
+          <td><span class="paywall-tag nofree">No Trial · Soft</span></td>
+        </tr>
+        <tr>
+          <td><div class="rank-num">10</div></td>
+          <td><div class="app-name">WeMoms</div><div class="app-cat">Medical</div></td>
+          <td><div class="mrr-val">$54.21K</div></td>
+          <td><div class="rating-val">4.80</div></td>
+          <td><div class="ob-bar-wrap"><div class="ob-bar-bg"><div class="ob-bar-fill" style="width:37%"></div></div><span class="ob-num">22</span></div></td>
+          <td><span class="paywall-tag free">Free Trial · Soft</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+
+<!-- ===== THREE FINDINGS ===== -->
+<div class="wrap">
+  <section class="findings">
+    <div class="section-head" style="margin-bottom:0">
+      <div class="section-eyebrow">▲ 核心发现</div>
+      <h2 class="section-title">三条<span class="underline">不可忽视</span>的行业规律</h2>
+    </div>
+
+    <!-- Finding 1 -->
+    <article class="obj">
+      <div class="obj-number">01</div>
+      <div class="obj-body">
+        <div class="obj-head">
+          <div class="obj-codename">◆ 软墙共识</div>
+          <h3 class="obj-title">没有一款头部 App<br>使用 <span class="accent">Hard Paywall</span></h3>
+        </div>
+        <p class="obj-narrative">母婴用户正处于人生压力最高峰——育儿焦虑、睡眠剥夺、经济考量同时叠加。任何"不付费就无法继续"的强迫体验，都会触发防御心理，直接关掉 App。Soft Paywall 给了用户"我可以不买"的幻觉，反而是提升转化的前提。</p>
+        <div class="kr-grid">
+          <div class="kr">
+            <div class="kr-tag"><span class="kr-tag-num">1.1</span><div class="kr-tag-line"></div></div>
+            <div class="kr-headline">10/10 采用 Soft Paywall</div>
+            <ul class="kr-bullets">
+              <li>用户始终可以<strong>跳过或稍后再说</strong>，不被强制阻断</li>
+              <li>付费墙出现后仍有<strong>部分免费内容可继续使用</strong></li>
+              <li>降低"被逼付钱"的负面情绪，减少卸载率</li>
+            </ul>
+          </div>
+          <div class="kr">
+            <div class="kr-tag"><span class="kr-tag-num">1.2</span><div class="kr-tag-line"></div></div>
+            <div class="kr-headline">Free Trial 分布：高价必配，低价可免</div>
+            <ul class="kr-bullets">
+              <li>月付 &gt; $15 的 App（Solid Starts $19.99、Natural Cycles $21.99）<strong>全部提供免费试用</strong></li>
+              <li>月付 &lt; $5 的 App（Lively $4.99、Wonder Weeks $4.99）<strong>无需试用</strong>，低价即说服</li>
+              <li>中间价位（$9–15）是 Free Trial 决策的灰色地带</li>
+            </ul>
+            <div class="kr-metric">
+              <div class="kr-metric-item"><span class="kr-metric-num">4/10</span><span class="kr-metric-lbl">提供免费试用</span></div>
+              <div class="kr-metric-item"><span class="kr-metric-num">7天</span><span class="kr-metric-lbl">标准试用周期</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Finding 2 -->
+    <article class="obj">
+      <div class="obj-number">02</div>
+      <div class="obj-body">
+        <div class="obj-head">
+          <div class="obj-codename">◇ 价值铺垫</div>
+          <h3 class="obj-title">Onboarding 深度<br>与<span class="accent">价格正相关</span></h3>
+        </div>
+        <p class="obj-narrative">当你要求用户付出更多金钱，就必须先让他们付出更多时间。长流程 Onboarding 不是摩擦——它是价值证明的载体。Natural Cycles 用 60 张 Onboarding 画面完成了本该由"免费试用"完成的说服工作。</p>
+        <div class="kr-grid">
+          <div class="kr">
+            <div class="kr-tag"><span class="kr-tag-num">2.1</span><div class="kr-tag-line"></div></div>
+            <div class="kr-headline">高价 App：用内容替代试用</div>
+            <ul class="kr-bullets">
+              <li><strong>Natural Cycles</strong> 60 张 → 年付 $149.99（最贵，无试用）</li>
+              <li><strong>Speech Blubs</strong> 52 张 → 月付 $14.49（无年付，聚焦月付转化）</li>
+              <li><strong>Solid Starts</strong> 51 张 → 7天试用 + 年付 $99.99</li>
+            </ul>
+            <div class="kr-metric">
+              <div class="kr-metric-item"><span class="kr-metric-num">60</span><span class="kr-metric-lbl">最多 Onboarding 步</span></div>
+              <div class="kr-metric-item"><span class="kr-metric-num">$149</span><span class="kr-metric-lbl">对应年付最高价</span></div>
+            </div>
+          </div>
+          <div class="kr">
+            <div class="kr-tag"><span class="kr-tag-num">2.2</span><div class="kr-tag-line"></div></div>
+            <div class="kr-headline">低价 App：极简流程直接转化</div>
+            <ul class="kr-bullets">
+              <li><strong>Lively</strong> 6 张 → 年付仅 $18.99，低价自己会说话</li>
+              <li><strong>Kiddopia</strong> 7 张 → MRR 最高（$432K），靠品牌认知跳过说服</li>
+              <li>规律：<strong>价格越低，越不需要 Onboarding 铺垫</strong></li>
+            </ul>
+            <div class="kr-metric">
+              <div class="kr-metric-item"><span class="kr-metric-num">6</span><span class="kr-metric-lbl">最少 Onboarding 步</span></div>
+              <div class="kr-metric-item"><span class="kr-metric-num">$18.99</span><span class="kr-metric-lbl">对应年付最低价</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Finding 3 -->
+    <article class="obj">
+      <div class="obj-number">03</div>
+      <div class="obj-body">
+        <div class="obj-head">
+          <div class="obj-codename">● 年付主导</div>
+          <h3 class="obj-title">年付折扣<span class="accent"> 40–68%</span><br>是行业标配武器</h3>
+        </div>
+        <p class="obj-narrative">年付订阅对 App 的意义不只是更高 LTV——它是把用户绑定在你的产品周期里的最有效工具。母婴 App 的使用场景天然有时间边界（孕期、产后康复、宝宝发育期），年付恰好覆盖了完整的关键窗口。</p>
+        <div class="kr-grid">
+          <div class="kr">
+            <div class="kr-tag"><span class="kr-tag-num">3.1</span><div class="kr-tag-line"></div></div>
+            <div class="kr-headline">折扣率分布</div>
+            <ul class="kr-bullets">
+              <li><strong>Lively</strong>：年付 $18.99 vs 月付 $4.99×12=$59.88 → <strong>省 68%</strong>（最高）</li>
+              <li><strong>Pok Pok</strong>：测试年付 $45.99 vs 月付 $9.99×12 → <strong>省 62%</strong></li>
+              <li><strong>Solid Starts</strong>：年付 $99.99 vs 月付 $19.99×12 → <strong>省 58%</strong></li>
+              <li><strong>Natural Cycles</strong>：年付 $149.99 vs 月付 $21.99×12 → <strong>省 43%</strong>（最低）</li>
+            </ul>
+            <div class="kr-metric">
+              <div class="kr-metric-item"><span class="kr-metric-num">52%</span><span class="kr-metric-lbl">平均节省比例</span></div>
+              <div class="kr-metric-item"><span class="kr-metric-num">8/10</span><span class="kr-metric-lbl">提供年付选项</span></div>
+            </div>
+          </div>
+          <div class="kr">
+            <div class="kr-tag"><span class="kr-tag-num">3.2</span><div class="kr-tag-line"></div></div>
+            <div class="kr-headline">两个特殊定价策略</div>
+            <ul class="kr-bullets">
+              <li><strong>Premom</strong>：不用月付/年付，改用<strong>季付($17.49) + 半年付($28.49)</strong>，精准匹配备孕周期（3–6个月）</li>
+              <li><strong>Wonder Weeks</strong>：月/季/年<strong>三档</strong>覆盖不同付费意愿，多一个季付入口拦截犹豫用户</li>
+              <li><strong>Huckleberry</strong>：同时跑 2 套价格（$11.99 vs $14.99 月付），是定价 A/B 测试的典型样本</li>
+            </ul>
+            <div class="kr-metric">
+              <div class="kr-metric-item"><span class="kr-metric-num">2套</span><span class="kr-metric-lbl">Huckleberry 定价实验</span></div>
+              <div class="kr-metric-item"><span class="kr-metric-num">3档</span><span class="kr-metric-lbl">Wonder Weeks 周期选项</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+</div>
+
+<!-- ===== PRICE MATRIX ===== -->
+<div class="wrap">
+  <section class="price-matrix">
+    <div class="section-head">
+      <div class="section-eyebrow">◆ 定价矩阵</div>
+      <h2 class="section-title">10 款 App<br><span class="underline">定价结构全貌</span></h2>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-app">Huckleberry</div>
+        <div class="price-monthly"><em>$11</em>.99</div>
+        <div class="price-monthly-label">/ MONTH · OFFER A</div>
+        <div class="price-annual">年付 $68.99 <span style="color:var(--accent)">省52%</span></div>
+        <div class="price-special">◆ 同时测 $14.99 月付<br>2套定价 A/B</div>
+      </div>
+      <div class="price-card">
+        <div class="price-app">Solid Starts</div>
+        <div class="price-monthly"><em>$19</em>.99</div>
+        <div class="price-monthly-label">/ MONTH</div>
+        <div class="price-annual">年付 $99.99 <span style="color:var(--accent)">省58%</span></div>
+        <div class="price-special">7天免费试用</div>
+      </div>
+      <div class="price-card">
+        <div class="price-app">Natural Cycles</div>
+        <div class="price-monthly"><em>$21</em>.99</div>
+        <div class="price-monthly-label">/ MONTH</div>
+        <div class="price-annual">年付 $149.99 <span style="color:var(--accent)">省43%</span></div>
+        <div class="price-special">无试用 · 全类目最贵<br>FDA认证背书</div>
+      </div>
+      <div class="price-card">
+        <div class="price-app">Speech Blubs</div>
+        <div class="price-monthly"><em>$14</em>.49</div>
+        <div class="price-monthly-label">/ MONTH ONLY</div>
+        <div class="price-annual" style="color:var(--muted)">无年付选项</div>
+        <div class="price-special">唯一纯月付策略</div>
+      </div>
+      <div class="price-card">
+        <div class="price-app">Pok Pok</div>
+        <div class="price-monthly"><em>$9</em>.99</div>
+        <div class="price-monthly-label">/ MONTH</div>
+        <div class="price-annual">年付 $45.99–$59.99</div>
+        <div class="price-special">2套年付价测试<br>最低 <span style="color:var(--accent)">省62%</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-app">Lively</div>
+        <div class="price-monthly"><em>$4</em>.99</div>
+        <div class="price-monthly-label">/ MONTH</div>
+        <div class="price-annual">年付 $18.99 <span style="color:var(--accent)">省68%</span></div>
+        <div class="price-special">折扣率全类目最高</div>
+      </div>
+      <div class="price-card">
+        <div class="price-app">Premom</div>
+        <div class="price-monthly"><em>$17</em>.49</div>
+        <div class="price-monthly-label">/ QUARTER (3M)</div>
+        <div class="price-annual">半年付 $28.49</div>
+        <div class="price-special">无月付无年付<br>匹配备孕周期</div>
+      </div>
+      <div class="price-card">
+        <div class="price-app">Wonder Weeks</div>
+        <div class="price-monthly"><em>$4</em>.99</div>
+        <div class="price-monthly-label">/ MONTH</div>
+        <div class="price-annual">季付 $9.99 / 年付 $34.99</div>
+        <div class="price-special">三档设计<span style="color:var(--accent)">最全</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-app">Kiddopia</div>
+        <div class="price-monthly"><em>$12</em>.99</div>
+        <div class="price-monthly-label">/ MONTH</div>
+        <div class="price-annual">年付 $79.99 <span style="color:var(--accent)">省49%</span></div>
+        <div class="price-special">无试用 · MRR最高</div>
+      </div>
+      <div class="price-card">
+        <div class="price-app">WeMoms</div>
+        <div class="price-monthly"><em>$9</em>.99</div>
+        <div class="price-monthly-label">/ MONTH</div>
+        <div class="price-annual">年付 $49.99 <span style="color:var(--accent)">省58%</span></div>
+        <div class="price-special">7天免费试用</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== FEATURE COMPARISON ===== -->
+<div class="wrap">
+  <section class="data-section" style="border-bottom: 1px solid var(--line-strong); padding: 80px 0 56px;">
+    <div class="section-head">
+      <div class="section-eyebrow">◆ 功能对比</div>
+      <h2 class="section-title">免费 vs 付费<br><span class="underline">各 App 功能分层解剖</span></h2>
+    </div>
+
+    <p style="font-size:14px; line-height:1.8; color:rgba(26,25,21,0.65); max-width:760px; margin-bottom:36px; padding-left:16px; border-left:2px solid var(--gold); font-style:italic;">
+      以下对比基于 App Store 功能描述、官网订阅页及公开截图整理。核心逻辑：<strong style="color:var(--paper)">免费层建立习惯，付费层解锁判断</strong>——数据可以免费采集，但"告诉你该怎么做"必须付费。
+    </p>
+
+    <!-- Table -->
+    <table class="data-table" style="table-layout:fixed;">
+      <colgroup>
+        <col style="width:140px">
+        <col style="width:80px">
+        <col>
+        <col>
+        <col style="width:110px">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>App</th>
+          <th>月付</th>
+          <th>免费可用</th>
+          <th>付费解锁</th>
+          <th>核心付费钩子</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="app-name">Huckleberry</div><div class="app-cat">Medical</div></td>
+          <td><div class="mrr-val">$11.99</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            宝宝作息记录（喂奶/睡眠/换尿布）<br>
+            基础睡眠日志查看
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">SweetSpot™ 睡眠窗口预测</strong><br>
+            个性化睡眠训练计划<br>
+            专属育儿顾问（Premium）<br>
+            历史数据趋势分析<br>
+            多宝宝档案
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            睡眠预测算法<br>是护城河
+          </td>
+        </tr>
+        <tr>
+          <td><div class="app-name">Solid Starts</div><div class="app-cat">Education</div></td>
+          <td><div class="mrr-val">$19.99</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            浏览部分食物安全信息<br>
+            宝宝月龄输入<br>
+            有限食物数据库预览
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">400+ 食物完整安全数据库</strong><br>
+            按月龄个性化喂养计划<br>
+            过敏原分步引入指南<br>
+            300+ 辅食食谱<br>
+            视频课程（儿科专家）
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            食物安全数据库<br>制造不敢不付
+          </td>
+        </tr>
+        <tr>
+          <td><div class="app-name">Natural Cycles</div><div class="app-cat">Health & Fitness</div></td>
+          <td><div class="mrr-val">$21.99</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            基础周期日历查看<br>
+            体温手动记录<br>
+            无算法分析
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">NC° 算法：每日红/绿灯避孕判断</strong><br>
+            排卵期精准预测<br>
+            BBT 体温曲线分析<br>
+            备孕模式（NC° Plan Pregnancy）<br>
+            FDA 510(k) 认证避孕方法
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            算法即产品<br>免费=无意义
+          </td>
+        </tr>
+        <tr>
+          <td><div class="app-name">Speech Blubs</div><div class="app-cat">Education</div></td>
+          <td><div class="mrr-val">$14.49</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            语言发育初步评估<br>
+            少量免费练习视频<br>
+            发音模仿基础功能
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">1500+ 语言练习视频</strong><br>
+            按发育阶段个性化课程<br>
+            语言进度追踪报告<br>
+            家长指导建议<br>
+            离线使用
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            评估暴露问题<br>内容库是答案
+          </td>
+        </tr>
+        <tr>
+          <td><div class="app-name">Pok Pok</div><div class="app-cat">Education</div></td>
+          <td><div class="mrr-val">$9.99</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            少量免费游戏体验<br>
+            界面浏览<br>
+            试用关卡
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">全部 40+ 蒙特梭利游戏</strong><br>
+            无广告、无内购<br>
+            新内容持续更新<br>
+            多孩子档案<br>
+            家长使用报告
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            内容数量壁垒<br>体验即诱饵
+          </td>
+        </tr>
+        <tr>
+          <td><div class="app-name">Lively</div><div class="app-cat">Health & Fitness</div></td>
+          <td><div class="mrr-val">$4.99</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            基础周期记录<br>
+            症状日志<br>
+            简单日历视图
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">AI 周期预测与分析</strong><br>
+            排卵期/受孕窗口预测<br>
+            健康趋势报告<br>
+            无广告体验<br>
+            历史数据导出
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            低价=最低阻力<br>AI预测是钩子
+          </td>
+        </tr>
+        <tr>
+          <td><div class="app-name">Premom</div><div class="app-cat">Health & Fitness</div></td>
+          <td><div class="mrr-val" style="font-size:11px;">$17.49/季</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            试纸拍照识别（LH 值）<br>
+            基础周期记录<br>
+            有限历史查看
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">BBT 体温曲线 + 排卵精准预测</strong><br>
+            AI 排卵日预测报告<br>
+            医生可共享诊断报告<br>
+            无限历史周期数据<br>
+            蓝牙体温计数据同步
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            硬件联动<br>数据报告=付费
+          </td>
+        </tr>
+        <tr>
+          <td><div class="app-name">Wonder Weeks</div><div class="app-cat">Health & Fitness</div></td>
+          <td><div class="mrr-val">$4.99</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            当前心智飞跃期提示<br>
+            基础阶段概览<br>
+            有限内容预览
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">完整 10 个心智飞跃期详解</strong><br>
+            每阶段宝宝能力发育指南<br>
+            家长应对策略建议<br>
+            飞跃期提前提醒推送<br>
+            基于出生日期的个性化日历
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            "下一阶段"<br>永远在付费墙后
+          </td>
+        </tr>
+        <tr>
+          <td><div class="app-name">Kiddopia</div><div class="app-cat">Education</div></td>
+          <td><div class="mrr-val">$12.99</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            极少数免费关卡<br>
+            界面预览
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">全科目儿童学习游戏（数学/阅读/科学/艺术）</strong><br>
+            无广告、无内购保护<br>
+            家长控制台 + 学习报告<br>
+            新内容每月更新<br>
+            离线下载
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            全内容即付费<br>几乎无免费层
+          </td>
+        </tr>
+        <tr>
+          <td><div class="app-name">WeMoms</div><div class="app-cat">Medical</div></td>
+          <td><div class="mrr-val">$9.99</div></td>
+          <td style="font-size:12.5px; color:rgba(26,25,21,0.65); line-height:1.65;">
+            孕产社区浏览<br>
+            部分文章阅读<br>
+            基础孕周追踪
+          </td>
+          <td style="font-size:12.5px; line-height:1.65;">
+            <strong style="color:var(--paper)">AI 孕期助手无限问答</strong><br>
+            专家医生在线咨询<br>
+            完整孕产知识库<br>
+            无广告社区体验<br>
+            个性化每日推送
+          </td>
+          <td style="font-size:11px; color:var(--accent); font-family:'JetBrains Mono',monospace; letter-spacing:0.05em; line-height:1.6;">
+            社区免费<br>专家咨询付费
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Feature Pattern Summary -->
+    <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong);">
+      <div style="background: var(--ink); padding: 28px 24px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--accent); margin-bottom:12px; text-transform:uppercase;">◆ 免费层共同规律</div>
+        <div style="font-family:'Noto Serif SC',serif; font-weight:900; font-size:17px; margin-bottom:12px; line-height:1.3;">数据录入永远免费<br>分析结论永远付费</div>
+        <div style="font-size:12.5px; line-height:1.75; color:rgba(26,25,21,0.65);">记录睡眠、填写周期、输入宝宝信息——这些行为本身不值钱，但它们建立了<strong style="color:var(--paper)">数据沉没成本</strong>，让用户舍不得离开，才是真正目的。</div>
+      </div>
+      <div style="background: var(--ink); padding: 28px 24px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--accent); margin-bottom:12px; text-transform:uppercase;">◇ 付费层共同规律</div>
+        <div style="font-family:'Noto Serif SC',serif; font-weight:900; font-size:17px; margin-bottom:12px; line-height:1.3;">「告诉你该怎么做」<br>是最高价值的功能</div>
+        <div style="font-size:12.5px; line-height:1.75; color:rgba(26,25,21,0.65);">预测、计划、建议、报告——所有<strong style="color:var(--paper)">把数据转化为行动指南</strong>的功能，都在付费墙后。用户为"判断力"买单，不为"数据存储"买单。</div>
+      </div>
+      <div style="background: var(--ink); padding: 28px 24px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--accent); margin-bottom:12px; text-transform:uppercase;">● Momcozy 启示</div>
+        <div style="font-family:'Noto Serif SC',serif; font-weight:900; font-size:17px; margin-bottom:12px; line-height:1.3;">AI Agent 的付费<br>钩子已清晰</div>
+        <div style="font-size:12.5px; line-height:1.75; color:rgba(26,25,21,0.65);">免费：记录喂奶/睡眠/吸奶器数据。付费：<strong style="color:var(--paper)">AI 分析 + 个性化建议 + 12周恢复计划</strong>。功能分界线与行业共识完全吻合，无需创新，执行即可。</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== SPACER QUOTE ===== -->
+<div class="wrap">
+  <div class="spacer-quote">
+    <div class="spacer-quote-text">
+      母婴用户不缺动力付费——<br>她们缺的是<span class="accent">相信你值得信任</span>的理由
+    </div>
+    <div class="spacer-quote-sub">Onboarding is the real paywall · 用户走进付费墙之前，说服已经结束</div>
+  </div>
+</div>
+
+<!-- ===== ONBOARDING PATTERNS ===== -->
+<div class="wrap">
+  <section class="ob-section">
+    <div class="section-head">
+      <div class="section-eyebrow">▲ 说服机制</div>
+      <h2 class="section-title">Onboarding<br><span class="underline">四种铺垫模式</span></h2>
+    </div>
+    <div class="ob-grid">
+      <div class="ob-card">
+        <div class="ob-type">◆ 焦虑驱动型</div>
+        <div class="ob-card-title">暴露问题 → 制造危机感 → 我来解决</div>
+        <div class="ob-card-desc">先用评估工具让用户发现自己孩子"可能存在的落后"，然后用付费功能作为解决方案出场。<strong>用爱和焦虑共同驱动决策</strong>，转化率在所有模式中最高，但需要谨慎处理情感尺度。</div>
+        <div class="ob-flow">
+          <div class="ob-flow-step">语言发育评估</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">展示落后程度</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">个性化方案</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">付费解锁</div>
+        </div>
+        <div class="ob-apps">代表案例：Speech Blubs (52步) · Huckleberry (30步)</div>
+      </div>
+      <div class="ob-card">
+        <div class="ob-type">◇ 权威背书型</div>
+        <div class="ob-card-title">科学证明 → 建立信任 → 安全感转化</div>
+        <div class="ob-card-desc">用大量科学内容、专家认证、临床数据替代免费试用期。用户在 Onboarding 中接受"教育"，产生专业信任后自然愿意付费。<strong>适合高单价产品，用权威替代体验。</strong></div>
+        <div class="ob-flow">
+          <div class="ob-flow-step">FDA认证说明</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">科学机制讲解</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">数据精准性证明</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">付费订阅</div>
+        </div>
+        <div class="ob-apps">代表案例：Natural Cycles (60步 · 年付$149.99)</div>
+      </div>
+      <div class="ob-card">
+        <div class="ob-type">● 数据沉没型</div>
+        <div class="ob-card-title">输入数据 → 生成专属结果 → 不舍得离开</div>
+        <div class="ob-card-desc">让用户主动填写宝宝信息、妈妈状态、饮食偏好，然后告诉他们"专属计划已生成"。<strong>用户投入的数据越多，离开的成本就越高</strong>——这是最温和也最有效的锁定机制。</div>
+        <div class="ob-flow">
+          <div class="ob-flow-step">宝宝年龄/过敏史</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">生成个性化计划</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">预览计划内容</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">订阅解锁</div>
+        </div>
+        <div class="ob-apps">代表案例：Solid Starts (51步) · Premom (32步)</div>
+      </div>
+      <div class="ob-card">
+        <div class="ob-type">◆ 社区情感型</div>
+        <div class="ob-card-title">她们都在 → 你不孤单 → 一起加入</div>
+        <div class="ob-card-desc">展示社区内其他妈妈的真实故事、评论、求助与互助，让用户产生归属感和 FOMO 情绪。<strong>孤独感是产后妈妈的核心痛点</strong>，社区认同是最有力的情感触发器。</div>
+        <div class="ob-flow">
+          <div class="ob-flow-step">孕周/产后状态</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">社区内容预览</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">其他妈妈故事</div><div class="ob-flow-arrow">→</div>
+          <div class="ob-flow-step">加入社区</div>
+        </div>
+        <div class="ob-apps">代表案例：WeMoms (22步)</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== STRATEGY ===== -->
+<div class="wrap">
+  <section class="strategy">
+    <div class="section-head">
+      <div class="section-eyebrow">◆ 策略规划</div>
+      <h2 class="section-title">Momcozy AI 育儿助手<br><span class="underline">付费策略全案</span></h2>
+    </div>
+
+    <div class="strategy-hero">
+      <p class="strategy-lead">
+        Momcozy 的优势在于它不只是一个 App——它是有吸奶器等硬件连接的产后妈妈生态入口。AI Agent 功能面向的用户群体，正是刚刚完成生产、身体和心理双重脆弱、同时又对宝宝健康极度敏感的产后妈妈。这个群体既需要专业权威感，也需要"有人懂我"的情感共鸣。
+      </p>
+    </div>
+
+    <!-- Pricing -->
+    <div class="strategy-pricing">
+      <div class="section-head" style="margin-bottom: 0;">
+        <div class="section-eyebrow">◇ 定价结构</div>
+        <h3 class="section-title" style="font-size: clamp(22px, 2.5vw, 32px);">推荐三档订阅方案</h3>
+      </div>
+      <div class="pricing-showcase">
+        <div class="plan-card">
+          <div class="plan-name">月度计划</div>
+          <div class="plan-price"><em>$12</em>.99</div>
+          <div class="plan-period">/ MONTH · 按月付费</div>
+          <ul class="plan-features">
+            <li>AI 育儿问答无限次</li>
+            <li>产后恢复每日建议</li>
+            <li>宝宝睡眠追踪分析</li>
+            <li>母乳喂养指导</li>
+            <li><strong>随时可取消</strong></li>
+          </ul>
+        </div>
+        <div class="plan-card featured">
+          <div class="plan-badge">默认选中 · 省 49%</div>
+          <div class="plan-name">年度计划</div>
+          <div class="plan-price"><em>$79</em>.99</div>
+          <div class="plan-period">/ YEAR · 约 $6.67/月</div>
+          <div class="plan-save">相比月付节省 $75.89</div>
+          <ul class="plan-features">
+            <li>全部月度功能</li>
+            <li><strong>12 周个性化康复方案</strong></li>
+            <li>AI 喂养成长档案</li>
+            <li>设备用户专属数据互通</li>
+            <li><strong>优先客服响应</strong></li>
+          </ul>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">免费试用</div>
+          <div class="plan-price" style="font-size: 44px;"><em>7</em>天</div>
+          <div class="plan-period">FREE TRIAL · 无需信用卡</div>
+          <ul class="plan-features">
+            <li>体验完整 AI Agent 功能</li>
+            <li>完成个性化档案创建</li>
+            <li>获取首周恢复计划</li>
+            <li>到期前提醒，<strong>不自动扣费</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Onboarding Flow -->
+    <div class="strategy-onboarding" style="margin-top: 64px;">
+      <div class="section-head" style="margin-bottom: 0;">
+        <div class="section-eyebrow">● Onboarding 设计</div>
+        <h3 class="section-title" style="font-size: clamp(22px, 2.5vw, 32px);">五步铺垫流程<br>借鉴 Solid Starts × Huckleberry</h3>
+      </div>
+      <div class="obj-narrative" style="margin-top: 20px; margin-bottom: 32px; max-width: none;">
+        全程控制在 10–15 步以内（约 3–5 分钟），每一步都在建立个性化数据沉没成本。付费墙在第五步触发，彼时用户已完成自我画像，AI 专属计划已"生成完毕"，只需订阅即可解锁——而非从零开始购买一个陌生服务。
+      </div>
+      <div class="ob-steps">
+        <div class="ob-step">
+          <div class="ob-step-num">01</div>
+          <div class="ob-step-title">宝宝基本信息</div>
+          <div class="ob-step-desc">出生日期、喂养方式（母乳/配方/混合）、出生体重</div>
+        </div>
+        <div class="ob-step">
+          <div class="ob-step-num">02</div>
+          <div class="ob-step-title">妈妈产后状态</div>
+          <div class="ob-step-desc">产后第几周、生产方式（顺产/剖腹）、当前恢复状态</div>
+        </div>
+        <div class="ob-step">
+          <div class="ob-step-num">03</div>
+          <div class="ob-step-title">三大关注问题</div>
+          <div class="ob-step-desc">从睡眠/母乳/体重/焦虑/性生活/育儿知识中选3个</div>
+        </div>
+        <div class="ob-step">
+          <div class="ob-step-num">04</div>
+          <div class="ob-step-title">AI 计划生成中</div>
+          <div class="ob-step-desc">进度动画 + "正在为你匹配 12 周康复方案…" 制造期待感</div>
+        </div>
+        <div class="ob-step paywall-trigger">
+          <div class="ob-step-num" style="color:var(--accent)">05</div>
+          <div class="ob-step-title">付费墙触发</div>
+          <div class="ob-step-desc">"你的专属计划已准备好" → 展示计划摘要（模糊处理）→ 订阅解锁</div>
+        </div>
+      </div>
+
+      <!-- Paywall copy -->
+      <div style="margin-top: 40px; padding: 36px; border: 1px solid var(--accent); background: rgba(255,91,34,0.05);">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 16px; text-transform: uppercase;">◆ 付费墙文案方向</div>
+        <div style="font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: clamp(22px, 2.8vw, 34px); line-height: 1.25; margin-bottom: 12px;">你的产后恢复计划<br>已经准备好了</div>
+        <div style="font-size: 14px; color: rgba(26,25,21,0.72); line-height: 1.8; margin-bottom: 20px;">基于你提供的信息，AI 为你制定了 <strong style="color:var(--paper)">12 周个性化康复方案</strong>，<br>涵盖母乳喂养、睡眠优化、产后体能恢复三个维度。</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--accent);">CTA → 「开始 7 天免费体验」 · 副 CTA → 「稍后再说」</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TIMELINE ===== -->
+<div class="wrap">
+  <section class="timeline-section">
+    <div class="section-head">
+      <div class="section-eyebrow">◇ 执行路线</div>
+      <h2 class="section-title">四阶段<span class="underline">上线计划</span></h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-phase">
+        <div class="tl-phase-label">Phase 01 · MVP</div>
+        <div class="tl-phase-num">冷</div>
+        <div class="tl-events">
+          <div class="tl-event big"><strong>上线基础付费墙</strong>无 A/B 测试，先跑基准数据</div>
+          <div class="tl-event"><strong>定价</strong>月付 $12.99 / 年付 $79.99</div>
+          <div class="tl-event"><strong>5步 Onboarding</strong>数据沉没型基础版</div>
+          <div class="tl-event"><strong>7天免费试用</strong>标准配置</div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-phase-label">Phase 02 · 测试</div>
+        <div class="tl-phase-num">测</div>
+        <div class="tl-events">
+          <div class="tl-event big"><strong>A/B 测试 #1</strong>7天试用 vs 无试用</div>
+          <div class="tl-event big"><strong>A/B 测试 #2</strong>年付默认选中 vs 月付默认</div>
+          <div class="tl-event"><strong>监测指标</strong>试用转化率、付费墙曝光→转化</div>
+          <div class="tl-event"><strong>目标</strong>确定核心转化路径</div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-phase-label">Phase 03 · 优化</div>
+        <div class="tl-phase-num">深</div>
+        <div class="tl-events">
+          <div class="tl-event big"><strong>A/B 测试 #3</strong>$9.99 低价月付入口</div>
+          <div class="tl-event big"><strong>A/B 测试 #4</strong>3步极简 vs 15步深度 Onboarding</div>
+          <div class="tl-event"><strong>Momcozy 设备用户</strong>专属折扣漏斗测试</div>
+        </div>
+      </div>
+      <div class="tl-phase">
+        <div class="tl-phase-label">Phase 04 · 扩张</div>
+        <div class="tl-phase-num">扩</div>
+        <div class="tl-events">
+          <div class="tl-event big"><strong>引入硬件联动</strong>设备数据 → 付费墙增值点</div>
+          <div class="tl-event"><strong>社区功能</strong>WeMoms 社区情感型模式参考</div>
+          <div class="tl-event"><strong>多层套餐</strong>探索家庭版/专业版分层</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== AB TESTS ===== -->
+<div class="wrap">
+  <section class="ab-section">
+    <div class="section-head">
+      <div class="section-eyebrow">▲ 测试假设</div>
+      <h2 class="section-title">四组<span class="underline">优先级 A/B 测试</span></h2>
+    </div>
+    <div class="ab-grid">
+      <div class="ab-card">
+        <div class="ab-label">TEST 01 · 最高优先级</div>
+        <div class="ab-question">是否应该提供免费试用？</div>
+        <div style="font-size:13px; color: rgba(26,25,21,0.65); line-height:1.7; margin-bottom: 12px;">AI 功能价值抽象，用户需要亲身体验才能感知。参考 Solid Starts（有试用）vs Huckleberry（无试用）——两者 MRR 差异背后的逻辑。</div>
+        <div class="ab-variants">
+          <div class="ab-variant a"><div class="ab-variant-tag">VARIANT A</div>7天免费试用，无需信用卡</div>
+          <div class="ab-variant b"><div class="ab-variant-tag">VARIANT B</div>直接付费，高折扣年付为锚</div>
+        </div>
+        <div class="ab-ref">参考：Solid Starts MRR $336K（有试用）vs Kiddopia $432K（无试用）</div>
+      </div>
+      <div class="ab-card">
+        <div class="ab-label">TEST 02 · 高优先级</div>
+        <div class="ab-question">年付应该默认选中吗？</div>
+        <div style="font-size:13px; color: rgba(26,25,21,0.65); line-height:1.7; margin-bottom: 12px;">默认选中年付可以显著提升年付订阅比例，但需要确认不会因为"感知贵"而降低整体转化率。</div>
+        <div class="ab-variants">
+          <div class="ab-variant a"><div class="ab-variant-tag">VARIANT A</div>年付默认选中 + 显示"省49%"</div>
+          <div class="ab-variant b"><div class="ab-variant-tag">VARIANT B</div>月付默认选中，年付作为升级选项</div>
+        </div>
+        <div class="ab-ref">参考：Pok Pok 2套年付价格实验 ($45.99 vs $59.99)</div>
+      </div>
+      <div class="ab-card">
+        <div class="ab-label">TEST 03 · 中优先级</div>
+        <div class="ab-question">需要低价月付入口吗？</div>
+        <div style="font-size:13px; color: rgba(26,25,21,0.65); line-height:1.7; margin-bottom: 12px;">$9.99 低价月付可能吸引价格敏感用户先进门，后续通过 in-app 升级转年付。但也可能分散年付转化。</div>
+        <div class="ab-variants">
+          <div class="ab-variant a"><div class="ab-variant-tag">VARIANT A</div>月付 $12.99 / 年付 $79.99 两档</div>
+          <div class="ab-variant b"><div class="ab-variant-tag">VARIANT B</div>新增 $9.99 基础月付，三档结构</div>
+        </div>
+        <div class="ab-ref">参考：Wonder Weeks 月/季/年三档 ($4.99/$9.99/$34.99)</div>
+      </div>
+      <div class="ab-card">
+        <div class="ab-label">TEST 04 · 中优先级</div>
+        <div class="ab-question">Onboarding 要多长？</div>
+        <div style="font-size:13px; color: rgba(26,25,21,0.65); line-height:1.7; margin-bottom: 12px;">深度 Onboarding 提高数据沉没成本，但增加流失风险。产后妈妈时间极度碎片化，5分钟上限是硬约束。</div>
+        <div class="ab-variants">
+          <div class="ab-variant a"><div class="ab-variant-tag">VARIANT A</div>15步深度个性化（~5分钟）</div>
+          <div class="ab-variant b"><div class="ab-variant-tag">VARIANT B</div>3步极简（宝宝生日+喂养方式+最大痛点）</div>
+        </div>
+        <div class="ab-ref">参考：Solid Starts 51步 vs Lively 6步，MRR 差 $197K</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== RISKS ===== -->
+<div class="wrap">
+  <section class="risks">
+    <div class="section-head">
+      <div class="section-eyebrow">● 风险提示</div>
+      <h2 class="section-title">三个<span class="underline">不可忽视的陷阱</span></h2>
+    </div>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-num">01</div>
+        <div class="risk-title">AI 信任度是转化天花板</div>
+        <div class="risk-desc">母婴用户对宝宝健康建议极度谨慎。AI 功能感知价值高，但"AI 说的能信吗"会成为最大的付费阻力。需要在 Onboarding 中增加 <strong>"AI 如何工作"</strong> 的透明度说明：数据来源、专业审核机制、免责声明。参考 Natural Cycles 的 FDA 认证策略。</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-num">02</div>
+        <div class="risk-title">硬件用户是最优先的转化池</div>
+        <div class="risk-desc">Momcozy 吸奶器用户已经完成了<strong>品牌信任建立</strong>，是转化阻力最低的群体。App 付费墙应当为"已购买 Momcozy 设备的用户"设置专属优惠入口（如"设备用户首年立减 $20"），把硬件销售转化为 App 订阅，形成飞轮效应。</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-num">03</div>
+        <div class="risk-title">产后妈妈的时间是奢侈品</div>
+        <div class="risk-desc">新生儿家庭平均每天可支配时间不超过 30 分钟。Onboarding 超过 5 分钟就会面临大量中途放弃。<strong>每增加一步流程，需要有明确的转化收益证明</strong>。建议 Onboarding 支持"存档继续"功能，允许用户分多次完成个性化设置，而不是一次性流程。</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== SECOND SPACER ===== -->
+<div class="wrap">
+  <div class="spacer-quote" style="padding: 72px 0;">
+    <div class="spacer-quote-text" style="font-size: clamp(24px, 3.5vw, 44px);">
+      <span class="accent">Momcozy</span> 不需要从零建立信任——<br>硬件已经完成了这一步
+    </div>
+    <div class="spacer-quote-sub">把硬件用户导入 App 订阅漏斗，是最高 ROI 的增长路径</div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="wrap">
+  <footer>
+    <div>
+      <div class="footer-mark">Mom<br>cozy</div>
+      <div class="footer-sub">AI Agent · Paywall Strategy · 2026</div>
+    </div>
+    <div class="footer-meta">
+      <strong>数据来源</strong>
+      github.com/paywallpro/paywall-gallery<br>
+      <strong>样本规模</strong>
+      500+ iOS 订阅 App · 母婴方向 26 款 · Top 10 深度分析<br>
+      <strong>研究方法</strong>
+      MRR 排序 · 付费墙类型标注 · Onboarding 截图计数<br>
+      <strong>策略对标</strong>
+      Solid Starts + Huckleberry 混合模式<br>
+      <strong>生成日期</strong>
+      2026 · Momcozy Product Strategy
+    </div>
+  </footer>
+</div>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.obj').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
