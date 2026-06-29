@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Momcozy 软硬一体订阅付费 · 商业化底座架构</title>
+<style>
+  :root {
+    --background: #F8FAFC;
+    --foreground: #1E293B;
+    --primary: #2563EB;
+    --accent: #F97316;
+    --border: #E2E8F0;
+    --muted: #64748B;
+
+    --free: #64748B;
+    --free-bg: #F1F5F9;
+    --plus: #2563EB;
+    --plus-bg: #EFF6FF;
+    --premium: #7C3AED;
+    --premium-bg: #F5F3FF;
+
+    --layer-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.05);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Top bar ===== */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 28px;
+    background: rgba(255,255,255,0.86);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar .brand { display: flex; align-items: baseline; gap: 12px; }
+  .topbar .brand h1 { font-size: 17px; font-weight: 700; letter-spacing: .2px; }
+  .topbar .brand span { font-size: 12px; color: var(--muted); }
+  .zoom { display: flex; align-items: center; gap: 6px; }
+  .zoom button {
+    border: 1px solid var(--border); background: #fff; color: var(--foreground);
+    border-radius: 8px; padding: 5px 11px; font-size: 12.5px; cursor: pointer;
+    transition: all .18s ease;
+  }
+  .zoom button:hover { background: var(--plus-bg); border-color: var(--plus); color: var(--plus); }
+  .zoom button.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+  /* ===== Canvas / scaling ===== */
+  .stage { padding: 28px 16px 80px; display: flex; justify-content: center; overflow-x: auto; }
+  .board {
+    width: 1280px;
+    transform-origin: top center;
+    transition: transform .2s ease;
+  }
+
+  .deck-title { text-align: center; margin-bottom: 6px; }
+  .deck-title h2 { font-size: 24px; font-weight: 800; letter-spacing: .3px; }
+  .deck-title p { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .flowline {
+    text-align: center; color: var(--muted); font-size: 12px; margin: 14px auto 24px;
+    letter-spacing: .5px;
+  }
+  .flowline b { color: var(--primary); }
+
+  /* ===== Layer block ===== */
+  .layer {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--layer-shadow);
+    margin-bottom: 26px;
+    overflow: hidden;
+  }
+  .layer::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;
+    background: var(--ac, var(--primary));
+  }
+  .layer-head {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 24px; border-bottom: 1px solid var(--border);
+    background: linear-gradient(90deg, var(--hbg, #fff), #fff 60%);
+  }
+  .layer-no {
+    flex: 0 0 auto; width: 38px; height: 38px; border-radius: 11px;
+    display: grid; place-items: center; font-weight: 800; font-size: 16px; color: #fff;
+    background: var(--ac, var(--primary));
+  }
+  .layer-head .t { font-size: 16.5px; font-weight: 750; }
+  .layer-head .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .layer-body { padding: 20px 24px 24px; }
+
+  /* connector arrow between layers */
+  .arrow { display: flex; justify-content: center; margin: -14px 0 12px; }
+  .arrow span {
+    width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent;
+    border-top: 11px solid var(--border);
+  }
+
+  /* ===== Layer 1 matrix ===== */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-bottom: 16px; font-size: 12px; }
+  .legend .chip { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+  .dot { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+  .dot.free { background: var(--free); }
+  .dot.plus { background: var(--plus); }
+  .dot.premium { background: var(--premium); }
+
+  table.matrix { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12.5px; }
+  table.matrix th, table.matrix td {
+    border: 1px solid var(--border); padding: 10px 12px; vertical-align: top; text-align: left;
+  }
+  table.matrix thead th {
+    background: #F8FAFC; font-weight: 700; font-size: 12.5px; position: relative;
+  }
+  table.matrix thead th.free   { background: var(--free-bg); color: #334155; }
+  table.matrix thead th.plus   { background: var(--plus-bg); color: var(--plus); }
+  table.matrix thead th.premium{ background: var(--premium-bg); color: var(--premium); }
+  table.matrix td.line {
+    font-weight: 700; background: #fff; width: 168px;
+  }
+  table.matrix td.line small { display:block; font-weight: 500; color: var(--muted); margin-top: 3px; font-size: 11px; }
+  table.matrix td.src { color: var(--muted); width: 118px; font-size: 11.5px; }
+  table.matrix td.c-free   { background: #FCFDFE; }
+  table.matrix td.c-plus   { background: #FBFDFF; }
+  table.matrix td.c-premium{ background: #FDFCFF; }
+  .tag-todo { color: var(--accent); font-size: 11px; font-weight: 700; }
+  .moat { font-size: 11px; color: var(--muted); }
+
+  /* ===== generic 3-column / card grids ===== */
+  .cols { display: grid; gap: 16px; }
+  .cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .cols-2 { grid-template-columns: 1fr 1fr; }
+  .cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    border: 1px solid var(--border); border-radius: 13px; padding: 15px 16px; background: #fff;
+    position: relative;
+  }
+  .card h4 { font-size: 13.5px; font-weight: 750; margin-bottom: 9px; display:flex; align-items:center; gap:8px; }
+  .card h4 .n { width:20px;height:20px;border-radius:6px;display:grid;place-items:center;font-size:11px;color:#fff;background:var(--primary);flex:0 0 auto;}
+  .card ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .card li { font-size: 12.3px; color: #334155; padding-left: 15px; position: relative; }
+  .card li::before { content: "›"; position: absolute; left: 0; color: var(--primary); font-weight: 700; }
+  .card .meta { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  .card.soft { background: #FBFDFF; }
+  .gate { border-color: var(--accent); background: #FFF7ED; }
+  .gate h4 .n { background: var(--accent); }
+  .gate li::before { color: var(--accent); }
+
+  .stage-flow { display:flex; align-items:stretch; gap:10px; }
+  .stage-flow .step { flex:1; }
+  .stage-flow .conn { display:flex; align-items:center; color: var(--muted); font-size: 20px; }
+
+  .pill {
+    display:inline-block; font-size: 10.5px; font-weight:700; padding: 2px 8px; border-radius: 999px;
+    background: var(--plus-bg); color: var(--plus); margin-left:6px;
+  }
+  .pill.warn { background:#FEF2F2; color:#DC2626; }
+  .pill.ok { background:#ECFDF5; color:#059669; }
+
+  /* metrics */
+  .funnel { display:flex; align-items:center; gap:6px; margin-bottom: 14px; flex-wrap: wrap; }
+  .funnel .f {
+    background: linear-gradient(180deg,#EFF6FF,#fff); border:1px solid var(--border);
+    border-radius:10px; padding:9px 14px; font-size:12px; font-weight:700; color:#1e3a8a; text-align:center;
+  }
+  .funnel .arrow2 { color: var(--muted); font-weight: 700; }
+  .kpi { display:grid; grid-template-columns: repeat(5,1fr); gap:10px; }
+  .kpi .k { border:1px solid var(--border); border-radius:11px; padding:11px; text-align:center; background:#fff; }
+  .kpi .k .v { font-size:18px; font-weight:800; color: var(--primary); }
+  .kpi .k .l { font-size:11px; color: var(--muted); margin-top:3px; }
+
+  /* RACI */
+  table.raci { width:100%; border-collapse:collapse; font-size:12px; margin-top:4px; }
+  table.raci th, table.raci td { border:1px solid var(--border); padding:8px 10px; text-align:left; }
+  table.raci th { background:#F8FAFC; font-weight:700; }
+  table.raci td.role { font-weight:700; background:#FBFDFF; width:170px; }
+
+  .footnote { text-align:center; color:var(--muted); font-size:11.5px; margin-top:8px; }
+
+  .sub { font-size:12.5px; font-weight:700; color:#334155; margin: 4px 0 12px; display:flex; align-items:center; gap:8px;}
+  .sub .bar { width:4px; height:15px; background:var(--ac,var(--primary)); border-radius:2px; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <h1>Momcozy 软硬一体订阅付费 · 商业化底座架构</h1>
+      <span>App 生态中心 · 商业化团队 · 草案 v1</span>
+    </div>
+    <div class="zoom" id="zoom">
+      <button data-z="0.5">50%</button>
+      <button data-z="0.75">75%</button>
+      <button data-z="1" class="active">100%</button>
+      <button data-z="1.25">125%</button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="board" id="board">
+
+      <div class="deck-title">
+        <h2>商业化底座 6 层架构</h2>
+        <p>从「付费能力供给」到「订阅中台产品化上线」，再到「触发 · 触达 · 度量 · 运营」的完整闭环</p>
+      </div>
+      <div class="flowline">
+        卖什么 <b>→</b> 怎么快速产品化上线 <b>→</b> 在哪触发 <b>→</b> 怎么触达 <b>→</b> 怎么度量 <b>→</b> 怎么持续运营
+      </div>
+
+      <!-- ============ LAYER 1 ============ -->
+      <section class="layer" style="--ac:#0EA5E9;--hbg:#F0F9FF;">
+        <div class="layer-head">
+          <div class="layer-no" style="background:#0EA5E9;">1</div>
+          <div>
+            <div class="t">APP 付费能力图景 · 按产线划分的付费能力矩阵</div>
+            <div class="s">供给侧：各产线在统一三档（Free / Plus / Premium）下的付费能力点 · 数据为护城河来源</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="legend">
+            <span class="chip"><i class="dot free"></i>Free（免费 / 本地处理 · 钩子层）</span>
+            <span class="chip"><i class="dot plus"></i>Plus（中档 / 云端分析 · 预测层）</span>
+            <span class="chip"><i class="dot premium"></i>Premium（高级 / 洞察 + Agent + 专家）</span>
+            <span class="chip"><span class="tag-todo">[待确认]</span>＝行业参考补全，需业务确认</span>
+          </div>
+
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>产线</th>
+                <th>数据来源 / 护城河</th>
+                <th class="free">Free 层（钩子）</th>
+                <th class="plus">Plus 层（分析 / 预测）</th>
+                <th class="premium">Premium 层（洞察 / Agent / 专家）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="line">① AI 产品线<small>图一 · 真实清单</small></td>
+                <td class="src">吸奶器数据 / 用户输入<br><span class="moat">护城河：强（独占）</span></td>
+                <td class="c-free">哺乳 Timeline 知识百科、设备新手指引、首页妈妈/宝宝阶段须知</td>
+                <td class="c-plus">AI 吸乳计划 + 日程提醒 + 动态调整、追奶专家 Tips、个性化哺乳 Timeline、AI 睡眠预测 + 专家 Tips、AI 语音 Log 录入、设备问答 Agent</td>
+                <td class="c-premium">吸乳分析与洞察报告、睡眠洞察报告</td>
+              </tr>
+              <tr>
+                <td class="line">② BBM 智能看护<small>图二 · 真实清单</small></td>
+                <td class="src">摄像头视觉传感器<br><span class="moat">护城河：极强</span></td>
+                <td class="c-free">实时直播/双向语音/云台、本地 SD 卡回看、温湿度监测+告警、哭声检测+基础声音/动作告警、基础状态识别（醒/睡）</td>
+                <td class="c-plus">细化状态识别（将睡/将醒）、云端哭声/异常音增强、AI 安全检测（遮脸/翻身/危险区）、短期睡眠报告、云录像回看 7 天</td>
+                <td class="c-premium">长期睡眠报告（周/月）、睡眠趋势分析与对比、呼吸/健康历史趋势、精彩相册、Agent 智能建议、成长记录/里程碑、云录像回看 30 天</td>
+              </tr>
+              <tr>
+                <td class="line">③ 智能婴儿床<small>参考 SNOO <span class="tag-todo">[待确认]</span></small></td>
+                <td class="src">床体传感器 / 电机<br><span class="moat">护城河：强（硬件锁）</span></td>
+                <td class="c-free">基础哄睡摇晃、白噪音、远程开关、电量查看、基础安全过渡</td>
+                <td class="c-plus">睡眠日志统计、哄睡方案推荐、摇晃幅度档位</td>
+                <td class="c-premium">断奶过渡模式、AI 睡眠干预方案、二手流转解锁权益</td>
+              </tr>
+              <tr>
+                <td class="line">④ 白噪音<small>行业参考 <span class="tag-todo">[待确认]</span></small></td>
+                <td class="src">内容库<br><span class="moat">护城河：弱（易替代）</span></td>
+                <td class="c-free">基础音库、定时关闭</td>
+                <td class="c-plus">完整高清音库、个性化助眠音组合</td>
+                <td class="c-premium">AI 自适应助眠（按睡眠/哺乳数据动态调节）</td>
+              </tr>
+              <tr>
+                <td class="line">⑤ 孕产康复课程<small>行业参考 <span class="tag-todo">[待确认]</span></small></td>
+                <td class="src">课程内容 / PGC<br><span class="moat">护城河：中（专家网络）</span></td>
+                <td class="c-free">课程试看、单课购买、阶段须知</td>
+                <td class="c-plus">完整康复课表、训练计划追踪、进度打卡</td>
+                <td class="c-premium">1v1 专家 / IBCLC 连线、个性化康复方案</td>
+              </tr>
+              <tr>
+                <td class="line">⑥ 账号 / 家庭体系<small>横切全产线</small></td>
+                <td class="src">全产线共用<br><span class="moat">护城河：中（家庭协同）</span></td>
+                <td class="c-free">1 个宝宝档案、7 天历史、3 次 AI 免费对话</td>
+                <td class="c-plus">多宝宝档案、家庭共享 2–5 人、无限历史</td>
+                <td class="c-premium">多看护人扩容、专家连线副号、跨产线权益打通</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="footnote">付费驱动力来源：焦虑解除 · 数据洞察 · 能力提升 · 家庭协同 ｜ 切分逻辑：免费＝记录/直播，付费＝分析/预测/Agent（对齐调研「确定性结果」原则）</p>
+        </div>
+      </section>
+
+      <div class="arrow"><span></span></div>
+
+      <!-- ============ LAYER 2 ============ -->
+      <section class="layer" style="--ac:#2563EB;--hbg:#EFF6FF;">
+        <div class="layer-head">
+          <div class="layer-no">2</div>
+          <div>
+            <div class="t">订阅中台 · 支持快速上线能力</div>
+            <div class="s">能力层：准入门槛 → 付费产品标准化定义 → 多平台接入落地（三段式）</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="stage-flow">
+            <div class="step card gate">
+              <h4><span class="n">2.1</span>接入前置条件（准入 Gate）</h4>
+              <ul>
+                <li>功能用户价值验证（已上线 · 核心场景跑通）</li>
+                <li>用户评价满意度（满意度 / NPS 达标）</li>
+                <li>付费意愿度（WTP 调研 / 假墙点击率）</li>
+              </ul>
+              <p class="meta">仅通过 Gate 的功能才可进入中台产品化（指标见第 5 层 5.1）</p>
+            </div>
+            <div class="conn">→</div>
+            <div class="step card soft">
+              <h4><span class="n">2.2</span>付费产品定义（中台能力抽象）</h4>
+              <ul>
+                <li>产品用户画像（人群 / 生命周期阶段）</li>
+                <li>核心用户价值定义（卖确定性结果）</li>
+                <li>付费功能与权益清单</li>
+                <li>定价策略（档位/月年付/试用/促销/本地化）</li>
+                <li>触发条件（硬件绑定/记录N天/额度/月龄/异常）</li>
+                <li>合规（自动续费/退订/隐私/医疗声明/商店政策）</li>
+                <li>履约与共享规则（家庭共享/降级/退订保留）</li>
+              </ul>
+            </div>
+            <div class="conn">→</div>
+            <div class="step card soft">
+              <h4><span class="n">2.3</span>订阅付费接入（落地动作）</h4>
+              <ul>
+                <li>新订阅产品上线 / 已有产品扩充权益</li>
+                <li>功能权益绑定（功能 ↔ 权益 ↔ 档位 映射）</li>
+                <li>多平台配置（iOS / Google Play / Web · RC 统管）</li>
+                <li>内外部推广位配置（站内 Paywall / 站外投放 / 私域）</li>
+                <li>用户使用指引（Onboarding / 功能引导 / 客服话术）</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="arrow"><span></span></div>
+
+      <!-- ============ LAYER 3 ============ -->
+      <section class="layer" style="--ac:#F97316;--hbg:#FFF7ED;">
+        <div class="layer-head">
+          <div class="layer-no" style="background:#F97316;">3</div>
+          <div>
+            <div class="t">Paywall 入口（依据 RevenueCat + 调研）</div>
+            <div class="s">触点层：按「触发时机」归类的入口类型，形态从硬阻断到渐进式</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="cols cols-4">
+            <div class="card"><h4>硬阻断式</h4><ul><li>Onboarding 终点强制墙</li></ul><p class="meta">高阻力 · 转化高但差评高 <span class="pill warn">谨慎</span></p></div>
+            <div class="card"><h4>渐进式 / 锁头图标 🔒</h4><ul><li>功能旁挂锁，点击触发</li></ul><p class="meta">成本最低 · 转化最高 <span class="pill ok">推荐</span></p></div>
+            <div class="card"><h4>上下文动态触发</h4><ul><li>数据感知后主动弹卡（奶量异常→分析墙）</li></ul><p class="meta">主动关怀 · 焦虑驱动转化最高</p></div>
+            <div class="card"><h4>资产 / 到期墙</h4><ul><li>试用到期、硬件赠送期到期</li></ul><p class="meta">损失厌恶 · 温和保留历史</p></div>
+            <div class="card"><h4>额度耗尽墙</h4><ul><li>免费 AI 对话 3 次用完</li></ul><p class="meta">先建依赖再设墙</p></div>
+            <div class="card"><h4>里程碑 / 阶段墙</h4><ul><li>宝宝月龄节点解锁新阶段</li></ul><p class="meta">情感驱动 · 中等</p></div>
+            <div class="card"><h4>升档墙</h4><ul><li>家庭共享超员 / 专家连线</li></ul><p class="meta">高 ARPU 权益</p></div>
+            <div class="card"><h4>展示形态</h4><ul><li>全屏 / 半屏卡片 / 内嵌按钮 / 弹窗 / Banner</li></ul></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="arrow"><span></span></div>
+
+      <!-- ============ LAYER 4 ============ -->
+      <section class="layer" style="--ac:#10B981;--hbg:#ECFDF5;">
+        <div class="layer-head">
+          <div class="layer-no" style="background:#10B981;">4</div>
+          <div>
+            <div class="t">用户触达（方式 · 特点 · 场景，依据 RC + 调研）</div>
+            <div class="s">触达层：在用户需要时主动出现，覆盖 App 内 / Push / 生命周期 / 报告 / 硬件侧</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="cols cols-3">
+            <div class="card"><h4>App 内触达</h4><ul><li>首页常驻智能卡片</li><li>独立 AI Tab</li><li>Story 卡片 / 挂锁入口</li></ul><p class="meta">特点：被动+主动并行 ｜ 场景：日常高频使用动线</p></div>
+            <div class="card"><h4>推送 Push</h4><ul><li>晨间报告</li><li>异常告警</li><li>月龄节点提醒</li></ul><p class="meta">特点：主动 ｜ 场景：定时/事件驱动</p></div>
+            <div class="card"><h4>生命周期消息</h4><ul><li>邮件 / 站内信</li><li>试用提醒 · 临期续费 · 退订挽留</li></ul><p class="meta">特点：主动 ｜ 场景：订阅生命周期节点</p></div>
+            <div class="card"><h4>报告型触达</h4><ul><li>月度成长报告</li><li>年度回顾</li></ul><p class="meta">特点：情感化 ｜ 场景：续费决断强化</p></div>
+            <div class="card"><h4>硬件侧触达</h4><ul><li>开箱引导</li><li>设备绑定时弹试用</li></ul><p class="meta">特点：购买意愿最强时 ｜ 场景：软硬一体专属</p></div>
+            <div class="card soft"><h4>触达原则</h4><ul><li>主动型转化 &gt; 被动型（Flo / Nanit 验证）</li><li>数据感知触发 &gt; 等待用户提问</li></ul></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="arrow"><span></span></div>
+
+      <!-- ============ LAYER 5 ============ -->
+      <section class="layer" style="--ac:#7C3AED;--hbg:#F5F3FF;">
+        <div class="layer-head">
+          <div class="layer-no" style="background:#7C3AED;">5</div>
+          <div>
+            <div class="t">数据指标与看板</div>
+            <div class="s">度量层：正式订阅「前置标准」与「运营指标体系」分离呈现</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="sub" style="--ac:#7C3AED;"><span class="bar"></span>5.1 正式订阅付费「前置标准」指标体系（Gate 阈值 · 对应第 2.1 层）</div>
+          <div class="cols cols-3" style="margin-bottom:20px;">
+            <div class="card"><h4>价值验证</h4><ul><li>功能渗透率</li><li>活跃 / 留存</li><li>满意度 · NPS</li></ul></div>
+            <div class="card"><h4>付费意愿</h4><ul><li>假墙点击率</li><li>WTP 调研</li><li>试用转化预估</li></ul></div>
+            <div class="card gate"><h4>达标线（Gate）</h4><ul><li>各指标设阈值，达标方可正式定价上线</li></ul></div>
+          </div>
+
+          <div class="sub" style="--ac:#7C3AED;"><span class="bar"></span>5.2 正式订阅运营指标体系（漏斗 + 北极星 + 收入）</div>
+          <div class="funnel">
+            <span class="f">曝光</span><span class="arrow2">→</span>
+            <span class="f">Paywall 点击</span><span class="arrow2">→</span>
+            <span class="f">试用</span><span class="arrow2">→</span>
+            <span class="f">付费</span><span class="arrow2">→</span>
+            <span class="f">续订</span>
+          </div>
+          <div class="kpi" style="margin-bottom:14px;">
+            <div class="k"><div class="v">15–25%</div><div class="l">付费转化率</div></div>
+            <div class="k"><div class="v">&gt;20%</div><div class="l">试用转化率</div></div>
+            <div class="k"><div class="v">&gt;50%</div><div class="l">年付占比</div></div>
+            <div class="k"><div class="v">&gt;60%</div><div class="l">12 月续订率</div></div>
+            <div class="k"><div class="v">&gt;70%</div><div class="l">付费用户月活留存</div></div>
+          </div>
+          <div class="cols cols-2">
+            <div class="card soft"><h4>收入指标</h4><ul><li>MRR / ARR</li><li>ARPU · LTV · 回本周期</li></ul></div>
+            <div class="card soft"><h4>看板拆解维度</h4><ul><li>产线 / 档位 / 渠道 / 触发点 / 地区</li></ul></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="arrow"><span></span></div>
+
+      <!-- ============ LAYER 6 ============ -->
+      <section class="layer" style="--ac:#0F172A;--hbg:#F1F5F9;">
+        <div class="layer-head">
+          <div class="layer-no" style="background:#0F172A;">6</div>
+          <div>
+            <div class="t">AB 实验与持续运营 · 跨部门协作</div>
+            <div class="s">运营层：上线后的实验与策略归类，明确各部门职责（RACI）</div>
+          </div>
+        </div>
+        <div class="layer-body">
+          <div class="cols cols-2" style="margin-bottom:18px;">
+            <div class="card"><h4>AB 实验对象</h4><ul><li>Paywall 文案 / 价格 / 触发点</li><li>试用时长</li><li>年付折扣力度</li><li>触达节奏与渠道</li></ul></div>
+            <div class="card"><h4>运营策略分类</h4><ul><li>拉新转化 · 试用促转</li><li>续订强化 · 流失挽留</li><li>LTV 延长（纵向延龄 / 多娃 / B2B）</li></ul></div>
+          </div>
+
+          <div class="sub"><span class="bar"></span>跨部门协作 RACI</div>
+          <table class="raci">
+            <thead><tr><th>角色</th><th>核心职责</th></tr></thead>
+            <tbody>
+              <tr><td class="role">AI / BBM / 硬件 / 内容(课程)</td><td>付费能力供给（第 1 层）· 功能价值验证</td></tr>
+              <tr><td class="role">商业化中台</td><td>付费产品定义 + 多平台接入 + 定价 + 合规（第 2 层）</td></tr>
+              <tr><td class="role">增长 / 运营</td><td>Paywall 入口 + 用户触达 + AB 实验（第 3/4/6 层）</td></tr>
+              <tr><td class="role">数据</td><td>指标看板 + 前置标准监测（第 5 层）</td></tr>
+              <tr><td class="role">客服 / 法务</td><td>合规底线 + 口碑防御（退订/续费/隐私）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="footnote">数据来源：图一 AI 产品功能清单 · 图二 BBM 三档功能总表 · 《全球母婴市场付费订阅产品调研报告》 ｜ App 生态中心-商业化团队</p>
+
+    </div>
+  </div>
+
+<script>
+  (function () {
+    var board = document.getElementById('board');
+    var zoom = document.getElementById('zoom');
+    function setZoom(z, btn) {
+      board.style.transform = 'scale(' + z + ')';
+      Array.prototype.forEach.call(zoom.querySelectorAll('button'), function (b) { b.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+    }
+    zoom.addEventListener('click', function (e) {
+      var b = e.target.closest('button');
+      if (!b) return;
+      setZoom(parseFloat(b.dataset.z), b);
+    });
+  })();
+</script>
+</body>
+</html>
