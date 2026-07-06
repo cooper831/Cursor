@@ -188,6 +188,32 @@
 
   .footnote { text-align:center; color:var(--muted); font-size:11.5px; margin-top:8px; }
 
+  /* ===== Layer 1 · 产线付费能力清单（标签行） ===== */
+  .pl-note { font-size:11.5px; color:var(--muted); margin-bottom:16px; line-height:1.7; }
+  .pl-note b { color:var(--primary); }
+
+  .pl-row {
+    display:flex; align-items:stretch;
+    border:1px solid var(--border); border-radius:14px; overflow:hidden;
+    margin-bottom:13px; box-shadow:0 1px 2px rgba(15,23,42,.04);
+  }
+  .pl-side {
+    flex:0 0 196px; padding:16px 18px; color:#fff;
+    display:flex; flex-direction:column; justify-content:center; gap:4px;
+    background:linear-gradient(135deg, var(--c1), var(--c2));
+  }
+  .pl-side .ic { font-size:22px; line-height:1; }
+  .pl-side .nm { font-size:15.5px; font-weight:800; margin-top:6px; }
+  .pl-side .sub { font-size:11px; opacity:.92; font-weight:500; }
+  .pl-side .cnt { font-size:11px; font-weight:700; margin-top:6px; background:rgba(255,255,255,.22); align-self:flex-start; padding:2px 9px; border-radius:999px; }
+  .pl-side .todo2 { display:inline-block; margin-top:6px; font-size:10px; font-weight:700; background:rgba(255,255,255,.25); padding:2px 8px; border-radius:6px; }
+
+  .pl-caps { flex:1; padding:15px 16px; display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; background:#fff; }
+  .cap { font-size:12px; font-weight:600; padding:6px 12px; border-radius:9px; border:1px solid var(--cb,#E2E8F0); background:var(--cbg,#F8FAFC); color:var(--ct,#334155); }
+
+  .pl-row.dashed { border-style:dashed; }
+  .pl-row.dashed .pl-caps .cap { border-style:dashed; }
+
   .sub { font-size:12.5px; font-weight:700; color:#334155; margin: 4px 0 12px; display:flex; align-items:center; gap:8px;}
   .sub .bar { width:4px; height:15px; background:var(--ac,var(--primary)); border-radius:2px; }
 </style>
@@ -222,74 +248,113 @@
         <div class="layer-head">
           <div class="layer-no" style="background:#0EA5E9;">1</div>
           <div>
-            <div class="t">APP 付费能力图景 · 按产线划分的付费能力矩阵</div>
-            <div class="s">供给侧：各产线在统一三档（Free / Plus / Premium）下的付费能力点 · 数据为护城河来源</div>
+            <div class="t">APP 付费能力图景 · 按产线划分的付费能力域</div>
+            <div class="s">横轴=产线　纵轴=AI 能力区 / 硬件高级能力区　·　AI 横切各产线形成「分析洞察」交集，硬件/平台沉淀「高阶能力」</div>
           </div>
         </div>
         <div class="layer-body">
-          <div class="legend">
-            <span class="chip"><i class="dot free"></i>Free（免费 / 本地处理 · 钩子层）</span>
-            <span class="chip"><i class="dot plus"></i>Plus（中档 / 云端分析 · 预测层）</span>
-            <span class="chip"><i class="dot premium"></i>Premium（高级 / 洞察 + Agent + 专家）</span>
-            <span class="chip"><span class="tag-todo">[待确认]</span>＝行业参考补全，需业务确认</span>
+          <div class="pl-note">
+            按 <b>AI · BBM · 智能婴儿床 · APP 平台 · 新增产线</b> 五个维度，分别列出各自「可付费的功能点」（不区分付费等级、不强调能力交集）。<span class="tag-todo">[待确认]</span> 为行业参考补全，需业务确认。
           </div>
 
-          <table class="matrix">
-            <thead>
-              <tr>
-                <th>产线</th>
-                <th>数据来源 / 护城河</th>
-                <th class="free">Free 层（钩子）</th>
-                <th class="plus">Plus 层（分析 / 预测）</th>
-                <th class="premium">Premium 层（洞察 / Agent / 专家）</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="line">① AI 产品线<small>图一 · 真实清单</small></td>
-                <td class="src">吸奶器数据 / 用户输入<br><span class="moat">护城河：强（独占）</span></td>
-                <td class="c-free">哺乳 Timeline 知识百科、设备新手指引、首页妈妈/宝宝阶段须知</td>
-                <td class="c-plus">AI 吸乳计划 + 日程提醒 + 动态调整、追奶专家 Tips、个性化哺乳 Timeline、AI 睡眠预测 + 专家 Tips、AI 语音 Log 录入、设备问答 Agent</td>
-                <td class="c-premium">吸乳分析与洞察报告、睡眠洞察报告</td>
-              </tr>
-              <tr>
-                <td class="line">② BBM 智能看护<small>图二 · 真实清单</small></td>
-                <td class="src">摄像头视觉传感器<br><span class="moat">护城河：极强</span></td>
-                <td class="c-free">实时直播/双向语音/云台、本地 SD 卡回看、温湿度监测+告警、哭声检测+基础声音/动作告警、基础状态识别（醒/睡）</td>
-                <td class="c-plus">细化状态识别（将睡/将醒）、云端哭声/异常音增强、AI 安全检测（遮脸/翻身/危险区）、短期睡眠报告、云录像回看 7 天</td>
-                <td class="c-premium">长期睡眠报告（周/月）、睡眠趋势分析与对比、呼吸/健康历史趋势、精彩相册、Agent 智能建议、成长记录/里程碑、云录像回看 30 天</td>
-              </tr>
-              <tr>
-                <td class="line">③ 智能婴儿床<small>参考 SNOO <span class="tag-todo">[待确认]</span></small></td>
-                <td class="src">床体传感器 / 电机<br><span class="moat">护城河：强（硬件锁）</span></td>
-                <td class="c-free">基础哄睡摇晃、白噪音、远程开关、电量查看、基础安全过渡</td>
-                <td class="c-plus">睡眠日志统计、哄睡方案推荐、摇晃幅度档位</td>
-                <td class="c-premium">断奶过渡模式、AI 睡眠干预方案、二手流转解锁权益</td>
-              </tr>
-              <tr>
-                <td class="line">④ 白噪音<small>行业参考 <span class="tag-todo">[待确认]</span></small></td>
-                <td class="src">内容库<br><span class="moat">护城河：弱（易替代）</span></td>
-                <td class="c-free">基础音库、定时关闭</td>
-                <td class="c-plus">完整高清音库、个性化助眠音组合</td>
-                <td class="c-premium">AI 自适应助眠（按睡眠/哺乳数据动态调节）</td>
-              </tr>
-              <tr>
-                <td class="line">⑤ 孕产康复课程<small>行业参考 <span class="tag-todo">[待确认]</span></small></td>
-                <td class="src">课程内容 / PGC<br><span class="moat">护城河：中（专家网络）</span></td>
-                <td class="c-free">课程试看、单课购买、阶段须知</td>
-                <td class="c-plus">完整康复课表、训练计划追踪、进度打卡</td>
-                <td class="c-premium">1v1 专家 / IBCLC 连线、个性化康复方案</td>
-              </tr>
-              <tr>
-                <td class="line">⑥ 账号 / 家庭体系<small>横切全产线</small></td>
-                <td class="src">全产线共用<br><span class="moat">护城河：中（家庭协同）</span></td>
-                <td class="c-free">1 个宝宝档案、7 天历史、3 次 AI 免费对话</td>
-                <td class="c-plus">多宝宝档案、家庭共享 2–5 人、无限历史</td>
-                <td class="c-premium">多看护人扩容、专家连线副号、跨产线权益打通</td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="footnote">付费驱动力来源：焦虑解除 · 数据洞察 · 能力提升 · 家庭协同 ｜ 切分逻辑：免费＝记录/直播，付费＝分析/预测/Agent（对齐调研「确定性结果」原则）</p>
+          <!-- AI 产线 -->
+          <div class="pl-row" style="--c1:#4F46E5;--c2:#6366F1;">
+            <div class="pl-side">
+              <span class="ic">🤖</span>
+              <span class="nm">AI 产线</span>
+              <span class="sub">哺乳 / 睡眠 / 育儿智能</span>
+              <span class="cnt">11 项</span>
+            </div>
+            <div class="pl-caps" style="--cb:#E0E7FF;--cbg:#EEF2FF;--ct:#3730A3;">
+              <span class="cap">AI 吸乳计划生成</span>
+              <span class="cap">吸乳日程提醒</span>
+              <span class="cap">智能动态调整吸乳</span>
+              <span class="cap">追奶专家 Tips</span>
+              <span class="cap">吸乳分析与洞察报告</span>
+              <span class="cap">个性化哺乳 Timeline</span>
+              <span class="cap">哺乳百科 / 社区推荐</span>
+              <span class="cap">AI 睡眠预测</span>
+              <span class="cap">睡眠专家 Tips</span>
+              <span class="cap">AI 语音 Log 录入</span>
+              <span class="cap">智能问答指引 Agent</span>
+            </div>
+          </div>
+
+          <!-- BBM -->
+          <div class="pl-row" style="--c1:#0284C7;--c2:#0EA5E9;">
+            <div class="pl-side">
+              <span class="ic">📹</span>
+              <span class="nm">BBM 智能看护</span>
+              <span class="sub">摄像头视觉传感</span>
+              <span class="cnt">11 项</span>
+            </div>
+            <div class="pl-caps" style="--cb:#BAE6FD;--cbg:#F0F9FF;--ct:#075985;">
+              <span class="cap">细化状态识别（将睡/将醒）</span>
+              <span class="cap">云端异常音增强识别</span>
+              <span class="cap">AI 安全检测（遮脸/翻身）</span>
+              <span class="cap">短期睡眠报告</span>
+              <span class="cap">长期睡眠报告（周/月）</span>
+              <span class="cap">睡眠趋势分析与对比</span>
+              <span class="cap">呼吸 / 健康历史趋势</span>
+              <span class="cap">云录像回看（7/30 天）</span>
+              <span class="cap">精彩相册自动抓拍</span>
+              <span class="cap">Agent 智能建议</span>
+              <span class="cap">成长记录 / 里程碑</span>
+            </div>
+          </div>
+
+          <!-- 智能婴儿床 -->
+          <div class="pl-row" style="--c1:#6D28D9;--c2:#7C3AED;">
+            <div class="pl-side">
+              <span class="ic">🛏️</span>
+              <span class="nm">智能婴儿床</span>
+              <span class="sub">床体传感 / 哄睡</span>
+              <span class="todo2">[待确认]</span>
+            </div>
+            <div class="pl-caps" style="--cb:#DDD6FE;--cbg:#F5F3FF;--ct:#5B21B6;">
+              <span class="cap">AI 睡眠干预方案</span>
+              <span class="cap">断奶过渡模式</span>
+              <span class="cap">哄睡方案推荐</span>
+              <span class="cap">睡眠日志统计</span>
+              <span class="cap">二手流转解锁权益</span>
+            </div>
+          </div>
+
+          <!-- APP 平台 -->
+          <div class="pl-row" style="--c1:#D97706;--c2:#F59E0B;">
+            <div class="pl-side">
+              <span class="ic">👨‍👩‍👧</span>
+              <span class="nm">APP 平台</span>
+              <span class="sub">多账号 · 权益</span>
+              <span class="cnt">7 项</span>
+            </div>
+            <div class="pl-caps" style="--cb:#FDE68A;--cbg:#FFFBEB;--ct:#92400E;">
+              <span class="cap">多宝宝档案</span>
+              <span class="cap">家庭共享</span>
+              <span class="cap">多看护人扩容</span>
+              <span class="cap">无限历史数据</span>
+              <span class="cap">跨产线权益打通</span>
+              <span class="cap">月度 / 年度成长报告</span>
+              <span class="cap">专家 1v1 连线</span>
+            </div>
+          </div>
+
+          <!-- 新增产线 -->
+          <div class="pl-row dashed" style="--c1:#0F766E;--c2:#0D9488;">
+            <div class="pl-side">
+              <span class="ic">➕</span>
+              <span class="nm">新增产线</span>
+              <span class="sub">规划 / 预留扩展</span>
+              <span class="todo2">[待确认]</span>
+            </div>
+            <div class="pl-caps" style="--cb:#99F6E4;--cbg:#F0FDFA;--ct:#115E59;">
+              <span class="cap">孕产康复课程</span>
+              <span class="cap">白噪音 / 自适应助眠</span>
+              <span class="cap">后续硬件 / 内容产线（预留）</span>
+            </div>
+          </div>
+
+          <p class="footnote">数据来源：图一 AI 产品功能清单 · 图二 BBM 三档功能总表 · 行业调研补全（智能婴儿床/新增产线）</p>
         </div>
       </section>
 
