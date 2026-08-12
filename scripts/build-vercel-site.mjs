@@ -6,30 +6,14 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { EXCLUDE_DIRS as EXCLUDE_DIRS_SET, EXCLUDE_FILES, shouldSkipDir, shouldPublish } from "./publish-config.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const OUT = path.join(ROOT, "public");
 const TEMPLATES = path.join(__dirname, "templates");
 
-const EXCLUDE_DIRS = new Set([
-  ".git",
-  ".vscode",
-  "node_modules",
-  "public",
-  "momcozy-app-scene-prototype",
-  "momcozy-carousel",
-  "momcozy-cozy-outing-mobile",
-  "promo-cards",
-  "recommendations",
-  "scripts",
-]);
-
-const EXCLUDE_FILES = new Set([
-  "CLAUDE.md",
-  "index.html",
-  "auth-prototype.html",
-]);
+const EXCLUDE_DIRS = EXCLUDE_DIRS_SET;
 
 const CATEGORY_LABELS = {
   "Skill production": "Skill / 方法论",
@@ -49,17 +33,6 @@ function rmrf(dir) {
 
 function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
-}
-
-function shouldSkipDir(name) {
-  return EXCLUDE_DIRS.has(name) || name.startsWith(".");
-}
-
-function shouldPublish(relPosix) {
-  if (EXCLUDE_FILES.has(relPosix)) return false;
-  const ext = path.extname(relPosix).toLowerCase();
-  if (ext !== ".md" && ext !== ".html") return false;
-  return true;
 }
 
 function walk(dir, files = []) {

@@ -201,7 +201,7 @@ border-color: var(--border);
 
 **不收录**：交互原型目录（`momcozy-app-scene-prototype/` 等）、`CLAUDE.md`、根目录 `index.html`。
 
-**AI 生成文档时**：优先输出到上述目录；push 后即自动上线，无需手工维护链接列表。
+**AI 生成文档时**：优先输出到上述目录；会话结束时会 **自动 commit / push / Vercel 部署**（见 `.cursor/rules/vercel-doc-publish.mdc`）。手动触发：`npm run publish:docs`。临时关闭：`DOC_PUBLISH_DISABLE=1`。
 
 ### 启动本地原型预览
 

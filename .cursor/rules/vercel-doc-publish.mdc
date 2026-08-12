@@ -1,0 +1,40 @@
+---
+description: 生成 HTML/MD 文档后自动 commit、push 并部署 Vercel
+alwaysApply: true
+---
+
+# 文档自动发布（Vercel）
+
+生成或更新 **可发布的 `.md` / `.html`** 后，必须走自动发布流程。
+
+## 输出位置（必须）
+
+优先写入以下目录（会被 Vercel 收录）：
+
+- `docs/`
+- `Skill production/`
+- `html/`
+- `commercialization planning/`
+- `Competitive product research/`
+- `全球市场母婴付费订阅调研/`
+- `DTC/`
+- 或仓库根目录（排除 `index.html`）
+
+不要写入 `momcozy-app-scene-prototype/` 等交互原型目录。
+
+## Agent 完成时
+
+1. 确认文档已保存到上述目录
+2. **不要**把无关文件（drawio、pptx、原型代码）一起 commit
+3. 会话结束时 `stop` hook 会自动执行 `scripts/publish-docs.mjs`
+4. 若需立即发布（不等 hook），运行：`npm run publish:docs`
+
+## 用户说「不要发布 / 不要 push」时
+
+设置 `DOC_PUBLISH_DISABLE=1` 或明确跳过 commit/push。
+
+## 部署结果
+
+- 站点：https://cursor-pm-docs.vercel.app
+- 目录：https://cursor-pm-docs.vercel.app/
+- 日志：`.cursor/hooks/publish-docs.log`

@@ -9,3 +9,6 @@ node_modules/
 dist/
 build/
 public/
+.vercel/
+.cursor/hooks/publish-docs.log
+.vercel
