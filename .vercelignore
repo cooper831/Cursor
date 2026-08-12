@@ -1,0 +1,10 @@
+.DS_Store
+**/.DS_Store
+.git
+.vscode
+docs/_keynote_pptxgenjs.pptx
+docs/_keynote_test.pptx
+docs/_test_minimal.pptx
+docs/momcozy-subscription-research.pptx
+docs/*.pptx
+**/*.pptx

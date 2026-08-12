@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PM 文档站 · {{DOC_COUNT}} 篇</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      padding: 28px 24px;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 80px; }
+    h1 { font-size: 1.8rem; margin: 0 0 6px; letter-spacing: -0.02em; }
+    .lede { color: var(--muted); margin: 0; }
+    .meta-bar {
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .meta-bar code { background: #eef2ff; padding: 2px 6px; border-radius: 4px; }
+    section { margin-top: 36px; }
+    .section-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+    .cards { display: grid; gap: 12px; }
+    .card {
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .card:hover {
+      border-color: #bfdbfe;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.08);
+    }
+    .card .meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .badge {
+      background: #eff6ff;
+      color: var(--accent);
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+    .path { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .card h2 { font-size: 1rem; margin: 0 0 4px; color: var(--ink); }
+    .card .link { margin: 0; font-size: 0.78rem; color: var(--accent); word-break: break-all; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap" style="padding-bottom:0;padding-top:0">
+      <h1>PM 文档站</h1>
+      <p class="lede">自动收录仓库内 HTML / Markdown 文档，部署于 Vercel。</p>
+      <p class="meta-bar">共 {{DOC_COUNT}} 篇 · 生成于 {{GENERATED_AT}} · 站点 <code>{{BASE_URL}}</code></p>
+    </div>
+  </header>
+  <div class="wrap">
+    {{SECTIONS}}
+  </div>
+</body>
+</html>

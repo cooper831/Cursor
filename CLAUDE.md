@@ -184,6 +184,25 @@ border-color: var(--border);
 
 ## 常见任务命令
 
+### Vercel 文档发布（默认）
+
+仓库内生成的 **`.md` / `.html` 文档**会在 push 后由 Vercel 自动构建并发布（需先在 Vercel 绑定 GitHub 仓库）。
+
+| 操作 | 命令 / 链接 |
+|------|-------------|
+| 本地构建 | `npm run build:vercel` |
+| 本地预览 | `npm run preview:vercel` → 打开 `http://localhost:3456/` |
+| 站点目录 | `https://<project>.vercel.app/` |
+| Markdown 阅读 | `https://<project>.vercel.app/read/docs/xxx.md` |
+| HTML 直链 | `https://<project>.vercel.app/docs/xxx.html` |
+| 链接清单 | 构建产物 `public/_site/LINKS.md`、`manifest.json` |
+
+**自动收录范围**：`docs/`、`Skill production/`、`html/`、`commercialization planning/`、`Competitive product research/`、`全球市场母婴付费订阅调研/`、`DTC/` 及根目录下的 `.md` / `.html`。
+
+**不收录**：交互原型目录（`momcozy-app-scene-prototype/` 等）、`CLAUDE.md`、根目录 `index.html`。
+
+**AI 生成文档时**：优先输出到上述目录；push 后即自动上线，无需手工维护链接列表。
+
 ### 启动本地原型预览
 
 ```bash
