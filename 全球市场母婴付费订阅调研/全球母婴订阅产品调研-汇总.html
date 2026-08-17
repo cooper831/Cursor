@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>全球母婴市场付费订阅产品调研 · 汇总</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfaf8; --bg-soft:#f4f1ec; --surface:#ffffff; --surface-2:#f6f3ee;
+  --border:rgba(26,34,51,.10); --border-strong:rgba(26,34,51,.22);
+  --ink:#1a2233; --text-1:#1a2233; --text-2:#52596b; --text-3:#8b91a0;
+  --accent:#d9486b;          /* warm rose — 母婴/Momcozy 暖调 */
+  --accent-soft:#fdeef2;
+  --navy:#16243d;            /* 结构深蓝 */
+  --blue:#2f6df0;            /* 数据蓝 */
+  --good:#0e9f6e; --warn:#d97706; --bad:#dc2626; --gold:#c08a2d;
+  --grad:linear-gradient(120deg,#16243d,#d9486b 120%);
+  --grad-rose:linear-gradient(120deg,#d9486b,#f0846a);
+  --radius:16px; --radius-sm:10px; --radius-lg:24px;
+  --shadow:0 8px 26px rgba(22,36,61,.07),0 2px 6px rgba(22,36,61,.04);
+  --shadow-lg:0 22px 60px rgba(22,36,61,.13),0 6px 16px rgba(22,36,61,.06);
+  --font:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+  --serif:'Playfair Display','Noto Serif SC',Georgia,serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0e1626;color:var(--text-1);
+  font-family:var(--font);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+
+/* ===== DECK / SLIDE ===== */
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--bg)}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:60px 84px;background:var(--bg);
+  opacity:0;pointer-events:none;transform:translateX(28px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);overflow:hidden}
+.slide.is-active{opacity:1;pointer-events:auto;transform:translateX(0);z-index:2}
+.slide.is-prev{transform:translateX(-28px)}
+.slide-inner{width:100%;max-width:1180px;margin:0 auto}
+
+/* ===== TYPE ===== */
+.kicker{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.16em;text-transform:uppercase;margin:0 0 14px}
+.kicker.navy{color:var(--navy)}
+h1{font-size:60px;line-height:1.06;font-weight:900;letter-spacing:-.03em;margin:0 0 18px;color:var(--navy)}
+h2{font-size:40px;line-height:1.12;font-weight:800;letter-spacing:-.025em;margin:0 0 6px;color:var(--navy)}
+h3{font-size:21px;font-weight:700;margin:0 0 6px;color:var(--navy)}
+h4{font-size:16px;font-weight:700;margin:0 0 4px;color:var(--navy)}
+p{margin:0}
+.lede{font-size:20px;line-height:1.5;color:var(--text-2);font-weight:400;max-width:64ch}
+.dim{color:var(--text-2)} .dim2{color:var(--text-3)}
+.hl{color:var(--accent);font-weight:700}
+.hlb{color:var(--blue);font-weight:700}
+.serif{font-family:var(--serif);font-style:italic}
+.gradient-text{background:var(--grad-rose);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mt-s{margin-top:8px}.mt-m{margin-top:18px}.mt-l{margin-top:30px}.mt-xl{margin-top:40px}
+
+/* ===== LAYOUT ===== */
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.row{display:flex;gap:16px;align-items:center}.row.wrap{flex-wrap:wrap}
+.between{justify-content:space-between}
+
+/* ===== CARD ===== */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card.soft{background:var(--surface-2);box-shadow:none}
+.card.accent{border-top:3px solid var(--accent)}
+.card.navytop{border-top:3px solid var(--navy)}
+.card.hover{transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.card.hover:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.tag{display:inline-block;width:34px;height:34px;border-radius:9px;background:var(--accent-soft);color:var(--accent);
+  font-weight:800;font-size:15px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px}
+.pill{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:600;
+  background:var(--surface-2);color:var(--text-2);border:1px solid var(--border)}
+.pill.rose{background:var(--accent-soft);color:var(--accent);border-color:rgba(217,72,107,.25)}
+.pill.blue{background:#eaf1ff;color:var(--blue);border-color:rgba(47,109,240,.25)}
+.pill.navy{background:#eef1f6;color:var(--navy);border-color:rgba(22,36,61,.2)}
+.divider-accent{height:4px;width:64px;background:var(--grad-rose);border-radius:2px;margin:0 0 22px}
+
+/* ===== METRIC ===== */
+.metric .n{font-size:46px;font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--navy)}
+.metric .n.rose{color:var(--accent)} .metric .n.blue{color:var(--blue)}
+.metric .l{font-size:13px;color:var(--text-2);margin-top:7px;line-height:1.4}
+
+/* ===== TABLE ===== */
+table.t{width:100%;border-collapse:collapse;font-size:14.5px}
+table.t th,table.t td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
+table.t th{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:700}
+table.t td.num{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
+table.t tr:last-child td{border-bottom:none}
+table.t tbody tr:hover td{background:var(--surface-2)}
+.bar-wrap{display:flex;align-items:center;gap:10px}
+.bar{height:13px;border-radius:7px;background:var(--grad-rose);min-width:4px}
+.bar.b2{background:linear-gradient(90deg,#2f6df0,#6aa0ff)}
+
+/* badges for AI level */
+.lvl{display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;
+  padding:3px 10px;border-radius:999px;color:#fff}
+.lvl0{background:#9aa1ad}.lvl1{background:#6b8cc4}.lvl2{background:var(--blue)}
+.lvl3{background:var(--accent)}.lvl4{background:var(--navy)}
+
+/* ===== CHROME ===== */
+.brandbar{position:absolute;top:30px;left:84px;display:flex;align-items:center;gap:9px;z-index:6}
+.brandbar .dot{width:11px;height:11px;border-radius:50%;background:var(--accent)}
+.brandbar b{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:-.01em}
+.deck-footer{position:absolute;bottom:24px;left:84px;right:84px;display:flex;justify-content:space-between;
+  font-size:11.5px;color:var(--text-3);letter-spacing:.06em;z-index:6}
+.progress{position:fixed;left:0;bottom:0;height:3px;background:var(--grad-rose);width:0;z-index:30;transition:width .4s var(--ease)}
+.snum{font-variant-numeric:tabular-nums}
+.foot-note{font-size:11.5px;color:var(--text-3);margin-top:14px}
+
+/* nav arrows */
+.nav{position:fixed;bottom:18px;right:22px;display:flex;gap:8px;z-index:31}
+.nav button{width:34px;height:34px;border-radius:9px;border:1px solid var(--border-strong);background:var(--surface);
+  color:var(--navy);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow);transition:.2s}
+.nav button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ===== COVER ===== */
+.cover{background:radial-gradient(120% 120% at 80% 10%,#1f3357 0%,#16243d 45%,#0e1626 100%);color:#fff}
+.cover h1{color:#fff;font-size:64px}
+.cover .lede{color:rgba(255,255,255,.8)}
+.cover .kicker{color:#ff9bb3}
+.cover .deck-footer{color:rgba(255,255,255,.55)}
+.cover .blob{position:absolute;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(217,72,107,.35),transparent 65%);top:-160px;right:-120px;filter:blur(8px)}
+.cover .chip{display:inline-block;padding:7px 16px;border:1px solid rgba(255,255,255,.22);border-radius:999px;
+  font-size:13px;color:rgba(255,255,255,.85);margin-right:10px}
+
+/* overview */
+.ov{position:fixed;inset:0;background:rgba(14,22,38,.94);backdrop-filter:blur(10px);z-index:50;display:none;
+  padding:40px;overflow:auto;grid-template-columns:repeat(4,1fr);gap:16px;align-content:start}
+.ov.open{display:grid}
+.ov .th{background:var(--surface);border:1px solid var(--border);border-radius:12px;aspect-ratio:16/9;
+  padding:14px;cursor:pointer;position:relative;font-size:11px;transition:.2s;overflow:hidden}
+.ov .th:hover{transform:scale(1.04)}
+.ov .th .n{position:absolute;top:8px;left:11px;font-weight:800;color:var(--text-3)}
+.ov .th .tt{position:absolute;bottom:11px;left:13px;right:13px;font-weight:700;color:var(--navy);font-size:13px;line-height:1.25}
+
+.note{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;
+  padding:14px 18px;color:var(--navy);font-weight:600;font-size:15px}
+.note.blue{background:#eef4ff;border-color:var(--blue)}
+.note.navy{background:#eef1f6;border-color:var(--navy)}
+.check{color:var(--good);font-weight:800}.cross{color:var(--bad);font-weight:800}
+small{font-size:12px}
+@media (max-width:1100px){.slide{padding:48px 40px}h1{font-size:46px}h2{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1 · COVER -->
+<section class="slide cover is-active" data-title="封面">
+  <div class="blob"></div>
+  <div class="slide-inner">
+    <p class="kicker">商业化基建 2026 · 调研汇总</p>
+    <h1>全球母婴市场<br>付费订阅产品<span class="serif" style="color:#ff9bb3"> 调研报告</span></h1>
+    <p class="lede mt-m">拆解 16 款头部母婴与女性健康 App 的订阅设计：<br>卖什么 · 怎么卖 · 在哪触发 · 如何留住 · 我们怎么做</p>
+    <div class="mt-xl">
+      <span class="chip">16 个调研对象 · 3 批次</span>
+      <span class="chip">一手购买体验 + 上市财报交叉验证</span>
+      <span class="chip">直达可落地的 Momcozy 规划</span>
+    </div>
+  </div>
+  <div class="deck-footer"><span>APP 生态中心 · 商业化团队</span><span>2026 · Q3 通用订阅能力建设</span></div>
+</section>
+
+<!-- 2 · 背景 / 五问 -->
+<section class="slide" data-title="调研目标：五个核心问题">
+  <div class="slide-inner">
+    <p class="kicker">Why · 调研背景</p>
+    <h2>订阅（ARR）是衡量 App 价值的核心，<br>我们要向行业最佳看齐</h2>
+    <p class="lede mt-s">26 年作为商业化基建年，初始方案就对标全球最佳实践——学什么、借鉴什么、规避什么。本报告回答五个核心问题：</p>
+    <div class="grid g5 mt-l">
+      <div class="card accent hover"><span class="tag">1</span><h4>卖什么</h4><p class="dim" style="font-size:13px">免费与付费的边界？核心价值主张与 AI 角色</p></div>
+      <div class="card accent hover"><span class="tag">2</span><h4>怎么卖</h4><p class="dim" style="font-size:13px">定价 · 试用 · 层级 · 年付引导 · 家庭共享</p></div>
+      <div class="card accent hover"><span class="tag">3</span><h4>在哪触发</h4><p class="dim" style="font-size:13px">AI 入口在哪？付费墙出现在旅程哪个节点</p></div>
+      <div class="card accent hover"><span class="tag">4</span><h4>如何留住</h4><p class="dim" style="font-size:13px">取消流程 · 续订价值 · 用户生命周期延长</p></div>
+      <div class="card accent hover"><span class="tag">5</span><h4>我们怎么做</h4><p class="dim" style="font-size:13px">可落地的定价 · 功能优先级 · 指标</p></div>
+    </div>
+    <div class="note mt-l">数据口径：✅ 已核实（App 实购截图 / 官网价格 / 上市财报）｜⚠️ 推算估计（下载排名 / 行业均值 / 媒体报道）。价格统一换算美元。</div>
+  </div>
+</section>
+
+<!-- 3 · 调研对象 -->
+<section class="slide" data-title="调研对象总览">
+  <div class="slide-inner">
+    <p class="kicker">Landscape · 调研对象</p>
+    <h2>16 款对象，覆盖 AI Level 0–3 完整谱系</h2>
+    <div class="grid g4 mt-l">
+      <div class="card navytop">
+        <h4>硬件捆绑订阅</h4>
+        <p class="dim mt-s" style="font-size:14px">Nanit · Owlet · SNOO<br><span class="dim2">与 Momcozy「硬件+软件」最相似，付费转化最高</span></p>
+      </div>
+      <div class="card navytop">
+        <h4>纯软件订阅</h4>
+        <p class="dim mt-s" style="font-size:14px">Huckleberry · Flo · Kinedu · Solid Starts · BabySparks · Nara Baby · Wonder Weeks</p>
+      </div>
+      <div class="card navytop">
+        <h4>哺乳硬件 + 免费 App</h4>
+        <p class="dim mt-s" style="font-size:14px">Medela · Willow/Elvie<br><span class="hl">三家订阅收入均为 0 → 失败参照</span></p>
+      </div>
+      <div class="card navytop">
+        <h4>双轨 / B2B</h4>
+        <p class="dim mt-s" style="font-size:14px">Tinybeans（订阅+实体打印）<br>Cleo · Ovia（企业福利 B2B2C）</p>
+      </div>
+    </div>
+    <div class="note navy mt-l">最直接的参照系是 <b>Nanit / Owlet / SNOO</b>（硬件锁定订阅）；最大的警示是 <b>Medela / Willow / Elvie</b> 三大哺乳硬件品牌 App 完全免费——既是用户预期挑战，也是率先突破者的市场机会。</div>
+  </div>
+</section>
+
+<!-- 4 · 体量 / MRR -->
+<section class="slide" data-title="体量分析：MRR 排行">
+  <div class="slide-inner">
+    <p class="kicker">Scale · 体量分析</p>
+    <h2>估算 MRR 排行：商业模式决定天花板</h2>
+    <table class="t mt-m">
+      <thead><tr><th style="width:150px">App</th><th>估算 MRR（月）</th><th class="num">付费转化率</th><th>类型 / 置信度</th></tr></thead>
+      <tbody>
+        <tr><td><b>Flo Health</b></td><td><div class="bar-wrap"><span class="bar" style="width:100%"></span><b>$1313 万</b></div></td><td class="num">6.5–8.5%</td><td><span class="pill blue">纯软件 · ✅财报</span></td></tr>
+        <tr><td><b>Cleo</b>（B2B）</td><td><div class="bar-wrap"><span class="bar" style="width:23%"></span><b>~$300 万</b></div></td><td class="num">B 端付费</td><td><span class="pill navy">企业福利 · ⚠️</span></td></tr>
+        <tr><td><b>Nanit</b></td><td><div class="bar-wrap"><span class="bar" style="width:13%"></span><b>$130–180 万</b></div></td><td class="num">20–25%</td><td><span class="pill rose">硬件捆绑 · ⚠️</span></td></tr>
+        <tr><td><b>Owlet360</b></td><td><div class="bar-wrap"><span class="bar" style="width:7%"></span><b>~$90 万</b></div></td><td class="num">22–28%</td><td><span class="pill rose">硬件捆绑 · ✅财报</span></td></tr>
+        <tr><td><b>Huckleberry</b></td><td><div class="bar-wrap"><span class="bar" style="width:6%"></span><b>$65–85 万</b></div></td><td class="num">5–7.5%</td><td><span class="pill blue">纯软件 · ⚠️</span></td></tr>
+        <tr><td><b>Kinedu</b></td><td><div class="bar-wrap"><span class="bar" style="width:2.5%"></span><b>$30 万</b></div></td><td class="num">3–4.5%</td><td><span class="pill blue">纯软件 · ⚠️</span></td></tr>
+        <tr><td><b>Medela/Willow/Elvie</b></td><td><b style="color:var(--bad)">$0</b></td><td class="num">0%</td><td><span class="pill">哺乳硬件 · ✅免费</span></td></tr>
+      </tbody>
+    </table>
+    <p class="foot-note">注：SNOO/Happiest Baby 硬件租赁（$149/月）另贡献约 $200–300 万/月；Tinybeans 含实体打印约 $59.6 万/月。Flo 付费用户 660 万 / MAU 7700 万。</p>
+  </div>
+</section>
+
+<!-- 5 · 三大洞察 -->
+<section class="slide" data-title="体量三大洞察">
+  <div class="slide-inner">
+    <p class="kicker">Key Insights · 关键洞察</p>
+    <h2>从体量数据中读出的三条规律</h2>
+    <div class="grid g3 mt-l">
+      <div class="card accent">
+        <div class="metric"><div class="n rose">5–10×</div><div class="l">硬件绑定 vs 纯软件 转化率倍数</div></div>
+        <h4 class="mt-m">硬件绑定转化率碾压纯软件</h4>
+        <p class="dim" style="font-size:13.5px">已付高价硬件→对配套订阅抵触低，不订阅就拿不到完整数据价值。Momcozy 订阅占比目标 <span class="hl">10–20%</span> 合理。</p>
+      </div>
+      <div class="card accent">
+        <div class="metric"><div class="n rose">MRR ≠ MAU</div></div>
+        <h4 class="mt-m">商业模式决定天花板</h4>
+        <p class="dim" style="font-size:13.5px">Wonder Weeks 下载破千万但买断制 MRR 仅 $15–25 万；SNOO 用户最少却客单价最高。<span class="hl">商业化效率 > 用户规模。</span></p>
+      </div>
+      <div class="card accent">
+        <div class="metric"><div class="n rose">3 / 3</div><div class="l">哺乳硬件品牌订阅收入为零</div></div>
+        <h4 class="mt-m">三大哺乳品牌均无订阅</h4>
+        <p class="dim" style="font-size:13.5px">Medela / Willow / Elvie 印证「哺乳硬件 App 不收费」是行业惯例——<span class="hl">率先突破者的机会窗口</span>。</p>
+      </div>
+    </div>
+    <div class="note blue mt-l">Nanit vs Owlet：月活相当（50 万+），但 Nanit 服务周期更长（0–4 岁 vs 0–18 个月）、商业化效率更高，MRR 反超 Owlet。</div>
+  </div>
+</section>
+
+<!-- 6 · 卖什么 · 切分模型 -->
+<section class="slide" data-title="卖什么：三种切分模型">
+  <div class="slide-inner">
+    <p class="kicker">① 卖什么 · 价值主张</p>
+    <h2>核心规律：免费层解决「记录」，付费层解决「分析与预测」</h2>
+    <div class="grid g3 mt-l">
+      <div class="card navytop">
+        <span class="pill rose">付费驱动力 · 最强</span>
+        <h3 class="mt-s">功能深度切分</h3>
+        <p class="dim2" style="font-size:13px">免费=记录 · 付费=预测/建议</p>
+        <p class="dim mt-s" style="font-size:14px">Huckleberry · Kinedu · Flo<br><span class="hlb">边界最清晰，用户清楚「付费买的是什么」</span></p>
+      </div>
+      <div class="card navytop">
+        <span class="pill blue">付费驱动力 · 强（随时间增强）</span>
+        <h3 class="mt-s">数据量切分</h3>
+        <p class="dim2" style="font-size:13px">免费=实时 · 付费=历史</p>
+        <p class="dim mt-s" style="font-size:14px">Nanit · Owlet · Nara Baby<br>历史数据越积累越有价值，绑定续费</p>
+      </div>
+      <div class="card navytop">
+        <span class="pill">付费驱动力 · 中等</span>
+        <h3 class="mt-s">内容量切分</h3>
+        <p class="dim2" style="font-size:13px">免费=样本 · 付费=完整库</p>
+        <p class="dim mt-s" style="font-size:14px">Solid Starts · BabySparks<br>逻辑简单，但需内容库足够大</p>
+      </div>
+    </div>
+    <div class="note mt-l">把免费墙设在「繁琐的过程记录」，把付费墙狠狠卡在「能给确定性答案、让父母省心的 AI 预测或专家结论」上。</div>
+  </div>
+</section>
+
+<!-- 7 · 六大付费能力 -->
+<section class="slide" data-title="六大核心付费能力">
+  <div class="slide-inner">
+    <p class="kicker">① 卖什么 · 能力地图</p>
+    <h2>六大核心付费能力 与 Momcozy 关联度</h2>
+    <table class="t mt-m">
+      <thead><tr><th>付费能力</th><th>代表品牌</th><th>核心逻辑</th><th class="num">驱动力</th><th>Momcozy 关联</th></tr></thead>
+      <tbody>
+        <tr><td><b>AI 算法黄金期预测</b></td><td>Huckleberry · Flo</td><td>算法代替肉眼预测最佳小睡/排卵</td><td class="num">★★★★★</td><td><span class="hl">✅ 极高（数据独占）</span></td></tr>
+        <tr><td><b>医疗/安全级实时警报</b></td><td>Owlet · Nanit</td><td>趋势+晨间报告+异常警报锁定</td><td class="num">★★★★★</td><td>⚠️ 中（映射哺乳安全）</td></tr>
+        <tr><td><b>专家咨询/个性化方案</b></td><td>Kinedu · Flo</td><td>真人定制报告/1对1，高 ARPU</td><td class="num">★★★★</td><td><span class="hl">✅ 高（真人 IBCLC）</span></td></tr>
+        <tr><td><b>异地双人/全家共享</b></td><td>Flo · Nanit</td><td>多看护人权限升级为付费权益</td><td class="num">★★★★</td><td><span class="hl">✅ 高（温和调性）</span></td></tr>
+        <tr><td><b>硬件控制权解封</b></td><td>SNOO</td><td>二手设备软件硬锁，转化长尾 MRR</td><td class="num">★★★★</td><td>✅ 高（二手市场活跃）</td></tr>
+        <tr><td><b>云端历史存储与回看</b></td><td>Nanit</td><td>取消=数据清空，损失厌恶卡续费</td><td class="num">★★★★</td><td>⚠️ 谨慎（建议温和版）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 8 · AI 等级 -->
+<section class="slide" data-title="AI 能力等级与全市场空白">
+  <div class="slide-inner">
+    <p class="kicker">① 卖什么 · AI 谱系</p>
+    <h2>AI 能力分 5 级，全市场最高仅触及 Level 3</h2>
+    <div class="grid g5 mt-m">
+      <div class="card soft"><span class="lvl lvl0">L0</span><h4 class="mt-s">无智能</h4><p class="dim2" style="font-size:12.5px">纯记录工具</p></div>
+      <div class="card soft"><span class="lvl lvl1">L1</span><h4 class="mt-s">规则化</h4><p class="dim2" style="font-size:12.5px">按月龄 if-else 推送</p></div>
+      <div class="card soft"><span class="lvl lvl2">L2</span><h4 class="mt-s">数据驱动预测</h4><p class="dim2" style="font-size:12.5px">Huckleberry · Nanit · Owlet</p></div>
+      <div class="card soft"><span class="lvl lvl3">L3</span><h4 class="mt-s">对话式 AI</h4><p class="dim2" style="font-size:12.5px">Flo · Kinedu · BabySparks</p></div>
+      <div class="card accent"><span class="lvl lvl4">L4</span><h4 class="mt-s">主动式 Agent</h4><p class="hl" style="font-size:12.5px">全市场空白</p></div>
+    </div>
+    <div class="grid g3 mt-l">
+      <div class="note blue">数据质量：硬件传感器（Owlet/Nanit）远高于手动输入，AI 预测更准、信任更强、<b>无法被 ChatGPT 替代</b>。</div>
+      <div class="note">触发效果：Flo「记录行为后主动弹出」转化最高；Kinedu 冷启动付费墙效果最差。</div>
+      <div class="note navy">空白机会：主动感知 + 主动行动的 <b>Level 4 AI Agent</b> 在母婴赛道尚无产品实现——核心护城河。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · 怎么卖 · 定价 -->
+<section class="slide" data-title="怎么卖：定价全景">
+  <div class="slide-inner">
+    <p class="kicker navy">② 怎么卖 · 定价策略</p>
+    <h2>月付主流 $5–15，中位 $8–10</h2>
+    <div class="grid g3 mt-l">
+      <div class="card accent"><div class="metric"><div class="n rose">$8–10</div><div class="l">月付价格带中位数</div></div>
+        <p class="dim mt-m" style="font-size:13.5px">低于 $5 感知价值不足，高于 $15 转化阻力骤增。</p></div>
+      <div class="card accent"><div class="metric"><div class="n rose">30–75%</div><div class="l">年付折扣普遍区间</div></div>
+        <p class="dim mt-m" style="font-size:13.5px">Flo 76–87% 是极端案例，但年付转化也最高。「省了多少钱」比「打几折」更有触动。</p></div>
+      <div class="card accent"><div class="metric"><div class="n rose">高月付<br>+低年付</div></div>
+        <p class="dim mt-m" style="font-size:13.5px">Solid Starts $20.6/月 vs 折合 $8.1；刻意定高月付让用户主动选年付，<span class="hl">第 1 天锁死全年价值</span>。</p></div>
+    </div>
+    <div class="note navy mt-l">母婴行业的诅咒是「用户注定流失」——刚需期常常只有半年。破局之道：用高月付作锚点，引导年付，与生命周期赛跑、锁定年化价值。</div>
+  </div>
+</section>
+
+<!-- 10 · 层级 + 共享 -->
+<section class="slide" data-title="层级结构与共享设计">
+  <div class="slide-inner">
+    <p class="kicker navy">② 怎么卖 · 结构</p>
+    <h2>主流层级结构 与 账号共享设计</h2>
+    <div class="grid g2 mt-m">
+      <div>
+        <h3>四类订阅层级结构</h3>
+        <div class="card soft mt-s" style="padding:14px 18px"><b>Free + Plus + Premium</b><p class="dim2" style="font-size:13px">记录免费 → 轻量预测 → 真人专家｜Huckleberry · Flo · Kinedu</p></div>
+        <div class="card soft mt-s" style="padding:14px 18px"><b>Free + 唯一付费档</b><p class="dim2" style="font-size:13px">降低选择焦虑｜Solid Starts · Wonder Weeks</p></div>
+        <div class="card soft mt-s" style="padding:14px 18px"><b>硬件限免 + 软件订阅</b><p class="dim2" style="font-size:13px">3–12 个月免费期后筑墙｜Nanit · SNOO · Owlet</p></div>
+        <div class="card soft mt-s" style="padding:14px 18px"><b>纯记录全免 / B2B</b><p class="dim2" style="font-size:13px">Medela/Elvie/Nara｜Cleo/Ovia 企业付费</p></div>
+      </div>
+      <div>
+        <h3>账号共享：推荐方案</h3>
+        <div class="card accent mt-s">
+          <p class="dim" style="font-size:14.5px"><b>主账号定向邀请</b>（最安全、潜力最高）：妈妈一人买单，App 内生成专属二维码/邮件邀请。</p>
+          <ul class="dim mt-s" style="font-size:14px;padding-left:20px;line-height:1.7">
+            <li>低档会员一次性赠送 <span class="hl">3–5 个免费副看护人</span>名额（爸爸/保姆/奶奶）</li>
+            <li>卡点收费：副账号需「真人专家 1对1」或全家超 5 人时再升档</li>
+          </ul>
+        </div>
+        <div class="note mt-m">避坑：Huckleberry 同账号多端登录 → 数据覆盖+无隐私；Nanit/SNOO 按设备重复收费 → 海量差评。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · 在哪触发 -->
+<section class="slide" data-title="在哪触发付费">
+  <div class="slide-inner">
+    <p class="kicker navy">③ 在哪触发 · 交互</p>
+    <h2>主动触达 完胜 被动等待</h2>
+    <div class="grid g2 mt-m">
+      <div class="card" style="border-top:3px solid var(--bad)">
+        <h3>被动型（用户主动找 AI）</h3>
+        <p class="dim" style="font-size:14px">Kinedu AI Coach（藏二级菜单）· BabySparks Ava（需点 Tab）</p>
+        <p class="dim mt-s" style="font-size:14px">凌晨 3 点精疲力竭的妈妈不会主动找 AI 聊天，入口越深使用越少。</p>
+        <div class="metric mt-m"><div class="n" style="color:var(--bad)">3–4.5%</div><div class="l">转化率（偏低）</div></div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--good)">
+        <h3>主动型（AI 主动触达）</h3>
+        <p class="dim" style="font-size:14px">Flo 症状触发 Stories · Nanit 晨间报告推送 · Huckleberry 屏幕中心倒计时</p>
+        <p class="dim mt-s" style="font-size:14px">AI 在用户需要它时自动出现，无需主动寻找入口。</p>
+        <div class="metric mt-m"><div class="n" style="color:var(--good)">6.5–45%</div><div class="l">转化率（Flo 6.5–8.5% · Nanit 35–45%）</div></div>
+      </div>
+    </div>
+    <div class="note mt-l">付费墙最佳形态：<b>锁头图标 🔒</b>——把付费功能大方摆在免费用户面前加把锁，反复被看到/吸引/点击，是成本最低、转化最高的被动触发；并在「对话进行到深处」而非入口处拦截。</div>
+  </div>
+</section>
+
+<!-- 12 · 如何留住 -->
+<section class="slide" data-title="如何留住用户">
+  <div class="slide-inner">
+    <p class="kicker navy">④ 如何留住 · 留存与防御</p>
+    <h2>退订挽留 · 续订强化 · 生命周期延长</h2>
+    <div class="grid g3 mt-l">
+      <div class="card navytop"><h3>取消挽留</h3>
+        <p class="dim mt-s" style="font-size:13.5px"><b>资产损失可视化</b>：取消=亲手销毁孩子成长档案（Nanit/Flo），拦截 15–20% 冲动退订。<br><b>嫌贵→秒发折扣</b>；<b>娃大了→跨线引流</b>进阶课。</p>
+      </div>
+      <div class="card navytop"><h3>续订强化</h3>
+        <p class="dim mt-s" style="font-size:13.5px">到期前 14 天推送<b>情感化年度成长报告</b>（Wonder Weeks/Tinybeans）；<b>同辈大数据对比</b>制造 FOMO；<b>老会员价锁定</b>，断缴即失去低价特权。</p>
+      </div>
+      <div class="card navytop"><h3>LTV 延长 3–5×</h3>
+        <p class="dim mt-s" style="font-size:13.5px"><b>纵向</b>：0–1 岁 → 0–5 岁大童课程；<b>横向</b>：多娃档案 + 家庭折扣，0 成本收割二胎；<b>降维</b>：开辟 B2B 企业福利，解耦「娃长大就卸载」。</p>
+      </div>
+    </div>
+    <div class="note navy mt-l">Momcozy 续订机制：每月 1 日「你和宝宝的成长报告」（泌乳量/哺乳里程碑）+ 年度「哺乳之旅回顾」+ 里程碑节点（辅食/断奶/满 1 岁）主动推送下阶段规划。</div>
+  </div>
+</section>
+
+<!-- 13 · 警示 -->
+<section class="slide" data-title="过度商业化的警示">
+  <div class="slide-inner">
+    <p class="kicker" style="color:var(--bad)">⚠ 红线 · 过度商业化警示</p>
+    <h2>SNOO / Nanit 的血泪教训</h2>
+    <div class="grid g2 mt-m">
+      <div>
+        <div class="card soft" style="border-left:4px solid var(--bad);padding:14px 18px"><h4>硬件控制权被绑架</h4><p class="dim2" style="font-size:13px">二手买家月付 $19.99 才能开「断奶模式」——侵犯硬件所有权感知</p></div>
+        <div class="card soft mt-s" style="border-left:4px solid var(--bad);padding:14px 18px"><h4>二胎/多设备加倍剥皮</h4><p class="dim2" style="font-size:13px">按设备重复收费，惩罚高忠诚复购用户</p></div>
+        <div class="card soft mt-s" style="border-left:4px solid var(--bad);padding:14px 18px"><h4>威胁式清空历史数据</h4><p class="dim2" style="font-size:13px">把停缴变成对情感资产的「数字勒索」</p></div>
+      </div>
+      <div>
+        <h3 class="hl">避免差评的三条策略</h3>
+        <div class="card accent mt-s"><h4>① 硬件基础能力 与 订阅增值解耦</h4><p class="dim" style="font-size:13.5px">设备控制、基础安全报警终身免费（含二手）；付费墙卡在「耗云端 AI 算力的增值结果」</p></div>
+        <div class="card accent mt-s"><h4>② 支持订阅多端共享</h4><p class="dim" style="font-size:13.5px">「全家呵护计划」一人付费，绑定 5–8 名家庭成员；二胎引导升级多娃计划</p></div>
+        <div class="card accent mt-s"><h4>③ 退订不卸载，保留静态时光机</h4><p class="dim" style="font-size:13.5px">停止新分析，但已生成的成长白皮书转「只读相册」永久保留 → CAC 为 0 的私域入口</p></div>
+      </div>
+    </div>
+    <div class="note navy mt-l">底线：<b>硬件给底线 · 软件给特权 · 一人付费全家安心</b>——提升商业化效率的同时兼顾品牌温度，实现口碑与 ARR 双赢。</div>
+  </div>
+</section>
+
+<!-- 14 · 我们怎么做 · 结论 -->
+<section class="slide cover" data-title="我们应该怎么做">
+  <div class="blob"></div>
+  <div class="slide-inner">
+    <p class="kicker">⑤ 我们应该怎么做 · 核心结论</p>
+    <h2 style="color:#fff">三条落地结论</h2>
+    <div class="grid g3 mt-l">
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)">
+        <div class="metric"><div class="n" style="color:#ff9bb3">$8.99–14.99</div><div class="l" style="color:rgba(255,255,255,.7)">月付合理定价区间</div></div>
+        <p style="color:rgba(255,255,255,.82);font-size:13.5px;margin-top:12px">Plus $8.99 高于 Kinedu 彰显 AI 价值，低于 Huckleberry 降低门槛。年付占比目标 &gt;50%。</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)">
+        <div class="metric"><div class="n" style="color:#ff9bb3">吸奶器数据</div></div>
+        <p style="color:rgba(255,255,255,.82);font-size:13.5px;margin-top:12px"><b style="color:#fff">唯一不可复制的护城河。</b>不做综合育儿平台，聚焦哺乳+早期母婴健康垂直，基于硬件数据做极致深度。</p>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)">
+        <div class="metric"><div class="n" style="color:#ff9bb3">15–25%</div><div class="l" style="color:rgba(255,255,255,.7)">付费转化率目标</div></div>
+        <p style="color:rgba(255,255,255,.82);font-size:13.5px;margin-top:12px">对标 Owlet 硬件绑定型（22–28%），而非纯软件均值（5–8%）。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 · SKU -->
+<section class="slide" data-title="订阅层级 SKU 设计">
+  <div class="slide-inner">
+    <p class="kicker navy">⑤ 落地 · SKU 设计（暂定）</p>
+    <h2>三档订阅 与 权益切分</h2>
+    <div class="grid g3 mt-m">
+      <div class="card">
+        <span class="pill">Free</span><div class="metric mt-s"><div class="n">$0</div></div>
+        <p class="dim mt-s" style="font-size:13px">基础吸奶记录 · 宝宝日志(1) · 每周通用贴士 · <b>3 次 AI 免费对话</b> · 7 天历史</p>
+      </div>
+      <div class="card accent" style="border-top-width:4px">
+        <span class="pill rose">Plus（Care）· 主推</span>
+        <div class="metric mt-s"><div class="n rose">$8.99<small style="font-size:15px;color:var(--text-3)">/月</small></div><div class="l">年付 $59.99（折合 $5/月 · <b class="hl">省 44%</b>）</div></div>
+        <p class="dim mt-s" style="font-size:13px">AI 哺乳顾问无限问答 · 吸奶趋势分析 · 睡眠建议 · 里程碑 · 多宝宝 · <b>家庭共享 2–5 人</b></p>
+      </div>
+      <div class="card navytop" style="border-top-width:4px">
+        <span class="pill navy">Premium（Insight）</span>
+        <div class="metric mt-s"><div class="n">$14.99<small style="font-size:15px;color:var(--text-3)">/月</small></div><div class="l">年付 $99.99（折合 $8.3/月 · 省 45%）</div></div>
+        <p class="dim mt-s" style="font-size:13px">Plus 全部 + 专家连线 2 次/月 · 月度 AI 报告 · 产后情绪追踪 · <b>主动式 AI 提醒(L4)</b> · 断奶预测</p>
+      </div>
+    </div>
+    <div class="note mt-l">促年付细节：默认选中年付高亮 · 标注「Save XX% + 省了多少钱」· 硬件购买用户附赠 12 个月 AI Basic（路径依赖）。<span class="hl">免费=记录，付费=AI 洞察</span>。</div>
+  </div>
+</section>
+
+<!-- 16 · 指标 + Paywall -->
+<section class="slide" data-title="目标指标与 Paywall 策略">
+  <div class="slide-inner">
+    <p class="kicker navy">⑤ 落地 · 目标指标</p>
+    <h2>五大订阅指标 与 Paywall 触达节点</h2>
+    <div class="grid g5 mt-m">
+      <div class="card soft tc"><div class="metric"><div class="n rose">15–25%</div><div class="l">付费转化率</div></div></div>
+      <div class="card soft tc"><div class="metric"><div class="n rose">&gt;20%</div><div class="l">试用转化率</div></div></div>
+      <div class="card soft tc"><div class="metric"><div class="n rose">&gt;50%</div><div class="l">年付占比</div></div></div>
+      <div class="card soft tc"><div class="metric"><div class="n rose">&gt;60%</div><div class="l">12 月续订率</div></div></div>
+      <div class="card soft tc"><div class="metric"><div class="n rose">&gt;70%</div><div class="l">付费用户月活留存</div></div></div>
+    </div>
+    <h3 class="mt-l">Paywall 触达策略（按转化预期排序）</h3>
+    <div class="row wrap mt-s">
+      <span class="pill rose">AI 检测奶量异常 · 极高</span>
+      <span class="pill rose">硬件首次绑定 → 7 天试用 · 最高</span>
+      <span class="pill rose">睡眠洞察分析 · 最高</span>
+      <span class="pill blue">连续记录 3 天 · 高</span>
+      <span class="pill blue">免费 AI 对话用完 · 高</span>
+      <span class="pill navy">宝宝月龄节点 · 中</span>
+    </div>
+    <div class="note blue mt-l">AI 护城河铁律：回答必须调用吸奶器历史数据（「你本周奶量下降 15%，基于泵奶间隔分析…」），而非通用育儿百科——这是无法被 ChatGPT 替代的差异点。</div>
+  </div>
+</section>
+
+<!-- 17 · Thanks -->
+<section class="slide cover center" data-title="结语" style="text-align:center">
+  <div class="blob"></div>
+  <div class="slide-inner">
+    <p class="kicker" style="color:#ff9bb3">Thanks</p>
+    <h1 style="font-size:72px">硬件给底线<span style="color:#ff9bb3"> · </span>软件给特权<br>一人付费<span class="serif" style="color:#ff9bb3"> 全家安心</span></h1>
+    <p class="lede mt-m" style="margin-left:auto;margin-right:auto">提升商业化效率的同时兼顾长线品牌温度——实现口碑与 ARR 双赢。</p>
+    <div class="mt-xl"><span class="chip">APP 生态中心 · 商业化团队</span><span class="chip">欢迎探讨指正</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="nav">
+  <button id="prev" title="上一页 (←)">‹</button>
+  <button id="ov-btn" title="总览 (O)">▦</button>
+  <button id="next" title="下一页 (→)">›</button>
+</div>
+<div class="ov" id="ov"></div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;
+  let i=0;
+  const prog=document.getElementById('progress');
+  const ov=document.getElementById('ov');
+
+  function show(n){
+    n=Math.max(0,Math.min(total-1,n));
+    slides.forEach((s,k)=>{
+      s.classList.toggle('is-active',k===n);
+      s.classList.toggle('is-prev',k<n);
+    });
+    i=n;
+    prog.style.width=((n+1)/total*100)+'%';
+    if(location.hash!=='#/'+(n+1)) history.replaceState(null,'','#/'+(n+1));
+  }
+  function next(){show(i+1)} function prev(){show(i-1)}
+
+  document.getElementById('next').onclick=next;
+  document.getElementById('prev').onclick=prev;
+
+  document.addEventListener('keydown',e=>{
+    if(ov.classList.contains('open')){ if(e.key==='Escape'||e.key==='o'||e.key==='O')ov.classList.remove('open'); return; }
+    if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next()}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}
+    else if(e.key==='Home')show(0);
+    else if(e.key==='End')show(total-1);
+    else if(e.key==='f'||e.key==='F'){ if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen(); }
+    else if(e.key==='o'||e.key==='O'){buildOv();ov.classList.add('open')}
+  });
+
+  // click halves to navigate (ignore interactive/nav zones)
+  document.getElementById('deck').addEventListener('click',e=>{
+    if(e.target.closest('.nav, a, button'))return;
+    (e.clientX > window.innerWidth*0.5) ? next() : prev();
+  });
+
+  function buildOv(){
+    ov.innerHTML='';
+    slides.forEach((s,k)=>{
+      const d=document.createElement('div');
+      d.className='th';
+      d.innerHTML='<span class="n">'+String(k+1).padStart(2,'0')+'</span><span class="tt">'+(s.dataset.title||'')+'</span>';
+      d.onclick=()=>{show(k);ov.classList.remove('open')};
+      ov.appendChild(d);
+    });
+  }
+  document.getElementById('ov-btn').onclick=()=>{buildOv();ov.classList.toggle('open')};
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open')});
+
+  // touch swipe
+  let tx=0;
+  document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+  document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>50)(dx<0?next():prev());});
+
+  const m=location.hash.match(/#\/(\d+)/);
+  show(m?parseInt(m[1])-1:0);
+})();
+</script>
+</body>
+</html>

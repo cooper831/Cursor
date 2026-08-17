@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  智能婴儿床 软件商业化汇报 · 4 模块版
+  可编辑：所有内容均为普通 HTML 文本，直接改 <section class="slide"> 内文字即可。
+  [待补] / [由XX团队补充] 为占位标记。
+  操作：← → / 空格 翻页，点击左右半屏翻页，O 总览，F 全屏。
+============================================================ -->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>智能婴儿床 · 软件商业化汇报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfaf8; --bg-soft:#f4f1ec; --surface:#ffffff; --surface-2:#f6f3ee;
+  --border:rgba(26,34,51,.10); --border-strong:rgba(26,34,51,.22);
+  --ink:#1a2233; --text-1:#1a2233; --text-2:#52596b; --text-3:#8b91a0;
+  --accent:#d9486b; --accent-soft:#fdeef2;
+  --navy:#16243d; --blue:#2f6df0; --purple:#7c5cd0;
+  --good:#0e9f6e; --warn:#d97706; --bad:#dc2626; --gold:#c08a2d;
+  --grad-rose:linear-gradient(120deg,#d9486b,#f0846a);
+  --radius:16px; --radius-sm:10px;
+  --shadow:0 8px 26px rgba(22,36,61,.07),0 2px 6px rgba(22,36,61,.04);
+  --shadow-lg:0 22px 60px rgba(22,36,61,.13),0 6px 16px rgba(22,36,61,.06);
+  --font:'Inter','Noto Sans SC',-apple-system,BlinkMacSystemFont,sans-serif;
+  --serif:'Playfair Display','Noto Serif SC',Georgia,serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0e1626;color:var(--text-1);
+  font-family:var(--font);font-weight:400;line-height:1.6;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--bg)}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:52px 78px;background:var(--bg);opacity:0;pointer-events:none;transform:translateX(28px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);overflow:hidden}
+.slide.is-active{opacity:1;pointer-events:auto;transform:translateX(0);z-index:2}
+.slide.is-prev{transform:translateX(-28px)}
+.slide-inner{width:100%;max-width:1210px;margin:0 auto}
+.kicker{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin:0 0 11px}
+.kicker.navy{color:var(--navy)}
+h1{font-size:56px;line-height:1.06;font-weight:900;letter-spacing:-.03em;margin:0 0 16px;color:var(--navy)}
+h2{font-size:37px;line-height:1.13;font-weight:800;letter-spacing:-.025em;margin:0 0 6px;color:var(--navy)}
+h3{font-size:19px;font-weight:700;margin:0 0 6px;color:var(--navy)}
+h4{font-size:15px;font-weight:700;margin:0 0 4px;color:var(--navy)}
+p{margin:0}
+.lede{font-size:18.5px;line-height:1.5;color:var(--text-2);font-weight:400;max-width:68ch}
+.dim{color:var(--text-2)} .dim2{color:var(--text-3)}
+.hl{color:var(--accent);font-weight:700} .hlb{color:var(--blue);font-weight:700} .hg{color:var(--good);font-weight:700}
+.serif{font-family:var(--serif);font-style:italic}
+.todo{color:var(--warn);font-weight:700;background:#fff6e9;padding:1px 7px;border-radius:6px;font-size:.92em}
+.mt-s{margin-top:8px}.mt-m{margin-top:15px}.mt-l{margin-top:24px}.mt-xl{margin-top:36px}
+.grid{display:grid;gap:15px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.row{display:flex;gap:13px;align-items:center}.row.wrap{flex-wrap:wrap}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:17px 19px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card.soft{background:var(--surface-2);box-shadow:none}
+.card.accent{border-top:3px solid var(--accent)}
+.card.navytop{border-top:3px solid var(--navy)}
+.tag{display:inline-flex;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);color:var(--accent);
+  font-weight:800;font-size:14px;align-items:center;justify-content:center;margin-bottom:8px}
+.pill{display:inline-block;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:600;
+  background:var(--surface-2);color:var(--text-2);border:1px solid var(--border)}
+.pill.rose{background:var(--accent-soft);color:var(--accent);border-color:rgba(217,72,107,.25)}
+.pill.blue{background:#eaf1ff;color:var(--blue);border-color:rgba(47,109,240,.25)}
+.pill.navy{background:#eef1f6;color:var(--navy);border-color:rgba(22,36,61,.2)}
+.pill.good{background:#e7f7ef;color:var(--good);border-color:rgba(14,159,110,.25)}
+.metric .n{font-size:40px;font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--navy)}
+.metric .n.rose{color:var(--accent)} .metric .n.blue{color:var(--blue)}
+.metric .l{font-size:12.5px;color:var(--text-2);margin-top:6px;line-height:1.4}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th,table.t td{padding:8.5px 11px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+table.t th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);font-weight:700}
+table.t td.num{font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
+table.t tr:last-child td{border-bottom:none}
+table.t tbody tr:hover td{background:var(--surface-2)}
+table.t.compact{font-size:12.6px} table.t.compact th,table.t.compact td{padding:5px 9px}
+.ck{color:var(--good);font-weight:800} .no{color:var(--text-3)}
+.loc{display:inline-block;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700}
+.loc.local{background:#e7f7ef;color:var(--good)}
+.loc.cloud{background:#eaf1ff;color:var(--blue)}
+.loc.insight{background:#f1ecfb;color:var(--purple)}
+.loc.agent{background:#fdeef2;color:var(--accent)}
+.tc{text-align:center}
+.note{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;
+  padding:12px 16px;color:var(--navy);font-weight:600;font-size:14px}
+.note.blue{background:#eef4ff;border-color:var(--blue)}
+.note.navy{background:#eef1f6;border-color:var(--navy)}
+.note.warn{background:#fff6e9;border-color:var(--warn)}
+.note.good{background:#e7f7ef;border-color:var(--good)}
+small{font-size:12px}
+.foot-note{font-size:11.5px;color:var(--text-3);margin-top:11px}
+/* flow */
+.flow{display:flex;align-items:stretch;gap:0;margin-top:6px}
+.flow .step{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:13px 14px;box-shadow:var(--shadow);position:relative}
+.flow .step h4{color:var(--navy)} .flow .step p{font-size:12px;color:var(--text-2);margin-top:3px}
+.flow .arrow{display:flex;align-items:center;justify-content:center;width:30px;color:var(--accent);font-size:20px;font-weight:800;flex:0 0 30px}
+.loopback{margin-top:10px;text-align:center;font-size:13px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:7px 14px;display:inline-block}
+/* roadmap phases */
+.rmrow{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center;margin-bottom:12px}
+.rmrow .when{text-align:right;font-weight:800;color:var(--navy);font-size:15px}
+.rmrow .when small{display:block;color:var(--text-3);font-weight:600;font-size:11px;margin-top:2px}
+.rmrow .body{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:13px 17px;box-shadow:var(--shadow)}
+.rmrow:nth-child(2) .body{border-left-color:var(--blue)}
+.rmrow:nth-child(3) .body{border-left-color:var(--navy)}
+/* chrome */
+.deck-footer{position:absolute;bottom:22px;left:78px;right:78px;display:flex;justify-content:space-between;
+  font-size:11.5px;color:var(--text-3);letter-spacing:.05em;z-index:6}
+.progress{position:fixed;left:0;bottom:0;height:3px;background:var(--grad-rose);width:0;z-index:30;transition:width .4s var(--ease)}
+.nav{position:fixed;bottom:16px;right:20px;display:flex;gap:8px;z-index:31}
+.nav button{width:33px;height:33px;border-radius:9px;border:1px solid var(--border-strong);background:var(--surface);
+  color:var(--navy);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);transition:.2s}
+.nav button:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cover{background:radial-gradient(120% 120% at 80% 10%,#1f3357 0%,#16243d 45%,#0e1626 100%);color:#fff}
+.cover h1{color:#fff;font-size:58px}.cover .lede{color:rgba(255,255,255,.8)}.cover .kicker{color:#ff9bb3}
+.cover .deck-footer{color:rgba(255,255,255,.55)}
+.cover .blob{position:absolute;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(217,72,107,.35),transparent 65%);top:-160px;right:-120px;filter:blur(8px)}
+.cover .chip{display:inline-block;padding:7px 15px;border:1px solid rgba(255,255,255,.22);border-radius:999px;
+  font-size:13px;color:rgba(255,255,255,.85);margin-right:9px}
+.ov{position:fixed;inset:0;background:rgba(14,22,38,.94);backdrop-filter:blur(10px);z-index:50;display:none;
+  padding:36px;overflow:auto;grid-template-columns:repeat(4,1fr);gap:14px;align-content:start}
+.ov.open{display:grid}
+.ov .th{background:var(--surface);border:1px solid var(--border);border-radius:12px;aspect-ratio:16/9;
+  padding:13px;cursor:pointer;position:relative;transition:.2s;overflow:hidden}
+.ov .th:hover{transform:scale(1.04)}
+.ov .th .n{position:absolute;top:7px;left:11px;font-weight:800;color:var(--text-3);font-size:12px}
+.ov .th .tt{position:absolute;bottom:11px;left:13px;right:13px;font-weight:700;color:var(--navy);font-size:13px;line-height:1.25}
+.deci{display:flex;gap:13px;align-items:flex-start;padding:13px 17px;background:var(--surface);border:1px solid var(--border);
+  border-left:4px solid var(--accent);border-radius:0 12px 12px 0;box-shadow:var(--shadow)}
+.deci .qn{font-weight:900;color:var(--accent);font-size:21px;line-height:1;min-width:24px}
+@media (max-width:1100px){.slide{padding:42px 34px}h1{font-size:42px}h2{font-size:29px}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1 · COVER -->
+<section class="slide cover is-active" data-title="封面">
+  <div class="blob"></div>
+  <div class="slide-inner">
+    <p class="kicker">MPC 评审 · 软件商业化决策</p>
+    <h1>智能婴儿床<br>软件商业化<span class="serif" style="color:#ff9bb3"> 规划与决策</span></h1>
+    <p class="lede mt-m">App 订阅 = 硬件销售的放大器<br>赋能硬件购买决策 · 到期转化付费 · 一次订阅打通全硬件高阶 · 提升 LTV</p>
+    <div class="mt-xl">
+      <span class="chip">竞品对标</span>
+      <span class="chip">APP 订阅产品</span>
+      <span class="chip">差异化策略</span>
+      <span class="chip">商业化 Roadmap</span>
+    </div>
+  </div>
+  <div class="deck-footer"><span>汇报：元一 · 软件 / APP 商业化</span><span>2026-06 · MPC 评审会</span></div>
+</section>
+
+<!-- 2 · 结论先行 -->
+<section class="slide" data-title="结论先行与决策点">
+  <div class="slide-inner">
+    <p class="kicker">结论先行 · TL;DR</p>
+    <h2>用 App 订阅权益赋能硬件销售，到期转化提升用户 LTV</h2>
+    <div class="grid g2 mt-m">
+      <div class="card accent"><h3>P0 · 赋能硬件（近期重点）</h3><p class="dim" style="font-size:14px">硬件高阶能力订阅化 → 成为差异化卖点、促进购买决策；服务整机 IPD 立项/计划决策。</p></div>
+      <div class="card navytop"><h3>P1 · App 平台化商业化（明年起）</h3><p class="dim" style="font-size:14px">明确 Free / Plus / Premium 边界与续费路径，中长期主发力；现已用睡眠预测"3 个月免费体验"留口子。</p></div>
+    </div>
+    <h3 class="mt-l">本次需老板拍板的 3 个决策点</h3>
+    <div class="grid g3 mt-s">
+      <div class="deci"><span class="qn">1</span><div><b>确立"订阅赋能硬件"模式</b><p class="dim2" style="font-size:12.5px">硬件高阶能力进订阅 + Day1 留口子，规避 SNOO 突收费</p></div></div>
+      <div class="deci"><span class="qn">2</span><div><b>锁定打包逻辑与三档定价</b><p class="dim2" style="font-size:12.5px">AI+咨询+硬件高阶打包，$8.99 / $14.99</p></div></div>
+      <div class="deci"><span class="qn">3</span><div><b>Q3 订阅权益中台立项</b><p class="dim2" style="font-size:12.5px">软硬件能力快速配置接入，跨品类复用</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · 竞品软件订阅能力 + 费用对比 -->
+<section class="slide" data-title="① 竞品软件订阅能力与费用对比">
+  <div class="slide-inner">
+    <p class="kicker navy">模块一 · 竞品分析</p>
+    <h2>SNOO / Nanit / Owlet：软件订阅能力与费用对比</h2>
+    <table class="t mt-m">
+      <thead><tr><th style="width:90px">竞品</th><th>软件订阅核心能力</th><th>费用</th><th>免费赠送期</th><th class="num">转化率</th><th class="tc">AI</th></tr></thead>
+      <tbody>
+        <tr><td><b>SNOO</b></td><td>设备高阶控制（断奶/锁档/哄睡音）、睡眠日志（<span class="dim2">几乎无云端 AI</span>）</td><td>$19.99/月<br><small class="dim2">二手/延长期</small></td><td>购买送 9 个月<br>租赁全程 +1 月</td><td class="num">20–25%</td><td class="tc"><span class="pill">弱</span></td></tr>
+        <tr><td><b>Nanit</b></td><td>历史存储、睡眠评分、呼吸监测、多看护人</td><td>~$10/月<br><small class="dim2">Memories$120/年·Milestones$300/年</small></td><td>新机送 3 个月–1 年</td><td class="num">20–25%</td><td class="tc"><span class="pill blue">L2</span></td></tr>
+        <tr><td><b>Owlet</b></td><td>历史趋势、晨间报告、同龄对比（<span class="hg">核心血氧/心率终身免费</span>）</td><td>$5.99–10/月<br>或 $99.99/年</td><td>7 天</td><td class="num">22–28%</td><td class="tc"><span class="pill blue">L2</span></td></tr>
+      </tbody>
+    </table>
+    <div class="note navy mt-l">三者均为硬件绑定型，<b>付费转化 20–28%</b>，是纯软件（5–8%）的 5–10 倍——印证"硬件高阶能力订阅化"成立。我方目标转化率对标此区间 <span class="hl">15–25%</span>。</div>
+    <p class="foot-note">数据来源：《全球母婴付费订阅调研报告》｜Owlet ✅ 财报，SNOO/Nanit ⚠️ 推算。</p>
+  </div>
+</section>
+
+<!-- 4 · 用户 VOC + 避免策略 -->
+<section class="slide" data-title="① 用户 VOC 与避坑策略">
+  <div class="slide-inner">
+    <p class="kicker navy">模块一 · 竞品分析</p>
+    <h2>用户 VOC（差评根因）与我方避免策略</h2>
+    <div class="grid g2 mt-m">
+      <div>
+        <h3 style="color:var(--bad)">用户真实差评（Reddit VOC）</h3>
+        <div class="card soft mt-s" style="border-left:4px solid var(--bad);padding:12px 16px"><h4>硬件控制权被绑架（SNOO）</h4><p class="dim2" style="font-size:12.5px">"花 $1700，二手还要月付 $19.99 才能开断奶模式"</p></div>
+        <div class="card soft mt-s" style="border-left:4px solid var(--bad);padding:12px 16px"><h4>二胎/多设备加倍收费（Nanit）</h4><p class="dim2" style="font-size:12.5px">多买一个摄像头还要再买一份年费订阅</p></div>
+        <div class="card soft mt-s" style="border-left:4px solid var(--bad);padding:12px 16px"><h4>到期清空历史数据 + 多看护人割裂</h4><p class="dim2" style="font-size:12.5px">停缴=清空成长视频；副账号高级统计被锁</p></div>
+      </div>
+      <div>
+        <h3 class="hl">我方避免策略</h3>
+        <div class="card accent mt-s"><h4>① 硬件基础能力 与 订阅增值解耦</h4><p class="dim" style="font-size:13px">设备基础控制、安全报警终身免费（含二手）；付费卡在云端 AI/洞察增值结果</p></div>
+        <div class="card accent mt-s"><h4>② 订阅支持多端共享</h4><p class="dim" style="font-size:13px">"全家呵护计划"一人付费绑 5–8 名家庭成员；二胎引导升多娃</p></div>
+        <div class="card accent mt-s"><h4>③ 退订不卸载，保留静态时光机</h4><p class="dim" style="font-size:13px">停订后历史资产转只读永久保留 → CAC 为 0 的私域入口</p></div>
+      </div>
+    </div>
+    <div class="note navy mt-l">底线原则：<b>硬件给底线 · 软件给特权 · 一人付费全家安心</b> —— 提升商业化效率同时保住品牌口碑。</div>
+  </div>
+</section>
+
+<!-- 5 · APP 订阅产品 + 赋能硬件 LTV 闭环 -->
+<section class="slide" data-title="② APP 订阅产品与赋能硬件闭环">
+  <div class="slide-inner">
+    <p class="kicker">模块二 · APP 付费订阅</p>
+    <h2>AI + 咨询 + 硬件高阶 打包成订阅，赋能硬件 + 提升 LTV</h2>
+    <div class="row wrap mt-s" style="gap:8px">
+      <span class="pill rose">AI 能力</span><span style="color:var(--accent);font-weight:800">+</span>
+      <span class="pill rose">专家咨询</span><span style="color:var(--accent);font-weight:800">+</span>
+      <span class="pill rose">硬件高级功能</span>
+      <span style="color:var(--text-3)">→ 打包成 APP 订阅产品（随硬件赠送 x 周期，到期付费）</span>
+    </div>
+    <div class="flow mt-m">
+      <div class="step"><span class="tag">1</span><h4>硬件售卖</h4><p>赠送 x 周期高阶订阅，作差异化卖点</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="tag">2</span><h4>体验高阶</h4><p>AI / 咨询 / 硬件高级功能养成习惯</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="tag">3</span><h4>周期到期</h4><p>免费体验期结束，触发转化</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="tag">4</span><h4>自动转付费</h4><p>沉淀为 APP 付费用户</p></div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="tag">5</span><h4>提升 LTV</h4><p>持续续费 + 交叉复购</p></div>
+    </div>
+    <div class="tc mt-m"><span class="loopback">↺ 一次订阅打通全硬件高阶 → 促进购买其他 Momcozy 硬件，回到第 1 步</span></div>
+    <div class="grid g2 mt-l">
+      <div class="note good"><b>赋能硬件：</b>硬件高阶功能订阅化 → 促进购买决策，形成对竞品的差异化优势。</div>
+      <div class="note blue"><b>提升 LTV：</b>用户到期自动转化为 APP 付费用户，延长生命周期、放大单用户价值。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · 三档功能矩阵 -->
+<section class="slide" data-title="② 三档权益矩阵（打包明细）">
+  <div class="slide-inner">
+    <p class="kicker navy">模块二 · 功能划分</p>
+    <h2>BBM 三档权益矩阵：处理位置决定免费/付费</h2>
+    <div class="row wrap mt-s" style="gap:10px;margin-bottom:5px">
+      <span class="loc local">本地 = 免费保底</span>
+      <span class="loc cloud">云端 = 中档增值</span>
+      <span class="loc insight">洞察 / Agent = 高级溢价</span>
+      <span class="dim2" style="font-size:12.5px">本地零边际成本 → 免费；云端/AI 有算力成本 → 付费</span>
+    </div>
+    <table class="t compact">
+      <thead><tr><th style="width:38%">功能</th><th>处理位置</th><th class="tc">免费</th><th class="tc">⭐ 中档</th><th class="tc">🔥 高级</th></tr></thead>
+      <tbody>
+        <tr><td>实时直播 / 双向语音 / 云台</td><td><span class="loc local">本地</span></td><td class="tc ck">✓</td><td class="tc ck">✓</td><td class="tc ck">✓</td></tr>
+        <tr><td>本地 SD 卡回看</td><td><span class="loc local">本地</span></td><td class="tc ck">✓</td><td class="tc ck">✓</td><td class="tc ck">✓</td></tr>
+        <tr><td>温湿度监测 + 告警</td><td><span class="loc local">本地</span></td><td class="tc ck">✓</td><td class="tc ck">✓</td><td class="tc ck">✓</td></tr>
+        <tr><td>哭声检测 + 基础声音/动作告警</td><td><span class="loc local">本地</span></td><td class="tc ck">✓</td><td class="tc ck">✓</td><td class="tc ck">✓</td></tr>
+        <tr><td>基础状态识别：醒/睡 + 睡眠时长</td><td><span class="loc local">本地</span></td><td class="tc ck">✓</td><td class="tc ck">✓</td><td class="tc ck">✓</td></tr>
+        <tr><td>细化状态识别：将睡/将醒过渡</td><td><span class="loc cloud">云端</span></td><td class="tc no">—</td><td class="tc ck">✓</td><td class="tc ck">✓</td></tr>
+        <tr><td>云端哭声 / 异常音增强识别</td><td><span class="loc cloud">云端</span></td><td class="tc no">—</td><td class="tc ck">✓</td><td class="tc ck">✓</td></tr>
+        <tr><td>AI 安全检测：遮脸 / 翻身 / 危险区域</td><td><span class="loc cloud">云端</span></td><td class="tc no">—</td><td class="tc ck">✓</td><td class="tc ck">✓</td></tr>
+        <tr><td>短期睡眠报告（单次 / 数日）</td><td><span class="loc cloud">云端</span></td><td class="tc no">—</td><td class="tc ck">✓</td><td class="tc ck">✓</td></tr>
+        <tr><td>云录像回看</td><td><span class="loc cloud">云端</span></td><td class="tc no">—</td><td class="tc">7 天</td><td class="tc">30 天</td></tr>
+        <tr><td>精彩相册（事件自动抓拍 / 片段）</td><td><span class="loc cloud">云端</span></td><td class="tc no">—</td><td class="tc no">—</td><td class="tc ck">✓</td></tr>
+        <tr><td>长期睡眠报告（周 / 月）</td><td><span class="loc insight">洞察</span></td><td class="tc no">—</td><td class="tc no">—</td><td class="tc ck">✓</td></tr>
+        <tr><td>睡眠趋势分析与对比</td><td><span class="loc insight">洞察</span></td><td class="tc no">—</td><td class="tc no">—</td><td class="tc ck">✓</td></tr>
+        <tr><td>呼吸 / 健康历史数据与趋势</td><td><span class="loc insight">洞察</span></td><td class="tc no">—</td><td class="tc no">—</td><td class="tc ck">✓</td></tr>
+        <tr><td>Agent 智能建议（睡眠/看护/发育）</td><td><span class="loc agent">Agent</span></td><td class="tc no">—</td><td class="tc no">—</td><td class="tc ck">✓</td></tr>
+        <tr><td>成长记录 / 里程碑追踪</td><td><span class="loc cloud">云端</span></td><td class="tc no">—</td><td class="tc no">—</td><td class="tc ck">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 7 · 定价 + 硬件赠送 -->
+<section class="slide" data-title="② 定价与硬件赠送周期">
+  <div class="slide-inner">
+    <p class="kicker navy">模块二 · 定价 & SKU</p>
+    <h2>三档定价 与 硬件赠送周期（制造 SKU 差异）</h2>
+    <div class="grid g3 mt-m">
+      <div class="card"><span class="pill">免费</span><div class="metric mt-s"><div class="n">$0</div></div>
+        <p class="dim mt-s" style="font-size:12.5px">本地能力全开 + 3 次 AI 免费对话</p></div>
+      <div class="card accent" style="border-top-width:4px"><span class="pill rose">⭐ 中档（Plus）· 主推</span>
+        <div class="metric mt-s"><div class="n rose">$8.99<small style="font-size:13px;color:var(--text-3)">/月</small></div><div class="l">年付 $59.99（折合 $5/月 · <b class="hl">省 44%</b>）</div></div>
+        <p class="dim mt-s" style="font-size:12.5px">云端 AI 识别、短期睡眠报告、云录像 7 天、家庭共享</p></div>
+      <div class="card navytop" style="border-top-width:4px"><span class="pill navy">🔥 高级（Premium）</span>
+        <div class="metric mt-s"><div class="n">$14.99<small style="font-size:13px;color:var(--text-3)">/月</small></div><div class="l">年付 $99.99（折合 $8.3/月 · 省 45%）</div></div>
+        <p class="dim mt-s" style="font-size:12.5px">洞察/趋势/历史 + Agent 建议 + 咨询 + 硬件高阶 + 云录像 30 天</p></div>
+    </div>
+    <div class="note mt-l"><b>SKU 差异机制（软件层无差别 → 靠权益捆绑）：</b>BD010 标准版赠送较短周期，BS-C1 旗舰版赠送<span class="hl">更长高阶订阅</span>；硬件定价 <span class="todo">显著低于竞品 ¥1600，具体待补</span>。</div>
+    <div class="note blue mt-m">促年付：默认选中年付高亮 · 标注"省了多少钱" · 目标年付占比 &gt;50%。</div>
+  </div>
+</section>
+
+<!-- 8 · 差异化策略 -->
+<section class="slide" data-title="③ 差异化策略">
+  <div class="slide-inner">
+    <p class="kicker">模块三 · 差异化策略</p>
+    <h2>四招拉开与竞品的差距</h2>
+    <div class="grid g2 mt-m">
+      <div class="card accent"><span class="tag">1</span><h3>软件能力更强更多</h3><p class="dim" style="font-size:13.5px">对应表覆盖云端 AI + 洞察 + Agent，远超 SNOO"仅控制开关"；护城河更深，无法被通用工具替代。</p></div>
+      <div class="card accent"><span class="tag">2</span><h3>随硬件赠送更长周期</h3><p class="dim" style="font-size:13.5px">比竞品更慷慨的免费体验期，养成使用习惯、降低首购决策门槛。</p></div>
+      <div class="card accent"><span class="tag">3</span><h3>续费价格更优</h3><p class="dim" style="font-size:13.5px">三档分层、续费价低于竞品单档 $19.99，降低转付费阻力、提升续订率。</p></div>
+      <div class="card accent"><span class="tag">4</span><h3>一次订阅打通全硬件高阶</h3><p class="dim" style="font-size:13.5px">同一订阅解锁全系硬件高阶能力 → 强力<span class="hl">促进交叉购买</span>其他 Momcozy 硬件，形成生态绑定。</p></div>
+    </div>
+    <div class="note navy mt-l">差异化内核：用"更强软件 + 更长赠送 + 更优续费 + 全硬件通用"，把单品销售升级为<b>生态级复购</b>。</div>
+  </div>
+</section>
+
+<!-- 9 · 商业化 Roadmap -->
+<section class="slide" data-title="④ 商业化 Roadmap">
+  <div class="slide-inner">
+    <p class="kicker navy">模块四 · 商业化 Roadmap</p>
+    <h2>从中台基建到成熟机制：三步走</h2>
+    <div class="mt-m">
+      <div class="rmrow"><div class="when">Q3 / 2026<small>基建</small></div><div class="body"><h3>完成订阅权益中台能力建设</h3><p class="dim" style="font-size:13.5px">支持各种软硬件能力<b>快速配置接入</b>订阅权益体系（RevenueCat：一次性购买已上线 · 订阅 9 月上线）。</p></div></div>
+      <div class="rmrow"><div class="when">Q4 → 2027<small>运营</small></div><div class="body"><h3>持续完善运营营销能力</h3><p class="dim" style="font-size:13.5px">支持<b>快速响应市场</b>的订阅运营能力：促销、A/B、挽留、续订、本地化定价。</p></div></div>
+      <div class="rmrow"><div class="when">2027<small>成熟</small></div><div class="body"><h3>形成 APP 订阅产品成熟机制</h3><p class="dim" style="font-size:13.5px"><b>赋能硬件售卖 · 增强用户获得感 · 协同交叉销售</b> → 系统性提升 Momcozy 用户 LTV。</p></div></div>
+    </div>
+    <div class="note good mt-s">主线节奏：近期（P0）以中台赋能硬件 IPD 立项；中长期（P1）做厚 App 平台化商业化。</div>
+  </div>
+</section>
+
+<!-- 10 · 决策请求 -->
+<section class="slide" data-title="决策请求">
+  <div class="slide-inner">
+    <p class="kicker">收尾 · 请拍板</p>
+    <h2>今天需要确认的三个决策</h2>
+    <div style="display:flex;flex-direction:column;gap:13px;margin-top:16px">
+      <div class="deci"><span class="qn">1</span><div><b>确立"订阅赋能硬件"模式 + Day1 留口子</b><p class="dim" style="font-size:13.5px">硬件高阶能力订阅化、随机赠送周期、到期转付费；延续睡眠预测"3 个月免费体验"，规避 SNOO 突收费。</p></div></div>
+      <div class="deci"><span class="qn">2</span><div><b>锁定打包逻辑与三档权益边界/定价</b><p class="dim" style="font-size:13.5px">AI + 咨询 + 硬件高阶打包；免费（本地）/ 中档 $8.99 / 高级 $14.99；SKU 差异靠赠送周期。</p></div></div>
+      <div class="deci"><span class="qn">3</span><div><b>Q3 订阅权益中台立项为公共基建</b><p class="dim" style="font-size:13.5px">软硬件能力快速配置接入、跨品类复用；软件团队按整体商业计划而非单品推进。</p></div></div>
+    </div>
+    <div class="note navy mt-l">配套：硬件定价、硬件高阶能力清单、安抚方案技术路径 <span class="todo">由相关团队回填</span>，不影响今日三项原则性决策。</div>
+  </div>
+</section>
+
+<!-- 11 · Thanks -->
+<section class="slide cover" data-title="结语" style="text-align:center;align-items:center">
+  <div class="blob"></div>
+  <div class="slide-inner">
+    <p class="kicker" style="color:#ff9bb3">Thanks</p>
+    <h1 style="font-size:56px">硬件给底线 · 软件给特权<br>订阅赋能硬件 <span class="serif" style="color:#ff9bb3">· 放大 LTV</span></h1>
+    <p class="lede mt-m" style="margin-left:auto;margin-right:auto">一次建设、全品类复用，把单品销售升级为生态级复购。</p>
+    <div class="mt-xl"><span class="chip">欢迎讨论与拍板</span><span class="chip">软件 / APP · 商业化</span></div>
+  </div>
+</section>
+
+</div>
+
+<div class="progress" id="progress"></div>
+<div class="nav">
+  <button id="prev" title="上一页 (←)">‹</button>
+  <button id="ov-btn" title="总览 (O)">▦</button>
+  <button id="next" title="下一页 (→)">›</button>
+</div>
+<div class="ov" id="ov"></div>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;let i=0;
+  const prog=document.getElementById('progress');const ov=document.getElementById('ov');
+  function show(n){n=Math.max(0,Math.min(total-1,n));
+    slides.forEach((s,k)=>{s.classList.toggle('is-active',k===n);s.classList.toggle('is-prev',k<n);});
+    i=n;prog.style.width=((n+1)/total*100)+'%';
+    if(location.hash!=='#/'+(n+1))history.replaceState(null,'','#/'+(n+1));}
+  function next(){show(i+1)}function prev(){show(i-1)}
+  document.getElementById('next').onclick=next;document.getElementById('prev').onclick=prev;
+  document.addEventListener('keydown',e=>{
+    if(ov.classList.contains('open')){if(e.key==='Escape'||e.key==='o'||e.key==='O')ov.classList.remove('open');return;}
+    if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next()}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}
+    else if(e.key==='Home')show(0);else if(e.key==='End')show(total-1);
+    else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+    else if(e.key==='o'||e.key==='O'){buildOv();ov.classList.add('open')}});
+  document.getElementById('deck').addEventListener('click',e=>{
+    if(e.target.closest('.nav, a, button'))return;
+    (e.clientX>window.innerWidth*0.5)?next():prev();});
+  function buildOv(){ov.innerHTML='';slides.forEach((s,k)=>{
+    const d=document.createElement('div');d.className='th';
+    d.innerHTML='<span class="n">'+String(k+1).padStart(2,'0')+'</span><span class="tt">'+(s.dataset.title||'')+'</span>';
+    d.onclick=()=>{show(k);ov.classList.remove('open')};ov.appendChild(d);});}
+  document.getElementById('ov-btn').onclick=()=>{buildOv();ov.classList.toggle('open')};
+  ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open')});
+  let tx=0;document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+  document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)(dx<0?next():prev());});
+  const m=location.hash.match(/#\/(\d+)/);show(m?parseInt(m[1])-1:0);
+})();
+</script>
+</body>
+</html>
