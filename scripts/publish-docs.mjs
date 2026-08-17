@@ -34,7 +34,9 @@ function run(cmd, args, opts = {}) {
 }
 
 function listGitLines(args) {
-  const out = run("git", args).trim();
+  // core.quotePath=false keeps non-ASCII paths literal; otherwise git returns
+  // octal-escaped names like "docs/\344\273\230....md" and extension checks fail.
+  const out = run("git", ["-c", "core.quotePath=false", ...args]).trim();
   if (!out) return [];
   return out.split("\n").map((p) => p.split(path.sep).join("/"));
 }
