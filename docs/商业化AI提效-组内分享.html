@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商业化用 AI 提效 · 6 个代表场景</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #0e0e0c;
+    --ink-soft: #1a1a17;
+    --paper: #f3ede3;
+    --paper-dim: #e6dfd2;
+    --accent: #ff5b22;
+    --accent-soft: #ffb392;
+    --gold: #c8a35a;
+    --line: rgba(243, 237, 227, 0.12);
+    --line-strong: rgba(243, 237, 227, 0.25);
+    --muted: rgba(243, 237, 227, 0.55);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Noto Sans SC', -apple-system, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255, 91, 34, 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(200, 163, 90, 0.06), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
+
+  /* ========== MASTHEAD ========== */
+  .masthead { padding: 56px 0 32px; border-bottom: 1px solid var(--line-strong); position: relative; }
+  .masthead-top {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 48px;
+  }
+  .masthead-top .dot {
+    display: inline-block; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    margin-right: 8px; animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% {opacity:1} 50% {opacity:0.3} }
+
+  .hero { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 48px; }
+  .hero-quarter {
+    font-family: 'Fraunces', serif; font-weight: 800;
+    font-size: clamp(80px, 14vw, 180px); line-height: 0.85;
+    letter-spacing: -0.04em; color: var(--paper);
+  }
+  .hero-quarter em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .hero-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(28px, 3.4vw, 48px); line-height: 1.15;
+    margin-top: 24px; letter-spacing: -0.01em;
+  }
+  .hero-title .underline {
+    background-image: linear-gradient(transparent 65%, var(--accent) 65%, var(--accent) 88%, transparent 88%);
+  }
+  .hero-meta {
+    text-align: right; font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.1em; color: var(--muted); line-height: 1.9;
+  }
+  .hero-meta strong { color: var(--paper); font-weight: 500; }
+
+  .hero-tagline {
+    margin-top: 56px; padding-top: 32px;
+    border-top: 1px solid var(--line);
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+  }
+  .tag-cell { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .tag-cell-num {
+    font-family: 'Fraunces', serif; font-weight: 300; font-size: 32px;
+    color: var(--accent); line-height: 1; margin-bottom: 8px; font-style: italic;
+  }
+  .tag-cell-label { color: var(--muted); }
+
+  /* ========== INTRO ========== */
+  .intro { padding: 96px 0 48px; display: grid; grid-template-columns: 200px 1fr; gap: 64px; align-items: start; }
+  .intro-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding-top: 8px; border-top: 2px solid var(--accent); display: inline-block;
+  }
+  .intro-body {
+    font-family: 'Noto Serif SC', serif; font-weight: 400;
+    font-size: 22px; line-height: 1.7; color: var(--paper);
+  }
+  .intro-body .high { color: var(--accent); font-weight: 600; }
+  .intro-body p + p { margin-top: 20px; }
+
+  /* ========== OBJECTIVES ========== */
+  .objectives { padding: 48px 0 96px; }
+  .obj { position: relative; padding: 64px 0; border-top: 1px solid var(--line-strong);
+    display: grid; grid-template-columns: 120px 1fr; gap: 48px; }
+  .obj:last-of-type { border-bottom: 1px solid var(--line-strong); }
+  .obj-number {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 96px; line-height: 0.9; color: var(--paper);
+    position: sticky; top: 32px; align-self: start;
+  }
+  .obj-number::after { content: ''; display: block; width: 40px; height: 2px; background: var(--accent); margin-top: 16px; }
+  .obj-body { display: grid; grid-template-columns: 1fr; gap: 40px; }
+  .obj-head { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: start; }
+  .obj-codename {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    padding: 6px 12px; border: 1px solid var(--accent); border-radius: 2px;
+    white-space: nowrap; margin-top: 12px;
+  }
+  .obj-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(28px, 3vw, 40px); line-height: 1.2; letter-spacing: -0.01em;
+  }
+  .obj-title .accent { color: var(--accent); }
+  .obj-narrative {
+    font-family: 'Noto Sans SC', sans-serif; font-weight: 300;
+    font-size: 16px; line-height: 1.8; color: rgba(243, 237, 227, 0.75);
+    max-width: 720px; padding-left: 16px; border-left: 2px solid var(--gold);
+    font-style: italic;
+  }
+
+  /* ========== KR GRID ========== */
+  .kr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--line-strong); border: 1px solid var(--line-strong); }
+  .kr { background: var(--ink); padding: 32px; position: relative; transition: background 0.4s ease; }
+  .kr:hover { background: var(--ink-soft); }
+  .kr.full { grid-column: 1 / -1; }
+  .kr-tag { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .kr-tag-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.15em; color: var(--accent); font-weight: 700;
+  }
+  .kr-tag-line { flex: 1; height: 1px; background: var(--line); }
+  .kr-headline {
+    font-family: 'Noto Serif SC', serif; font-weight: 600;
+    font-size: 19px; line-height: 1.4; margin-bottom: 16px; color: var(--paper);
+  }
+  .kr-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .kr-bullets li {
+    font-size: 13.5px; line-height: 1.6; color: rgba(243, 237, 227, 0.7);
+    padding-left: 18px; position: relative;
+  }
+  .kr-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 10px;
+    width: 8px; height: 1px; background: var(--accent);
+  }
+  .kr-bullets li strong { color: var(--paper); font-weight: 500; }
+  .kr-metric {
+    margin-top: 20px; padding-top: 16px;
+    border-top: 1px dashed var(--line-strong);
+    display: flex; flex-wrap: wrap; gap: 16px 24px;
+  }
+  .kr-metric-item { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.05em; }
+  .kr-metric-num { color: var(--accent); font-size: 16px; font-weight: 700; display: block; margin-bottom: 2px; }
+  .kr-metric-lbl { color: var(--muted); }
+
+  /* ========== SPACER QUOTE ========== */
+  .spacer-quote {
+    padding: 80px 0;
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+    margin: 32px 0;
+  }
+  .spacer-quote-text {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(32px, 4.5vw, 56px); line-height: 1.25;
+    text-align: center; letter-spacing: -0.01em;
+  }
+  .spacer-quote-text .accent {
+    color: var(--accent); font-style: italic;
+    font-family: 'Fraunces', serif; font-weight: 300;
+  }
+  .spacer-quote-sub {
+    text-align: center; margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.25em; color: var(--muted); text-transform: uppercase;
+  }
+
+  /* ========== TIMELINE ========== */
+  .timeline-section { padding: 80px 0 60px; }
+  .section-head { display: grid; grid-template-columns: 200px 1fr; gap: 64px; margin-bottom: 48px; align-items: end; }
+  .section-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.01em; line-height: 1.1;
+  }
+  .timeline { position: relative; padding: 32px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .tl-month { border-top: 2px solid var(--accent); padding-top: 24px; }
+  .tl-month-num {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 64px; line-height: 1; color: var(--paper);
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .tl-month-num span {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.2em; color: var(--accent); font-style: normal;
+  }
+  .tl-events { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .tl-event {
+    padding: 14px 16px; background: var(--ink-soft);
+    border-left: 2px solid var(--gold); font-size: 13.5px; line-height: 1.5;
+  }
+  .tl-event strong { display: block; color: var(--paper); font-weight: 500; margin-bottom: 4px; }
+  .tl-event span { color: var(--muted); font-size: 12px; }
+  .tl-event.big { border-left-color: var(--accent); background: rgba(255, 91, 34, 0.08); }
+
+  /* ========== TAKEAWAYS ========== */
+  .takeaways { padding: 0 0 80px; }
+  .tk-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line-strong); border: 1px solid var(--line-strong); }
+  .tk {
+    background: var(--ink); padding: 40px 32px;
+    transition: background 0.4s ease;
+  }
+  .tk:hover { background: var(--ink-soft); }
+  .tk-num {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 16px;
+  }
+  .tk-title {
+    font-family: 'Noto Serif SC', serif; font-weight: 900;
+    font-size: 22px; line-height: 1.3; margin-bottom: 12px;
+  }
+  .tk-body {
+    font-size: 14px; line-height: 1.7; color: rgba(243, 237, 227, 0.7);
+  }
+  .tk-body strong { color: var(--paper); font-weight: 500; }
+
+  /* ========== TABLE ========== */
+  .data-section { padding: 0 0 96px; }
+  .data-table { width: 100%; border-collapse: collapse; }
+  .data-table thead tr { border-bottom: 1px solid var(--line-strong); }
+  .data-table thead th {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    padding: 12px 16px 16px; text-align: left; font-weight: 400;
+  }
+  .data-table thead th:first-child { padding-left: 0; }
+  .data-table tbody tr { border-bottom: 1px solid var(--line); }
+  .data-table tbody tr:hover { background: var(--ink-soft); }
+  .data-table tbody td {
+    padding: 18px 16px; font-size: 13.5px; vertical-align: middle;
+    color: rgba(243, 237, 227, 0.8);
+  }
+  .data-table tbody td:first-child { padding-left: 0; }
+  .rank-num {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 28px; color: var(--accent); line-height: 1;
+  }
+  .case-name { font-family: 'Noto Serif SC', serif; font-weight: 600; color: var(--paper); font-size: 15px; }
+  .case-out { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--muted); }
+
+  /* ========== FOOTER ========== */
+  footer {
+    padding: 80px 0 48px; border-top: 1px solid var(--line-strong);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end;
+  }
+  .footer-mark {
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 300;
+    font-size: 80px; line-height: 0.9; color: var(--accent);
+  }
+  .footer-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.15em; color: var(--muted); text-align: right; line-height: 2;
+  }
+  .footer-meta strong { color: var(--paper); font-weight: 500; }
+
+  /* ========== ANIMATIONS ========== */
+  .reveal { opacity: 0; transform: translateY(20px);
+    animation: reveal 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+  .obj { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .obj.in { opacity: 1; transform: translateY(0); }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .wrap { padding: 0 24px; }
+    .hero { grid-template-columns: 1fr; gap: 24px; }
+    .hero-meta { text-align: left; }
+    .hero-tagline { grid-template-columns: repeat(2, 1fr); }
+    .intro { grid-template-columns: 1fr; gap: 16px; padding: 64px 0 32px;}
+    .obj { grid-template-columns: 1fr; gap: 24px; padding: 48px 0;}
+    .obj-number { position: static; font-size: 64px; }
+    .obj-head { grid-template-columns: 1fr; gap: 12px; }
+    .obj-codename { margin-top: 0; justify-self: start; }
+    .kr-grid { grid-template-columns: 1fr; }
+    .section-head { grid-template-columns: 1fr; gap: 16px; }
+    .timeline { grid-template-columns: 1fr; }
+    .tk-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; text-align: left;}
+    .footer-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead wrap">
+  <div class="masthead-top">
+    <span><span class="dot"></span>商业化 · 组内分享</span>
+    <span>VOL.01 / 2026.04–08</span>
+  </div>
+  <div class="hero reveal">
+    <div>
+      <div class="hero-quarter">0<em>6</em></div>
+      <h1 class="hero-title">看清市场，<span class="underline">做出判断</span>，沉淀能力</h1>
+    </div>
+    <div class="hero-meta">
+      <strong>APP 商业化</strong>
+      组内分享 · 约 10 分钟<br>
+      只讲工作里怎么用 AI<br>
+      不讲产品里怎么卖 AI
+    </div>
+  </div>
+  <div class="hero-tagline">
+    <div class="tag-cell">
+      <div class="tag-cell-num">6</div>
+      <div class="tag-cell-label">代表场景</div>
+    </div>
+    <div class="tag-cell">
+      <div class="tag-cell-num">5+</div>
+      <div class="tag-cell-label">个月工作链</div>
+    </div>
+    <div class="tag-cell">
+      <div class="tag-cell-num">15</div>
+      <div class="tag-cell-label">一手调研对象</div>
+    </div>
+    <div class="tag-cell">
+      <div class="tag-cell-num">$8.99</div>
+      <div class="tag-cell-label">定价锚点起</div>
+    </div>
+    <div class="tag-cell">
+      <div class="tag-cell-num">10'</div>
+      <div class="tag-cell-label">讲完即可</div>
+    </div>
+  </div>
+</header>
+
+<section class="intro wrap">
+  <div class="intro-eyebrow">致同事</div>
+  <div class="intro-body">
+    <p>这五个月商业化不是「让 AI 写了几份文档」，而是把它嵌进整条工作链：<span class="high">看清市场 → 做出判断 → 写成可研发交付 → 画成可评审 → 沉淀成可复用能力。</span></p>
+    <p>下面六个案例，每个只讲四件事：当时卡在哪，AI 干了啥，人拍了啥板，组内能直接复用什么。</p>
+  </div>
+</section>
+
+<section class="objectives wrap">
+
+  <article class="obj">
+    <div class="obj-number">01</div>
+    <div class="obj-body">
+      <div>
+        <div class="obj-head">
+          <span class="obj-codename">◆ 一手调研</span>
+          <h2 class="obj-title">从「感觉对标」到能拍板的<span class="accent">一手报告</span></h2>
+        </div>
+        <p class="obj-narrative">定价不能靠感觉对标。没有来源等级的数字，不能进决策。</p>
+      </div>
+      <div class="kr-grid">
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">卡在哪</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">9 月要上订阅，锚点全缺</h3>
+          <ul class="kr-bullets">
+            <li>定价、转化目标、付费墙形态都没有行业参照</li>
+            <li>公开资料散、口径乱，飞书表导出还缺表</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">AI 干了啥</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">五问收口，三批深浅</h3>
+          <ul class="kr-bullets">
+            <li>按<strong>卖什么 / 怎么卖 / 何时触发 / 如何留存 / 我们怎么做</strong>收口</li>
+            <li>15 个对象分三批；价格、财报、实测交叉核对，标 已核实 / 推算 / 待核实</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">人拍了啥板</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">实测范围，目标落到自己身上</h3>
+          <ul class="kr-bullets">
+            <li>哪些必须买会员实测，哪些只体验触点；<strong>不把推算写成结论</strong></li>
+            <li>订阅率目标用 Owlet / Nanit 作参照，落到我们自己的区间</li>
+          </ul>
+          <div class="kr-metric">
+            <div class="kr-metric-item"><span class="kr-metric-num">10%–20%</span><span class="kr-metric-lbl">订阅率目标</span></div>
+            <div class="kr-metric-item"><span class="kr-metric-num">$8.99–$14.99</span><span class="kr-metric-lbl">月费锚点</span></div>
+          </div>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">可复用</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">先定五问，再找对象</h3>
+          <ul class="kr-bullets">
+            <li>数字必须带来源等级。硬件绑定转化远高于纯软</li>
+            <li>Medela / Willow / Elvie 软件订阅收入为 $0，<strong>吸奶器线不能和摄像头线同一套价</strong></li>
+          </ul>
+          <div class="kr-metric">
+            <div class="kr-metric-item"><span class="kr-metric-num">20%–28%</span><span class="kr-metric-lbl">硬件绑定转化</span></div>
+            <div class="kr-metric-item"><span class="kr-metric-num">3%–8%</span><span class="kr-metric-lbl">纯软转化</span></div>
+            <div class="kr-metric-item"><span class="kr-metric-num">$0</span><span class="kr-metric-lbl">吸奶器三家软件订阅</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="obj">
+    <div class="obj-number">02</div>
+    <div class="obj-body">
+      <div>
+        <div class="obj-head">
+          <span class="obj-codename">◇ 敢改优先级</span>
+          <h2 class="obj-title">AI 帮成稿，人也要敢改<span class="accent">自己的优先级</span></h2>
+        </div>
+        <p class="obj-narrative">AI 帮你成稿没有问题。过两个月用新材料回头打自己，才是规划的下半场。</p>
+      </div>
+      <div class="kr-grid">
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">卡在哪</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">节奏要排，方向也可能排错</h3>
+          <ul class="kr-bullets">
+            <li>Q2 要同时讲清一次性购买、订阅、商城怎么排</li>
+            <li>到了 7 月材料齐了，但「订阅当主线」可能排错了</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">AI 干了啥</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">先收成可拍板，再交叉对照</h3>
+          <ul class="kr-bullets">
+            <li>5 月：节奏、依赖、HC、风险收成<strong>完整版 + 高管摘要</strong></li>
+            <li>7 月：规划、调研、ARR、DTC 交叉，算出 LTV 六项弹性完全不同</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">人拍了啥板</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">5 月拍节奏，7 月拍方向</h3>
+          <ul class="kr-bullets">
+            <li>6 月一次性购买、9 月订阅、商城分 V1 / V2 / V3</li>
+            <li>软件订阅更像硬件卖点和留存钩子；<strong>纠偏本身也是产出</strong></li>
+          </ul>
+          <div class="kr-metric">
+            <div class="kr-metric-item"><span class="kr-metric-num">×2</span><span class="kr-metric-lbl">Autoship LTV vs 订阅</span></div>
+            <div class="kr-metric-item"><span class="kr-metric-num">30%</span><span class="kr-metric-lbl">渠道抽成 · 订阅吃、耗材不吃</span></div>
+          </div>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">可复用</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">规划成稿之后，要回头打自己</h3>
+          <ul class="kr-bullets">
+            <li>用 AI 成稿没问题；过两个月要用新材料打旧结论</li>
+            <li>方案已提交，决策仍在讨论——<strong>没被立刻采纳，不等于没产出</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="obj">
+    <div class="obj-number">03</div>
+    <div class="obj-body">
+      <div>
+        <div class="obj-head">
+          <span class="obj-codename">▲ 可算公式</span>
+          <h2 class="obj-title">把「能卖多少」拆成可改假设的<span class="accent">ARR</span></h2>
+        </div>
+        <p class="obj-narrative">续费率是订阅模型的灵魂。它决定 MRR 是滚雪球，还是一条走平的直线。</p>
+      </div>
+      <div class="kr-grid">
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">卡在哪</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">双档 × 双周期混在一起</h3>
+          <ul class="kr-bullets">
+            <li>Plus / Premium × 月包 / 年包，改一个假设全盘重算</li>
+            <li>说不清扣完渠道抽成和云成本之后的净收入</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">AI 干了啥</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">写成可套数字的公式</h3>
+          <ul class="kr-bullets">
+            <li>激活 → 试用转付费 → 档位 / 周期 → 续费率 → 扣抽成和云成本 = <strong>净 ARR</strong></li>
+            <li>补 8 个指标定义、中性预期表、付费转化路径</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">人拍了啥板</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">真数和假设必须分开</h3>
+          <ul class="kr-bullets">
+            <li>哪些是内部真实数，哪些是行业假设</li>
+            <li>摄像头线可以按竞品转化谈，<strong>吸奶器线不行</strong></li>
+          </ul>
+          <div class="kr-metric">
+            <div class="kr-metric-item"><span class="kr-metric-num">8</span><span class="kr-metric-lbl">核心量化指标</span></div>
+            <div class="kr-metric-item"><span class="kr-metric-num">2×2</span><span class="kr-metric-lbl">档位 × 周期矩阵</span></div>
+          </div>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">可复用</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">先锁公式和假设表，再填数</h3>
+          <ul class="kr-bullets">
+            <li>测算不要从「大概能卖多少」起笔</li>
+            <li>路径：试用期价值外显 → Paywall 触达 → 续费</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="obj">
+    <div class="obj-number">04</div>
+    <div class="obj-body">
+      <div>
+        <div class="obj-head">
+          <span class="obj-codename">● 中台交付</span>
+          <h2 class="obj-title">从「接入一个 SDK」变成可开发的<span class="accent">PayHub</span></h2>
+        </div>
+        <p class="obj-narrative">接入一个 SDK 不是产品。能让研发、法务、QA 对上同一张图，才是中台。</p>
+      </div>
+      <div class="kr-grid">
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">卡在哪</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">课程内购和存储订阅混在一起</h3>
+          <ul class="kr-bullets">
+            <li>范围一混，研发、法务、QA 对不齐</li>
+            <li>Webhook、权益、退款、跨端掉单任何一环说不清都会返工</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">AI 干了啥</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">拆阶段，统一术语，配齐图</h3>
+          <ul class="kr-bullets">
+            <li>PRD-1 课程 IAP（6 月）+ PRD-2 存储订阅（9 月）</li>
+            <li>统一 Entitlement / Offering / Webhook；购买、权益、生命周期、Linkout 流程图</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">人拍了啥板</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">砍 MVP，定权益权威</h3>
+          <ul class="kr-bullets">
+            <li>购买记录查询可后置；课程权益仍走现有后端</li>
+            <li>订阅权益以 <strong>RevenueCat</strong> 为准；暂不用 Targeting / 营销推送，少走一轮合规</li>
+          </ul>
+          <div class="kr-metric">
+            <div class="kr-metric-item"><span class="kr-metric-num">PRD-1</span><span class="kr-metric-lbl">课程一次性 · 6 月</span></div>
+            <div class="kr-metric-item"><span class="kr-metric-num">PRD-2</span><span class="kr-metric-lbl">存储订阅 · 9 月</span></div>
+          </div>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">可复用</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">复杂接入先拆阶段，再出 PRD + 图</h3>
+          <ul class="kr-bullets">
+            <li>不要一份大而全</li>
+            <li>开发前配置清单和隐私披露口径一起走，避免上线前补课</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="obj">
+    <div class="obj-number">05</div>
+    <div class="obj-body">
+      <div>
+        <div class="obj-head">
+          <span class="obj-codename">◆ 一张底座</span>
+          <h2 class="obj-title">一张图讲清卖什么、怎么上、<span class="accent">在哪触发</span></h2>
+        </div>
+        <p class="obj-narrative">中台不是所有功能都能卖。先过用户价值验证，再接快速上 SKU。</p>
+      </div>
+      <div class="kr-grid">
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">卡在哪</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">各产线各给一截付费点</h3>
+          <ul class="kr-bullets">
+            <li>IoT、AI、婴儿床、课程评审时对不上</li>
+            <li>缺一张图：供给侧矩阵 + 中台怎么快速上 SKU</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">AI 干了啥</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">先出六层骨架，再填肉</h3>
+          <ul class="kr-bullets">
+            <li>付费能力矩阵 → 中台准入 → Paywall → 触达 → 指标 → 运营</li>
+            <li>AI / BBM 用真实清单；婴儿床 / 白噪音 / 课程标<strong>待确认</strong></li>
+          </ul>
+          <div class="kr-metric">
+            <div class="kr-metric-item"><span class="kr-metric-num">6 层</span><span class="kr-metric-lbl">底座架构</span></div>
+          </div>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">人拍了啥板</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">准入先于上架</h3>
+          <ul class="kr-bullets">
+            <li>Paywall 入口分<strong>推荐 / 谨慎</strong></li>
+            <li>新产线先验证、再品牌归一</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">可复用</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">架构图先对骨架，确认后再铺功能</h3>
+          <ul class="kr-bullets">
+            <li>同步 HTML 和 drawio，评审和后续改图不打架</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="obj">
+    <div class="obj-number">06</div>
+    <div class="obj-body">
+      <div>
+        <div class="obj-head">
+          <span class="obj-codename">◇ 写进下次</span>
+          <h2 class="obj-title">把一次提效变成团队能接着用的<span class="accent">流程</span></h2>
+        </div>
+        <p class="obj-narrative">能复用的不是那次对话。是 SOP、Skill，和「数字必须带来源」这种约定。</p>
+      </div>
+      <div class="kr-grid">
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">卡在哪</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">每次从零聊，人一换就重来</h3>
+          <ul class="kr-bullets">
+            <li>订阅配置跨 Apple / Google / RC 三端，顺序错了要返工一整天</li>
+            <li>招人没有统一题和打分</li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">AI 干了啥</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">路径写成 Skill，配置写成 SOP</h3>
+          <ul class="kr-bullets">
+            <li>PRD → 流程图 → 原型，收成可重复调用的 Skill</li>
+            <li>配置 9 步，每步有字段、坑和 Gate；面试收成 60 分钟手册</li>
+          </ul>
+          <div class="kr-metric">
+            <div class="kr-metric-item"><span class="kr-metric-num">9 步</span><span class="kr-metric-lbl">订阅配置 SOP</span></div>
+            <div class="kr-metric-item"><span class="kr-metric-num">60'</span><span class="kr-metric-lbl">结构化面试</span></div>
+          </div>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">人拍了啥板</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">自动化不替代签字</h3>
+          <ul class="kr-bullets">
+            <li>Skill 不替代评审；SOP 里账号、定价、法务仍是人</li>
+            <li>面试手册是辅助判断，<strong>录用决定在面试官</strong></li>
+          </ul>
+        </div>
+        <div class="kr">
+          <div class="kr-tag"><span class="kr-tag-num">可复用</span><span class="kr-tag-line"></span></div>
+          <h3 class="kr-headline">同类任务跑通第二次，就该沉淀</h3>
+          <ul class="kr-bullets">
+            <li>协作习惯也固化了：<strong>先框架，确认后再细写</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<section class="spacer-quote wrap">
+  <p class="spacer-quote-text">
+    AI 负责结构与成稿<br>
+    人负责口径、<span class="accent">取舍</span>和纠偏
+  </p>
+  <p class="spacer-quote-sub">Framework first · Human signs last</p>
+</section>
+
+<section class="timeline-section wrap">
+  <div class="section-head">
+    <div class="intro-eyebrow">五个月</div>
+    <h2 class="section-title">工作链怎么嵌进去的</h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-month">
+      <div class="tl-month-num">04<span>MAY</span></div>
+      <div class="tl-events">
+        <div class="tl-event big"><strong>立柱 · 能收钱</strong><span>先把支付和需求写成可开发的东西</span></div>
+        <div class="tl-event"><strong>PRD-1 课程 IAP</strong><span>RevenueCat 接入，一次性购买 6 月上线</span></div>
+        <div class="tl-event"><strong>2026 规划</strong><span>完整版 + 高管摘要，节奏拍板</span></div>
+        <div class="tl-event"><strong>面试手册</strong><span>EC / VAS 双轨，60 分钟结构化</span></div>
+      </div>
+    </div>
+    <div class="tl-month">
+      <div class="tl-month-num">06<span>JUN</span></div>
+      <div class="tl-events">
+        <div class="tl-event big"><strong>看清 · 能定价</strong><span>用一手调研把锚点钉死</span></div>
+        <div class="tl-event"><strong>15 竞品订阅调研</strong><span>五问收口，来源分级</span></div>
+        <div class="tl-event"><strong>Paywall 案例库</strong><span>从公开墙库筛母婴方向</span></div>
+        <div class="tl-event"><strong>订阅底座架构</strong><span>六层图：卖什么 / 怎么上 / 在哪触发</span></div>
+      </div>
+    </div>
+    <div class="tl-month">
+      <div class="tl-month-num">07<span>AUG</span></div>
+      <div class="tl-events">
+        <div class="tl-event big"><strong>沉淀 · 能复用</strong><span>公式、纠偏、SOP 写进下一次</span></div>
+        <div class="tl-event"><strong>摄像头 / BBM ARR</strong><span>双档双周期，先锁公式</span></div>
+        <div class="tl-event"><strong>LTV 优先级纠偏</strong><span>Autoship vs 订阅，敢改自己</span></div>
+        <div class="tl-event"><strong>订阅配置 SOP</strong><span>Apple / Google / RC 九步 Gate</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="takeaways wrap">
+  <div class="section-head">
+    <div class="intro-eyebrow">带走三条</div>
+    <h2 class="section-title">组内下次怎么用</h2>
+  </div>
+  <div class="tk-grid">
+    <div class="tk">
+      <div class="tk-num">01</div>
+      <h3 class="tk-title">先框架后细节</h3>
+      <p class="tk-body">规划、架构、调研都是<strong>骨架确认再铺肉</strong>。比一次生成五十页再返工，更少、更快、更像协作。</p>
+    </div>
+    <div class="tk">
+      <div class="tk-num">02</div>
+      <h3 class="tk-title">人必须签字</h3>
+      <p class="tk-body">AI 负责结构、交叉和成稿。调研的来源等级、PRD 的砍范围、LTV 的优先级反转，<strong>都不是模型能替你签字的</strong>。</p>
+    </div>
+    <div class="tk">
+      <div class="tk-num">03</div>
+      <h3 class="tk-title">提效写进下次</h3>
+      <p class="tk-body">能复用的不是那次对话，是 PRD 框架、SOP、Skill，和<strong>数字必须带来源</strong>这种约定。</p>
+    </div>
+  </div>
+</section>
+
+<section class="data-section wrap">
+  <div class="section-head">
+    <div class="intro-eyebrow">对照</div>
+    <h2 class="section-title">六个案例，人必须做的</h2>
+  </div>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>场景</th>
+        <th>人必须做的</th>
+        <th>典型产出</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="rank-num">01</span></td>
+        <td><span class="case-name">订阅调研</span></td>
+        <td>实测范围、来源等级、目标转化 / 定价锚</td>
+        <td><span class="case-out">调研报告 + HTML</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-num">02</span></td>
+        <td><span class="case-name">规划与纠偏</span></td>
+        <td>节奏拍板；过两个月用新材料打旧结论</td>
+        <td><span class="case-out">2026 规划 · LTV 方案</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-num">03</span></td>
+        <td><span class="case-name">ARR 测算</span></td>
+        <td>哪些是真数、哪些是假设</td>
+        <td><span class="case-out">ARR 公式 + 转化路径</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-num">04</span></td>
+        <td><span class="case-name">PRD + 流程图</span></td>
+        <td>拆阶段、砍 MVP、定权益权威</td>
+        <td><span class="case-out">PRD-1 / PRD-2 + drawio</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-num">05</span></td>
+        <td><span class="case-name">架构图</span></td>
+        <td>准入条件、待确认项、产线边界</td>
+        <td><span class="case-out">6 层底座图</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-num">06</span></td>
+        <td><span class="case-name">流程沉淀</span></td>
+        <td>哪些可自动化、哪些必须人审</td>
+        <td><span class="case-out">Skill / SOP / 面试手册</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<footer class="wrap">
+  <div class="footer-mark">Onward.</div>
+  <div class="footer-meta">
+    <strong>APP 商业化 · 组内分享</strong><br>
+    2026.04 — 2026.08<br>
+    先框架，后细节<br>
+    人签字，再往下写
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.obj').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
